@@ -10,6 +10,14 @@ Nothing here touches that domain until Chelsea decides to launch.**
 - Every page is marked `noindex` and `robots.txt` blocks crawlers, so the preview stays out of Google.
   At launch, set `PUBLIC_INDEXABLE=true` to switch that off.
 
+## Editing content (no code needed)
+
+- Editor: **https://app.pagescms.org**. Sign in with GitHub and open `chelseavaneeden/chelseavaneeden-site`.
+- Sections: Home page, Service pages, Offers & prices, Testimonials, Site settings.
+- Each **Save** is stored on GitHub, and Cloudflare rebuilds the preview automatically (about 1–2 minutes).
+- If an edit is invalid (e.g. a "From" price with no number), the build stops and the preview keeps the last good version.
+- Content files live in `src/content/`; the editor's fields are configured in `.pages.yml`.
+
 ## Commands
 
 | Command | What it does |
@@ -17,7 +25,7 @@ Nothing here touches that domain until Chelsea decides to launch.**
 | `npm install` | Install dependencies (first time only) |
 | `npm run dev` | Local preview at http://localhost:4321 |
 | `npm run build` | Check the design system, then build to `dist/` |
-| `npm run deploy:preview` | Build and publish to the Cloudflare preview address |
+| `npm run deploy:preview` | Build and publish to the preview by hand (normally automatic on every push to `main`) |
 | `npm run brand:favicons` | Regenerate favicons from the logo swoosh and brand tokens |
 
 ## Design system
