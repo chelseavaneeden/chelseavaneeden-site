@@ -1,0 +1,47 @@
+nav:
+  - label: Private sessions
+    href: /private-sessions
+  - label: Partnerships
+    href: /partnerships
+    children:
+      - label: Companies
+        href: /companies
+      - label: Retreats & hospitality
+        href: /retreats-hospitality
+      - label: Studios & clinics
+        href: /studios-partners
+      - label: Brands
+        href: /brands
+  - label: On-demand
+    href: https://www.thegoodmood.club
+    external: true
+  - label: About
+    href: /about
+bookCta:
+  label: Book an intro
+  href: /book
+tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
+location: Lisbon, Portugal · Teaching worldwide
+stats:
+  - value: 5,000+
+    label: private sessions taught
+  - value: 5+ yrs
+    label: teaching online, worldwide
+  - value: 9.3K
+    label: YouTube subscribers
+  - value: BASI
+    label: certified instructor
+socials:
+  - label: YouTube
+    href: https://www.youtube.com/@chelseavaneeden
+  - label: LinkedIn
+    href: https://www.linkedin.com/in/chelseavaneeden/
+  - label: The Good Mood Club
+    href: https://www.thegoodmood.club
+legal:
+  - label: Privacy
+    href: /privacy
+  - label: Terms
+    href: /terms
+  - label: Cancellation policy
+    href: /cancellation

@@ -3,18 +3,24 @@ import Heading from '../ui/Heading.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Icon from '../ui/Icon.astro';
 import Text from '../ui/Text.astro';
-import type { Door } from '../../data/draft';
+export interface DoorItem {
+  title: string;
+  text: string;
+  href: string;
+}
 
 export type DoorVariant = 'index' | 'cards';
 
 interface Props {
-  doors: Door[];
+  doors: DoorItem[];
   eyebrow?: string;
   title?: string;
   variant?: DoorVariant;
 }
 
-const { doors, eyebrow, title, variant = 'index' } = Astro.props;
+const { doors: items, eyebrow, title, variant = 'index' } = Astro.props;
+// Numbered by position, so reordering in the editor renumbers automatically.
+const doors = items.map((d, i) => ({ ...d, number: String(i + 1).padStart(2, '0') }));
 ---
 
 <div class="flex flex-col gap-10 md:gap-14">

@@ -1,0 +1,8 @@
+quote: I just wanted to let you know that I feel really good in my body today. I needed those stretches and movements yesterday, thank you again.
+name: Private client
+context: Online sessions
+audiences:
+  - private
+consent: true
+featured: false
+order: 20

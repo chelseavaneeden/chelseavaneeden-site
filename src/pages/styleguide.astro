@@ -17,12 +17,13 @@ import Price from '../components/ui/Price.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
 import OfferCard from '../components/patterns/OfferCard.astro';
-import { investment } from '../data/draft';
+import { getOffers } from '../lib/content';
 import { emphasis } from '../lib/text';
 
 import tokensCss from '../styles/tokens.css?raw';
 
 // Brand palette = the colour primitives (name-number: hex) declared in tokens.css.
+const offers = await getOffers('private');
 const primitives = [...tokensCss.matchAll(/--([a-z]+-\d+):\s*(#[0-9a-f]{6});/gi)].map(([, name, value]) => ({ name, value }));
 const ramps = Object.entries(
   primitives.reduce<Record<string, { name: string; value: string }[]>>((acc, p) => {
@@ -325,7 +326,7 @@ const sizes = ['s', 'm', 'l'] as const;
         </div>
         <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {
-            investment.offers.map((o) => (
+            offers.map((o) => (
               <li>
                 <OfferCard offer={o} />
               </li>

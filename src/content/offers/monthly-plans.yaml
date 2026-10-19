@@ -1,0 +1,19 @@
+title: Monthly plans
+audience: private
+eyebrow: Ongoing
+summary: 4 to 12 sessions a month, same time each week.
+priceDisplay: from
+price: 340
+currency: EUR
+unit: month
+priceVisibility: web
+includes:
+  - Programme updated monthly
+  - Message support between sessions
+  - Online or in Lisbon
+cta:
+  label: Book a call
+  href: /book
+featured: false
+order: 20
+published: true

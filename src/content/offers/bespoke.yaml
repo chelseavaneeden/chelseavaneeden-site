@@ -1,0 +1,17 @@
+title: In-home, travel & intensives
+audience: private
+eyebrow: Bespoke
+summary: Sessions where you are, or focused blocks for an injury or an event.
+priceDisplay: on-request
+currency: EUR
+priceVisibility: web
+includes:
+  - Travel with you or meet you there
+  - Intensive rehab blocks
+  - Pre & post-natal programmes
+cta:
+  label: Request a proposal
+  href: /enquire?type=private
+featured: false
+order: 30
+published: true

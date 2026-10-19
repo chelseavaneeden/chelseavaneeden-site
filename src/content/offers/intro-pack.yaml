@@ -1,0 +1,19 @@
+title: Intro pack
+audience: private
+eyebrow: Start here
+summary: Three private sessions, online or in Lisbon.
+priceDisplay: exact
+price: 270
+currency: EUR
+unit: pack
+priceVisibility: web
+includes:
+  - Movement & posture assessment
+  - Your personal plan
+  - Reformer or mat
+cta:
+  label: Book your intro pack
+  href: /book
+featured: true
+order: 10
+published: true

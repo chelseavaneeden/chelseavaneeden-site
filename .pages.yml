@@ -1,0 +1,262 @@
+# Pages CMS: the editor Chelsea uses at https://app.pagescms.org
+# Each section below is a menu item in the editor. Fields mirror src/content.config.ts;
+# if you add a field there, add it here too.
+
+media:
+  input: src/assets/media
+  output: ../../assets/media
+  rename: safe
+  categories: [image]
+
+content:
+  # ── HOME PAGE ──────────────────────────────────────────────────────────────
+  - name: home
+    label: Home page
+    type: file
+    path: src/content/pages/home.yaml
+    format: yaml
+    fields:
+      - name: seo
+        label: Google listing
+        type: object
+        description: How the page appears in search results and when shared.
+        fields:
+          - { name: title, label: Page title, type: string, required: true }
+          - { name: description, label: Short description, type: text, required: true, description: 'About 150 characters.' }
+      - name: hero
+        label: Top of the page
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the headline, type: string, required: true }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates.' }
+          - { name: lede, label: Intro sentence, type: text, required: true }
+          - name: primary
+            label: Main button
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /book, or a full https:// address.' }
+          - name: secondary
+            label: Second button (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
+          - { name: meta, label: Small details under the photo, type: string, list: true }
+          - { name: image, label: Photo, type: image, required: true }
+          - { name: imageAlt, label: Photo description, type: string, required: true, description: 'Describe the photo for people using screen readers.' }
+      - name: doors
+        label: Ways to work together
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - name: items
+            label: Cards
+            type: object
+            list: true
+            description: 'The first card is shown larger. Drag to reorder; numbers update automatically.'
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: text, label: Short description, type: text, required: true }
+              - { name: href, label: Link, type: string, required: true }
+      - name: about
+        label: Meet Chelsea
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: paragraphs, label: Paragraphs, type: text, list: true }
+          - { name: image, label: Photo, type: image, required: true }
+          - { name: imageAlt, label: Photo description, type: string, required: true }
+          - name: cta
+            label: Link (optional)
+            type: object
+            fields:
+              - { name: label, label: Link text, type: string }
+              - { name: href, label: Link, type: string }
+      - name: investment
+        label: Prices section
+        type: object
+        description: The offers themselves are edited under "Offers & prices".
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: intro, label: Intro text, type: text }
+          - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
+      - name: ctaBand
+        label: Dark band at the bottom
+        type: object
+        fields:
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: text, label: Text, type: text }
+          - name: primary
+            label: Main button
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true }
+          - name: secondary
+            label: Second button (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
+
+  # ── OFFERS & PRICES ────────────────────────────────────────────────────────
+  - name: offers
+    label: Offers & prices
+    type: collection
+    path: src/content/offers
+    format: yaml
+    filename: '{primary}.yaml'
+    view:
+      primary: title
+      fields: [title, audience, priceDisplay, price, published]
+      sort: [order, title]
+    fields:
+      - { name: title, label: Offer name, type: string, required: true }
+      - name: audience
+        label: Who it's for
+        type: select
+        required: true
+        options:
+          values:
+            - { value: private, label: Private clients }
+            - { value: companies, label: Companies }
+            - { value: hospitality, label: Retreats & hospitality }
+            - { value: studios, label: Studios & clinics }
+            - { value: brands, label: Brands }
+      - { name: eyebrow, label: Small label above the name, type: string, description: 'e.g. Start here' }
+      - { name: summary, label: One-line summary, type: text, required: true }
+      - name: priceDisplay
+        label: How to show the price
+        type: select
+        required: true
+        description: '"Tailored proposal" shows no number, so nothing locks you in.'
+        options:
+          values:
+            - { value: exact, label: 'Exact price (e.g. €270)' }
+            - { value: from, label: 'From price (e.g. From €340)' }
+            - { value: on-request, label: Tailored proposal (no price) }
+      - { name: price, label: Price, type: number, description: 'Numbers only, no € sign. Leave empty for Tailored proposal.' }
+      - name: currency
+        label: Currency
+        type: select
+        default: EUR
+        options:
+          values: [EUR, GBP, USD]
+      - name: unit
+        label: Per
+        type: select
+        options:
+          values:
+            - { value: session, label: session }
+            - { value: pack, label: pack }
+            - { value: month, label: month }
+            - { value: programme, label: programme }
+            - { value: workshop, label: workshop }
+            - { value: day, label: day }
+            - { value: person, label: person }
+      - name: priceVisibility
+        label: Where the price appears
+        type: select
+        default: web
+        options:
+          values:
+            - { value: web, label: On the website }
+            - { value: media-kit, label: Only in downloadable one-sheets }
+            - { value: hidden, label: Nowhere (show Tailored proposal) }
+      - { name: priceNote, label: Small note under the price, type: string }
+      - { name: includes, label: What's included, type: string, list: true }
+      - name: cta
+        label: Button
+        type: object
+        fields:
+          - { name: label, label: Button text, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }
+      - { name: featured, label: Highlight this offer, type: boolean, description: 'Shown in the dark card.' }
+      - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }
+      - { name: published, label: Show on the website, type: boolean, default: true }
+
+  # ── TESTIMONIALS ───────────────────────────────────────────────────────────
+  - name: testimonials
+    label: Testimonials
+    type: collection
+    path: src/content/testimonials
+    format: yaml
+    filename: '{primary}.yaml'
+    view:
+      primary: name
+      fields: [name, context, consent, featured]
+      sort: [order, name]
+    fields:
+      - { name: quote, label: Quote, type: text, required: true }
+      - { name: name, label: Name as shown, type: string, required: true, description: 'e.g. Sarah M., Head of People at Acme, or Private client.' }
+      - { name: context, label: Context, type: string, description: 'e.g. Online Reformer sessions, Lisbon' }
+      - name: audiences
+        label: Show on pages for
+        type: select
+        options:
+          multiple: true
+          values:
+            - { value: private, label: Private clients }
+            - { value: companies, label: Companies }
+            - { value: hospitality, label: Retreats & hospitality }
+            - { value: studios, label: Studios & clinics }
+            - { value: brands, label: Brands }
+      - { name: consent, label: I have written permission to publish this, type: boolean, description: 'Without this tick the testimonial never appears.' }
+      - { name: featured, label: Feature first, type: boolean }
+      - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }
+
+  # ── SITE SETTINGS ──────────────────────────────────────────────────────────
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/content/settings/site.yaml
+    format: yaml
+    fields:
+      - name: nav
+        label: Menu
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Menu text, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }
+          - { name: external, label: Opens another website, type: boolean }
+          - name: children
+            label: Drop-down items
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Menu text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true }
+      - name: bookCta
+        label: Menu button
+        type: object
+        fields:
+          - { name: label, label: Button text, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }
+      - { name: tagline, label: Footer tagline, type: text, required: true }
+      - { name: location, label: Footer location line, type: string, required: true }
+      - name: stats
+        label: Proof numbers (under the top photo)
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string, required: true, description: 'e.g. 5,000+' }
+          - { name: label, label: What it means, type: string, required: true }
+      - name: socials
+        label: Social links
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Name, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }
+      - name: legal
+        label: Legal links (footer)
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Name, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }

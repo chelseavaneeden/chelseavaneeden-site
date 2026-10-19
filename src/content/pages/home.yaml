@@ -1,0 +1,62 @@
+seo:
+  title: Chelsea van Eeden · Specialist Pilates in Lisbon & online
+  description: Specialist 1-on-1 Pilates online and in Lisbon, plus bespoke movement programmes for companies, retreats, hotels and studios across Europe.
+hero:
+  eyebrow: Private Pilates · Lisbon & worldwide
+  title: Quietly *powerful* Pilates.
+  lede: Specialist 1-on-1 sessions online and in Lisbon, plus bespoke movement programmes for companies, retreats, hotels and studios across Europe.
+  primary:
+    label: Book your intro pack
+    href: /private-sessions#investment
+  secondary:
+    label: Partner with me
+    href: /partnerships
+  meta:
+    - BASI certified
+    - Rehab · Pre & post-natal · Posture
+  image: ../../assets/media/home-studio.png
+  imageAlt: A wooden reformer by a sunlit window in Chelsea’s private studio
+doors:
+  eyebrow: Work with me
+  title: One specialist, *five* ways in.
+  items:
+    - title: Private sessions
+      text: 1-on-1, online or in Lisbon. Rehab, pre & post-natal, posture and pain.
+      href: /private-sessions
+    - title: Companies
+      text: Workshops, team classes and executive care for desk-based teams.
+      href: /companies
+    - title: Retreats & hospitality
+      text: A specialist instructor for retreats, hotels, villas and yachts.
+      href: /retreats-hospitality
+    - title: Studios & clinics
+      text: Guest workshops, cover teaching and referral partnerships.
+      href: /studios-partners
+    - title: Brands
+      text: UGC, ambassadorships and co-hosted experiences for wellness brands.
+      href: /brands
+about:
+  eyebrow: Meet Chelsea
+  title: Strength *with* ease.
+  paragraphs:
+    - 'I’m Chelsea, a BASI-certified Pilates instructor based in Lisbon. For more than five years I’ve taught people who carry a lot: leaders, travellers, new mothers, bodies in pain.'
+    - I blend Pilates with myofascial and somatic work, so you build real strength while your nervous system learns to settle.
+  image: ../../assets/media/chelsea-portrait.jpg
+  imageAlt: Chelsea van Eeden smiling and waving during an online session
+  cta:
+    label: More about me
+    href: /about
+investment:
+  eyebrow: Investment
+  title: Begin with an *intro pack*.
+  intro: Three private sessions to assess how you move, ease what hurts and build a plan around your schedule. Then continue monthly, or let’s design something bespoke.
+  note: Sample prices for layout only.
+ctaBand:
+  title: Not sure where you *fit*?
+  text: 'Tell me what you have in mind: a team, a retreat, a studio collaboration or your own body. I reply personally within two working days.'
+  primary:
+    label: Start an enquiry
+    href: /enquire
+  secondary:
+    label: Book an intro
+    href: /book

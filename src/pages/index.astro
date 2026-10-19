@@ -1,5 +1,6 @@
 ---
-// Home page (draft). Copy and prices come from src/data/draft.ts until Phase 2 moves them into the CMS.
+// Home page. All words, images and prices come from the editor (src/content/pages/home.yaml,
+// offers/, testimonials/ and settings/site.yaml); this file only arranges them.
 import Base from '../layouts/Base.astro';
 import Section from '../components/ui/Section.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
@@ -11,71 +12,69 @@ import MediaSplit from '../components/patterns/MediaSplit.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import ProofStrip from '../components/patterns/ProofStrip.astro';
 import Testimonial from '../components/patterns/Testimonial.astro';
-import { bookCta, ctaBand, doors, footer, hero, investment, nav, stats, testimonial } from '../data/draft';
-import homeStudio from '../assets/placeholder/home-studio.png';
-import portrait from '../assets/placeholder/chelsea-portrait.jpg';
+import { getOffers, getPage, getSite, getTestimonials } from '../lib/content';
+
+const site = await getSite();
+const page = await getPage('home');
+const offers = await getOffers('private');
+const [testimonial] = await getTestimonials('private');
 ---
 
-<Base
-  title="Chelsea van Eeden · Specialist Pilates in Lisbon & online"
-  description="Specialist 1-on-1 Pilates online and in Lisbon, plus bespoke movement programmes for companies, retreats, hotels and studios across Europe."
-  noindex
->
-  <Header nav={nav} cta={bookCta} />
+<Base title={page.seo.title} description={page.seo.description}>
+  <Header nav={site.nav} cta={site.bookCta} />
 
   <main id="main">
-    <Hero
-      layout="centered"
-      eyebrow={hero.eyebrow}
-      title={hero.title}
-      lede={hero.lede}
-      primary={hero.primary}
-      secondary={hero.secondary}
-      meta={hero.meta}
-      image={homeStudio}
-      imageAlt="A wooden reformer by a sunlit window in Chelsea’s private studio"
-    />
+    <Hero layout="centered" {...page.hero} />
 
-    <Section space="none" width="wide" class="pb-(--space-section-s)">
-      <ProofStrip stats={stats} />
-    </Section>
+    {
+      site.stats.length > 0 && (
+        <Section space="none" width="wide" class="pb-(--space-section-s)">
+          <ProofStrip stats={site.stats} />
+        </Section>
+      )
+    }
 
     <Section space="m" width="wide">
-      <DoorGrid doors={doors} eyebrow="Work with me" title="One specialist, *five* ways in." variant="cards" />
+      <DoorGrid doors={page.doors.items} eyebrow={page.doors.eyebrow} title={page.doors.title} variant="cards" />
     </Section>
 
     <Section space="m" tone="alt">
       <MediaSplit
-        image={portrait}
-        imageAlt="Chelsea van Eeden smiling and waving during an online session"
-        eyebrow="Meet Chelsea"
-        title="Strength *with* ease."
-        text={[
-          'I’m Chelsea, a BASI-certified Pilates instructor based in Lisbon. For more than five years I’ve taught people who carry a lot: leaders, travellers, new mothers, bodies in pain.',
-          'I blend Pilates with myofascial and somatic work, so you build real strength while your nervous system learns to settle.',
-        ]}
-        cta={{ label: 'More about me', href: '/about' }}
+        image={page.about.image}
+        imageAlt={page.about.imageAlt}
+        eyebrow={page.about.eyebrow}
+        title={page.about.title}
+        text={page.about.paragraphs}
+        cta={page.about.cta}
         ratio="square"
       />
     </Section>
 
-    <Section space="m" id="investment" labelledby="investment-title">
-      <OfferGrid
-        eyebrow={investment.eyebrow}
-        title={investment.title}
-        intro={investment.intro}
-        note={investment.note}
-        offers={investment.offers}
-        headingId="investment-title"
-      />
-    </Section>
+    {
+      offers.length > 0 && (
+        <Section space="m" id="investment" labelledby="investment-title">
+          <OfferGrid
+            eyebrow={page.investment.eyebrow}
+            title={page.investment.title}
+            intro={page.investment.intro}
+            note={page.investment.note}
+            offers={offers}
+            headingId="investment-title"
+          />
+        </Section>
+      )
+    }
 
-    <Section space="m" tone="alt">
-      <Testimonial {...testimonial} align="center" />
-    </Section>
+    {
+      testimonial && (
+        <Section space="m" tone="alt">
+          <Testimonial quote={testimonial.quote} name={testimonial.name} context={testimonial.context} align="center" />
+        </Section>
+      )
+    }
 
-    <CtaBand {...ctaBand} />
+    <CtaBand {...page.ctaBand} />
   </main>
 
-  <Footer nav={nav} {...footer} />
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} />
 </Base>

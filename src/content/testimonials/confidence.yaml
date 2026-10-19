@@ -1,0 +1,9 @@
+quote: Thank you for the challenging workout yesterday. When I am around people or talking to clients, I feel more confident and have less anxiety thanks to you and the sessions.
+name: Private client
+context: Online sessions
+audiences:
+  - private
+  - companies
+consent: true
+featured: false
+order: 30
