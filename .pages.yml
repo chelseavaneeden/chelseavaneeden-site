@@ -103,6 +103,151 @@ content:
               - { name: label, label: Button text, type: string }
               - { name: href, label: Link, type: string }
 
+  # ── SERVICE PAGES (private sessions, companies, hospitality, studios, brands) ─
+  - name: audiencePages
+    label: Service pages
+    type: collection
+    path: src/content/audience-pages
+    format: yaml
+    filename: '{fields.audience}.yaml'
+    description: 'One page per audience. Prices come from "Offers & prices" and quotes from "Testimonials" for the same audience.'
+    view:
+      primary: title
+      fields: [title, audience]
+    fields:
+      - { name: title, label: Page name (only shown in the editor), type: string, required: true }
+      - name: audience
+        label: Audience
+        type: select
+        required: true
+        options:
+          values:
+            - { value: private, label: Private clients }
+            - { value: companies, label: Companies }
+            - { value: hospitality, label: Retreats & hospitality }
+            - { value: studios, label: Studios & clinics }
+            - { value: brands, label: Brands }
+      - name: seo
+        label: Google listing
+        type: object
+        fields:
+          - { name: title, label: Page title, type: string, required: true }
+          - { name: description, label: Short description, type: text, required: true, description: 'About 150 characters.' }
+      - name: hero
+        label: Top of the page
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the headline, type: string, required: true }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap words in *asterisks* to make them italic.' }
+          - { name: lede, label: Intro sentence, type: text, required: true }
+          - name: primary
+            label: Main button
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true, description: '#investment jumps to the prices on this page.' }
+          - name: secondary
+            label: Second button (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
+          - { name: image, label: Photo, type: image, required: true }
+          - { name: imageAlt, label: Photo description, type: string, required: true }
+      - name: whoFor
+        label: Who it's for
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: intro, label: Intro text, type: text }
+          - name: items
+            label: Points
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+      - name: formats
+        label: Formats / where we work
+        type: object
+        description: 'Leave the points empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro text, type: text }
+          - name: items
+            label: Cards
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+      - name: steps
+        label: How it works
+        type: object
+        description: 'Numbered in order. Leave the steps empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro text, type: text }
+          - name: items
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Title, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+      - name: investment
+        label: Prices section
+        type: object
+        description: 'The offers themselves are edited under "Offers & prices".'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: intro, label: Intro text, type: text }
+          - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
+      - name: proof
+        label: Testimonials heading
+        type: object
+        description: 'Shows the testimonials tagged for this audience that have permission ticked.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true }
+      - name: faq
+        label: Questions
+        type: object
+        description: 'Leave the questions empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro text, type: text }
+          - name: items
+            label: Questions
+            type: object
+            list: true
+            fields:
+              - { name: question, label: Question, type: string, required: true }
+              - { name: answer, label: Answer, type: text, required: true, description: 'Leave a blank line to start a new paragraph.' }
+      - name: ctaBand
+        label: Dark band at the bottom
+        type: object
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: text, label: Text, type: text }
+          - name: primary
+            label: Main button
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true }
+          - name: secondary
+            label: Second button (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
+
   # ── OFFERS & PRICES ────────────────────────────────────────────────────────
   - name: offers
     label: Offers & prices

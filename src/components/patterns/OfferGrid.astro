@@ -1,8 +1,7 @@
 ---
-import Eyebrow from '../ui/Eyebrow.astro';
-import Heading from '../ui/Heading.astro';
 import Text from '../ui/Text.astro';
 import OfferCard from './OfferCard.astro';
+import SectionHeader from './SectionHeader.astro';
 import type { Offer } from '../../lib/content';
 
 interface Props {
@@ -19,14 +18,8 @@ const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId }
 ---
 
 <div class="flex flex-col gap-12 md:gap-16">
-  <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end">
-    <div class="flex flex-col gap-4 lg:col-span-7">
-      {eyebrow && <Eyebrow rule>{eyebrow}</Eyebrow>}
-      <Heading variant="h1" text={title} id={headingId} />
-    </div>
-    {intro && <Text variant="body" tone="muted" class="lg:col-span-5" text={intro} />}
-  </div>
-  <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" id={headingId} />
+  <ul class:list={['grid grid-cols-1 gap-4 md:grid-cols-2', offers.length > 2 && 'xl:grid-cols-3']}>
     {
       offers.map((offer) => (
         <li>

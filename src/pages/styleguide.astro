@@ -17,13 +17,23 @@ import Price from '../components/ui/Price.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
 import OfferCard from '../components/patterns/OfferCard.astro';
-import { getOffers } from '../lib/content';
+import FAQAccordion from '../components/patterns/FAQAccordion.astro';
+import FeatureGrid from '../components/patterns/FeatureGrid.astro';
+import StepList from '../components/patterns/StepList.astro';
+import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
+import { getOffers, getTestimonials } from '../lib/content';
 import { emphasis } from '../lib/text';
 
 import tokensCss from '../styles/tokens.css?raw';
 
 // Brand palette = the colour primitives (name-number: hex) declared in tokens.css.
 const offers = await getOffers('private');
+const testimonials = (await getTestimonials()).slice(0, 2);
+const sampleItems = [
+  { title: 'First point', text: 'A short supporting sentence, kept to one or two lines.' },
+  { title: 'Second point', text: 'Items are laid out in two or three columns depending on how many there are.' },
+  { title: 'Third point', text: 'Titles use the h3 text style; text uses body-s in the muted ink.' },
+];
 const primitives = [...tokensCss.matchAll(/--([a-z]+-\d+):\s*(#[0-9a-f]{6});/gi)].map(([, name, value]) => ({ name, value }));
 const ramps = Object.entries(
   primitives.reduce<Record<string, { name: string; value: string }[]>>((acc, p) => {
@@ -334,6 +344,31 @@ const sizes = ['s', 'm', 'l'] as const;
           }
         </ul>
       </div>
+    </Section>
+
+    <!-- SECTION PATTERNS -->
+    <Section space="s" labelledby="sg-patterns">
+      <div class="flex flex-col gap-6">
+        <Heading variant="h1" id="sg-patterns">Section patterns</Heading>
+        <Text variant="body-s" tone="muted" class="max-w-prose">
+          The building blocks every service page is assembled from (src/layouts/AudiencePage.astro). Shown here with
+          sample content.
+        </Text>
+      </div>
+    </Section>
+    <Section space="s"><FeatureGrid eyebrow="FeatureGrid · lines" title="Who it’s *for*" items={sampleItems} variant="lines" /></Section>
+    <Section space="s" tone="alt"><FeatureGrid eyebrow="FeatureGrid · cards" title="Where we *train*" items={sampleItems} variant="cards" /></Section>
+    <Section space="s"><StepList eyebrow="StepList" title="How it *works*" items={[...sampleItems, { title: 'Fourth step', text: 'Steps are numbered by position.' }]} /></Section>
+    <Section space="s" tone="alt"><TestimonialGrid eyebrow="TestimonialGrid" title="What clients *notice*" testimonials={testimonials} /></Section>
+    <Section space="s">
+      <FAQAccordion
+        eyebrow="FAQAccordion"
+        title="Good to *know*"
+        items={[
+          { question: 'A question someone might ask?', answer: 'A clear, short answer.\n\nA blank line starts a new paragraph.' },
+          { question: 'Another question?', answer: 'Answers stay within a comfortable reading width.' },
+        ]}
+      />
     </Section>
 
     <!-- SMALL PARTS -->

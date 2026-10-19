@@ -1,0 +1,90 @@
+---
+/*
+ * One layout for every audience page (private sessions, companies, retreats & hospitality,
+ * studios & clinics, brands). Content comes from src/content/audience-pages/<audience>.yaml,
+ * plus the offers and testimonials tagged for that audience. Sections the editor leaves
+ * empty are skipped.
+ *
+ * Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
+ */
+import Base from './Base.astro';
+import Section from '../components/ui/Section.astro';
+import CtaBand from '../components/patterns/CtaBand.astro';
+import FAQAccordion from '../components/patterns/FAQAccordion.astro';
+import FeatureGrid from '../components/patterns/FeatureGrid.astro';
+import Footer from '../components/patterns/Footer.astro';
+import Header from '../components/patterns/Header.astro';
+import Hero from '../components/patterns/Hero.astro';
+import OfferGrid from '../components/patterns/OfferGrid.astro';
+import StepList from '../components/patterns/StepList.astro';
+import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
+import { getAudiencePage, getOffers, getSite, getTestimonials, type Audience } from '../lib/content';
+
+interface Props {
+  audience: Audience;
+}
+
+const { audience } = Astro.props;
+const site = await getSite();
+const page = await getAudiencePage(audience);
+const offers = await getOffers(audience);
+const testimonials = await getTestimonials(audience);
+---
+
+<Base title={page.seo.title} description={page.seo.description}>
+  <Header nav={site.nav} cta={site.bookCta} />
+
+  <main id="main">
+    <Hero layout="split" {...page.hero} />
+
+    <Section space="m">
+      <FeatureGrid {...page.whoFor} variant="lines" />
+    </Section>
+
+    {
+      page.formats && (
+        <Section space="m" tone="alt">
+          <FeatureGrid {...page.formats} variant="cards" />
+        </Section>
+      )
+    }
+    <slot name="after-formats" />
+
+    {
+      page.steps && (
+        <Section space="m">
+          <StepList {...page.steps} />
+        </Section>
+      )
+    }
+
+    {
+      offers.length > 0 && (
+        <Section space="m" tone="alt" id="investment" labelledby="investment-title">
+          <OfferGrid {...page.investment} offers={offers} headingId="investment-title" />
+        </Section>
+      )
+    }
+    <slot name="after-offers" />
+
+    {
+      testimonials.length > 0 && (
+        <Section space="m">
+          <TestimonialGrid eyebrow={page.proof.eyebrow} title={page.proof.title} testimonials={testimonials} />
+        </Section>
+      )
+    }
+
+    {
+      page.faq && (
+        <Section space="m" tone="alt">
+          <FAQAccordion {...page.faq} />
+        </Section>
+      )
+    }
+
+    <CtaBand {...page.ctaBand} />
+  </main>
+
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} />
+</Base>

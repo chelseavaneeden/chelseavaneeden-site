@@ -1,0 +1,36 @@
+---
+import Text from '../ui/Text.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  items: { title: string; text: string }[];
+  /** cards: soft raised tiles. lines: open list separated by hairlines. */
+  variant?: 'cards' | 'lines';
+}
+
+const { eyebrow, title, intro, items, variant = 'lines' } = Astro.props;
+// Two columns when there are 2 or 4 items, so rows never end with a lone tile.
+const cols = items.length % 3 === 0 || items.length > 4 ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
+---
+
+<div class="flex flex-col gap-10 md:gap-14">
+  <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" />
+  <ul class:list={['grid grid-cols-1 md:grid-cols-2', cols, variant === 'cards' ? 'gap-4' : 'gap-x-10 gap-y-2']}>
+    {
+      items.map((item) => (
+        <li
+          class:list={[
+            'flex flex-col gap-3',
+            variant === 'cards' ? 'rounded-card bg-surface-raised p-7 md:p-8' : 'border-t border-line py-7',
+          ]}
+        >
+          <h3 class="type-h3 text-ink">{item.title}</h3>
+          <Text variant="body-s" tone="muted" text={item.text} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

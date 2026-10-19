@@ -1,0 +1,96 @@
+title: Private sessions
+audience: private
+seo:
+  title: Private Pilates online & in Lisbon · Chelsea van Eeden
+  description: One-to-one Pilates with a BASI-certified specialist, live online wherever you are or in person in Lisbon. Rehab, chronic pain, pre & post-natal and posture. Start with an intro pack.
+hero:
+  eyebrow: Private sessions · Online & Lisbon
+  title: One-to-one Pilates, *built around you*.
+  lede: Live private sessions online, wherever you are, or in person at my private Reformer studio in Lisbon. Specialist care for injury, pain, posture and pregnancy, at a pace that fits your life.
+  primary:
+    label: Book your intro pack
+    href: '#investment'
+  secondary:
+    label: Ask me a question
+    href: /enquire?type=private
+  image: ../../assets/media/ring-reformer.png
+  imageAlt: Hands holding a Pilates ring on a wooden Reformer in soft daylight
+whoFor:
+  eyebrow: Who it's for
+  title: For bodies that *carry a lot*.
+  intro: Most clients come to me with something specific to work on. Every session is planned around your body, your history and your week.
+  items:
+    - title: Injury & rehab
+      text: Rebuild strength and trust in your body after injury or surgery, working alongside your physio when you have one.
+    - title: Chronic pain
+      text: Back, neck and shoulder pain that keeps coming back. We work on the patterns behind it, gently and progressively.
+    - title: Pre & post-natal
+      text: Stay strong through pregnancy, then rebuild your core, pelvic floor and confidence afterwards, at the right pace.
+    - title: Posture & desk-body
+      text: For long days at a desk or on flights. Better alignment, freer breathing and the energy to lead.
+    - title: Stress & nervous system
+      text: Somatic and myofascial work that helps your body settle, so strength comes with ease rather than tension.
+    - title: Strength for life
+      text: No injury, just a goal. Precise, challenging work that makes you stronger, more mobile and more balanced.
+formats:
+  eyebrow: Where we train
+  title: Online, in Lisbon or *wherever you are*.
+  items:
+    - title: Live online
+      text: Private video sessions from home, the office or a hotel room, on the mat or on your own Reformer. Clients join from the UK, Europe and the US.
+    - title: In person in Lisbon
+      text: Private Reformer sessions at my studio just west of the city, one client at a time.
+    - title: Travel & in-home
+      text: Sessions at your home, villa or hotel, in Lisbon or further afield, planned around your trip.
+steps:
+  eyebrow: How it works
+  title: From first session to *real progress*.
+  items:
+    - title: Book your intro pack
+      text: Choose a time that suits you and pay securely online.
+    - title: Assessment
+      text: In our first session we look at how you move, any pain or injuries, and what you want to change.
+    - title: Your plan
+      text: I build a programme around your body, your goals and your schedule.
+    - title: Keep going
+      text: Continue with a monthly plan, with your programme reviewed every month.
+investment:
+  eyebrow: Investment
+  title: Begin with an *intro pack*.
+  intro: Three sessions to assess, ease and plan. Then continue monthly, or let’s design something bespoke.
+  note: Sample prices for layout only.
+proof:
+  eyebrow: Client words
+  title: What clients *notice*.
+faq:
+  eyebrow: Questions
+  title: Good to *know*.
+  items:
+    - question: Do I need any experience?
+      answer: No. Sessions start where you are, whether you’ve never done Pilates or have practised for years.
+    - question: What do I need for online sessions?
+      answer: A mat, a little floor space and a laptop or tablet with a camera. I’ll suggest a few small props if they would help. If you have a Reformer at home, we can use it.
+    - question: I have an injury or pain. Is this right for me?
+      answer: |-
+        Often, yes. I specialise in rehab and chronic pain, and I’m happy to work alongside your physiotherapist or doctor.
+
+        Tell me about it when you book. If something else would serve you better first, I’ll say so.
+    - question: Is it safe during pregnancy?
+      answer: Yes, with the right adaptations. I’m trained in pre and post-natal Pilates and adjust every session to your stage and how you feel. Please check with your midwife or doctor before you start.
+    - question: How long is a session?
+      answer: Each private session lasts [55] minutes.
+    - question: Where is the Lisbon studio?
+      answer: It’s a private Reformer studio in Algés, just west of central Lisbon and easy to reach from Belém, Oeiras and Cascais. You’ll receive the address when you book.
+    - question: Can I cancel or reschedule?
+      answer: Yes, with at least [24 hours’] notice. Sessions cancelled later than that are charged in full.
+    - question: How do I pay?
+      answer: Securely online by card. Monthly plans are billed once a month.
+ctaBand:
+  title: Ready when *you* are.
+  text: Start with an intro pack, or send me a question first. I reply personally within two working days.
+  primary:
+    label: Book your intro pack
+    href: '#investment'
+  secondary:
+    label: Ask a question
+    href: /enquire?type=private

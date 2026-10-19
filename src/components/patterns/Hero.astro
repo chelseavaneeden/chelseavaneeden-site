@@ -43,15 +43,15 @@ const {
 
 {
   layout === 'split' && (
-    <section data-tone={tone} class="overflow-hidden">
-      <div class="mx-auto grid max-w-wide grid-cols-1 lg:min-h-(--hero-min-height) lg:grid-cols-12">
-        <div class="flex flex-col justify-end gap-8 px-(--gutter) pt-16 pb-12 lg:col-span-7 lg:py-20">
-          <Eyebrow rule>{eyebrow}</Eyebrow>
+    <section data-tone={tone} class="pt-(--space-section-s) pb-(--space-section-s)">
+      <Container width="wide" class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="flex flex-col gap-7 lg:col-span-7">
+          <Eyebrow>{eyebrow}</Eyebrow>
           <Heading level={1} variant="display-xl" text={title} />
           <Text variant="lede" tone="muted" class="max-w-prose" text={lede} />
           <div class="flex flex-wrap items-center gap-3">
-            <Button href={primary.href} size="l" icon="arrow-right" event="hero_primary">{primary.label}</Button>
-            {secondary && <Button href={secondary.href} size="l" variant="secondary">{secondary.label}</Button>}
+            <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
+            {secondary && <Button href={secondary.href} size="l" variant="ghost" icon="arrow-right">{secondary.label}</Button>}
           </div>
           {meta.length > 0 && (
             <ul class="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-6">
@@ -62,9 +62,9 @@ const {
           )}
         </div>
         <div class="lg:col-span-5">
-          <Img src={image} alt={imageAlt} ratio="portrait" priority sizes="(min-width: 1024px) 42vw, 100vw" class="lg:aspect-auto lg:h-full" />
+          <Img src={image} alt={imageAlt} ratio="portrait" priority sizes="(min-width: 1024px) 38vw, 100vw" />
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

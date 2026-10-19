@@ -1,0 +1,35 @@
+---
+import Text from '../ui/Text.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  items: { title: string; text: string }[];
+}
+
+const { eyebrow, title, intro, items } = Astro.props;
+// Steps are a real sequence, so they're numbered by position.
+const cols = items.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4';
+---
+
+<div class="flex flex-col gap-10 md:gap-14">
+  <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" />
+  <ol class:list={['grid grid-cols-1 gap-8 sm:grid-cols-2', cols]}>
+    {
+      items.map((step, i) => (
+        <li class="flex flex-col gap-4">
+          <span
+            class="type-label inline-flex size-11 items-center justify-center rounded-pill border border-line text-ink"
+            aria-hidden="true"
+          >
+            {i + 1}
+          </span>
+          <h3 class="type-h3 text-ink">{step.title}</h3>
+          <Text variant="body-s" tone="muted" text={step.text} />
+        </li>
+      ))
+    }
+  </ol>
+</div>

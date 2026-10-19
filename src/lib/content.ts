@@ -20,6 +20,14 @@ export async function getPage(id: string): Promise<CollectionEntry<'pages'>['dat
   return entry.data;
 }
 
+export type AudiencePageData = CollectionEntry<'audiencePages'>['data'];
+
+export async function getAudiencePage(audience: Audience): Promise<AudiencePageData> {
+  const entry = await getEntry('audiencePages', audience);
+  if (!entry) throw new Error(`Missing src/content/audience-pages/${audience}.yaml`);
+  return entry.data;
+}
+
 /** Published offers for one audience, in the order set in the editor. */
 export async function getOffers(audience: Audience): Promise<Offer[]> {
   const all = await getCollection('offers', ({ data }) => data.published && data.audience === audience);

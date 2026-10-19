@@ -23,6 +23,22 @@ const optionalLink = z.preprocess(
 
 export const audiences = ['private', 'companies', 'hospitality', 'studios', 'brands'] as const;
 
+// Shared building blocks for page sections.
+const sectionHead = { eyebrow: optionalText, title: z.string(), intro: optionalText };
+const titledItems = list(z.object({ title: z.string(), text: z.string() }));
+const ctaBand = z.object({
+  title: z.string(),
+  text: optionalText,
+  primary: link,
+  secondary: optionalLink,
+});
+// A section the editor can leave empty: no items means the section is hidden.
+const optionalSection = <T extends z.ZodRawShape>(shape: T) =>
+  z.preprocess(
+    (v) => (v && typeof v === 'object' && Array.isArray((v as { items?: unknown[] }).items) && (v as { items: unknown[] }).items.length ? v : undefined),
+    z.object(shape).optional(),
+  );
+
 const yamlIn = (dir: string) => glob({ pattern: '*.{yaml,yml}', base: `./src/content/${dir}` });
 
 const settings = defineCollection({
@@ -79,12 +95,38 @@ const pages = defineCollection({
         intro: optionalText,
         note: optionalText,
       }),
-      ctaBand: z.object({
+      ctaBand,
+    }),
+});
+
+// The five audience pages (private sessions, companies, hospitality, studios, brands)
+// all share one layout: src/layouts/AudiencePage.astro.
+const audiencePages = defineCollection({
+  loader: yamlIn('audience-pages'),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      audience: z.enum(audiences),
+      seo: z.object({ title: z.string(), description: z.string() }),
+      hero: z.object({
+        eyebrow: z.string(),
         title: z.string(),
-        text: optionalText,
+        lede: z.string(),
         primary: link,
         secondary: optionalLink,
+        image: image(),
+        imageAlt: z.string(),
       }),
+      whoFor: z.object({ ...sectionHead, items: titledItems }),
+      formats: optionalSection({ ...sectionHead, items: titledItems }),
+      steps: optionalSection({ ...sectionHead, items: titledItems }),
+      investment: z.object({ ...sectionHead, note: optionalText }),
+      proof: z.object({ eyebrow: optionalText, title: z.string() }),
+      faq: optionalSection({
+        ...sectionHead,
+        items: list(z.object({ question: z.string(), answer: z.string() })),
+      }),
+      ctaBand,
     }),
 });
 
@@ -131,4 +173,4 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { settings, pages, offers, testimonials };
+export const collections = { settings, pages, audiencePages, offers, testimonials };
