@@ -1,0 +1,29 @@
+---
+import { priceView, type PriceInput } from '../../lib/price';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  offer: PriceInput;
+  context?: 'web' | 'media-kit';
+  lang?: Lang;
+  class?: string;
+}
+
+const { offer, context = 'web', lang = 'en', class: className } = Astro.props;
+const view = priceView(offer, lang, context);
+---
+
+<div class:list={['flex flex-col gap-1', className]}>
+  {
+    view.kind === 'quote' ? (
+      <p class="type-h3 text-ink">{view.label}</p>
+    ) : (
+      <p class="flex flex-wrap items-baseline gap-x-2">
+        {view.prefix && <span class="type-eyebrow text-ink-muted">{view.prefix}</span>}
+        <span class="type-price text-ink">{view.amount}</span>
+        {view.unit && <span class="type-body-s text-ink-muted">/ {view.unit}</span>}
+      </p>
+    )
+  }
+  {view.note && <p class="type-body-s text-ink-muted">{view.note}</p>}
+</div>

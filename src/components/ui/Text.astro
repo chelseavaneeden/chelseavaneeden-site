@@ -1,0 +1,51 @@
+---
+import { emphasis } from '../../lib/text';
+
+export type TextVariant =
+  | 'lede'
+  | 'body'
+  | 'body-s'
+  | 'caption'
+  | 'quote'
+  | 'label'
+  | 'eyebrow'
+  | 'price'
+  | 'stat';
+
+interface Props {
+  variant?: TextVariant;
+  tone?: 'ink' | 'muted' | 'accent';
+  as?: 'p' | 'span' | 'div' | 'blockquote' | 'figcaption' | 'small' | 'li' | 'dt' | 'dd';
+  /** Plain text; wrap words in *asterisks* to emphasise them. Or use the slot. */
+  text?: string;
+  class?: string;
+}
+
+const { variant = 'body', tone = 'ink', as = 'p', text, class: className } = Astro.props;
+
+const Tag = as;
+// Literal class names so Tailwind can find them.
+const variantClass: Record<TextVariant, string> = {
+  lede: 'type-lede',
+  body: 'type-body',
+  'body-s': 'type-body-s',
+  caption: 'type-caption',
+  quote: 'type-quote',
+  label: 'type-label',
+  eyebrow: 'type-eyebrow',
+  price: 'type-price',
+  stat: 'type-stat',
+};
+const toneClass = { ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' }[tone];
+const classes = [variantClass[variant], toneClass, className];
+---
+
+{
+  text ? (
+    <Tag class:list={classes} set:html={emphasis(text)} />
+  ) : (
+    <Tag class:list={classes}>
+      <slot />
+    </Tag>
+  )
+}

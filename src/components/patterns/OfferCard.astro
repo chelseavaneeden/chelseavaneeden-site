@@ -1,0 +1,44 @@
+---
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import Divider from '../ui/Divider.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Heading from '../ui/Heading.astro';
+import Icon from '../ui/Icon.astro';
+import Price from '../ui/Price.astro';
+import Text from '../ui/Text.astro';
+import type { Offer } from '../../data/draft';
+
+interface Props {
+  offer: Offer;
+  /** Card style for non-featured offers; featured offers always use the inverse tone. */
+  variant?: 'raised' | 'outline';
+}
+
+const { offer, variant = 'raised' } = Astro.props;
+---
+
+<Card as="article" variant={offer.featured ? 'inverse' : variant} padding="m" class="h-full gap-6">
+  <div class="flex flex-col gap-3">
+    {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
+    <Heading level={3} variant="h3" text={offer.title} />
+    <Text variant="body-s" tone="muted" text={offer.summary} />
+  </div>
+  <Price offer={offer} />
+  <Divider />
+  <ul class="flex flex-col gap-2.5">
+    {
+      offer.includes.map((item) => (
+        <li class="type-body-s flex items-start gap-2.5 text-ink">
+          <Icon name="check" class="mt-0.5 text-lg text-accent" />
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+  <div class="mt-auto pt-2">
+    <Button href={offer.cta.href} variant={offer.featured ? 'primary' : 'secondary'} full event="offer_cta">
+      {offer.cta.label}
+    </Button>
+  </div>
+</Card>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** Show a short rule before the text. */
+  rule?: boolean;
+  tone?: 'muted' | 'ink' | 'accent';
+  as?: 'p' | 'span' | 'div';
+  class?: string;
+}
+
+const { rule = false, tone = 'muted', as: Tag = 'p', class: className } = Astro.props;
+const toneClass = { ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' }[tone];
+---
+
+<Tag class:list={['type-eyebrow flex items-center gap-3', toneClass, className]}>
+  {rule && <span class="h-px w-8 bg-current" aria-hidden="true"></span>}
+  <slot />
+</Tag>

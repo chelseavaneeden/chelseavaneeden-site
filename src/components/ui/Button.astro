@@ -1,0 +1,79 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
+export type ButtonSize = 's' | 'm' | 'l';
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: 'button' | 'submit';
+  icon?: IconName;
+  external?: boolean;
+  full?: boolean;
+  /** Analytics event name (Umami), e.g. "book_intro" */
+  event?: string;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'm',
+  href,
+  type = 'button',
+  icon,
+  external = false,
+  full = false,
+  event,
+  class: className,
+} = Astro.props;
+
+const base =
+  'group/button inline-flex items-center justify-center gap-2 font-body whitespace-nowrap transition-colors duration-(--duration-base) ease-soft';
+
+const variants: Record<ButtonVariant, string> = {
+  primary: 'rounded-control bg-accent text-accent-ink hover:bg-ink hover:text-surface',
+  secondary: 'rounded-control border border-current text-ink hover:bg-ink hover:text-surface hover:border-ink',
+  ghost: 'rounded-control text-ink hover:bg-surface-alt',
+  link: 'text-ink underline decoration-1 underline-offset-4 hover:decoration-2',
+};
+
+const sizes: Record<ButtonSize, string> = {
+  s: 'type-label px-4 py-2',
+  m: 'type-label px-6 py-3.5',
+  l: 'type-body font-medium px-8 py-4',
+};
+
+const classes = [
+  base,
+  variants[variant],
+  variant === 'link' ? 'type-label' : sizes[size],
+  full && 'w-full',
+  className,
+];
+
+const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class:list={classes}
+      data-umami-event={event}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener' : undefined}
+    >
+      <slot />
+      {trailingIcon && (
+        <Icon name={trailingIcon} class="transition-transform duration-(--duration-base) ease-soft group-hover/button:translate-x-0.5" />
+      )}
+    </a>
+  ) : (
+    <button type={type} class:list={classes} data-umami-event={event}>
+      <slot />
+      {trailingIcon && <Icon name={trailingIcon} />}
+    </button>
+  )
+}

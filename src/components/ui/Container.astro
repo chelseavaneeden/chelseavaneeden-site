@@ -1,0 +1,22 @@
+---
+export type ContainerWidth = 'prose' | 'narrow' | 'content' | 'wide' | 'full';
+
+interface Props {
+  width?: ContainerWidth;
+  class?: string;
+}
+
+const { width = 'content', class: className } = Astro.props;
+
+const widths: Record<ContainerWidth, string> = {
+  prose: 'max-w-prose',
+  narrow: 'max-w-narrow',
+  content: 'max-w-content',
+  wide: 'max-w-wide',
+  full: 'max-w-none',
+};
+---
+
+<div class:list={['mx-auto w-full px-(--gutter)', widths[width], className]}>
+  <slot />
+</div>

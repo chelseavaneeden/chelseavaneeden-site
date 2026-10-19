@@ -1,0 +1,41 @@
+---
+import { emphasis } from '../../lib/text';
+
+export type HeadingVariant = 'display-xl' | 'display-l' | 'h1' | 'h2' | 'h3' | 'h4';
+export type TextTone = 'ink' | 'muted' | 'accent';
+
+interface Props {
+  /** Document outline level (h1–h6). Independent of how it looks. */
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  /** Visual style from the design system. */
+  variant?: HeadingVariant;
+  tone?: TextTone;
+  /** Plain text; wrap words in *asterisks* to emphasise them. Or use the slot. */
+  text?: string;
+  id?: string;
+  class?: string;
+}
+
+const { level = 2, variant = 'h2', tone = 'ink', text, id, class: className } = Astro.props;
+
+const Tag = `h${level}` as 'h1';
+const variantClass: Record<HeadingVariant, string> = {
+  'display-xl': 'type-display-xl',
+  'display-l': 'type-display-l',
+  h1: 'type-h1',
+  h2: 'type-h2',
+  h3: 'type-h3',
+  h4: 'type-h4',
+};
+const toneClass: Record<TextTone, string> = { ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' };
+---
+
+{
+  text ? (
+    <Tag id={id} class:list={[variantClass[variant], toneClass[tone], className]} set:html={emphasis(text)} />
+  ) : (
+    <Tag id={id} class:list={[variantClass[variant], toneClass[tone], className]}>
+      <slot />
+    </Tag>
+  )
+}

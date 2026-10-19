@@ -1,0 +1,18 @@
+---
+interface Props {
+  variant?: 'outline' | 'solid';
+  class?: string;
+}
+
+const { variant = 'outline', class: className } = Astro.props;
+---
+
+<span
+  class:list={[
+    'type-caption inline-flex items-center gap-1.5 rounded-pill px-3 py-1 uppercase tracking-widest',
+    variant === 'solid' ? 'bg-accent text-accent-ink' : 'border border-line text-ink-muted',
+    className,
+  ]}
+>
+  <slot />
+</span>

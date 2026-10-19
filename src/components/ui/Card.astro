@@ -1,0 +1,32 @@
+---
+export type CardVariant = 'raised' | 'outline' | 'plain' | 'inverse';
+export type CardPadding = 's' | 'm' | 'l';
+
+interface Props {
+  variant?: CardVariant;
+  padding?: CardPadding;
+  as?: 'div' | 'article' | 'li' | 'a';
+  href?: string;
+  class?: string;
+}
+
+const { variant = 'raised', padding = 'm', as = 'div', href, class: className } = Astro.props;
+
+const Tag = href ? 'a' : as;
+const variants: Record<CardVariant, string> = {
+  raised: 'bg-surface-raised shadow-raised',
+  outline: 'border border-line',
+  plain: '',
+  // Flips to the dark tone of the active theme.
+  inverse: '',
+};
+const paddings: Record<CardPadding, string> = { s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
+---
+
+<Tag
+  href={href}
+  data-tone={variant === 'inverse' ? 'dark' : undefined}
+  class:list={['rounded-card flex flex-col', variants[variant], paddings[padding], className]}
+>
+  <slot />
+</Tag>

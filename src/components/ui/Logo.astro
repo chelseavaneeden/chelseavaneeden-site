@@ -1,0 +1,43 @@
+---
+/*
+ * Chelsea's signature logo, from the existing brand artwork (public/brand/).
+ * The swoosh and the script are separate masks, so their colours come from tokens:
+ * the swoosh uses --logo-mark (ochre, lighter on dark tones), the script uses the text colour.
+ */
+export type LogoSize = 's' | 'm' | 'l';
+
+interface Props {
+  size?: LogoSize;
+  /** Accessible name; the artwork itself reads "Chelsea". */
+  label?: string;
+  class?: string;
+}
+
+const { size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
+
+const heights: Record<LogoSize, string> = {
+  s: 'h-(--logo-height-s)',
+  m: 'h-(--logo-height-m)',
+  l: 'h-(--logo-height-l)',
+};
+---
+
+<span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-ink', heights[size], className]}>
+  <span class="logo-mark absolute inset-0 bg-logo-mark" aria-hidden="true"></span>
+  <span class="logo-word absolute inset-0 bg-current" aria-hidden="true"></span>
+</span>
+
+<style>
+  .logo-mark,
+  .logo-word {
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: left center;
+  }
+  .logo-mark {
+    mask-image: url('/brand/logo-mark.svg');
+  }
+  .logo-word {
+    mask-image: url('/brand/logo-word.svg');
+  }
+</style>

@@ -1,0 +1,16 @@
+// Cloudflare deploy settings.
+// PREVIEW ONLY: there are deliberately no `routes` or custom domains here, so deploys go to
+// https://chelseavaneeden-site.<account>.workers.dev and never touch chelseavaneeden.com
+// (the live Framer site). Add the domain only at launch, on Chelsea's go-ahead.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "chelseavaneeden-site",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

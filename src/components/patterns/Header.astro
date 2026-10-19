@@ -1,0 +1,119 @@
+---
+import Button from '../ui/Button.astro';
+import Container from '../ui/Container.astro';
+import Icon from '../ui/Icon.astro';
+import Logo from '../ui/Logo.astro';
+import { t, type Lang } from '../../i18n/ui';
+import type { NavItem } from '../../data/draft';
+
+interface Props {
+  nav: NavItem[];
+  cta: { label: string; href: string };
+  tone?: 'light' | 'dark';
+  lang?: Lang;
+}
+
+const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
+---
+
+<header data-tone={tone} class="sticky top-0 z-(--z-header) border-b border-line">
+  <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
+    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo size="m" label="Chelsea van Eeden" /></a>
+
+    <nav aria-label="Main" class="hidden items-center gap-8 lg:flex">
+      <ul class="flex items-center gap-7">
+        {
+          nav.map((item) =>
+            item.children ? (
+              <li class="relative">
+                <details class="group/menu" data-dropdown>
+                  <summary class="type-label flex cursor-pointer items-center gap-1 text-ink transition-colors hover:text-ink-muted">
+                    {item.label}
+                    <Icon name="chevron-down" class="transition-transform duration-(--duration-fast) group-open/menu:rotate-180" />
+                  </summary>
+                  <ul class="absolute top-full left-0 mt-4 min-w-60 rounded-card border border-line bg-surface-raised p-2 shadow-raised">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class="type-body-s block rounded-control px-4 py-2.5 text-ink transition-colors hover:bg-surface-alt"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a
+                  href={item.href}
+                  class="type-label inline-flex items-center gap-1 text-ink transition-colors hover:text-ink-muted"
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener' : undefined}
+                >
+                  {item.label}
+                  {item.external && <Icon name="arrow-up-right" label={t(lang, 'a11y.external')} />}
+                </a>
+              </li>
+            ),
+          )
+        }
+      </ul>
+      <Button href={cta.href} size="s" event="nav_book">{cta.label}</Button>
+    </nav>
+
+    <details class="group/mobile lg:hidden">
+      <summary
+        class="flex size-11 cursor-pointer items-center justify-center rounded-control text-ink text-2xl"
+        aria-label={t(lang, 'nav.menu')}
+      >
+        <Icon name="menu" class="group-open/mobile:hidden" />
+        <Icon name="close" class="hidden group-open/mobile:block" />
+      </summary>
+      <div data-tone={tone} class="fixed inset-x-0 top-16 bottom-0 z-(--z-overlay) overflow-y-auto px-(--gutter) py-8">
+        <ul class="flex flex-col gap-1">
+          {
+            nav.map((item) => (
+              <li class="border-b border-line py-3">
+                {item.children ? (
+                  <>
+                    <p class="type-eyebrow mb-2 text-ink-muted">{item.label}</p>
+                    <ul class="flex flex-col gap-1">
+                      {item.children.map((child) => (
+                        <li>
+                          <a href={child.href} class="type-h3 block py-1 text-ink">
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <a href={item.href} class="type-h3 block py-1 text-ink" target={item.external ? '_blank' : undefined}>
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+        <Button href={cta.href} full class="mt-8" event="nav_book">{cta.label}</Button>
+      </div>
+    </details>
+  </Container>
+</header>
+
+<script>
+  // Close the Partnerships dropdown when clicking elsewhere or pressing Escape.
+  const dropdowns = document.querySelectorAll<HTMLDetailsElement>('details[data-dropdown]');
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach((d) => {
+      if (!d.contains(e.target as Node)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') dropdowns.forEach((d) => (d.open = false));
+  });
+</script>

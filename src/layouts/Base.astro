@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import { Font } from 'astro:assets';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: Lang;
+  noindex?: boolean;
+}
+
+const { title, description, lang = 'en', noindex = false } = Astro.props;
+
+// Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
+// This keeps the workers.dev preview out of Google while the live Framer site carries on.
+const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {(noindex || !indexable) && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <Font
+      cssVariable="--font-satoshi"
+      preload={[
+        { weight: '300', style: 'normal' },
+        { weight: '400', style: 'normal' },
+        { weight: '500', style: 'normal' },
+      ]}
+    />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="type-label sr-only z-(--z-banner) rounded-control bg-accent px-4 py-2 text-accent-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+    >
+      {t(lang, 'a11y.skip')}
+    </a>
+    <slot />
+  </body>
+</html>

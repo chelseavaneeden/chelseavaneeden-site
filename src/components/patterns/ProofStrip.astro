@@ -1,0 +1,24 @@
+---
+interface Props {
+  stats: { value: string; label: string }[];
+}
+
+const { stats } = Astro.props;
+---
+
+<dl class="grid grid-cols-2 border-t border-line lg:grid-cols-4">
+  {
+    stats.map((s, i) => (
+      <div
+        class:list={[
+          'flex flex-col gap-2 border-b border-line py-8 pr-4 lg:border-b-0 lg:py-10',
+          i % 2 === 1 && 'border-l pl-5 lg:pl-8',
+          i % 2 === 0 && i > 0 && 'lg:border-l lg:pl-8',
+        ]}
+      >
+        <dt class="type-body-s order-2 text-ink-muted">{s.label}</dt>
+        <dd class="type-stat order-1 text-ink">{s.value}</dd>
+      </div>
+    ))
+  }
+</dl>

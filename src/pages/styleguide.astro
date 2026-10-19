@@ -1,0 +1,433 @@
+---
+/*
+ * LIVING STYLE GUIDE: every token, text style and component in every variant.
+ * It reads tokens.css directly, so it can never drift from the real design system.
+ */
+import Base from '../layouts/Base.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Container from '../components/ui/Container.astro';
+import Divider from '../components/ui/Divider.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Heading from '../components/ui/Heading.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import Logo from '../components/ui/Logo.astro';
+import Price from '../components/ui/Price.astro';
+import Section from '../components/ui/Section.astro';
+import Text from '../components/ui/Text.astro';
+import OfferCard from '../components/patterns/OfferCard.astro';
+import { investment } from '../data/draft';
+import { emphasis } from '../lib/text';
+
+import tokensCss from '../styles/tokens.css?raw';
+
+// Brand palette = the colour primitives (name-number: hex) declared in tokens.css.
+const primitives = [...tokensCss.matchAll(/--([a-z]+-\d+):\s*(#[0-9a-f]{6});/gi)].map(([, name, value]) => ({ name, value }));
+const ramps = Object.entries(
+  primitives.reduce<Record<string, { name: string; value: string }[]>>((acc, p) => {
+    const family = p.name.replace(/-\d+$/, '');
+    (acc[family] ??= []).push(p);
+    return acc;
+  }, {}),
+);
+
+const semantic = [
+  { token: 'surface', cls: 'bg-surface' },
+  { token: 'surface-alt', cls: 'bg-surface-alt' },
+  { token: 'surface-raised', cls: 'bg-surface-raised' },
+  { token: 'ink', cls: 'bg-ink' },
+  { token: 'ink-muted', cls: 'bg-ink-muted' },
+  { token: 'accent', cls: 'bg-accent' },
+  { token: 'accent-ink', cls: 'bg-accent-ink' },
+  { token: 'line', cls: 'bg-line' },
+  { token: 'focus', cls: 'bg-focus' },
+  { token: 'success', cls: 'bg-success' },
+  { token: 'error', cls: 'bg-error' },
+];
+
+const contrastPairs = [
+  { fg: 'text-ink', bg: 'bg-surface', label: 'Ink on surface' },
+  { fg: 'text-ink-muted', bg: 'bg-surface', label: 'Muted ink on surface' },
+  { fg: 'text-ink', bg: 'bg-surface-alt', label: 'Ink on surface-alt' },
+  { fg: 'text-ink-muted', bg: 'bg-surface-alt', label: 'Muted ink on surface-alt' },
+  { fg: 'text-accent-ink', bg: 'bg-accent', label: 'Button text on accent' },
+  { fg: 'text-accent', bg: 'bg-surface', label: 'Accent text on surface' },
+];
+
+const textStyles = [
+  { cls: 'type-display-xl', name: 'display-xl', use: 'Hero headlines', sample: 'Quietly *powerful* Pilates.' },
+  { cls: 'type-display-l', name: 'display-l', use: 'Section statements, CTA bands', sample: 'Strength *with* ease.' },
+  { cls: 'type-h1', name: 'h1', use: 'Section titles', sample: 'Begin with an *intro pack*.' },
+  { cls: 'type-h2', name: 'h2', use: 'Sub-sections, door titles', sample: 'Retreats & hospitality' },
+  { cls: 'type-h3', name: 'h3', use: 'Card titles', sample: 'Monthly plans' },
+  { cls: 'type-h4', name: 'h4', use: 'Small headings', sample: 'What’s included' },
+  { cls: 'type-eyebrow', name: 'eyebrow', use: 'Labels above headings', sample: 'Work with me' },
+  { cls: 'type-lede', name: 'lede', use: 'Intro paragraphs', sample: 'Specialist 1-on-1 sessions online and in Lisbon.' },
+  {
+    cls: 'type-body',
+    name: 'body',
+    use: 'Running text',
+    sample: 'I blend Pilates with myofascial and somatic work, so you build real strength while your nervous system learns to settle.',
+  },
+  { cls: 'type-body-s', name: 'body-s', use: 'Card text, lists', sample: 'Three private sessions, online or in Lisbon.' },
+  { cls: 'type-caption', name: 'caption', use: 'Notes, legal, meta', sample: 'Sample prices for layout only.' },
+  { cls: 'type-quote', name: 'quote', use: 'Testimonials', sample: 'I feel more confident and have less anxiety.' },
+  { cls: 'type-price', name: 'price', use: 'Prices', sample: '€270' },
+  { cls: 'type-stat', name: 'stat', use: 'Proof numbers', sample: '5,000+' },
+  { cls: 'type-label', name: 'label', use: 'Buttons, nav, form labels', sample: 'Book your intro pack' },
+  { cls: 'type-wordmark', name: 'wordmark', use: 'Logo text', sample: 'Chelsea van Eeden' },
+];
+
+const spacing = [
+  { token: '--space-stack-s', label: 'stack-s' },
+  { token: '--space-stack-m', label: 'stack-m' },
+  { token: '--space-stack-l', label: 'stack-l' },
+  { token: '--gutter', label: 'gutter (fluid)' },
+  { token: '--space-section-s', label: 'section-s (fluid)' },
+  { token: '--space-section-m', label: 'section-m (fluid)' },
+  { token: '--space-section-l', label: 'section-l (fluid)' },
+];
+
+const icons: IconName[] = ['arrow-right', 'arrow-up-right', 'check', 'plus', 'menu', 'close', 'chevron-down'];
+const variants = ['primary', 'secondary', 'ghost', 'link'] as const;
+const sizes = ['s', 'm', 'l'] as const;
+---
+
+<Base title="Style guide · Chelsea van Eeden" noindex>
+
+  <main id="main">
+    <Section space="m">
+      <div class="flex max-w-narrow flex-col gap-5">
+        <Logo size="l" />
+        <Eyebrow rule>Design system</Eyebrow>
+        <Heading level={1} variant="display-l">Somatic Minimal</Heading>
+        <Text variant="lede" tone="muted">
+          Calm and soft: one typeface in light weights, rounded shapes and generous space, in Chelsea’s existing brand
+          colours (amber, chocolate, espresso and linen) with sage as the calm secondary tone.
+        </Text>
+        <dl class="mt-2 grid grid-cols-2 gap-6 border-t border-line pt-6">
+          <div><dt class="type-caption text-ink-muted">Typefaces</dt><dd class="type-body">Satoshi (300 · 400 · 500 · 700)</dd></div>
+          <div><dt class="type-caption text-ink-muted">Palette</dt><dd class="type-body">Linen · Amber · Chocolate · Espresso · Sage</dd></div>
+        </dl>
+      </div>
+    </Section>
+
+    <!-- LOGO -->
+    <Section space="s" labelledby="sg-logo">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-logo">Logo & favicon</Heading>
+        <Text variant="body-s" tone="muted" class="max-w-prose">
+          Chelsea’s signature from the existing brand. The swoosh takes the logo-mark token (ochre, lighter on dark
+          tones); the script follows the text colour. Use the Logo component, never the image files directly.
+        </Text>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {
+            ['light', 'alt', 'dark'].map((tone) => (
+              <div data-tone={tone} class="flex flex-col gap-6 rounded-card border border-line p-8">
+                <code class="type-caption text-ink-muted">tone="{tone}"</code>
+                <div class="flex flex-wrap items-end gap-6">
+                  <Logo size="l" />
+                  <Logo size="m" />
+                  <Logo size="s" />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="flex flex-wrap items-center gap-6">
+          <img src="/favicon.svg" alt="Favicon" width="48" height="48" class="rounded-control border border-line bg-surface-raised p-1" />
+          <img src="/apple-touch-icon.png" alt="App icon" width="72" height="72" class="rounded-card" />
+          <Text variant="caption" tone="muted">
+            Favicons are generated from the swoosh and the brand tokens: npm run brand:favicons
+          </Text>
+        </div>
+      </div>
+    </Section>
+
+    <!-- COLOUR -->
+    <Section space="s" labelledby="sg-colour">
+      <div class="flex flex-col gap-10">
+        <Heading variant="h1" id="sg-colour">Colour</Heading>
+
+        <div class="flex flex-col gap-5">
+          <Heading level={3} variant="h3">Semantic tokens</Heading>
+          <Text variant="body-s" tone="muted" class="max-w-prose">
+            Components only ever use these names. Each section tone (light, alt, dark) decides which brand colour they
+            point to.
+          </Text>
+          <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {
+              semantic.map((s) => (
+                <li class="flex flex-col gap-2">
+                  <span class:list={['block aspect-square rounded-card border border-line', s.cls]} data-swatch />
+                  <span class="type-label">{s.token}</span>
+                  <span class="type-caption text-ink-muted" data-swatch-value>—</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <Heading level={3} variant="h3">Palette primitives</Heading>
+          <div class="flex flex-col gap-6">
+            {
+              ramps.map(([family, swatches]) => (
+                <div class="flex flex-col gap-2">
+                  <span class="type-eyebrow text-ink-muted">{family}</span>
+                  <ul class="flex flex-wrap gap-2">
+                    {swatches.map((s) => (
+                      <li class="flex w-28 flex-col gap-1.5">
+                        <span class="block h-16 rounded-card border border-line" style={`background-color: var(--${s.name})`} />
+                        <span class="type-caption">{s.name}</span>
+                        <span class="type-caption text-ink-muted">{s.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <Heading level={3} variant="h3">Contrast checks</Heading>
+          <Text variant="body-s" tone="muted" class="max-w-prose">
+            Calculated live from the tokens. AA needs 4.5:1 for body text and 3:1 for large text.
+          </Text>
+          {
+            ['light', 'alt', 'dark'].map((tone) => (
+              <div data-tone={tone} class="rounded-card p-5">
+                <p class="type-eyebrow mb-3 text-ink-muted">{tone} tone</p>
+                <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {contrastPairs.map((p) => (
+                    <li class:list={['flex items-center justify-between gap-3 rounded-control px-4 py-3', p.bg]} data-contrast>
+                      <span class:list={['type-body-s', p.fg]}>{p.label}</span>
+                      <span class="type-caption rounded-pill bg-surface-raised px-2 py-0.5 text-ink" data-contrast-result>
+                        —
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Section>
+
+    <!-- TYPE -->
+    <Section space="s" tone="alt" labelledby="sg-type">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-type">Typography</Heading>
+        <ul class="flex flex-col">
+          {
+            textStyles.map((s) => (
+              <li class="grid grid-cols-1 gap-3 border-t border-line py-6 md:grid-cols-12 md:gap-6">
+                <div class="flex flex-col gap-1 md:col-span-3">
+                  <code class="type-label">type-{s.name}</code>
+                  <span class="type-caption text-ink-muted">{s.use}</span>
+                  <span class="type-caption text-ink-muted" data-type-meta={s.name}>—</span>
+                </div>
+                <div class="md:col-span-9">
+                  <div class:list={[s.cls, 'text-ink']} data-type-sample={s.name} set:html={emphasis(s.sample)} />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Section>
+
+    <!-- BUTTONS -->
+    <Section space="s" labelledby="sg-buttons">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-buttons">Buttons</Heading>
+        {
+          ['light', 'dark'].map((tone) => (
+            <div data-tone={tone} class="flex flex-col gap-6 rounded-card p-6 md:p-8">
+              <p class="type-eyebrow text-ink-muted">{tone} tone</p>
+              {variants.map((v) => (
+                <div class="flex flex-wrap items-center gap-4">
+                  <code class="type-caption w-24 text-ink-muted">{v}</code>
+                  {v === 'link' ? (
+                    <Button variant="link" href="#" icon="arrow-right">
+                      More about me
+                    </Button>
+                  ) : (
+                    sizes.map((s) => (
+                      <Button variant={v} size={s} href="#">
+                        Size {s}
+                      </Button>
+                    ))
+                  )}
+                </div>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <!-- SURFACES & CARDS -->
+    <Section space="s" tone="alt" labelledby="sg-cards">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-cards">Section tones & cards</Heading>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {
+            ['light', 'alt', 'dark'].map((tone) => (
+              <div data-tone={tone} class="flex flex-col gap-3 rounded-card border border-line p-6">
+                <code class="type-label">tone="{tone}"</code>
+                <Heading level={3} variant="h2">Strength *with* ease.</Heading>
+                <Text variant="body-s" tone="muted">
+                  Muted supporting text on this tone.
+                </Text>
+                <div>
+                  <Button size="s" href="#">Primary</Button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {
+            (['raised', 'outline', 'plain', 'inverse'] as const).map((v) => (
+              <Card variant={v} class="gap-2">
+                <code class="type-label">variant="{v}"</code>
+                <Text variant="body-s" tone="muted">
+                  Card surface, radius and padding come from tokens.
+                </Text>
+              </Card>
+            ))
+          }
+        </div>
+      </div>
+    </Section>
+
+    <!-- PRICE & OFFERS -->
+    <Section space="s" labelledby="sg-price">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-price">Price & offer cards</Heading>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card variant="outline" class="gap-3">
+            <code class="type-label">priceDisplay="exact"</code>
+            <Price offer={{ priceDisplay: 'exact', price: 270, unit: 'pack' }} />
+          </Card>
+          <Card variant="outline" class="gap-3">
+            <code class="type-label">priceDisplay="from"</code>
+            <Price offer={{ priceDisplay: 'from', price: 340, unit: 'month' }} />
+          </Card>
+          <Card variant="outline" class="gap-3">
+            <code class="type-label">priceDisplay="on-request"</code>
+            <Price offer={{ priceDisplay: 'on-request', priceNote: 'Scoped to your team and dates' }} />
+          </Card>
+        </div>
+        <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {
+            investment.offers.map((o) => (
+              <li>
+                <OfferCard offer={o} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Section>
+
+    <!-- SMALL PARTS -->
+    <Section space="s" tone="alt" labelledby="sg-parts">
+      <div class="flex flex-col gap-8">
+        <Heading variant="h1" id="sg-parts">Small parts</Heading>
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
+          <div class="flex flex-col gap-4">
+            <Heading level={3} variant="h3">Eyebrows & badges</Heading>
+            <Eyebrow>Plain eyebrow</Eyebrow>
+            <Eyebrow rule>Eyebrow with rule</Eyebrow>
+            <div class="flex flex-wrap gap-2">
+              <Badge>Online</Badge>
+              <Badge>Lisbon</Badge>
+              <Badge variant="solid">Limited availability</Badge>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <Heading level={3} variant="h3">Icons</Heading>
+            <ul class="flex flex-wrap gap-5 text-2xl">
+              {
+                icons.map((i) => (
+                  <li class="flex flex-col items-center gap-2">
+                    <Icon name={i} />
+                    <span class="type-caption text-ink-muted">{i}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div class="flex flex-col gap-4">
+            <Heading level={3} variant="h3">Radii</Heading>
+            <div class="flex flex-wrap gap-4">
+              <div class="flex flex-col gap-2"><span class="block size-20 rounded-card bg-accent"></span><code class="type-caption">card</code></div>
+              <div class="flex flex-col gap-2"><span class="block size-20 rounded-control bg-accent"></span><code class="type-caption">control</code></div>
+              <div class="flex flex-col gap-2"><span class="block size-20 rounded-media bg-accent"></span><code class="type-caption">media</code></div>
+              <div class="flex flex-col gap-2"><span class="block h-20 w-32 rounded-pill bg-accent"></span><code class="type-caption">pill</code></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-4">
+            <Heading level={3} variant="h3">Spacing</Heading>
+            <ul class="flex flex-col gap-2">
+              {
+                spacing.map((s) => (
+                  <li class="flex items-center gap-4">
+                    <span class="block h-3 bg-accent" style={`width: var(${s.token})`} />
+                    <code class="type-caption text-ink-muted">{s.label}</code>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+        <Divider />
+        <Text variant="caption" tone="muted">
+          Source of truth: src/styles/tokens.css · src/styles/typography.css
+        </Text>
+      </div>
+    </Section>
+  </main>
+</Base>
+
+<script>
+  // Live readouts: hex values, contrast ratios and computed type sizes.
+  const toRgb = (c: string) => (c.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+  const hex = (c: string) =>
+    '#' + toRgb(c).map((n) => Math.round(n).toString(16).padStart(2, '0')).join('');
+  const lum = (c: string) => {
+    const [r, g, b] = toRgb(c).map((v) => {
+      const s = v / 255;
+      return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const ratio = (a: string, b: string) => {
+    const [l1, l2] = [lum(a), lum(b)].sort((x, y) => y - x);
+    return (l1 + 0.05) / (l2 + 0.05);
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-swatch]').forEach((el) => {
+    const out = el.parentElement?.querySelector('[data-swatch-value]');
+    if (out) out.textContent = hex(getComputedStyle(el).backgroundColor);
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-contrast]').forEach((row) => {
+    const fgEl = row.firstElementChild as HTMLElement;
+    const r = ratio(getComputedStyle(fgEl).color, getComputedStyle(row).backgroundColor);
+    const out = row.querySelector('[data-contrast-result]');
+    if (out) out.textContent = `${r.toFixed(1)}:1 ${r >= 4.5 ? 'AA' : r >= 3 ? 'AA large' : 'Fail'}`;
+  });
+
+  document.querySelectorAll<HTMLElement>('[data-type-meta]').forEach((meta) => {
+    const sample = document.querySelector<HTMLElement>(`[data-type-sample="${meta.dataset.typeMeta}"]`);
+    if (!sample) return;
+    const cs = getComputedStyle(sample);
+    meta.textContent = `${Math.round(parseFloat(cs.fontSize))}px · ${cs.fontWeight} · ${cs.fontFamily.split(',')[0].replace(/"/g, '')}`;
+  });
+</script>

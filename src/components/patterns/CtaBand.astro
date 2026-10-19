@@ -1,0 +1,34 @@
+---
+import Button from '../ui/Button.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Text from '../ui/Text.astro';
+
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  text?: string;
+  primary: Link;
+  secondary?: Link;
+  tone?: 'light' | 'alt' | 'dark';
+}
+
+const { title, text, primary, secondary, tone = 'dark' } = Astro.props;
+---
+
+<Section tone={tone} space="m">
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+    <Heading variant="display-l" text={title} class="lg:col-span-7" />
+    <div class="flex flex-col gap-6 lg:col-span-5">
+      {text && <Text tone="muted" text={text} />}
+      <div class="flex flex-wrap gap-3">
+        <Button href={primary.href} size="l" icon="arrow-right" event="cta_band_primary">{primary.label}</Button>
+        {secondary && <Button href={secondary.href} size="l" variant="secondary">{secondary.label}</Button>}
+      </div>
+    </div>
+  </div>
+</Section>

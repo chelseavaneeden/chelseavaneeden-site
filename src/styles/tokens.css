@@ -1,0 +1,194 @@
+/*
+ * DESIGN TOKENS: the single source of truth.
+ *
+ * Raw values (colours, sizes, timings) may only appear in this file and in typography.css.
+ * Everything else references these tokens; scripts/check-tokens.mjs enforces this at build time.
+ *
+ * Layers in this file:
+ *   1. Brand palette   → named colour ramps (primitives). Taken from the existing brand:
+ *                        amber buttons, chocolate text, espresso headings, linen background,
+ *                        ochre logo, plus sage as the calm secondary tone.
+ *   2. Semantic colours → what components use (surface, ink, accent…), per section tone.
+ *   3. Tailwind mapping → turns semantic tokens into utilities (bg-surface, text-ink, rounded-card…).
+ *   4. Shared scales    → type steps, spacing, layout, motion.
+ *
+ * Direction: "Somatic Minimal" (B) with the brand palette. Satoshi only, light display weights,
+ * soft rounded shapes, generous space.
+ */
+
+/* 1. BRAND PALETTE ------------------------------------------------------- */
+:root {
+  --linen-0: #ffffff;
+  --linen-50: #f8f6f3;
+  --linen-100: #f2f0ec;
+  --linen-200: #e7e2da;
+  --linen-300: #d8cfc3;
+  --brown-900: #301a11;
+  --brown-700: #572e1e;
+  --brown-500: #7a5e4f;
+  --brown-300: #cdbbaa;
+  --amber-600: #9f5c09;
+  --amber-300: #d99a4e;
+  --ochre-600: #95601e;
+  --sage-200: #ccd3c4;
+  --sage-300: #b5bfab;
+  --sage-500: #7f8c74;
+  --sage-700: #4f5b44;
+  --rust-600: #a23e2c;
+}
+
+/* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
+:root,
+[data-tone='light'] {
+  --surface: var(--linen-100);
+  --surface-alt: var(--linen-200);
+  --surface-raised: var(--linen-0);
+  --ink: var(--brown-900);
+  --ink-muted: var(--brown-700);
+  --accent: var(--amber-600);
+  --accent-ink: var(--linen-0);
+  --line: var(--linen-300);
+  --focus: var(--amber-600);
+  --success: var(--sage-700);
+  --error: var(--rust-600);
+  --logo-mark: var(--ochre-600);
+}
+
+[data-tone='alt'] {
+  --surface: var(--sage-200);
+  --surface-alt: var(--sage-300);
+  --surface-raised: var(--linen-50);
+  --line: var(--sage-300);
+}
+
+[data-tone='dark'] {
+  --surface: var(--brown-900);
+  --surface-alt: var(--brown-700);
+  --surface-raised: var(--brown-700);
+  --ink: var(--linen-100);
+  --ink-muted: var(--brown-300);
+  --accent: var(--amber-300);
+  --accent-ink: var(--brown-900);
+  --line: var(--brown-700);
+  --focus: var(--amber-300);
+  --logo-mark: var(--amber-300);
+}
+
+/* 3. TAILWIND MAPPING ----------------------------------------------------- */
+
+/* Tailwind's default palette, fonts, sizes and radii are removed on purpose,
+   so only design-system tokens can be used. */
+@theme inline {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  /* Semantic colours — what components use. Values come from the active theme/tone. */
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-raised: var(--surface-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-line: var(--line);
+  --color-focus: var(--focus);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-logo-mark: var(--logo-mark);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Font families */
+  --font-display: var(--font-display-family);
+  --font-body: var(--font-body-family);
+
+  /* Shape */
+  --radius-none: 0;
+  --radius-card: var(--radius-card-value);
+  --radius-control: var(--radius-control-value);
+  --radius-media: var(--radius-media-value);
+  --radius-pill: 999px;
+
+  --shadow-raised: var(--shadow-raised-value);
+
+  /* Layout widths (max-w-content, max-w-prose…) */
+  --container-prose: 40rem;
+  --container-narrow: 56rem;
+  --container-content: 76rem;
+  --container-wide: 92rem;
+
+  /* Motion */
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out-soft: cubic-bezier(0.6, 0, 0.3, 1);
+}
+
+/* 4. SHARED SCALES -------------------------------------------------------- */
+:root {
+  /* Fluid type steps (≈ 1.2 → 1.333 scale from 360px to 1440px viewports). */
+  --step--2: clamp(0.72rem, 0.7rem + 0.1vw, 0.78rem);
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.42rem);
+  --step-2: clamp(1.44rem, 1.27rem + 0.8vw, 1.9rem);
+  --step-3: clamp(1.73rem, 1.42rem + 1.45vw, 2.6rem);
+  --step-4: clamp(2.07rem, 1.55rem + 2.5vw, 3.6rem);
+  --step-5: clamp(2.49rem, 1.6rem + 4.2vw, 5rem);
+  --step-6: clamp(2.99rem, 1.6rem + 6.5vw, 7rem);
+
+  /* Page rhythm */
+  --header-height: 5rem;
+  --hero-min-height: calc(100svh - var(--header-height));
+  --gutter: clamp(1rem, 0.6rem + 2.4vw, 2.75rem);
+  --space-section-s: clamp(3rem, 2.4rem + 3vw, 5rem);
+  --space-section-m: clamp(4.5rem, 3.4rem + 5vw, 8rem);
+  --space-section-l: clamp(6rem, 4.4rem + 7.5vw, 11rem);
+  --space-stack-s: 0.75rem;
+  --space-stack-m: 1.5rem;
+  --space-stack-l: 2.5rem;
+
+  /* Motion durations */
+  --duration-fast: 160ms;
+  --duration-base: 320ms;
+  --duration-slow: 700ms;
+
+  /* Layers */
+  --z-header: 50;
+  --z-overlay: 80;
+  --z-banner: 90;
+
+  /* Type families and character */
+  --font-display-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-body-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --display-scale: 0.92;
+  --display-weight: 300;
+  --display-leading: 1.02;
+  --display-tracking: -0.035em;
+  --display-case: none;
+  --heading-weight: 500;
+  --eyebrow-weight: 500;
+  --eyebrow-tracking: 0.08em;
+  --eyebrow-case: none;
+  --body-leading: 1.65;
+
+  /* Shape */
+  --radius-card-value: 1.5rem;
+  --radius-control-value: 999px;
+  --radius-media-value: 1.5rem;
+  --shadow-raised-value: none;
+
+  /* Logo: the signature artwork is 82 × 36 */
+  --logo-height-s: 1.75rem;
+  --logo-height-m: 2.25rem;
+  --logo-height-l: 3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

@@ -1,0 +1,83 @@
+---
+import Heading from '../ui/Heading.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+import Text from '../ui/Text.astro';
+import type { Door } from '../../data/draft';
+
+export type DoorVariant = 'index' | 'cards';
+
+interface Props {
+  doors: Door[];
+  eyebrow?: string;
+  title?: string;
+  variant?: DoorVariant;
+}
+
+const { doors, eyebrow, title, variant = 'index' } = Astro.props;
+---
+
+<div class="flex flex-col gap-10 md:gap-14">
+  {
+    (eyebrow || title) && (
+      <div class="flex max-w-narrow flex-col gap-4">
+        {eyebrow && <Eyebrow rule={variant === 'index'}>{eyebrow}</Eyebrow>}
+        {title && <Heading variant="h1" text={title} />}
+      </div>
+    )
+  }
+
+  {
+    variant === 'index' && (
+      <ul class="border-b border-line">
+        {doors.map((door) => (
+          <li class="border-t border-line">
+            <a
+              href={door.href}
+              class="group/door grid grid-cols-12 items-baseline gap-x-4 gap-y-2 py-7 transition-colors md:py-9"
+            >
+              <span class="type-eyebrow col-span-2 text-ink-muted md:col-span-1">{door.number}</span>
+              <span class="type-h2 col-span-10 text-ink transition-transform duration-(--duration-base) ease-soft group-hover/door:translate-x-2 md:col-span-5">
+                {door.title}
+              </span>
+              <span class="type-body col-span-10 col-start-3 text-ink-muted md:col-span-5 md:col-start-auto">{door.text}</span>
+              <span class="col-span-12 hidden justify-end text-2xl text-ink md:col-span-1 md:flex">
+                <Icon name="arrow-right" class="transition-transform duration-(--duration-base) ease-soft group-hover/door:translate-x-1" />
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    variant === 'cards' && (
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {doors.map((door, i) => (
+          <li class:list={[i === 0 && 'sm:col-span-2 lg:col-span-1 lg:row-span-2']}>
+            <a
+              href={door.href}
+              data-tone={i === 0 ? 'dark' : undefined}
+              class:list={[
+                'group/door flex h-full flex-col justify-between gap-10 rounded-card p-7 transition-colors md:p-8',
+                i === 0 ? '' : 'bg-surface-raised hover:bg-surface-alt',
+              ]}
+            >
+              <span class="type-eyebrow text-ink-muted">{door.number}</span>
+              <span class="flex flex-col gap-3">
+                <span class:list={[i === 0 ? 'type-h1' : 'type-h2', 'text-ink']}>{door.title}</span>
+                <Text as="span" variant="body-s" tone="muted">
+                  {door.text}
+                </Text>
+                <span class="mt-2 inline-flex size-11 items-center justify-center rounded-pill border border-line text-lg text-ink transition-colors group-hover/door:bg-accent group-hover/door:text-accent-ink">
+                  <Icon name="arrow-right" />
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>

@@ -1,0 +1,46 @@
+---
+import Container, { type ContainerWidth } from './Container.astro';
+
+export type SectionTone = 'light' | 'alt' | 'dark';
+export type SectionSpace = 'none' | 's' | 'm' | 'l';
+
+interface Props {
+  tone?: SectionTone;
+  space?: SectionSpace;
+  width?: ContainerWidth;
+  /** Skip the inner container (for full-bleed layouts that manage their own width). */
+  bare?: boolean;
+  id?: string;
+  labelledby?: string;
+  class?: string;
+}
+
+const {
+  tone = 'light',
+  space = 'm',
+  width = 'content',
+  bare = false,
+  id,
+  labelledby,
+  class: className,
+} = Astro.props;
+
+const spaces: Record<SectionSpace, string> = {
+  none: '',
+  s: 'py-(--space-section-s)',
+  m: 'py-(--space-section-m)',
+  l: 'py-(--space-section-l)',
+};
+---
+
+<section id={id} aria-labelledby={labelledby} data-tone={tone} class:list={[spaces[space], className]}>
+  {
+    bare ? (
+      <slot />
+    ) : (
+      <Container width={width}>
+        <slot />
+      </Container>
+    )
+  }
+</section>
