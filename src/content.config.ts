@@ -53,6 +53,21 @@ const settings = defineCollection({
       }),
     ),
     bookCta: link,
+    availability: z
+      .object({
+        open: z.boolean().default(true),
+        openLabel: z.string().default('Accepting new clients'),
+        closedLabel: z.string().default('Fully booked · Join the waitlist'),
+        href: z.string().default('/private-sessions#investment'),
+        closedHref: z.string().default('/enquire?type=private'),
+      })
+      .default({
+        open: true,
+        openLabel: 'Accepting new clients',
+        closedLabel: 'Fully booked · Join the waitlist',
+        href: '/private-sessions#investment',
+        closedHref: '/enquire?type=private',
+      }),
     tagline: z.string(),
     location: z.string(),
     stats: list(z.object({ value: z.string(), label: z.string() })),

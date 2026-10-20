@@ -1,13 +1,14 @@
 ---
 /*
- * One layout for every audience page (private sessions, companies, retreats & hospitality,
- * studios & clinics, brands). Content comes from src/content/audience-pages/<audience>.yaml,
+ * One layout for every audience page (private sessions, retreats & events, brands,
+ * studios & clinics, companies). Content comes from src/content/audience-pages/<audience>.yaml,
  * plus the offers and testimonials tagged for that audience. Sections the editor leaves
  * empty are skipped.
  *
  * Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
  */
 import Base from './Base.astro';
+import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Section from '../components/ui/Section.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
@@ -32,10 +33,12 @@ const testimonials = await getTestimonials(audience);
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} />
+  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="split" {...page.hero} />
+    <Hero layout="split" {...page.hero}>
+      {audience === 'private' && <AvailabilityBadge slot="badge" {...site.availability} />}
+    </Hero>
 
     <Section space="m">
       <FeatureGrid {...page.whoFor} variant="lines" />

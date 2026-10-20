@@ -1,0 +1,35 @@
+---
+/*
+ * "Accepting new clients" badge. Switched on/off in the editor (Site settings → Availability).
+ * Open: a green dot with a soft pulse. Closed: a still, muted dot and a waitlist message.
+ * The pulse stops for visitors who prefer reduced motion.
+ */
+interface Props {
+  open: boolean;
+  openLabel: string;
+  closedLabel: string;
+  href: string;
+  /** Where the badge links when closed (e.g. a waitlist enquiry). */
+  closedHref?: string;
+  size?: 's' | 'm';
+  class?: string;
+}
+
+const { open, openLabel, closedLabel, href, closedHref, size = 'm', class: className } = Astro.props;
+---
+
+<a
+  href={open ? href : (closedHref ?? href)}
+  data-umami-event={open ? 'availability_open' : 'availability_waitlist'}
+  class:list={[
+    'inline-flex items-center gap-2.5 rounded-pill border border-line bg-surface-raised text-ink transition-colors hover:border-ink',
+    size === 's' ? 'type-caption px-3 py-1.5' : 'type-label px-4 py-2',
+    className,
+  ]}
+>
+  <span class="relative flex size-2.5 shrink-0" aria-hidden="true">
+    {open && <span class="absolute inline-flex size-full animate-ping rounded-pill bg-status-open opacity-75 motion-reduce:animate-none" />}
+    <span class:list={['relative inline-flex size-2.5 rounded-pill', open ? 'bg-status-open' : 'bg-status-closed']} />
+  </span>
+  {open ? openLabel : closedLabel}
+</a>

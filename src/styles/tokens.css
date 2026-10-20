@@ -35,6 +35,7 @@
   --sage-500: #7f8c74;
   --sage-700: #4f5b44;
   --rust-600: #a23e2c;
+  --green-500: #3f9a5c;
 }
 
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
@@ -51,6 +52,8 @@
   --focus: var(--amber-600);
   --success: var(--sage-700);
   --error: var(--rust-600);
+  --status-open: var(--green-500);
+  --status-closed: var(--brown-300);
   --logo-mark: var(--ochre-600);
 }
 
@@ -97,6 +100,8 @@
   --color-focus: var(--focus);
   --color-success: var(--success);
   --color-error: var(--error);
+  --color-status-open: var(--status-open);
+  --color-status-closed: var(--status-closed);
   --color-logo-mark: var(--logo-mark);
   --color-transparent: transparent;
   --color-current: currentColor;

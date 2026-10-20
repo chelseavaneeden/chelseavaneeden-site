@@ -4,7 +4,7 @@ seo:
 hero:
   eyebrow: Private Pilates · Lisbon & worldwide
   title: Quietly *powerful* Pilates.
-  lede: Specialist 1-on-1 sessions online and in Lisbon, plus bespoke movement programmes for companies, retreats, hotels and studios across Europe.
+  lede: Specialist one-to-one sessions online and in Lisbon, plus Pilates for retreats, events, hotels, studios and brands across Europe.
   primary:
     label: Book your intro pack
     href: /private-sessions#investment
@@ -23,18 +23,18 @@ doors:
     - title: Private sessions
       text: 1-on-1, online or in Lisbon. Rehab, pre & post-natal, posture and pain.
       href: /private-sessions
-    - title: Companies
-      text: Workshops, team classes and executive care for desk-based teams.
-      href: /companies
-    - title: Retreats & hospitality
-      text: A specialist instructor for retreats, hotels, villas and yachts.
-      href: /retreats-hospitality
-    - title: Studios & clinics
-      text: Guest workshops, cover teaching and referral partnerships.
-      href: /studios-partners
+    - title: Retreats & Events
+      text: A specialist Pilates instructor for retreats, wellness events, hotels and private groups.
+      href: /retreats-events
     - title: Brands
       text: UGC, ambassadorships and co-hosted experiences for wellness brands.
       href: /brands
+    - title: Studios & Clinics
+      text: Guest workshops, cover teaching and referral partnerships.
+      href: /studios-clinics
+    - title: Companies
+      text: Workshops, team classes and executive care for desk-based teams.
+      href: /companies
 about:
   eyebrow: Meet Chelsea
   title: Strength *with* ease.
@@ -49,7 +49,7 @@ about:
 investment:
   eyebrow: Investment
   title: Begin with an *intro pack*.
-  intro: Three private sessions to assess how you move, ease what hurts and build a plan around your schedule. Then continue monthly, or let’s design something bespoke.
+  intro: Three private sessions to assess how you move, ease what hurts and build a plan around your schedule. Then continue with a monthly plan that fits your week.
   note: Sample prices for layout only.
 ctaBand:
   title: Not sure where you *fit*?

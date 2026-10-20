@@ -1,0 +1,17 @@
+title: Retreats & Events
+audience: private
+eyebrow: For organisers
+summary: Pilates for your retreat, wellness event, hotel or private group, in Portugal, across Europe and beyond.
+priceDisplay: on-request
+currency: EUR
+priceVisibility: web
+includes:
+  - Classes designed around your guests and programme
+  - Mat or Reformer, small groups or one-to-one
+  - Private in-home and travel sessions on request
+cta:
+  label: Request a proposal
+  href: /retreats-events
+featured: false
+order: 30
+published: true

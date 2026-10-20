@@ -2,6 +2,7 @@
 // Home page. All words, images and prices come from the editor (src/content/pages/home.yaml,
 // offers/, testimonials/ and settings/site.yaml); this file only arranges them.
 import Base from '../layouts/Base.astro';
+import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Section from '../components/ui/Section.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import DoorGrid from '../components/patterns/DoorGrid.astro';
@@ -21,10 +22,12 @@ const [testimonial] = await getTestimonials('private');
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} />
+  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="centered" {...page.hero} />
+    <Hero layout="centered" {...page.hero}>
+      <AvailabilityBadge slot="badge" {...site.availability} />
+    </Hero>
 
     {
       site.stats.length > 0 && (

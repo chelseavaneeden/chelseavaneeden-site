@@ -2,18 +2,21 @@
 import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 import Icon from '../ui/Icon.astro';
+import AvailabilityBadge from '../ui/AvailabilityBadge.astro';
 import Logo from '../ui/Logo.astro';
 import { t, type Lang } from '../../i18n/ui';
-import type { NavItem } from '../../lib/content';
+import type { NavItem, Site } from '../../lib/content';
 
 interface Props {
   nav: NavItem[];
   cta: { label: string; href: string };
+  /** Shown next to the Book button on wide screens. */
+  availability?: Site['availability'];
   tone?: 'light' | 'dark';
   lang?: Lang;
 }
 
-const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
+const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
 ---
 
 <header data-tone={tone} class="sticky top-0 z-(--z-header) border-b border-line">
@@ -61,7 +64,10 @@ const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
           )
         }
       </ul>
-      <Button href={cta.href} size="s" event="nav_book">{cta.label}</Button>
+      <div class="flex items-center gap-3">
+        {availability && <AvailabilityBadge {...availability} size="s" class="hidden xl:inline-flex" />}
+        <Button href={cta.href} size="s" event="nav_book">{cta.label}</Button>
+      </div>
     </nav>
 
     <details class="group/mobile lg:hidden">

@@ -103,7 +103,7 @@ content:
               - { name: label, label: Button text, type: string }
               - { name: href, label: Link, type: string }
 
-  # ── SERVICE PAGES (private sessions, companies, hospitality, studios, brands) ─
+  # ── SERVICE PAGES (private sessions, retreats & events, brands, studios & clinics, companies) ─
   - name: audiencePages
     label: Service pages
     type: collection
@@ -124,8 +124,8 @@ content:
           values:
             - { value: private, label: Private clients }
             - { value: companies, label: Companies }
-            - { value: hospitality, label: Retreats & hospitality }
-            - { value: studios, label: Studios & clinics }
+            - { value: hospitality, label: Retreats & Events }
+            - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
       - name: seo
         label: Google listing
@@ -269,8 +269,8 @@ content:
           values:
             - { value: private, label: Private clients }
             - { value: companies, label: Companies }
-            - { value: hospitality, label: Retreats & hospitality }
-            - { value: studios, label: Studios & clinics }
+            - { value: hospitality, label: Retreats & Events }
+            - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
       - { name: eyebrow, label: Small label above the name, type: string, description: 'e.g. Start here' }
       - { name: summary, label: One-line summary, type: text, required: true }
@@ -347,8 +347,8 @@ content:
           values:
             - { value: private, label: Private clients }
             - { value: companies, label: Companies }
-            - { value: hospitality, label: Retreats & hospitality }
-            - { value: studios, label: Studios & clinics }
+            - { value: hospitality, label: Retreats & Events }
+            - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
       - { name: consent, label: I have written permission to publish this, type: boolean, description: 'Without this tick the testimonial never appears.' }
       - { name: featured, label: Feature first, type: boolean }
@@ -376,6 +376,16 @@ content:
             fields:
               - { name: label, label: Menu text, type: string, required: true }
               - { name: href, label: Link, type: string, required: true }
+      - name: availability
+        label: Availability badge
+        type: object
+        description: 'The "Accepting new clients" badge with the pulsing green dot (top of the home and Private sessions pages, and in the menu on wide screens).'
+        fields:
+          - { name: open, label: Accepting new clients, type: boolean, default: true, description: 'Untick when you are fully booked: the dot stops pulsing and the badge shows the waitlist message instead.' }
+          - { name: openLabel, label: Text when open, type: string, default: Accepting new clients }
+          - { name: closedLabel, label: Text when fully booked, type: string, default: Fully booked · Join the waitlist }
+          - { name: href, label: Link when open, type: string, default: /private-sessions#investment }
+          - { name: closedHref, label: Link when fully booked, type: string, default: /enquire?type=private }
       - name: bookCta
         label: Menu button
         type: object

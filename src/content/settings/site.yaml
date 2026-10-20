@@ -4,14 +4,14 @@ nav:
   - label: Partnerships
     href: /partnerships
     children:
-      - label: Companies
-        href: /companies
-      - label: Retreats & hospitality
-        href: /retreats-hospitality
-      - label: Studios & clinics
-        href: /studios-partners
+      - label: Retreats & Events
+        href: /retreats-events
       - label: Brands
         href: /brands
+      - label: Studios & Clinics
+        href: /studios-clinics
+      - label: Companies
+        href: /companies
   - label: On-demand
     href: https://www.thegoodmood.club
     external: true
@@ -20,6 +20,12 @@ nav:
 bookCta:
   label: Book an intro
   href: /book
+availability:
+  open: true
+  openLabel: Accepting new clients
+  closedLabel: Fully booked · Join the waitlist
+  href: /private-sessions#investment
+  closedHref: /enquire?type=private
 tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
 location: Lisbon, Portugal · Teaching worldwide
 stats:
