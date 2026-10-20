@@ -68,6 +68,13 @@ const settings = defineCollection({
         href: '/private-sessions#investment',
         closedHref: '/enquire?type=private',
       }),
+    contact: z
+      .object({
+        whatsappHref: optionalText,
+        whatsappLead: z.string().default('Not sure which option suits you?'),
+        whatsappLabel: z.string().default('Message me on WhatsApp'),
+      })
+      .default({ whatsappLead: 'Not sure which option suits you?', whatsappLabel: 'Message me on WhatsApp' }),
     tagline: z.string(),
     location: z.string(),
     stats: list(z.object({ value: z.string(), label: z.string() })),
@@ -162,6 +169,8 @@ const offers = defineCollection({
       ),
       priceVisibility: z.enum(['web', 'media-kit', 'hidden']).default('web'),
       priceNote: optionalText,
+      /** Short call-out shown as a pill on the card, e.g. "Continue & save €40". */
+      highlight: optionalText,
       includes: list(z.string()),
       cta: link,
       featured: z.boolean().default(false),

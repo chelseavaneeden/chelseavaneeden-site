@@ -53,12 +53,11 @@ steps:
     - title: Your plan
       text: I build a programme around your body, your goals and your schedule.
     - title: Keep going
-      text: Continue with a monthly plan, with your programme reviewed every month.
+      text: Continue weekly or twice weekly. Start within 14 days of your intro pack and save €40 on your first month.
 investment:
   eyebrow: Investment
   title: Begin with an *intro pack*.
-  intro: Three sessions to assess, ease and plan. Then continue with a monthly plan that fits your week.
-  note: Sample prices for layout only.
+  intro: Four sessions to assess, ease and plan. Continue with a monthly plan within 14 days and save €40 on your first month.
 proof:
   eyebrow: Client words
   title: What clients *notice*.
@@ -83,6 +82,8 @@ faq:
       answer: It’s a private Reformer studio in Lisbon. You’ll receive the address when you book.
     - question: Can I cancel or reschedule?
       answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
+    - question: What happens after my intro pack?
+      answer: We look back at your progress together and agree the right rhythm, weekly or twice weekly. Start a monthly plan within 14 days of your intro pack and you save €40 on your first month.
     - question: How do I pay?
       answer: Securely online by card. Monthly plans are billed once a month.
 ctaBand:

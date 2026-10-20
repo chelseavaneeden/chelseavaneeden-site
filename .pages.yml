@@ -313,6 +313,7 @@ content:
             - { value: media-kit, label: Only in downloadable one-sheets }
             - { value: hidden, label: Nowhere (show Tailored proposal) }
       - { name: priceNote, label: Small note under the price, type: string }
+      - { name: highlight, label: Highlight badge, type: string, description: 'A short call-out shown as a coloured pill under the price, e.g. Continue & save €40. Leave empty for none.' }
       - { name: includes, label: What's included, type: string, list: true }
       - name: cta
         label: Button
@@ -392,6 +393,14 @@ content:
         fields:
           - { name: label, label: Button text, type: string, required: true }
           - { name: href, label: Link, type: string, required: true }
+      - name: contact
+        label: WhatsApp link
+        type: object
+        description: 'The small "Message me on WhatsApp" link under the price cards. Leave the link empty to hide it.'
+        fields:
+          - { name: whatsappHref, label: Your WhatsApp link, type: string, description: 'Paste your custom wa.me link (with your number and pre-filled message).' }
+          - { name: whatsappLead, label: Text before the link, type: string, default: Not sure which option suits you? }
+          - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp }
       - { name: tagline, label: Footer tagline, type: text, required: true }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats

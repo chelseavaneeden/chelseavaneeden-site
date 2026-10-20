@@ -1,5 +1,6 @@
 ---
 import Text from '../ui/Text.astro';
+import Icon from '../ui/Icon.astro';
 import OfferCard from './OfferCard.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { Offer } from '../../lib/content';
@@ -12,9 +13,11 @@ interface Props {
   offers: Offer[];
   cardVariant?: 'raised' | 'outline';
   headingId?: string;
+  /** Optional quiet contact link under the cards (WhatsApp). */
+  contact?: { lead: string; label: string; href?: string };
 }
 
-const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId } = Astro.props;
+const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId, contact } = Astro.props;
 ---
 
 <div class="flex flex-col gap-12 md:gap-16">
@@ -28,5 +31,22 @@ const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId }
       ))
     }
   </ul>
+  {
+    contact?.href && (
+      <p class="type-body-s flex flex-wrap items-center gap-x-2 gap-y-1 text-ink-muted">
+        {contact.lead}{' '}
+        <a
+          href={contact.href}
+          target="_blank"
+          rel="noopener"
+          data-umami-event="whatsapp_click"
+          class="inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2"
+        >
+          <Icon name="message" />
+          {contact.label}
+        </a>
+      </p>
+    )
+  }
   {note && <Text variant="caption" tone="muted">{note}</Text>}
 </div>

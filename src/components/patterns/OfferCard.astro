@@ -24,7 +24,10 @@ const { offer, variant = 'raised' } = Astro.props;
     <Heading level={3} variant="h3" text={offer.title} />
     <Text variant="body-s" tone="muted" text={offer.summary} />
   </div>
-  <Price offer={offer} />
+  <div class="flex flex-col items-start gap-3">
+    <Price offer={offer} />
+    {offer.highlight && <p class="type-label rounded-pill bg-accent px-3 py-1.5 text-accent-ink">{offer.highlight}</p>}
+  </div>
   <Divider />
   <ul class="flex flex-col gap-2.5">
     {

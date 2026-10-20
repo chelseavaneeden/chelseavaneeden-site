@@ -3,14 +3,15 @@ audience: private
 eyebrow: Start here
 summary: 4x Private sessions, online
 priceDisplay: exact
-price: 270
+price: 300
 currency: EUR
 unit: pack
 priceVisibility: web
+highlight: Continue & save €40
 includes:
-  - Movement & posture assessment
-  - Your personal plan
-  - Reformer or mat
+  - Full movement & posture assessment
+  - Your written personal plan
+  - €40 off your first month when you continue within 14 days
 cta:
   label: Book your intro pack
   href: /book

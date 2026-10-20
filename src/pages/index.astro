@@ -63,6 +63,7 @@ const [testimonial] = await getTestimonials('private');
             note={page.investment.note}
             offers={offers}
             headingId="investment-title"
+            contact={{ lead: site.contact.whatsappLead, label: site.contact.whatsappLabel, href: site.contact.whatsappHref }}
           />
         </Section>
       )
