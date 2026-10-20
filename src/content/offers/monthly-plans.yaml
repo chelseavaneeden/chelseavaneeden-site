@@ -8,10 +8,11 @@ currency: EUR
 unit: month
 priceVisibility: web
 includes:
-  - 'Weekly: 4 sessions · €260 a month'
-  - 'Twice weekly: 8 sessions · €480 a month'
-  - Programme reviewed every month
-  - Online or in Lisbon
+  - Live one-to-one, with real-time feedback and correction
+  - Adapted on the day to how you feel and what you need
+  - Tailored plans for injury rehab, pain, pre & post-natal or performance
+  - Grows with your goals and your season of life
+  - Weekly or twice weekly, online or in Lisbon
 cta:
   label: Book a call
   href: /book
