@@ -13,8 +13,9 @@ hero:
   secondary:
     label: Ask me a question
     href: /enquire?type=private
-  image: ../../assets/media/ring-reformer.png
-  imageAlt: Hands holding a Pilates ring on a wooden Reformer in soft daylight
+  image: ../../assets/media/chelsea-teaching-online.jpg
+  imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
+  imageFocus: center
 whoFor:
   eyebrow: Who it's for
   title: For bodies that *carry a lot*.
