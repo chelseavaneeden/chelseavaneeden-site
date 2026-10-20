@@ -4,7 +4,7 @@ import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Heading from '../ui/Heading.astro';
-import Img from '../ui/Img.astro';
+import Img, { type ImgFocus } from '../ui/Img.astro';
 import Text from '../ui/Text.astro';
 
 export type HeroLayout = 'split' | 'centered';
@@ -24,6 +24,7 @@ interface Props {
   meta?: string[];
   image: ImageMetadata;
   imageAlt: string;
+  imageFocus?: ImgFocus;
   tone?: 'light' | 'alt' | 'dark';
 }
 
@@ -37,6 +38,7 @@ const {
   meta = [],
   image,
   imageAlt,
+  imageFocus = 'center',
   tone = 'light',
 } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
@@ -64,7 +66,7 @@ const hasBadge = Astro.slots.has('badge');
           )}
         </div>
         <div class="lg:col-span-5">
-          <Img src={image} alt={imageAlt} ratio="portrait" priority sizes="(min-width: 1024px) 38vw, 100vw" />
+          <Img src={image} alt={imageAlt} focus={imageFocus} ratio="portrait" priority sizes="(min-width: 1024px) 38vw, 100vw" />
         </div>
       </Container>
     </section>
@@ -85,7 +87,7 @@ const hasBadge = Astro.slots.has('badge');
         </div>
       </Container>
       <Container width="wide" class="mt-(--space-section-s)">
-        <Img src={image} alt={imageAlt} ratio="wide" priority sizes="(min-width: 1472px) 1400px, 94vw" class="max-md:aspect-4/5" />
+        <Img src={image} alt={imageAlt} focus={imageFocus} ratio="wide" priority sizes="(min-width: 1472px) 1400px, 94vw" class="max-md:aspect-4/5" />
         {meta.length > 0 && (
           <ul class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-2">
             {meta.map((m) => (

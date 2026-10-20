@@ -182,6 +182,10 @@
   --radius-media-value: 1.5rem;
   --shadow-raised-value: none;
 
+  /* Photo focus points for cropped images (object-position) */
+  --focus-upper: 50% 22%;
+  --focus-lower: 50% 78%;
+
   /* Logo: the signature artwork is 82 × 36 */
   --logo-height-s: 1.75rem;
   --logo-height-m: 2.25rem;

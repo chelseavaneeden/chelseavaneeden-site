@@ -2,6 +2,14 @@
 @import './tokens.css';
 @import './typography.css';
 
+/* Photo focus helpers (values live in tokens.css). */
+@utility object-upper {
+  object-position: var(--focus-upper);
+}
+@utility object-lower {
+  object-position: var(--focus-lower);
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

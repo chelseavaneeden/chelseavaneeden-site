@@ -45,6 +45,18 @@ content:
           - { name: meta, label: Small details under the photo, type: string, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true, description: 'Describe the photo for people using screen readers.' }
+          - name: imageFocus
+            label: Photo focus
+            type: select
+            default: center
+            description: 'Which part of the photo stays in view when it is cropped to fit.'
+            options:
+              values:
+                - { value: top, label: Top }
+                - { value: upper, label: Upper third }
+                - { value: center, label: Centre }
+                - { value: lower, label: Lower third }
+                - { value: bottom, label: Bottom }
       - name: doors
         label: Ways to work together
         type: object
@@ -154,6 +166,18 @@ content:
               - { name: href, label: Link, type: string }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
+          - name: imageFocus
+            label: Photo focus
+            type: select
+            default: center
+            description: 'Which part of the photo stays in view when it is cropped to fit.'
+            options:
+              values:
+                - { value: top, label: Top }
+                - { value: upper, label: Upper third }
+                - { value: center, label: Centre }
+                - { value: lower, label: Lower third }
+                - { value: bottom, label: Bottom }
       - name: whoFor
         label: Who it's for
         type: object

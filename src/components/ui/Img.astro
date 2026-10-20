@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 export type ImgRatio = 'portrait' | 'tall' | 'landscape' | 'wide' | 'square' | 'fill';
+export type ImgFocus = 'center' | 'top' | 'upper' | 'lower' | 'bottom';
 
 interface Props {
   src: ImageMetadata;
@@ -12,6 +13,8 @@ interface Props {
   widths?: number[];
   sizes?: string;
   priority?: boolean;
+  /** Which part of the photo stays in view when it's cropped to fit. */
+  focus?: ImgFocus;
   class?: string;
 }
 
@@ -22,8 +25,17 @@ const {
   widths = [480, 800, 1200, 1600],
   sizes = '100vw',
   priority = false,
+  focus = 'center',
   class: className,
 } = Astro.props;
+
+const focusClass: Record<ImgFocus, string> = {
+  center: 'object-center',
+  top: 'object-top',
+  upper: 'object-upper',
+  lower: 'object-lower',
+  bottom: 'object-bottom',
+};
 
 const ratios: Record<ImgRatio, string> = {
   portrait: 'aspect-4/5',
@@ -44,5 +56,5 @@ const ratios: Record<ImgRatio, string> = {
   fallbackFormat="jpg"
   priority={priority}
   pictureAttributes={{ class: ['block overflow-hidden rounded-media', ratios[ratio], className].filter(Boolean).join(' ') }}
-  class="h-full w-full object-cover"
+  class:list={['h-full w-full object-cover', focusClass[focus]]}
 />

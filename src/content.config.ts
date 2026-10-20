@@ -97,6 +97,7 @@ const pages = defineCollection({
         meta: list(z.string()),
         image: image(),
         imageAlt: z.string(),
+        imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom']).default('center'),
       }),
       doors: z.object({
         eyebrow: optionalText,
@@ -138,6 +139,7 @@ const audiencePages = defineCollection({
         secondary: optionalLink,
         image: image(),
         imageAlt: z.string(),
+        imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom']).default('center'),
       }),
       whoFor: z.object({ ...sectionHead, items: titledItems }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),
