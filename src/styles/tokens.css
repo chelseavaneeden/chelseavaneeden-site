@@ -169,14 +169,18 @@
   --z-banner: 90;
 
   /* Type families and character */
-  --font-display-family: var(--font-oranienbaum), 'Didot', 'Bodoni 72', serif;
+  --font-display-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
   --font-body-family: var(--font-host-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-label-family: var(--font-martian-mono), ui-monospace, 'SF Mono', monospace;
-  --display-scale: 0.8;
+  --display-scale: 0.72;
   --display-weight: 400;
-  --display-leading: 0.95;
-  --display-tracking: -0.01em;
-  --display-case: uppercase;
+  --display-leading: 1.08;
+  --display-tracking: -0.015em;
+  --display-case: none;
+  /* Optical size match for the headline candidates on /fonts */
+  --display-scale-playfair: 0.72;
+  --display-scale-garamond: 0.8;
+  --display-scale-cormorant: 0.86;
   --heading-weight: 500;
   --eyebrow-weight: 400;
   --eyebrow-tracking: 0.06em;

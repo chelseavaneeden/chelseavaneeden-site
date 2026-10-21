@@ -1,0 +1,93 @@
+---
+/*
+ * Headline font comparison (concept branch). Each column swaps only the headline face;
+ * body text (Host Grotesk) and labels/buttons (Martian Mono) stay the same.
+ */
+import Base from '../layouts/Base.astro';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Heading from '../components/ui/Heading.astro';
+import Logo from '../components/ui/Logo.astro';
+import Section from '../components/ui/Section.astro';
+import Text from '../components/ui/Text.astro';
+
+const options = [
+  {
+    label: 'Option 1 · Applied to the concept',
+    name: 'Playfair Display',
+    font: 'var(--font-playfair)',
+    scale: 'var(--display-scale-playfair)',
+    note: 'Elegant and classic with a little fashion-editorial polish. Clear at every size and beautiful in italics.',
+  },
+  {
+    label: 'Option 2 · Most timeless',
+    name: 'EB Garamond',
+    font: 'var(--font-eb-garamond)',
+    scale: 'var(--display-scale-garamond)',
+    note: 'A book face based on 16th-century type. Calm, warm and very easy to read, from headlines to captions.',
+  },
+  {
+    label: 'Option 3 · Most delicate',
+    name: 'Cormorant Garamond',
+    font: 'var(--font-cormorant)',
+    scale: 'var(--display-scale-cormorant)',
+    note: 'Refined and airy with fine strokes. Lovely large; needs a little more size to stay readable on small screens.',
+  },
+];
+---
+
+<Base title="Headline fonts · Chelsea van Eeden" noindex>
+  <main id="main">
+    <Section space="m" width="wide">
+      <div class="flex max-w-narrow flex-col gap-4">
+        <Logo size="l" />
+        <Eyebrow>Concept · headline fonts</Eyebrow>
+        <Heading level={1} variant="h1" text="Three *timeless* headline fonts" />
+        <Text tone="muted">
+          Only the headline font changes between the columns. Body text stays in Host Grotesk, and buttons and labels
+          stay in Martian Mono. All three are free Google Fonts.
+        </Text>
+      </div>
+    </Section>
+
+    <Section space="s" width="wide" tone="alt">
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {
+          options.map((o) => (
+            <article
+              class="flex flex-col gap-7 bg-surface-raised p-7 md:p-8"
+              style={`--font-display-family: ${o.font}; --display-scale: ${o.scale}`}
+            >
+              <div class="flex flex-col gap-2 border-b border-line pb-6">
+                <Eyebrow>{o.label}</Eyebrow>
+                <Heading level={2} variant="h2" text={o.name} />
+                <Text variant="body-s" tone="muted" text={o.note} />
+              </div>
+
+              <Heading level={3} variant="display-l" text="Quietly *powerful* Pilates." />
+              <Heading level={3} variant="h2" text="One specialist, *five* ways in." />
+              <Text variant="body-s" tone="muted">
+                Live private sessions online, wherever you are, or in person in Lisbon. Specialist care for injury,
+                pain, posture and pregnancy.
+              </Text>
+              <div>
+                <Button href="#" size="s">
+                  Book your intro pack
+                </Button>
+              </div>
+
+              <div data-tone="dark" class="flex aspect-square flex-col justify-between p-7">
+                <Eyebrow tone="ink">Social post</Eyebrow>
+                <Heading level={3} variant="h1" text="Strong, calm & *cared for*. Wherever you are." />
+                <div class="flex items-end justify-between">
+                  <span class="type-eyebrow text-ink-muted">@chelseavaneeden</span>
+                  <Logo size="s" />
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </Section>
+  </main>
+</Base>

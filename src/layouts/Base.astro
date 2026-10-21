@@ -28,7 +28,9 @@ const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <Font cssVariable="--font-oranienbaum" preload />
+    <Font cssVariable="--font-playfair" preload={[{ weight: '400 600', style: 'normal' }]} />
+    <Font cssVariable="--font-eb-garamond" />
+    <Font cssVariable="--font-cormorant" />
     <Font cssVariable="--font-host-grotesk" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-martian-mono" preload={[{ style: 'normal' }]} />
   </head>

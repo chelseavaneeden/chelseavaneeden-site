@@ -11,7 +11,10 @@ export default defineConfig({
   },
   fonts: [
     // Concept "Scrapbook": condensed caps serif, clean grotesk, typewriter mono.
-    { name: 'Oranienbaum', cssVariable: '--font-oranienbaum', provider: fontProviders.google(), weights: ['400'], styles: ['normal'] },
+    // Headline candidates (timeless serifs with true italics): Playfair Display is applied; see /fonts.
+    { name: 'Playfair Display', cssVariable: '--font-playfair', provider: fontProviders.google(), weights: ['400 600'], styles: ['normal', 'italic'] },
+    { name: 'EB Garamond', cssVariable: '--font-eb-garamond', provider: fontProviders.google(), weights: ['400 600'], styles: ['normal', 'italic'] },
+    { name: 'Cormorant Garamond', cssVariable: '--font-cormorant', provider: fontProviders.google(), weights: ['400', '500', '600'], styles: ['normal', 'italic'] },
     { name: 'Host Grotesk', cssVariable: '--font-host-grotesk', provider: fontProviders.google(), weights: ['300 700'], styles: ['normal', 'italic'] },
     { name: 'Martian Mono', cssVariable: '--font-martian-mono', provider: fontProviders.google(), weights: ['400 500'], styles: ['normal'] },
     {
