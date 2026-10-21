@@ -13,9 +13,11 @@ hero:
   secondary:
     label: Ask me a question
     href: /enquire?type=private
-  image: ../../assets/media/chelsea-teaching-online.jpg
-  imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
+  image: ../../assets/media/chelsea-portrait.jpg
+  imageAlt: Chelsea van Eeden smiling and waving during a live online session
   imageFocus: center
+  layout: overlay
+  textPosition: left
 whoFor:
   eyebrow: Who it's for
   title: For bodies that *carry a lot*.

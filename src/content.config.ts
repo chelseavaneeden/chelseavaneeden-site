@@ -140,6 +140,8 @@ const audiencePages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom']).default('center'),
+        layout: z.enum(['split', 'overlay']).default('split'),
+        textPosition: z.enum(['center', 'left']).default('left'),
       }),
       whoFor: z.object({ ...sectionHead, items: titledItems }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),

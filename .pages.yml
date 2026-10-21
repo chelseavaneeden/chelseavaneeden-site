@@ -178,6 +178,22 @@ content:
                 - { value: center, label: Centre }
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
+          - name: layout
+            label: Top section style
+            type: select
+            default: split
+            options:
+              values:
+                - { value: split, label: Text beside the photo }
+                - { value: overlay, label: Full-width photo with a frosted text card }
+          - name: textPosition
+            label: Text card position (frosted style)
+            type: select
+            default: left
+            options:
+              values:
+                - { value: left, label: Left }
+                - { value: center, label: Centre }
       - name: whoFor
         label: Who it's for
         type: object
