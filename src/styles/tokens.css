@@ -33,8 +33,12 @@
   --amber-600: #9f5c09;
   --amber-300: #d99a4e;
   --ochre-600: #95601e;
-  --sage-200: #ccd3c4;
-  --sage-300: #b5bfab;
+  --sage-200: #d8dac0;
+  --sage-300: #c3c6a3;
+  /* Green options compared on /fonts */
+  --sage-cool-200: #ccd3c4;
+  --pistachio-200: #dfe5c6;
+  --oat-200: #e8dccb;
   --sage-700: #4f5b44;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
@@ -74,7 +78,7 @@
   --surface-raised: var(--brown-700);
   --ink: var(--cream-100);
   --ink-muted: var(--brown-300);
-  --accent: var(--amber-300);
+  --accent: var(--butter-300);
   --accent-ink: var(--brown-900);
   --line: var(--brown-700);
   --focus: var(--butter-300);
@@ -188,9 +192,9 @@
   --body-leading: 1.6;
 
   /* Shape */
-  --radius-card-value: 0;
-  --radius-control-value: 0;
-  --radius-media-value: 0;
+  --radius-card-value: 0.25rem;
+  --radius-control-value: 0.25rem;
+  --radius-media-value: 0.25rem;
   --shadow-raised-value: 0 24px 48px -28px rgb(48 26 17 / 0.45);
   --hero-overlay-height: min(88svh, 56rem);
 

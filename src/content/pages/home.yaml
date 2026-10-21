@@ -3,19 +3,20 @@ seo:
   description: Specialist one-to-one Pilates online and in Lisbon, plus Pilates for retreats, events, hotels, studios and brands across Europe.
 hero:
   eyebrow: Private Pilates · Lisbon & worldwide
-  title: Quietly *powerful* Pilates.
+  title: One-to-one Pilates, *built around you*.
   lede: Specialist one-to-one sessions online and in Lisbon, plus Pilates for retreats, events, hotels, studios and brands across Europe.
   primary:
     label: Book your intro pack
     href: /private-sessions#investment
   secondary:
     label: Partner with me
-    href: /partnerships
+    href: '#work-with-me'
   meta:
     - BASI certified
     - Rehab · Pre & post-natal · Posture
-  image: ../../assets/media/home-studio.png
-  imageAlt: A wooden reformer by a sunlit window in Chelsea’s private studio
+  image: ../../assets/media/chelsea-teaching-online.jpg
+  imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
+  imageFocus: center
 doors:
   eyebrow: Work with me
   title: One specialist, *five* ways in.
