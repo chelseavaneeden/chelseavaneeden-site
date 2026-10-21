@@ -7,7 +7,7 @@ import Heading from '../ui/Heading.astro';
 import Img, { type ImgFocus } from '../ui/Img.astro';
 import Text from '../ui/Text.astro';
 
-export type HeroLayout = 'split' | 'centered';
+export type HeroLayout = 'split' | 'centered' | 'overlay';
 
 interface Link {
   label: string;
@@ -100,3 +100,24 @@ const hasBadge = Astro.slots.has('badge');
   )
 }
 
+{
+  layout === 'overlay' && (
+    <section data-tone={tone} class="relative isolate flex min-h-(--hero-overlay-height) items-center justify-center overflow-hidden px-(--gutter) py-(--space-section-m)">
+      <div class="absolute inset-0 -z-10" aria-hidden="true">
+        <Img src={image} alt="" focus={imageFocus} ratio="fill" priority sizes="100vw" class="w-full" />
+      </div>
+      <div class="flex max-w-xl flex-col items-center gap-6 border border-line bg-surface/70 px-7 py-10 text-center shadow-raised backdrop-blur-md md:px-12 md:py-14">
+        {hasBadge && <slot name="badge" />}
+        <Heading level={1} variant="display-l" text={title} />
+        <Text variant="body" tone="muted" class="max-w-md" text={lede} />
+        <Button href={primary.href} size="m" event="hero_primary">{primary.label}</Button>
+        {secondary && (
+          <Button href={secondary.href} variant="link" icon="arrow-right">
+            {secondary.label}
+          </Button>
+        )}
+      </div>
+      <span class="sr-only">{imageAlt}</span>
+    </section>
+  )
+}

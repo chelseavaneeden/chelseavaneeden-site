@@ -1,0 +1,25 @@
+---
+// A tilted "sticky note" in the CTA colour: caps headline plus a small mono caption/link.
+interface Props {
+  title: string;
+  caption?: string;
+  href?: string;
+  tilt?: 'left' | 'right';
+  class?: string;
+}
+
+const { title, caption, href, tilt = 'right', class: className } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class:list={[
+    'flex aspect-square w-full max-w-xs flex-col justify-between bg-cta p-7 text-cta-ink shadow-raised transition-transform duration-(--duration-base) ease-soft hover:rotate-0',
+    tilt === 'right' ? 'rotate-2' : '-rotate-2',
+    className,
+  ]}
+>
+  <span class="type-h2 text-cta-ink">{title}</span>
+  {caption && <span class="type-eyebrow text-cta-ink underline decoration-1 underline-offset-4">{caption}</span>}
+</Tag>

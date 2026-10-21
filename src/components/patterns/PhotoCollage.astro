@@ -1,0 +1,29 @@
+---
+// Two photos laid out like prints on a desk: framed in paper, slightly turned, held with "tape".
+import type { ImageMetadata } from 'astro';
+import Img from '../ui/Img.astro';
+
+interface Photo {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  photos: [Photo, Photo];
+  class?: string;
+}
+
+const { photos, class: className } = Astro.props;
+const [first, second] = photos;
+---
+
+<div class:list={['relative grid grid-cols-6 grid-rows-6', className]}>
+  <figure class="relative col-span-4 col-start-1 row-span-5 row-start-1 -rotate-2 bg-surface-raised p-2.5 pb-10 shadow-raised">
+    <span class="absolute -top-3 left-1/2 h-6 w-20 -translate-x-1/2 rotate-3 bg-cta opacity-80" aria-hidden="true"></span>
+    <Img src={first.src} alt={first.alt} ratio="portrait" sizes="(min-width: 1024px) 26vw, 60vw" />
+  </figure>
+  <figure class="relative z-10 col-span-3 col-start-4 row-span-4 row-start-3 rotate-3 bg-surface-raised p-2.5 pb-8 shadow-raised">
+    <span class="absolute -top-3 left-1/2 h-6 w-16 -translate-x-1/2 -rotate-2 bg-cta opacity-80" aria-hidden="true"></span>
+    <Img src={second.src} alt={second.alt} ratio="portrait" sizes="(min-width: 1024px) 20vw, 45vw" />
+  </figure>
+</div>

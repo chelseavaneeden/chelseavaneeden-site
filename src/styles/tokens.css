@@ -17,22 +17,24 @@
  */
 
 /* 1. BRAND PALETTE ------------------------------------------------------- */
+/* Concept "Scrapbook": cream paper, butter-yellow notes, espresso bands, sage. */
 :root {
+  --cream-50: #fffcf5;
+  --cream-100: #faf4e9;
+  --cream-200: #f0e7d8;
+  --cream-300: #e2d6c3;
   --linen-0: #ffffff;
-  --linen-50: #f8f6f3;
-  --linen-100: #f2f0ec;
-  --linen-200: #e7e2da;
-  --linen-300: #d8cfc3;
   --brown-900: #301a11;
   --brown-700: #572e1e;
   --brown-500: #7a5e4f;
   --brown-300: #cdbbaa;
+  --butter-300: #f1ef83;
+  --butter-100: #fffda6;
   --amber-600: #9f5c09;
   --amber-300: #d99a4e;
   --ochre-600: #95601e;
   --sage-200: #ccd3c4;
   --sage-300: #b5bfab;
-  --sage-500: #7f8c74;
   --sage-700: #4f5b44;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
@@ -41,14 +43,16 @@
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
 :root,
 [data-tone='light'] {
-  --surface: var(--linen-100);
-  --surface-alt: var(--linen-200);
-  --surface-raised: var(--linen-0);
+  --surface: var(--cream-100);
+  --surface-alt: var(--cream-200);
+  --surface-raised: var(--cream-50);
   --ink: var(--brown-900);
   --ink-muted: var(--brown-700);
   --accent: var(--amber-600);
   --accent-ink: var(--linen-0);
-  --line: var(--linen-300);
+  --cta: var(--butter-300);
+  --cta-ink: var(--brown-900);
+  --line: var(--cream-300);
   --focus: var(--amber-600);
   --success: var(--sage-700);
   --error: var(--rust-600);
@@ -60,7 +64,7 @@
 [data-tone='alt'] {
   --surface: var(--sage-200);
   --surface-alt: var(--sage-300);
-  --surface-raised: var(--linen-50);
+  --surface-raised: var(--cream-50);
   --line: var(--sage-300);
 }
 
@@ -68,12 +72,12 @@
   --surface: var(--brown-900);
   --surface-alt: var(--brown-700);
   --surface-raised: var(--brown-700);
-  --ink: var(--linen-100);
+  --ink: var(--cream-100);
   --ink-muted: var(--brown-300);
   --accent: var(--amber-300);
   --accent-ink: var(--brown-900);
   --line: var(--brown-700);
-  --focus: var(--amber-300);
+  --focus: var(--butter-300);
   --logo-mark: var(--amber-300);
 }
 
@@ -96,6 +100,8 @@
   --color-ink-muted: var(--ink-muted);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-cta: var(--cta);
+  --color-cta-ink: var(--cta-ink);
   --color-line: var(--line);
   --color-focus: var(--focus);
   --color-success: var(--success);
@@ -163,24 +169,26 @@
   --z-banner: 90;
 
   /* Type families and character */
-  --font-display-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  --font-body-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  --display-scale: 0.92;
-  --display-weight: 300;
-  --display-leading: 1.02;
-  --display-tracking: -0.035em;
-  --display-case: none;
+  --font-display-family: var(--font-oranienbaum), 'Didot', 'Bodoni 72', serif;
+  --font-body-family: var(--font-host-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-label-family: var(--font-martian-mono), ui-monospace, 'SF Mono', monospace;
+  --display-scale: 0.8;
+  --display-weight: 400;
+  --display-leading: 0.95;
+  --display-tracking: -0.01em;
+  --display-case: uppercase;
   --heading-weight: 500;
-  --eyebrow-weight: 500;
-  --eyebrow-tracking: 0.08em;
-  --eyebrow-case: none;
-  --body-leading: 1.65;
+  --eyebrow-weight: 400;
+  --eyebrow-tracking: 0.06em;
+  --eyebrow-case: uppercase;
+  --body-leading: 1.6;
 
   /* Shape */
-  --radius-card-value: 1.5rem;
-  --radius-control-value: 999px;
-  --radius-media-value: 1.5rem;
-  --shadow-raised-value: none;
+  --radius-card-value: 0;
+  --radius-control-value: 0;
+  --radius-media-value: 0;
+  --shadow-raised-value: 0 24px 48px -28px rgb(48 26 17 / 0.45);
+  --hero-overlay-height: min(88svh, 56rem);
 
   /* Photo focus points for cropped images (object-position) */
   --focus-upper: 50% 22%;

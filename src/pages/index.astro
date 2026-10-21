@@ -9,7 +9,12 @@ import DoorGrid from '../components/patterns/DoorGrid.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
-import MediaSplit from '../components/patterns/MediaSplit.astro';
+import PhotoCollage from '../components/patterns/PhotoCollage.astro';
+import StickyNote from '../components/patterns/StickyNote.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Heading from '../components/ui/Heading.astro';
+import Text from '../components/ui/Text.astro';
+import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import ProofStrip from '../components/patterns/ProofStrip.astro';
 import Testimonial from '../components/patterns/Testimonial.astro';
@@ -25,7 +30,7 @@ const [testimonial] = await getTestimonials('private');
   <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="centered" {...page.hero}>
+    <Hero layout="overlay" {...page.hero}>
       <AvailabilityBadge slot="badge" {...site.availability} />
     </Hero>
 
@@ -41,16 +46,31 @@ const [testimonial] = await getTestimonials('private');
       <DoorGrid doors={page.doors.items} eyebrow={page.doors.eyebrow} title={page.doors.title} variant="cards" />
     </Section>
 
-    <Section space="m" tone="alt">
-      <MediaSplit
-        image={page.about.image}
-        imageAlt={page.about.imageAlt}
-        eyebrow={page.about.eyebrow}
-        title={page.about.title}
-        text={page.about.paragraphs}
-        cta={page.about.cta}
-        ratio="square"
-      />
+    <Section space="l" tone="light">
+      <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+        <div class="flex flex-col gap-5 lg:col-span-5">
+          {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
+          <Heading variant="h1" text={page.about.title} />
+          {page.about.paragraphs.map((p) => <Text tone="muted" text={p} />)}
+        </div>
+        <div class="relative lg:col-span-7">
+          <div class="grid grid-cols-1 items-center gap-10 sm:grid-cols-12">
+            <StickyNote
+              class="relative z-20 mx-auto sm:col-span-5 sm:mx-0 sm:-mr-10"
+              title="Strong, calm & cared for. Wherever you are."
+              caption="Join my client list"
+              href="/private-sessions#investment"
+            />
+            <PhotoCollage
+              class="sm:col-span-7"
+              photos={[
+                { src: page.about.image, alt: page.about.imageAlt },
+                { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
+              ]}
+            />
+          </div>
+        </div>
+      </div>
     </Section>
 
     {
