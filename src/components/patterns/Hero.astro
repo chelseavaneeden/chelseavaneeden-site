@@ -7,7 +7,7 @@ import Heading from '../ui/Heading.astro';
 import Img, { type ImgFocus } from '../ui/Img.astro';
 import Text from '../ui/Text.astro';
 
-export type HeroLayout = 'split' | 'centered';
+export type HeroLayout = 'split' | 'centered' | 'fullbleed';
 
 interface Link {
   label: string;
@@ -100,3 +100,27 @@ const hasBadge = Astro.slots.has('badge');
   )
 }
 
+{
+  layout === 'fullbleed' && (
+    <section
+      data-tone="dark"
+      class="relative isolate flex min-h-(--hero-overlay-height) items-end justify-center overflow-hidden px-(--gutter) pt-(--space-section-l) pb-(--space-section-s)"
+    >
+      <div class="absolute inset-0 -z-20" aria-hidden="true">
+        <Img src={image} alt="" focus={imageFocus} ratio="fill" priority sizes="100vw" class="w-full" />
+      </div>
+      <div class="absolute inset-0 -z-10 bg-linear-to-t from-surface/85 via-surface/35 to-transparent" aria-hidden="true"></div>
+      <div class="flex max-w-3xl flex-col items-center gap-7 text-center">
+        {hasBadge && <slot name="badge" />}
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <Heading level={1} variant="display-l" text={title} />
+        <Text variant="lede" class="max-w-xl" text={lede} />
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <Button href={primary.href} size="m" variant="secondary" event="hero_primary">{primary.label}</Button>
+          {secondary && <Button href={secondary.href} variant="link" icon="arrow-right">{secondary.label}</Button>}
+        </div>
+      </div>
+      <span class="sr-only">{imageAlt}</span>
+    </section>
+  )
+}

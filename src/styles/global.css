@@ -10,6 +10,25 @@
   object-position: var(--focus-lower);
 }
 
+/* Scrolling text band */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@utility animate-marquee {
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+/* Vertical labels on the accordion spines */
+@utility vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

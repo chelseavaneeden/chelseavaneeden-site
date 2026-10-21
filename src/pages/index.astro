@@ -2,10 +2,13 @@
 // Home page. All words, images and prices come from the editor (src/content/pages/home.yaml,
 // offers/, testimonials/ and settings/site.yaml); this file only arranges them.
 import Base from '../layouts/Base.astro';
-import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Section from '../components/ui/Section.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
-import DoorGrid from '../components/patterns/DoorGrid.astro';
+import AnnouncementBar from '../components/patterns/AnnouncementBar.astro';
+import DoorSpines from '../components/patterns/DoorSpines.astro';
+import Marquee from '../components/patterns/Marquee.astro';
+import portraitPhoto from '../assets/media/chelsea-portrait.jpg';
+import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
@@ -22,12 +25,17 @@ const [testimonial] = await getTestimonials('private');
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <AnnouncementBar availability={site.availability} />
+  <Header nav={site.nav} cta={site.bookCta} />
 
   <main id="main">
-    <Hero layout="centered" {...page.hero}>
-      <AvailabilityBadge slot="badge" {...site.availability} />
-    </Hero>
+    <Hero
+      layout="fullbleed"
+      {...page.hero}
+      image={portraitPhoto}
+      imageAlt="Chelsea van Eeden smiling during an online session"
+      imageFocus="center"
+    />
 
     {
       site.stats.length > 0 && (
@@ -38,18 +46,21 @@ const [testimonial] = await getTestimonials('private');
     }
 
     <Section space="m" width="wide">
-      <DoorGrid doors={page.doors.items} eyebrow={page.doors.eyebrow} title={page.doors.title} variant="cards" />
+      <DoorSpines doors={page.doors.items} eyebrow={page.doors.eyebrow} title={page.doors.title} />
     </Section>
 
-    <Section space="m" tone="alt">
+    <Marquee phrases={['Strength with ease', 'Pilates that meets you where you are', 'Online & in Lisbon']} />
+
+    <Section space="m" tone="dark">
       <MediaSplit
-        image={page.about.image}
-        imageAlt={page.about.imageAlt}
+        image={teachingOnline}
+        imageAlt="Chelsea guiding a client through a live online Reformer session"
         eyebrow={page.about.eyebrow}
         title={page.about.title}
         text={page.about.paragraphs}
         cta={page.about.cta}
-        ratio="square"
+        ratio="portrait"
+        reverse
       />
     </Section>
 

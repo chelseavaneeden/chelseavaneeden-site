@@ -1,0 +1,91 @@
+---
+/*
+ * Ways to work together as a sideways accordion: one open panel, the rest as narrow
+ * spines with vertical labels. Click a spine to open it. On phones it becomes a simple list.
+ */
+import Button from '../ui/Button.astro';
+import Heading from '../ui/Heading.astro';
+import Text from '../ui/Text.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Door {
+  title: string;
+  text: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  doors: Door[];
+}
+
+const { eyebrow, title, doors } = Astro.props;
+const n = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<div class="flex flex-col gap-10 md:gap-14">
+  <SectionHeader eyebrow={eyebrow} title={title} />
+
+  <ul class="hidden h-(--spine-height) border-y border-line lg:flex" data-spines>
+    {
+      doors.map((d, i) => (
+        <li
+          class="group/spine relative flex shrink-0 basis-(--spine-width) overflow-hidden border-l border-line transition-all duration-(--duration-slow) ease-in-out-soft first:border-l-0 data-active:grow"
+          data-active={i === 0 ? '' : undefined}
+        >
+          <button
+            type="button"
+            class="flex h-full w-(--spine-width) shrink-0 flex-col items-center justify-between py-6 text-ink transition-colors hover:bg-surface-alt"
+            aria-expanded={i === 0 ? 'true' : 'false'}
+            aria-controls={`spine-panel-${i}`}
+          >
+            <span class="type-eyebrow text-ink-muted">{n(i)}</span>
+            <span class="type-eyebrow vertical-text">{d.title}</span>
+          </button>
+          <div
+            id={`spine-panel-${i}`}
+            class="flex w-(--spine-panel-width) min-w-0 flex-col justify-end gap-6 p-10 opacity-0 transition-opacity duration-(--duration-slow) group-data-active/spine:opacity-100"
+          >
+            <Heading level={3} variant="h1">{d.title}</Heading>
+            <Text tone="muted" class="max-w-md">{d.text}</Text>
+            <div>
+              <Button href={d.href} variant="secondary" size="m" icon="arrow-right">
+                Explore
+              </Button>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <ul class="flex flex-col border-b border-line lg:hidden">
+    {
+      doors.map((d, i) => (
+        <li class="border-t border-line">
+          <a href={d.href} class="flex flex-col gap-2 py-6">
+            <span class="type-eyebrow text-ink-muted">{n(i)}</span>
+            <span class="type-h2 text-ink">{d.title}</span>
+            <span class="type-body-s text-ink-muted">{d.text}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-spines]').forEach((list) => {
+    const items = [...list.querySelectorAll<HTMLElement>(':scope > li')];
+    items.forEach((item) => {
+      item.querySelector('button')?.addEventListener('click', () => {
+        items.forEach((other) => {
+          const open = other === item;
+          other.toggleAttribute('data-active', open);
+          other.querySelector('button')?.setAttribute('aria-expanded', String(open));
+        });
+      });
+    });
+  });
+</script>

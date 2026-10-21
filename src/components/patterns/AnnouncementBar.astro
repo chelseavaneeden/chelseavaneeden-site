@@ -1,0 +1,19 @@
+---
+// Thin dark bar along the very top. Follows the availability switch in Site settings.
+import type { Site } from '../../lib/content';
+
+interface Props {
+  availability: Site['availability'];
+}
+
+const { availability: a } = Astro.props;
+---
+
+<a
+  href={a.open ? a.href : a.closedHref}
+  data-tone="dark"
+  class="type-eyebrow flex items-center justify-center gap-2.5 px-(--gutter) py-2.5 text-center transition-colors hover:text-ink-muted"
+>
+  <span class:list={['inline-block size-1.5 rounded-pill', a.open ? 'bg-status-open' : 'bg-status-closed']} aria-hidden="true"></span>
+  {a.open ? `${a.openLabel} · Book your intro pack` : a.closedLabel}
+</a>

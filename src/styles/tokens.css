@@ -17,23 +17,20 @@
  */
 
 /* 1. BRAND PALETTE ------------------------------------------------------- */
+/* Concept "Studio": green-tinted cream, pale olive, espresso; Swiss-minimal type. */
 :root {
   --linen-0: #ffffff;
-  --linen-50: #f8f6f3;
-  --linen-100: #f2f0ec;
-  --linen-200: #e7e2da;
-  --linen-300: #d8cfc3;
+  --cream-50: #f8f9ef;
+  --cream-100: #f2f3e5;
+  --cream-200: #e8e9d6;
+  --cream-300: #d6d7bd;
+  --olive-200: #dfe0c0;
+  --olive-300: #cacba5;
   --brown-900: #301a11;
   --brown-700: #572e1e;
-  --brown-500: #7a5e4f;
   --brown-300: #cdbbaa;
-  --amber-600: #9f5c09;
-  --amber-300: #d99a4e;
   --ochre-600: #95601e;
-  --sage-200: #ccd3c4;
-  --sage-300: #b5bfab;
-  --sage-500: #7f8c74;
-  --sage-700: #4f5b44;
+  --amber-300: #d99a4e;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
 }
@@ -41,16 +38,16 @@
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
 :root,
 [data-tone='light'] {
-  --surface: var(--linen-100);
-  --surface-alt: var(--linen-200);
-  --surface-raised: var(--linen-0);
+  --surface: var(--cream-100);
+  --surface-alt: var(--cream-200);
+  --surface-raised: var(--cream-50);
   --ink: var(--brown-900);
   --ink-muted: var(--brown-700);
-  --accent: var(--amber-600);
-  --accent-ink: var(--linen-0);
-  --line: var(--linen-300);
-  --focus: var(--amber-600);
-  --success: var(--sage-700);
+  --accent: var(--brown-900);
+  --accent-ink: var(--cream-100);
+  --line: var(--cream-300);
+  --focus: var(--ochre-600);
+  --success: var(--green-500);
   --error: var(--rust-600);
   --status-open: var(--green-500);
   --status-closed: var(--brown-300);
@@ -58,19 +55,19 @@
 }
 
 [data-tone='alt'] {
-  --surface: var(--sage-200);
-  --surface-alt: var(--sage-300);
-  --surface-raised: var(--linen-50);
-  --line: var(--sage-300);
+  --surface: var(--olive-200);
+  --surface-alt: var(--olive-300);
+  --surface-raised: var(--cream-50);
+  --line: var(--olive-300);
 }
 
 [data-tone='dark'] {
   --surface: var(--brown-900);
   --surface-alt: var(--brown-700);
   --surface-raised: var(--brown-700);
-  --ink: var(--linen-100);
+  --ink: var(--cream-100);
   --ink-muted: var(--brown-300);
-  --accent: var(--amber-300);
+  --accent: var(--cream-100);
   --accent-ink: var(--brown-900);
   --line: var(--brown-700);
   --focus: var(--amber-300);
@@ -162,25 +159,34 @@
   --z-overlay: 80;
   --z-banner: 90;
 
-  /* Type families and character */
-  --font-display-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  --font-body-family: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  --display-scale: 0.92;
-  --display-weight: 300;
-  --display-leading: 1.02;
-  --display-tracking: -0.035em;
+  /* Type families and character: Helvetica Neue where installed (Apple devices), Inter Tight elsewhere */
+  --font-display-family: 'Helvetica Neue', Helvetica, var(--font-inter-tight), Arial, sans-serif;
+  --font-body-family: 'Helvetica Neue', Helvetica, var(--font-inter-tight), Arial, sans-serif;
+  --display-scale: 0.8;
+  --display-weight: 400;
+  --display-leading: 1.04;
+  --display-tracking: -0.025em;
   --display-case: none;
-  --heading-weight: 500;
-  --eyebrow-weight: 500;
-  --eyebrow-tracking: 0.08em;
-  --eyebrow-case: none;
-  --body-leading: 1.65;
+  --heading-weight: 400;
+  --eyebrow-weight: 400;
+  --eyebrow-tracking: 0.2em;
+  --eyebrow-case: uppercase;
+  --eyebrow-size: var(--step--2);
+  --label-size: var(--step--2);
+  --label-tracking: 0.16em;
+  --label-case: uppercase;
+  --body-leading: 1.6;
 
   /* Shape */
-  --radius-card-value: 1.5rem;
+  --radius-card-value: 0;
   --radius-control-value: 999px;
-  --radius-media-value: 1.5rem;
+  --radius-media-value: 0;
   --shadow-raised-value: none;
+  --hero-overlay-height: min(92svh, 60rem);
+  --marquee-duration: 45s;
+  --spine-height: 36rem;
+  --spine-width: 4.5rem;
+  --spine-panel-width: 42rem;
 
   /* Photo focus points for cropped images (object-position) */
   --focus-upper: 50% 22%;

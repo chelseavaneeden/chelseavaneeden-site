@@ -1,0 +1,20 @@
+---
+// A giant line of text that drifts slowly across the screen (stops for reduced-motion users).
+interface Props {
+  phrases: string[];
+  tone?: 'light' | 'alt' | 'dark';
+}
+
+const { phrases, tone = 'light' } = Astro.props;
+const line = phrases.join('  ·  ') + '  ·  ';
+---
+
+<div data-tone={tone} class="overflow-hidden border-y border-line py-8 md:py-12" aria-hidden="true">
+  <div class="flex w-max animate-marquee motion-reduce:animate-none">
+    {
+      [0, 1].map(() => (
+        <span class="type-display-xl whitespace-pre pr-0 text-ink">{line.repeat(2)}</span>
+      ))
+    }
+  </div>
+</div>
