@@ -28,10 +28,22 @@ export async function getAudiencePage(audience: Audience): Promise<AudiencePageD
   return entry.data;
 }
 
-/** Published offers for one audience, in the order set in the editor. */
+/** The link "whatsapp" (any case) stands for the WhatsApp link set in Site settings. */
+const isWhatsApp = (href: string) => href.trim().toLowerCase() === 'whatsapp';
+
+/** Published offers for one audience, in the order set in the editor, with "whatsapp" buttons filled in. */
 export async function getOffers(audience: Audience): Promise<Offer[]> {
   const all = await getCollection('offers', ({ data }) => data.published && data.audience === audience);
-  return all.map((e) => e.data).sort((a, b) => a.order - b.order);
+  const { whatsappHref } = (await getSite()).contact;
+  return all
+    .map(({ data }) => {
+      if (!isWhatsApp(data.cta.href)) return data;
+      if (!whatsappHref) {
+        throw new Error(`The "${data.title}" button links to WhatsApp, but no WhatsApp link is set in Site settings.`);
+      }
+      return { ...data, cta: { ...data.cta, href: whatsappHref } };
+    })
+    .sort((a, b) => a.order - b.order);
 }
 
 /** Testimonials with written permission only; featured ones first, then by order. */
@@ -48,8 +60,7 @@ export async function getTestimonials(audience?: Audience): Promise<Testimonial[
  * Returns the hero data with that link filled in, plus how to display the second action.
  */
 export function resolveHeroLinks<T extends { secondary?: Link }>(hero: T, site: Site) {
-  const isWhatsApp = hero.secondary?.href.trim().toLowerCase() === 'whatsapp';
-  if (!isWhatsApp || !hero.secondary) return { ...hero, secondaryStyle: 'button' as const };
+  if (!hero.secondary || !isWhatsApp(hero.secondary.href)) return { ...hero, secondaryStyle: 'button' as const };
   const href = site.contact.whatsappHref;
   return {
     ...hero,

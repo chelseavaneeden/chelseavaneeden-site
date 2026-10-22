@@ -360,7 +360,7 @@ content:
         type: object
         fields:
           - { name: label, label: Button text, type: string, required: true }
-          - { name: href, label: Link, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true, description: 'Type whatsapp to use your WhatsApp link from Site settings.' }
       - { name: featured, label: Highlight this offer, type: boolean, description: 'Shown in the dark card.' }
       - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }
       - { name: published, label: Show on the website, type: boolean, default: true }
