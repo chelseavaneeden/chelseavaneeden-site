@@ -20,6 +20,7 @@ hero:
   video:
     src: /media/chelsea-teaching.mp4
     poster: /media/chelsea-teaching-poster.jpg
+    speed: 0.8
 doors:
   eyebrow: Work with me
   title: One specialist, *five* ways in.

@@ -27,7 +27,8 @@ interface Props {
   imageAlt: string;
   imageFocus?: ImgFocus;
   /** Glass layout only: a looping, muted background video (the photo is the fallback). */
-  video?: { src: string; poster: string };
+  /** speed: playback rate, e.g. 0.8 for slightly slower than filmed. */
+  video?: { src: string; poster: string; speed?: number };
   /** Glass layout only: where the text card sits on wide screens. */
   textPosition?: 'center' | 'left';
   tone?: 'light' | 'alt' | 'dark';
@@ -125,6 +126,7 @@ const hasBadge = Astro.slots.has('badge');
               preload="metadata"
               poster={video.poster}
               data-bg-video
+              data-speed={video.speed ?? 1}
             >
               <source src={video.src} type="video/mp4" />
             </video>
@@ -163,11 +165,21 @@ const hasBadge = Astro.slots.has('badge');
 }
 
 <script>
-  // Background videos stay still (showing their poster frame) for visitors who prefer reduced motion.
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((v) => {
+  // Background videos play at their chosen speed, and stay still (showing their poster frame)
+  // for visitors who prefer reduced motion.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((v) => {
+    if (reduceMotion) {
       v.removeAttribute('autoplay');
       v.pause();
-    });
-  }
+      return;
+    }
+    const speed = Number(v.dataset.speed) || 1;
+    const apply = () => {
+      v.defaultPlaybackRate = speed;
+      v.playbackRate = speed;
+    };
+    apply();
+    v.addEventListener('loadedmetadata', apply);
+  });
 </script>

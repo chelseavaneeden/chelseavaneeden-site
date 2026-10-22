@@ -98,7 +98,10 @@ const pages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
-        video: z.preprocess(blankToUndefined, z.object({ src: z.string(), poster: z.string() }).optional()),
+        video: z.preprocess(
+          blankToUndefined,
+          z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
+        ),
       }),
       doors: z.object({
         eyebrow: optionalText,
@@ -141,7 +144,10 @@ const audiencePages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
-        video: z.preprocess(blankToUndefined, z.object({ src: z.string(), poster: z.string() }).optional()),
+        video: z.preprocess(
+          blankToUndefined,
+          z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
+        ),
         layout: z.enum(['split', 'overlay']).default('split'),
         textPosition: z.enum(['center', 'left']).default('left'),
       }),
