@@ -1,10 +1,10 @@
 seo:
-  title: Chelsea van Eeden · Specialist Pilates in Lisbon & online
-  description: Specialist one-to-one Pilates online and in Lisbon, plus Pilates for retreats, events, hotels, studios and brands across Europe.
+  title: Chelsea van Eeden · Specialist online Pilates
+  description: Specialist one-to-one Pilates online, plus Pilates for retreats, events, hotels, studios and brands in Europe and South Africa.
 hero:
-  eyebrow: Private Pilates · Lisbon & worldwide
+  eyebrow: Private Pilates · Online, worldwide
   title: One-to-one Pilates, *built around you*.
-  lede: Specialist one-to-one sessions online and in Lisbon, plus Pilates for retreats, events, hotels, studios and brands across Europe.
+  lede: Specialist one-to-one sessions online, plus Pilates for retreats, events, hotels, studios and brands in Europe and South Africa.
   primary:
     label: Book your intro pack
     href: /private-sessions#investment
@@ -26,7 +26,7 @@ doors:
   title: One specialist, *five* ways in.
   items:
     - title: Private sessions
-      text: 1-on-1, online or in Lisbon. Rehab, pre & post-natal, posture and pain.
+      text: 1-on-1, live online. Rehab, pre & post-natal, posture and pain.
       href: /private-sessions
     - title: Retreats & Events
       text: A specialist Pilates instructor for retreats, wellness events, hotels and private groups.
@@ -44,7 +44,7 @@ about:
   eyebrow: Meet Chelsea
   title: Strength *with* ease.
   paragraphs:
-    - 'I’m Chelsea, a BASI-certified Pilates instructor based in Lisbon. For more than five years I’ve taught people who carry a lot: leaders, travellers, new mothers, bodies in pain.'
+    - 'I’m Chelsea, a BASI-certified Pilates instructor teaching one-to-one online. For more than five years I’ve taught people who carry a lot: leaders, travellers, new mothers, bodies in pain.'
     - I blend Pilates with myofascial and somatic work, so you build real strength while your nervous system learns to settle.
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session

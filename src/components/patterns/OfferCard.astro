@@ -40,7 +40,13 @@ const { offer, variant = 'raised' } = Astro.props;
     }
   </ul>
   <div class="mt-auto pt-2">
-    <Button href={offer.cta.href} variant={offer.featured ? 'primary' : 'secondary'} full event="offer_cta">
+    <Button
+      href={offer.cta.href}
+      variant={offer.featured ? 'primary' : 'secondary'}
+      full
+      external={/^https?:\/\//.test(offer.cta.href)}
+      event="offer_cta"
+    >
       {offer.cta.label}
     </Button>
   </div>

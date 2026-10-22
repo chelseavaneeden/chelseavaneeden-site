@@ -19,7 +19,7 @@ nav:
     href: /about
 bookCta:
   label: Book an intro
-  href: /book
+  href: /private-sessions#investment
 availability:
   open: true
   openLabel: Accepting new clients
@@ -28,7 +28,7 @@ availability:
   closedHref: /enquire?type=private
 contact:
   # Replace with your own WhatsApp link (https://wa.me/<your number>?text=...)
-  whatsappHref: https://wa.me/?text=Hi%20Chelsea%2C%20I%27d%20love%20to%20know%20more%20about%20private%20sessions.
+  whatsappHref: https://wa.link/ccq3ib
   whatsappLead: Not sure which option suits you?
   whatsappLabel: Message me on WhatsApp
 tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
