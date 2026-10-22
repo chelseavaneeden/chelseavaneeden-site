@@ -15,7 +15,7 @@ includes:
   - Weekly or twice weekly, live online
 cta:
   label: Start your monthly plan
-  href: https://buy.stripe.com/9B65kD5uFgW8dPC921fw409
+  href: /monthly-plans
 featured: false
 order: 20
 published: true

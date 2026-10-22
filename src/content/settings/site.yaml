@@ -26,6 +26,13 @@ availability:
   closedLabel: Fully booked · Join the waitlist
   href: /private-sessions#investment
   closedHref: /enquire?type=private
+monthlyPlans:
+  eyebrow: Monthly plans
+  title: Choose your *monthly plan*.
+  intro: One or two live online sessions a week, at a regular time that suits you. Starting within 14 days of your intro pack? You save €40 on your first month.
+  # From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
+  stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
+  stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 contact:
   # Replace with your own WhatsApp link (https://wa.me/<your number>?text=...)
   whatsappHref: https://wa.link/ccq3ib

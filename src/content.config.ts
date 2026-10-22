@@ -68,6 +68,15 @@ const settings = defineCollection({
         href: '/private-sessions#investment',
         closedHref: '/enquire?type=private',
       }),
+    monthlyPlans: z
+      .object({
+        eyebrow: optionalText,
+        title: z.string(),
+        intro: optionalText,
+        stripePricingTableId: z.string(),
+        stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
+      })
+      .optional(),
     contact: z
       .object({
         whatsappHref: optionalText,

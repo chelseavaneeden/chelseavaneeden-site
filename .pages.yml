@@ -433,6 +433,16 @@ content:
         fields:
           - { name: label, label: Button text, type: string, required: true }
           - { name: href, label: Link, type: string, required: true }
+      - name: monthlyPlans
+        label: Monthly plans page
+        type: object
+        description: 'The page "Start your monthly plan" opens, with your Stripe pricing table.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: intro, label: Intro text, type: text }
+          - { name: stripePricingTableId, label: Stripe pricing table ID, type: string, required: true, description: 'Starts with prctbl_ (Stripe → Pricing tables → Copy code).' }
+          - { name: stripePublishableKey, label: Stripe publishable key, type: string, required: true, description: 'Starts with pk_. Never paste a secret key (sk_).' }
       - name: contact
         label: WhatsApp link
         type: object
