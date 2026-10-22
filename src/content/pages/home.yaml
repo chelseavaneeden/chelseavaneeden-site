@@ -17,6 +17,9 @@ hero:
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
   imageFocus: center
+  video:
+    src: /media/chelsea-teaching.mp4
+    poster: /media/chelsea-teaching-poster.jpg
 doors:
   eyebrow: Work with me
   title: One specialist, *five* ways in.

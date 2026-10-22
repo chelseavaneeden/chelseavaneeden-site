@@ -3,7 +3,9 @@ import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 export type ImgRatio = 'portrait' | 'tall' | 'landscape' | 'wide' | 'square' | 'fill';
-export type ImgFocus = 'center' | 'top' | 'upper' | 'lower' | 'bottom';
+import { focusClass, type Focus } from '../../lib/focus';
+
+export type ImgFocus = Focus;
 
 interface Props {
   src: ImageMetadata;
@@ -29,13 +31,6 @@ const {
   class: className,
 } = Astro.props;
 
-const focusClass: Record<ImgFocus, string> = {
-  center: 'object-center',
-  top: 'object-top',
-  upper: 'object-upper',
-  lower: 'object-lower',
-  bottom: 'object-bottom',
-};
 
 const ratios: Record<ImgRatio, string> = {
   portrait: 'aspect-4/5',

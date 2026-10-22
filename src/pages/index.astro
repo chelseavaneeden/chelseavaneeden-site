@@ -30,7 +30,7 @@ const [testimonial] = await getTestimonials('private');
   <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="split" {...page.hero}>
+    <Hero layout="overlay" textPosition="left" {...page.hero}>
       <AvailabilityBadge slot="badge" {...site.availability} />
     </Hero>
 

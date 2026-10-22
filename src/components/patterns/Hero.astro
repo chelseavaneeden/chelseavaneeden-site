@@ -5,6 +5,7 @@ import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Heading from '../ui/Heading.astro';
 import Img, { type ImgFocus } from '../ui/Img.astro';
+import { focusClass } from '../../lib/focus';
 import Text from '../ui/Text.astro';
 
 export type HeroLayout = 'split' | 'centered' | 'overlay';
@@ -25,6 +26,8 @@ interface Props {
   image: ImageMetadata;
   imageAlt: string;
   imageFocus?: ImgFocus;
+  /** Glass layout only: a looping, muted background video (the photo is the fallback). */
+  video?: { src: string; poster: string };
   /** Glass layout only: where the text card sits on wide screens. */
   textPosition?: 'center' | 'left';
   tone?: 'light' | 'alt' | 'dark';
@@ -42,6 +45,7 @@ const {
   imageAlt,
   imageFocus = 'center',
   textPosition = 'center',
+  video,
   tone = 'light',
 } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
@@ -109,8 +113,25 @@ const hasBadge = Astro.slots.has('badge');
       data-tone={tone}
       class="relative isolate flex flex-col overflow-hidden lg:min-h-(--hero-overlay-height) lg:flex-row lg:items-center lg:px-(--gutter) lg:py-(--space-section-m)"
     >
-      <div class="relative aspect-4/5 w-full lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto" aria-hidden="true">
-        <Img src={image} alt="" focus={imageFocus} ratio="fill" priority sizes="100vw" class="w-full" />
+      <div class="relative aspect-4/5 w-full overflow-hidden rounded-none lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto" aria-hidden="true">
+        {
+          video ? (
+            <video
+              class:list={['h-full w-full object-cover', focusClass[imageFocus]]}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster={video.poster}
+              data-bg-video
+            >
+              <source src={video.src} type="video/mp4" />
+            </video>
+          ) : (
+            <Img src={image} alt="" focus={imageFocus} ratio="fill" priority sizes="100vw" class="w-full" />
+          )
+        }
       </div>
       <div
         class:list={[
@@ -140,3 +161,13 @@ const hasBadge = Astro.slots.has('badge');
     </section>
   )
 }
+
+<script>
+  // Background videos stay still (showing their poster frame) for visitors who prefer reduced motion.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((v) => {
+      v.removeAttribute('autoplay');
+      v.pause();
+    });
+  }
+</script>
