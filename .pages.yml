@@ -41,7 +41,7 @@ content:
             type: object
             fields:
               - { name: label, label: Button text, type: string }
-              - { name: href, label: Link, type: string }
+              - { name: href, label: Link, type: string, description: 'Type whatsapp to use your WhatsApp link from Site settings (shown with the chat icon).' }
           - { name: meta, label: Small details under the photo, type: string, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true, description: 'Describe the photo for people using screen readers.' }
@@ -163,7 +163,7 @@ content:
             type: object
             fields:
               - { name: label, label: Button text, type: string }
-              - { name: href, label: Link, type: string }
+              - { name: href, label: Link, type: string, description: 'Type whatsapp to use your WhatsApp link from Site settings (shown with the chat icon).' }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
           - name: imageFocus

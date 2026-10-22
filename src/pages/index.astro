@@ -18,10 +18,11 @@ import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import ProofStrip from '../components/patterns/ProofStrip.astro';
 import Testimonial from '../components/patterns/Testimonial.astro';
-import { getOffers, getPage, getSite, getTestimonials } from '../lib/content';
+import { getOffers, getPage, getSite, getTestimonials, resolveHeroLinks } from '../lib/content';
 
 const site = await getSite();
 const page = await getPage('home');
+const hero = resolveHeroLinks(page.hero, site);
 const offers = await getOffers('private');
 const [testimonial] = await getTestimonials('private');
 ---
@@ -30,7 +31,7 @@ const [testimonial] = await getTestimonials('private');
   <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="overlay" textPosition="left" {...page.hero}>
+    <Hero layout="overlay" textPosition="left" {...hero}>
       <AvailabilityBadge slot="badge" {...site.availability} />
     </Hero>
 

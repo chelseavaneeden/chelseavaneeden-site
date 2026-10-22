@@ -1,6 +1,6 @@
 ---
 import Text from '../ui/Text.astro';
-import Icon from '../ui/Icon.astro';
+import WhatsAppLink from '../ui/WhatsAppLink.astro';
 import OfferCard from './OfferCard.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { Offer } from '../../lib/content';
@@ -35,16 +35,7 @@ const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId, 
     contact?.href && (
       <p class="type-body-s flex flex-wrap items-center gap-x-2 gap-y-1 text-ink-muted">
         {contact.lead}{' '}
-        <a
-          href={contact.href}
-          target="_blank"
-          rel="noopener"
-          data-umami-event="whatsapp_click"
-          class="inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2"
-        >
-          <Icon name="message" />
-          {contact.label}
-        </a>
+        <WhatsAppLink href={contact.href} label={contact.label} />
       </p>
     )
   }

@@ -1,0 +1,28 @@
+---
+// The quiet "Message me on WhatsApp" link: chat icon + underlined text, opens WhatsApp in a new tab.
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  size?: 's' | 'm';
+  class?: string;
+}
+
+const { href, label, size = 's', class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  data-umami-event="whatsapp_click"
+  class:list={[
+    'inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2',
+    size === 'm' ? 'type-body' : 'type-body-s',
+    className,
+  ]}
+>
+  <Icon name="message" />
+  {label}
+</a>

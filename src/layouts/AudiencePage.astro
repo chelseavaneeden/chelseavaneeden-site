@@ -19,7 +19,7 @@ import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
-import { getAudiencePage, getOffers, getSite, getTestimonials, type Audience } from '../lib/content';
+import { getAudiencePage, getOffers, getSite, getTestimonials, resolveHeroLinks, type Audience } from '../lib/content';
 
 interface Props {
   audience: Audience;
@@ -30,13 +30,14 @@ const site = await getSite();
 const page = await getAudiencePage(audience);
 const offers = await getOffers(audience);
 const testimonials = await getTestimonials(audience);
+const hero = resolveHeroLinks(page.hero, site);
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
   <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
 
   <main id="main">
-    <Hero layout="split" {...page.hero}>
+    <Hero layout="split" {...hero}>
       {audience === 'private' && <AvailabilityBadge slot="badge" {...site.availability} />}
     </Hero>
 

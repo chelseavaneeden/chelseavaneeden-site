@@ -42,3 +42,18 @@ export async function getTestimonials(audience?: Audience): Promise<Testimonial[
   );
   return all.map((e) => e.data).sort((a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order);
 }
+
+/**
+ * Top-of-page actions can use the link "whatsapp" to mean the WhatsApp link set in Site settings.
+ * Returns the hero data with that link filled in, plus how to display the second action.
+ */
+export function resolveHeroLinks<T extends { secondary?: Link }>(hero: T, site: Site) {
+  const isWhatsApp = hero.secondary?.href.trim().toLowerCase() === 'whatsapp';
+  if (!isWhatsApp || !hero.secondary) return { ...hero, secondaryStyle: 'button' as const };
+  const href = site.contact.whatsappHref;
+  return {
+    ...hero,
+    secondary: href ? { label: hero.secondary.label, href } : undefined,
+    secondaryStyle: 'whatsapp' as const,
+  };
+}

@@ -11,8 +11,8 @@ hero:
     label: Book your intro pack
     href: '#investment'
   secondary:
-    label: Ask me a question
-    href: /enquire?type=private
+    label: Message me on WhatsApp
+    href: whatsapp
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
   imageFocus: center

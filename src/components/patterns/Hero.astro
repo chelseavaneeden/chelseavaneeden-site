@@ -5,6 +5,7 @@ import Container from '../ui/Container.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Heading from '../ui/Heading.astro';
 import Img, { type ImgFocus } from '../ui/Img.astro';
+import WhatsAppLink from '../ui/WhatsAppLink.astro';
 import { focusClass } from '../../lib/focus';
 import Text from '../ui/Text.astro';
 
@@ -22,6 +23,8 @@ interface Props {
   lede: string;
   primary: Link;
   secondary?: Link;
+  /** Show the second action as the WhatsApp link instead of a button. */
+  secondaryStyle?: 'button' | 'whatsapp';
   meta?: string[];
   image: ImageMetadata;
   imageAlt: string;
@@ -41,6 +44,7 @@ const {
   lede,
   primary,
   secondary,
+  secondaryStyle = 'button',
   meta = [],
   image,
   imageAlt,
@@ -63,7 +67,7 @@ const hasBadge = Astro.slots.has('badge');
           <Text variant="lede" tone="muted" class="max-w-prose" text={lede} />
           <div class="flex flex-wrap items-center gap-3">
             <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
-            {secondary && <Button href={secondary.href} size="l" variant="ghost" icon="arrow-right">{secondary.label}</Button>}
+            {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} size="l" variant="ghost" icon="arrow-right">{secondary.label}</Button>)}
           </div>
           {meta.length > 0 && (
             <ul class="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-6">
@@ -91,7 +95,7 @@ const hasBadge = Astro.slots.has('badge');
         <Text variant="lede" tone="muted" class="max-w-prose" text={lede} />
         <div class="flex flex-wrap justify-center gap-3">
           <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
-          {secondary && <Button href={secondary.href} size="l" variant="ghost" icon="arrow-right">{secondary.label}</Button>}
+          {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} size="l" variant="ghost" icon="arrow-right">{secondary.label}</Button>)}
         </div>
       </Container>
       <Container width="wide" class="mt-(--space-section-s)">
@@ -152,11 +156,14 @@ const hasBadge = Astro.slots.has('badge');
         <Heading level={1} variant="display-l" text={title} />
         <Text variant="body" tone="muted" class="max-w-md" text={lede} />
         <Button href={primary.href} size="m" event="hero_primary">{primary.label}</Button>
-        {secondary && (
-          <Button href={secondary.href} variant="link" icon="arrow-right">
-            {secondary.label}
-          </Button>
-        )}
+        {secondary &&
+          (secondaryStyle === 'whatsapp' ? (
+            <WhatsAppLink href={secondary.href} label={secondary.label} size="m" />
+          ) : (
+            <Button href={secondary.href} variant="link" icon="arrow-right">
+              {secondary.label}
+            </Button>
+          ))}
       </div>
       </div>
       <span class="sr-only">{imageAlt}</span>
