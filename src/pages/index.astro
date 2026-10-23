@@ -1,10 +1,10 @@
 ---
 // Home page: the one-pager. All words, images and prices come from the editor
 // (src/content/pages/home.yaml, offers/, testimonials/ and settings/site.yaml). The testimonials
-// heading, "Online, wherever you are" and the questions are shared with the Private sessions page
+// heading and the questions are shared with the Private sessions page
 // (src/content/audience-pages/private.yaml), so they are edited in one place.
 // Section ids (investment, reviews, about, faq) are the menu links in Site settings.
-// Order: header, credentials, services, reviews, Meet Chelsea, formats, questions.
+// Order: header, credentials, services, reviews, Meet Chelsea, questions.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
@@ -12,7 +12,6 @@ import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
-import FeatureGrid from '../components/patterns/FeatureGrid.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
@@ -102,14 +101,6 @@ const testimonials = await getTestimonials('private');
         </div>
       </div>
     </Section>
-
-    {
-      shared.formats && (
-        <Section space="m" tone="alt">
-          <FeatureGrid {...shared.formats} variant="cards" />
-        </Section>
-      )
-    }
 
     {
       shared.faq && (

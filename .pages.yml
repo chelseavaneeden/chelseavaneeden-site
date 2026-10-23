@@ -186,7 +186,7 @@ content:
       - name: formats
         label: Formats / where we work
         type: object
-        description: 'Leave the points empty to hide this section. The Private sessions version also appears on the home page.'
+        description: 'Leave the points empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string }
