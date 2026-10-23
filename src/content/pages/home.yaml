@@ -11,7 +11,7 @@ hero:
     label: About Chelsea
     href: '#about'
   secondary:
-    label: Retreats, Brand Collaborations
+    label: Retreats & Collaborations
     href: '#investment'
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
