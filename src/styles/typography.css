@@ -99,6 +99,15 @@
   letter-spacing: 0.02em;
 }
 
+@utility type-note {
+  font-family: var(--font-display-family);
+  font-size: calc(var(--step-1) * var(--display-scale) * 1.1);
+  font-weight: var(--display-weight);
+  line-height: 1.15;
+  letter-spacing: var(--display-tracking);
+  text-wrap: balance;
+}
+
 @utility type-quote {
   font-family: var(--font-display-family);
   font-size: calc(var(--step-3) * var(--display-scale));
