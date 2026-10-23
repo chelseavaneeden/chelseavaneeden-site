@@ -103,6 +103,7 @@ const pages = defineCollection({
         title: z.string(),
         lede: z.string(),
         primary: link,
+        extra: optionalLink,
         secondary: optionalLink,
         meta: list(z.string()),
         image: image(),

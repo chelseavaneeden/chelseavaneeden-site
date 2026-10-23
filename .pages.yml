@@ -36,11 +36,19 @@ content:
             fields:
               - { name: label, label: Button text, type: string, required: true }
               - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /book, or a full https:// address.' }
-          - name: secondary
+          - name: extra
             label: Second button (optional)
             type: object
+            description: 'Outlined button next to the main button. #about jumps to Meet Chelsea.'
             fields:
               - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
+          - name: secondary
+            label: Text link (optional)
+            type: object
+            description: 'Underlined link after the buttons. #investment jumps to My services.'
+            fields:
+              - { name: label, label: Link text, type: string }
               - { name: href, label: Link, type: string, description: 'Type whatsapp to use your WhatsApp link from Site settings (shown with the chat icon).' }
           - { name: meta, label: Small details under the photo, type: string, list: true }
           - { name: image, label: Photo, type: image, required: true }
