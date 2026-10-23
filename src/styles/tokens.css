@@ -42,6 +42,8 @@
   --sage-700: #4f5b44;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
+  /* WhatsApp's official brand green, only for the WhatsApp button. */
+  --whatsapp-500: #25d366;
 }
 
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
@@ -113,6 +115,8 @@
   --color-status-open: var(--status-open);
   --color-status-closed: var(--status-closed);
   --color-logo-mark: var(--logo-mark);
+  --color-whatsapp: var(--whatsapp-500);
+  --color-whatsapp-ink: var(--linen-0);
   --color-transparent: transparent;
   --color-current: currentColor;
 

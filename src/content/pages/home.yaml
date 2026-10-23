@@ -3,13 +3,10 @@ seo:
   description: Specialist one-to-one Pilates online, plus Pilates for retreats, events, hotels, studios and brands in Europe and South Africa.
 hero:
   title: One-to-one Pilates, *built around you*.
-  lede: Specialist 1-to-1 online private sessions, or elevate your events and retreats with feel-good, mixed-level group Pilates sessions.
+  lede: Specialist 1-to-1 Pilates sessions online, or collaborate to elevate your retreat with mixed-level, feel-good Pilates sessions.
   primary:
     label: Book your intro pack
     href: '#investment'
-  extra:
-    label: About Chelsea
-    href: '#about'
   secondary:
     label: Retreats & Collaborations
     href: '#investment'
