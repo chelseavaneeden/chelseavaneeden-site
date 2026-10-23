@@ -355,6 +355,20 @@ content:
       - { name: priceNote, label: Small note under the price, type: string }
       - { name: highlight, label: Highlight badge, type: string, description: 'A short call-out shown as a coloured pill under the price, e.g. Continue & save €40. Leave empty for none.' }
       - { name: includes, label: What's included, type: string, list: true }
+      - { name: image, label: Photo (optional), type: image, description: 'When an offer has a photo, the price cards stack full width with the photo on the side.' }
+      - { name: imageAlt, label: Photo description, type: string, description: 'Describe the photo for people using screen readers. Needed when there is a photo.' }
+      - name: imageFocus
+        label: Photo focus
+        type: select
+        default: center
+        description: 'Which part of the photo stays in view when it is cropped to fit.'
+        options:
+          values:
+            - { value: top, label: Top }
+            - { value: upper, label: Upper third }
+            - { value: center, label: Centre }
+            - { value: lower, label: Lower third }
+            - { value: bottom, label: Bottom }
       - name: cta
         label: Button
         type: object

@@ -1,16 +1,18 @@
 title: Monthly plans
 audience: private
 eyebrow: Start here
-summary: One or two sessions a week, at a regular time that suits you.
+summary: Live private sessions online. Specialist care for injury and pain, tailored to help you feel stronger, more energised and more mobile, with less pain.
+image: ../../assets/media/mat-detail.jpg
+imageAlt: A client kneeling on a mat, folding forward into a stretch
+imageFocus: top
 priceDisplay: from
 price: 260
 currency: EUR
 unit: month
 priceVisibility: web
 includes:
-  - Live one-to-one, with real-time feedback and correction
-  - Adapted on the day to how you feel and what you need
-  - Tailored plans for injury rehab, pain, pre & post-natal or performance
+  - Studio-quality, virtual 1-to-1 Pilates, wherever you are
+  - Collaborative and tailored to your needs
   - Grows with your goals and your season of life
   - Weekly or twice weekly, live online
 cta:

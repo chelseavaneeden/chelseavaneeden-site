@@ -18,11 +18,18 @@ interface Props {
 }
 
 const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId, contact } = Astro.props;
+// Cards with photos are wide (photo on the side), so they stack one per row.
+const withPhotos = offers.some((o) => o.image);
 ---
 
 <div class="flex flex-col gap-12 md:gap-16">
   <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" id={headingId} />
-  <ul class:list={['grid grid-cols-1 gap-4 md:grid-cols-2', offers.length > 2 && 'xl:grid-cols-3']}>
+  <ul
+    class:list={[
+      'grid grid-cols-1',
+      withPhotos ? 'gap-6' : ['gap-4 md:grid-cols-2', offers.length > 2 && 'xl:grid-cols-3'],
+    ]}
+  >
     {
       offers.map((offer) => (
         <li>

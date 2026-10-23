@@ -175,33 +175,42 @@ const audiencePages = defineCollection({
 
 const offers = defineCollection({
   loader: yamlIn('offers'),
-  schema: z
-    .object({
-      title: z.string(),
-      audience: z.enum(audiences),
-      eyebrow: optionalText,
-      summary: z.string().max(240),
-      priceDisplay: z.enum(['exact', 'from', 'on-request']),
-      price: optionalNumber,
-      currency: z.enum(['EUR', 'GBP', 'USD']).default('EUR'),
-      unit: z.preprocess(
-        blankToUndefined,
-        z.enum(['session', 'pack', 'month', 'programme', 'workshop', 'day', 'person']).optional(),
-      ),
-      priceVisibility: z.enum(['web', 'media-kit', 'hidden']).default('web'),
-      priceNote: optionalText,
-      /** Short call-out shown as a pill on the card, e.g. "Continue & save €40". */
-      highlight: optionalText,
-      includes: list(z.string()),
-      cta: link,
-      featured: z.boolean().default(false),
-      order: z.number().default(50),
-      published: z.boolean().default(true),
-    })
-    .refine((o) => o.priceDisplay === 'on-request' || o.price !== undefined, {
-      message: 'Add a price, or choose "Tailored proposal" under How to show the price.',
-      path: ['price'],
-    }),
+  schema: ({ image }) =>
+    z
+      .object({
+        title: z.string(),
+        audience: z.enum(audiences),
+        eyebrow: optionalText,
+        summary: z.string().max(240),
+        /** Optional photo. When any offer in a list has one, the cards stack full width with the photo on the side. */
+        image: z.preprocess(blankToUndefined, image().optional()),
+        imageAlt: optionalText,
+        imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
+        priceDisplay: z.enum(['exact', 'from', 'on-request']),
+        price: optionalNumber,
+        currency: z.enum(['EUR', 'GBP', 'USD']).default('EUR'),
+        unit: z.preprocess(
+          blankToUndefined,
+          z.enum(['session', 'pack', 'month', 'programme', 'workshop', 'day', 'person']).optional(),
+        ),
+        priceVisibility: z.enum(['web', 'media-kit', 'hidden']).default('web'),
+        priceNote: optionalText,
+        /** Short call-out shown as a pill on the card, e.g. "Continue & save €40". */
+        highlight: optionalText,
+        includes: list(z.string()),
+        cta: link,
+        featured: z.boolean().default(false),
+        order: z.number().default(50),
+        published: z.boolean().default(true),
+      })
+      .refine((o) => o.priceDisplay === 'on-request' || o.price !== undefined, {
+        message: 'Add a price, or choose "Tailored proposal" under How to show the price.',
+        path: ['price'],
+      })
+      .refine((o) => !o.image || o.imageAlt, {
+        message: 'Add a photo description so people using screen readers know what it shows.',
+        path: ['imageAlt'],
+      }),
 });
 
 const testimonials = defineCollection({

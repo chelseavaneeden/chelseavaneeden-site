@@ -17,6 +17,8 @@ interface Props {
   priority?: boolean;
   /** Which part of the photo stays in view when it's cropped to fit. */
   focus?: ImgFocus;
+  /** Rounded corners; turn off when the photo sits flush inside a card that already clips it. */
+  rounded?: boolean;
   class?: string;
 }
 
@@ -28,6 +30,7 @@ const {
   sizes = '100vw',
   priority = false,
   focus = 'center',
+  rounded = true,
   class: className,
 } = Astro.props;
 
@@ -50,6 +53,8 @@ const ratios: Record<ImgRatio, string> = {
   formats={['avif', 'webp']}
   fallbackFormat="jpg"
   priority={priority}
-  pictureAttributes={{ class: ['block overflow-hidden rounded-media', ratios[ratio], className].filter(Boolean).join(' ') }}
+  pictureAttributes={{
+    class: ['block overflow-hidden', rounded && 'rounded-media', ratios[ratio], className].filter(Boolean).join(' '),
+  }}
   class:list={['h-full w-full object-cover', focusClass[focus]]}
 />

@@ -1,6 +1,6 @@
 ---
 export type CardVariant = 'raised' | 'outline' | 'plain' | 'inverse';
-export type CardPadding = 's' | 'm' | 'l';
+export type CardPadding = 'none' | 's' | 'm' | 'l';
 
 interface Props {
   variant?: CardVariant;
@@ -20,7 +20,7 @@ const variants: Record<CardVariant, string> = {
   // Flips to the dark tone of the active theme.
   inverse: '',
 };
-const paddings: Record<CardPadding, string> = { s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
+const paddings: Record<CardPadding, string> = { none: '', s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
 ---
 
 <Tag
