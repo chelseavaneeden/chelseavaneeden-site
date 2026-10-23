@@ -5,15 +5,15 @@ image: ../../assets/media/mat-detail.jpg
 imageAlt: A client kneeling on a mat, folding forward into a stretch
 imageFocus: top-left
 priceDisplay: from
-price: 260
+price: 280
 currency: EUR
 unit: month
 priceVisibility: web
+priceNote: Weekly or twice weekly
 includes:
-  - Studio-quality, virtual 1-to-1 Pilates, wherever you are
-  - Collaborative and tailored to your needs
-  - Grows with your goals and your season of life
-  - Weekly or twice weekly, live online
+  - 'Suitable for: injury, rehab and chronic pain'
+  - Studio-quality 1-to-1 Pilates, online
+  - Tailored to your body, goals and busy schedule
 cta:
   label: Book your intro pack
   href: https://buy.stripe.com/9B65kD5uFgW8dPC921fw409
