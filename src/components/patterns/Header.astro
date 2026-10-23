@@ -52,7 +52,7 @@ const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
               <li>
                 <a
                   href={item.href}
-                  class="type-label inline-flex items-center gap-1 text-ink transition-colors hover:text-ink-muted"
+                  class="type-label inline-flex items-center gap-1 whitespace-nowrap text-ink transition-colors hover:text-ink-muted"
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noopener' : undefined}
                 >
@@ -65,7 +65,13 @@ const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
         }
       </ul>
       <div class="flex items-center gap-3">
-        {availability && <AvailabilityBadge {...availability} size="s" class="hidden xl:inline-flex" />}
+        {
+          availability && (
+            <div class="hidden xl:block">
+              <AvailabilityBadge {...availability} size="s" />
+            </div>
+          )
+        }
         <Button href={cta.href} size="s" event="nav_book">{cta.label}</Button>
       </div>
     </nav>
