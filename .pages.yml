@@ -443,7 +443,7 @@ content:
       - { name: tagline, label: Footer tagline, type: text, required: true }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats
-        label: Credentials banner (home page, under Meet Chelsea)
+        label: Credentials banner (home page, under the top of the page)
         type: object
         list: true
         fields:
