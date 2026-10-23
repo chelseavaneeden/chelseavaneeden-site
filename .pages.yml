@@ -313,7 +313,7 @@ content:
             - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
       - { name: eyebrow, label: Small label above the name, type: string, description: 'e.g. Start here' }
-      - { name: summary, label: One-line summary, type: text, required: true }
+      - { name: summary, label: One-line summary, type: text, description: 'Optional. Leave empty to show just the ticks.' }
       - name: priceDisplay
         label: How to show the price
         type: select
@@ -355,7 +355,7 @@ content:
       - { name: priceNote, label: Small note under the price, type: string }
       - { name: highlight, label: Highlight badge, type: string, description: 'A short call-out shown as a coloured pill under the price, e.g. Continue & save €40. Leave empty for none.' }
       - { name: includes, label: What's included, type: string, list: true }
-      - { name: image, label: Photo (optional), type: image, description: 'When an offer has a photo, the price cards stack full width with the photo on the side.' }
+      - { name: image, label: Photo (optional), type: image, description: 'Shown on the side of the card (on top on phones).' }
       - { name: imageAlt, label: Photo description, type: string, description: 'Describe the photo for people using screen readers. Needed when there is a photo.' }
       - name: imageFocus
         label: Photo focus
@@ -369,6 +369,7 @@ content:
             - { value: center, label: Centre }
             - { value: lower, label: Lower third }
             - { value: bottom, label: Bottom }
+            - { value: top-left, label: Top left }
       - name: cta
         label: Button
         type: object

@@ -181,11 +181,11 @@ const offers = defineCollection({
         title: z.string(),
         audience: z.enum(audiences),
         eyebrow: optionalText,
-        summary: z.string().max(240),
-        /** Optional photo. When any offer in a list has one, the cards stack full width with the photo on the side. */
+        summary: z.preprocess(blankToUndefined, z.string().max(240).optional()),
+        /** Optional photo, shown on the side of the card (on top on phones). */
         image: z.preprocess(blankToUndefined, image().optional()),
         imageAlt: optionalText,
-        imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
+        imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right', 'top-left']).default('center'),
         priceDisplay: z.enum(['exact', 'from', 'on-request']),
         price: optionalNumber,
         currency: z.enum(['EUR', 'GBP', 'USD']).default('EUR'),

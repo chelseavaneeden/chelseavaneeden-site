@@ -18,8 +18,7 @@ interface Props {
 
 const { offer, variant = 'raised' } = Astro.props;
 
-// With a photo the card goes wide: photo on top on phones, on the left from tablets up,
-// and from laptops the details split into two columns (words and ticks left, price and button right).
+// With a photo, the photo sits on top on phones and on the left from tablets up.
 const hasPhoto = Boolean(offer.image);
 ---
 
@@ -38,28 +37,23 @@ const hasPhoto = Boolean(offer.image);
           ratio="landscape"
           focus={offer.imageFocus}
           rounded={false}
-          sizes="(min-width: 768px) 33vw, 100vw"
+          sizes="(min-width: 1280px) 20vw, (min-width: 768px) 33vw, 100vw"
           class="md:absolute md:inset-0 md:aspect-auto"
         />
       </div>
     )
   }
-  <div
-    class:list={[
-      'flex-1 gap-6',
-      hasPhoto ? 'grid content-start p-7 md:p-8 lg:grid-cols-2 lg:gap-x-12 lg:p-10' : 'flex flex-col',
-    ]}
-  >
+  <div class:list={['flex flex-1 flex-col gap-6', hasPhoto && 'p-7 md:p-8']}>
     <div class="flex flex-col gap-3">
       {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
       <Heading level={3} variant="h3" text={offer.title} />
-      <Text variant="body-s" tone="muted" text={offer.summary} />
+      {offer.summary && <Text variant="body-s" tone="muted" text={offer.summary} />}
     </div>
-    <div class="flex flex-col items-start gap-3 lg:self-end">
+    <div class="flex flex-col items-start gap-3">
       <Price offer={offer} />
       {offer.highlight && <p class="type-label rounded-pill bg-cta px-3 py-1.5 text-cta-ink">{offer.highlight}</p>}
     </div>
-    <Divider class={hasPhoto ? 'lg:col-span-2' : undefined} />
+    <Divider />
     <ul class="flex flex-col gap-2.5">
       {
         offer.includes.map((item) => (
@@ -70,7 +64,7 @@ const hasPhoto = Boolean(offer.image);
         ))
       }
     </ul>
-    <div class={hasPhoto ? 'pt-2 lg:self-end' : 'mt-auto pt-2'}>
+    <div class="mt-auto pt-2">
       <Button
         href={offer.cta.href}
         variant={offer.featured ? 'primary' : 'secondary'}
