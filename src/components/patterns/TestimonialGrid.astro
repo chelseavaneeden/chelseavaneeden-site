@@ -1,4 +1,5 @@
 ---
+import Button from '../ui/Button.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { Testimonial } from '../../lib/content';
@@ -7,9 +8,11 @@ interface Props {
   eyebrow?: string;
   title: string;
   testimonials: Testimonial[];
+  /** Optional link under the quotes, e.g. to your Google reviews (opens in a new tab). */
+  link?: { label: string; href: string };
 }
 
-const { eyebrow, title, testimonials } = Astro.props;
+const { eyebrow, title, testimonials, link } = Astro.props;
 const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 ---
 
@@ -37,4 +40,13 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
       ))
     }
   </ul>
+  {
+    link && (
+      <div>
+        <Button href={link.href} variant="secondary" external={/^https?:\/\//.test(link.href)} event="reviews_link">
+          {link.label}
+        </Button>
+      </div>
+    )
+  }
 </div>

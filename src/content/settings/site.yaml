@@ -1,30 +1,20 @@
 nav:
-  - label: Private sessions
-    href: /private-sessions
-  - label: Partnerships
-    href: /partnerships
-    children:
-      - label: Retreats & Events
-        href: /retreats-events
-      - label: Brands
-        href: /brands
-      - label: Studios & Clinics
-        href: /studios-clinics
-      - label: Companies
-        href: /companies
-  - label: On-demand
-    href: https://www.thegoodmood.club
-    external: true
+  - label: Services
+    href: /#investment
+  - label: Testimonials
+    href: /#reviews
   - label: About
-    href: /about
+    href: /#about
+  - label: FAQ
+    href: /#faq
 bookCta:
-  label: Book an intro
-  href: /private-sessions#investment
+  label: Book your intro pack
+  href: /#investment
 availability:
   open: true
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
-  href: /private-sessions#investment
+  href: /#investment
   closedHref: /enquire?type=private
 monthlyPlans:
   eyebrow: Monthly plans
@@ -42,20 +32,17 @@ tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
 location: Lisbon, Portugal · Teaching worldwide
 stats:
   - value: 5,000+
-    label: private sessions taught
+    label: teaching hours
   - value: 5+ yrs
-    label: teaching online, worldwide
+    label: teaching worldwide
   - value: 9.3K
     label: YouTube subscribers
   - value: BASI
-    label: certified instructor
-socials:
-  - label: YouTube
-    href: https://www.youtube.com/@chelseavaneeden
-  - label: LinkedIn
-    href: https://www.linkedin.com/in/chelseavaneeden/
-  - label: The Good Mood Club
-    href: https://www.thegoodmood.club
+    label: Comprehensive Instructor
+reviews:
+  label: Read my Google reviews
+  href: https://www.google.com/search?hl=en-NL&sxsrf=APpeQnv2oa5SlsqzGMce54noDq6KYR_7Yw:1789395207368&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
+socials: []
 legal:
   - label: Privacy
     href: /privacy

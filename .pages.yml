@@ -57,21 +57,6 @@ content:
                 - { value: center, label: Centre }
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
-      - name: doors
-        label: Ways to work together
-        type: object
-        fields:
-          - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
-          - name: items
-            label: Cards
-            type: object
-            list: true
-            description: 'The first card is shown larger. Drag to reorder; numbers update automatically.'
-            fields:
-              - { name: title, label: Title, type: string, required: true }
-              - { name: text, label: Short description, type: text, required: true }
-              - { name: href, label: Link, type: string, required: true }
       - name: about
         label: Meet Chelsea
         type: object
@@ -96,24 +81,6 @@ content:
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
           - { name: intro, label: Intro text, type: text }
           - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
-      - name: ctaBand
-        label: Dark band at the bottom
-        type: object
-        fields:
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
-          - { name: text, label: Text, type: text }
-          - name: primary
-            label: Main button
-            type: object
-            fields:
-              - { name: label, label: Button text, type: string, required: true }
-              - { name: href, label: Link, type: string, required: true }
-          - name: secondary
-            label: Second button (optional)
-            type: object
-            fields:
-              - { name: label, label: Button text, type: string }
-              - { name: href, label: Link, type: string }
 
   # ── SERVICE PAGES (private sessions, retreats & events, brands, studios & clinics, companies) ─
   - name: audiencePages
@@ -211,7 +178,7 @@ content:
       - name: formats
         label: Formats / where we work
         type: object
-        description: 'Leave the points empty to hide this section.'
+        description: 'Leave the points empty to hide this section. The Private sessions version also appears on the home page.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string }
@@ -250,14 +217,14 @@ content:
       - name: proof
         label: Testimonials heading
         type: object
-        description: 'Shows the testimonials tagged for this audience that have permission ticked.'
+        description: 'Shows the testimonials tagged for this audience that have permission ticked. The Private sessions version also appears on the home page.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true }
       - name: faq
         label: Questions
         type: object
-        description: 'Leave the questions empty to hide this section.'
+        description: 'Leave the questions empty to hide this section. The Private sessions questions also appear on the home page.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string }
@@ -469,12 +436,19 @@ content:
       - { name: tagline, label: Footer tagline, type: text, required: true }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats
-        label: Proof numbers (under the top photo)
+        label: Credentials banner (home page, under Meet Chelsea)
         type: object
         list: true
         fields:
           - { name: value, label: Number, type: string, required: true, description: 'e.g. 5,000+' }
           - { name: label, label: What it means, type: string, required: true }
+      - name: reviews
+        label: Reviews button (under the testimonials)
+        type: object
+        description: 'Opens in a new tab. Leave the button text empty to hide it.'
+        fields:
+          - { name: label, label: Button text, type: string }
+          - { name: href, label: Link, type: string }
       - name: socials
         label: Social links
         type: object

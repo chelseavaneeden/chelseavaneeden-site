@@ -7,13 +7,7 @@ hero:
   lede: Specialist one-to-one sessions online, plus Pilates for studios, hotels, events and retreats in Europe and South Africa.
   primary:
     label: Book your intro pack
-    href: /private-sessions#investment
-  secondary:
-    label: Partner with me
-    href: '#work-with-me'
-  meta:
-    - BASI certified
-    - Rehab · Pre & post-natal · Posture
+    href: '#investment'
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
   imageFocus: center
@@ -21,25 +15,6 @@ hero:
     src: /media/chelsea-teaching.mp4
     poster: /media/chelsea-teaching-poster.jpg
     speed: 0.8
-doors:
-  eyebrow: Work with me
-  title: One specialist, *five* ways in.
-  items:
-    - title: Private sessions
-      text: 1-on-1, live online. Rehab, pre & post-natal, posture and pain.
-      href: /private-sessions
-    - title: Retreats & Events
-      text: A specialist Pilates instructor for retreats, wellness events, hotels and private groups.
-      href: /retreats-events
-    - title: Brands
-      text: UGC, ambassadorships and co-hosted experiences for wellness brands.
-      href: /brands
-    - title: Studios & Clinics
-      text: Guest workshops, cover teaching and referral partnerships.
-      href: /studios-clinics
-    - title: Companies
-      text: Workshops, team classes and executive care for desk-based teams.
-      href: /companies
 about:
   eyebrow: Meet Chelsea
   title: Strength *with* ease.
@@ -54,12 +29,3 @@ about:
 investment:
   eyebrow: My services
   title: How we work *together*.
-ctaBand:
-  title: Not sure where you *fit*?
-  text: 'Tell me what you have in mind: a team, a retreat, a studio collaboration or your own body. I reply personally within two working days.'
-  primary:
-    label: Start an enquiry
-    href: /enquire
-  secondary:
-    label: Book an intro
-    href: /book

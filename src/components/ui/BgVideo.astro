@@ -1,0 +1,52 @@
+---
+// A looping, muted, decorative video that fills its box (the parent sets the size and shape).
+import { focusClass, type Focus } from '../../lib/focus';
+
+interface Props {
+  src: string;
+  /** Still image shown while loading, and instead of playing for visitors who prefer reduced motion. */
+  poster: string;
+  /** Playback rate, e.g. 0.8 for slightly slower than filmed. */
+  speed?: number;
+  /** Which part of the video stays in view when it's cropped to fit. */
+  focus?: Focus;
+  class?: string;
+}
+
+const { src, poster, speed = 1, focus = 'center', class: className } = Astro.props;
+---
+
+<video
+  class:list={['h-full w-full object-cover', focusClass[focus], className]}
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  poster={poster}
+  aria-hidden="true"
+  data-bg-video
+  data-speed={speed}
+>
+  <source src={src} type="video/mp4" />
+</video>
+
+<script>
+  // Videos play at their chosen speed, and stay still (showing their poster frame)
+  // for visitors who prefer reduced motion.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((v) => {
+    if (reduceMotion) {
+      v.removeAttribute('autoplay');
+      v.pause();
+      return;
+    }
+    const speed = Number(v.dataset.speed) || 1;
+    const apply = () => {
+      v.defaultPlaybackRate = speed;
+      v.playbackRate = speed;
+    };
+    apply();
+    v.addEventListener('loadedmetadata', apply);
+  });
+</script>

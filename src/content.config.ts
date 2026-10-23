@@ -87,6 +87,8 @@ const settings = defineCollection({
     tagline: z.string(),
     location: z.string(),
     stats: list(z.object({ value: z.string(), label: z.string() })),
+    /** Button under the testimonials, e.g. to your Google reviews. */
+    reviews: optionalLink,
     socials: list(link),
     legal: list(link),
   }),
@@ -112,11 +114,6 @@ const pages = defineCollection({
           z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
         ),
       }),
-      doors: z.object({
-        eyebrow: optionalText,
-        title: z.string(),
-        items: list(z.object({ title: z.string(), text: z.string(), href: z.string() })),
-      }),
       about: z.object({
         eyebrow: optionalText,
         title: z.string(),
@@ -131,7 +128,6 @@ const pages = defineCollection({
         intro: optionalText,
         note: optionalText,
       }),
-      ctaBand,
     }),
 });
 

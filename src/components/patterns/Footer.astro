@@ -47,23 +47,27 @@ const links = nav
           }
         </ul>
       </nav>
-      <ul class="flex flex-col gap-2.5 md:col-span-3">
-        {
-          socials.map((s) => (
-            <li>
-              <a
-                href={s.href}
-                target="_blank"
-                rel="noopener"
-                class="type-body-s inline-flex items-center gap-1.5 text-ink transition-colors hover:text-ink-muted"
-              >
-                {s.label}
-                <Icon name="arrow-up-right" label={t(lang, 'a11y.external')} />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        socials.length > 0 && (
+          <ul class="flex flex-col gap-2.5 md:col-span-3">
+            {
+              socials.map((s) => (
+                <li>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="type-body-s inline-flex items-center gap-1.5 text-ink transition-colors hover:text-ink-muted"
+                  >
+                    {s.label}
+                    <Icon name="arrow-up-right" label={t(lang, 'a11y.external')} />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        )
+      }
     </div>
     <div class="flex flex-col gap-3 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
       <Text variant="caption" tone="muted">© {year} Chelsea van Eeden · {location}</Text>
