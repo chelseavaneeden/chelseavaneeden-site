@@ -18,11 +18,11 @@ hero:
     poster: /media/chelsea-teaching-poster.jpg
     speed: 0.8
 about:
-  eyebrow: Meet Chelsea
-  title: Strength *with* ease.
+  eyebrow: Meet your instructor
+  title: Hi, I’m *Chelsea*.
   paragraphs:
-    - 'I’m Chelsea, a BASI-certified Pilates instructor teaching one-to-one online. For more than five years I’ve taught people who carry a lot: leaders, travellers, new mothers, bodies in pain.'
-    - I blend Pilates with myofascial and somatic work, so you build real strength while your nervous system learns to settle.
+    - I’m a BASI-certified Pilates instructor specialising in movement for mental health, for busy professionals, travellers, new mothers and bodies in chronic pain who prefer to train from home.
+    - When I’m not teaching, you’ll find me baking treats, making coffees, exploring new cities or shaking out stress on the dance floor!
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session
   cta:
