@@ -65,7 +65,7 @@ const hero = resolveHeroLinks(page.hero, site);
     {
       offers.length > 0 && (
         <Section space="m" tone="alt" id="investment" labelledby="investment-title">
-          <OfferGrid {...page.investment} offers={offers} headingId="investment-title" contact={{ lead: site.contact.whatsappLead, label: site.contact.whatsappLabel, href: site.contact.whatsappHref }} />
+          <OfferGrid {...page.investment} offers={offers} headingId="investment-title" />
         </Section>
       )
     }

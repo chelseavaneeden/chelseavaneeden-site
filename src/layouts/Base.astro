@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
 import { Font } from 'astro:assets';
+import WhatsAppFloat from '../components/patterns/WhatsAppFloat.astro';
 import { t, type Lang } from '../i18n/ui';
+import { getSite } from '../lib/content';
 
 interface Props {
   title: string;
@@ -15,6 +17,7 @@ const { title, description, lang = 'en', noindex = false } = Astro.props;
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev preview out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
+const { contact } = await getSite();
 ---
 
 <!doctype html>
@@ -41,6 +44,7 @@ const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
     >
       {t(lang, 'a11y.skip')}
     </a>
+    {contact.whatsappHref && <WhatsAppFloat href={contact.whatsappHref} label={contact.whatsappLabel} />}
     <slot />
   </body>
 </html>

@@ -80,10 +80,9 @@ const settings = defineCollection({
     contact: z
       .object({
         whatsappHref: optionalText,
-        whatsappLead: z.string().default('Not sure which option suits you?'),
         whatsappLabel: z.string().default('Message me on WhatsApp'),
       })
-      .default({ whatsappLead: 'Not sure which option suits you?', whatsappLabel: 'Message me on WhatsApp' }),
+      .default({ whatsappLabel: 'Message me on WhatsApp' }),
     tagline: z.string(),
     location: z.string(),
     stats: list(z.object({ value: z.string(), label: z.string() })),
@@ -100,7 +99,7 @@ const pages = defineCollection({
     z.object({
       seo: z.object({ title: z.string(), description: z.string() }),
       hero: z.object({
-        eyebrow: z.string(),
+        eyebrow: optionalText,
         title: z.string(),
         lede: z.string(),
         primary: link,

@@ -1,6 +1,5 @@
 ---
 import Text from '../ui/Text.astro';
-import WhatsAppLink from '../ui/WhatsAppLink.astro';
 import OfferCard from './OfferCard.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { Offer } from '../../lib/content';
@@ -13,11 +12,9 @@ interface Props {
   offers: Offer[];
   cardVariant?: 'raised' | 'outline';
   headingId?: string;
-  /** Optional quiet contact link under the cards (WhatsApp). */
-  contact?: { lead: string; label: string; href?: string };
 }
 
-const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId, contact } = Astro.props;
+const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId } = Astro.props;
 // Cards with photos need more width (photo on the side), so they sit side by side only on wide screens.
 const withPhotos = offers.some((o) => o.image);
 ---
@@ -38,13 +35,5 @@ const withPhotos = offers.some((o) => o.image);
       ))
     }
   </ul>
-  {
-    contact?.href && (
-      <p class="type-body-s flex flex-wrap items-center gap-x-2 gap-y-1 text-ink-muted">
-        {contact.lead}{' '}
-        <WhatsAppLink href={contact.href} label={contact.label} />
-      </p>
-    )
-  }
   {note && <Text variant="caption" tone="muted">{note}</Text>}
 </div>

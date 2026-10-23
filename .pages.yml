@@ -27,7 +27,7 @@ content:
         label: Top of the page
         type: object
         fields:
-          - { name: eyebrow, label: Small line above the headline, type: string, required: true }
+          - { name: eyebrow, label: Small line above the headline, type: string, description: 'Optional. Leave empty to hide.' }
           - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates.' }
           - { name: lede, label: Intro sentence, type: text, required: true }
           - name: primary
@@ -428,11 +428,10 @@ content:
       - name: contact
         label: WhatsApp link
         type: object
-        description: 'The small "Message me on WhatsApp" link under the price cards. Leave the link empty to hide it.'
+        description: 'Used by the round WhatsApp button in the bottom-right corner of every page, and by any button whose link is whatsapp. Leave the link empty to hide the round button.'
         fields:
           - { name: whatsappHref, label: Your WhatsApp link, type: string, description: 'Paste your custom wa.me link (with your number and pre-filled message).' }
-          - { name: whatsappLead, label: Text before the link, type: string, default: Not sure which option suits you? }
-          - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp }
+          - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp, description: 'Read out by screen readers on the round button, and shown on the Monthly plans page.' }
       - { name: tagline, label: Footer tagline, type: text, required: true }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats

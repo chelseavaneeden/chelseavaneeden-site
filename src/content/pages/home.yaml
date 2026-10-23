@@ -2,11 +2,13 @@ seo:
   title: Chelsea van Eeden · Specialist online Pilates
   description: Specialist one-to-one Pilates online, plus Pilates for retreats, events, hotels, studios and brands in Europe and South Africa.
 hero:
-  eyebrow: Private Pilates · Online, worldwide
   title: One-to-one Pilates, *built around you*.
   lede: Specialist one-to-one sessions online, plus Pilates for studios, hotels, events and retreats in Europe and South Africa.
   primary:
     label: Book your intro pack
+    href: '#investment'
+  secondary:
+    label: Retreats, Brand Collaborations
     href: '#investment'
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
