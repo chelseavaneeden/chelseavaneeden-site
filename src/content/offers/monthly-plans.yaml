@@ -11,9 +11,11 @@ unit: month
 priceVisibility: web
 priceNote: Weekly or twice weekly
 includes:
-  - 'Suitable for: injury, rehab and chronic pain'
-  - Studio-quality 1-to-1 Pilates, online
-  - Tailored to your body, goals and busy schedule
+  - Ease back, neck & shoulder pain
+  - Rebuild strength after injury or surgery
+  - Recover your core after pregnancy
+  - Better posture, less desk stiffness
+  - Live 1-to-1 online, tailored to you
 cta:
   label: Book your intro pack
   href: /monthly-plans
