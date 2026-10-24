@@ -211,13 +211,13 @@
   --logo-height-m: 2.25rem;
   --logo-height-l: 3rem;
 
-  /* Embossed logo: the swoosh takes the colour of the surface it sits on (a "blind" emboss)
-     and shows through light and shadow alone: light catches the top-left edge, a soft
-     shadow falls bottom-right, like paper pressed from behind. */
-  --logo-emboss-s: 2.25rem;
-  --logo-emboss-m: 2.75rem;
-  --logo-emboss-l: 3.5rem;
-  --emboss-filter: drop-shadow(-0.75px -0.75px 0 rgb(255 255 255 / 0.95)) drop-shadow(0.75px 1px 0.5px rgb(48 26 17 / 0.4)) drop-shadow(1px 2px 2px rgb(48 26 17 / 0.15));
+  /* Debossed logo: the swoosh is pressed into the surface it sits on. It is a shade darker
+     than its background (surface-alt), with a thin shadow along its top edge and light
+     catching its bottom edge, like a letterpress print. */
+  --logo-deboss-s: 2.25rem;
+  --logo-deboss-m: 2.75rem;
+  --logo-deboss-l: 3.5rem;
+  --deboss-filter: drop-shadow(0 -0.75px 0 rgb(48 26 17 / 0.3)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.95));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,15 +2,15 @@
 /*
  * Chelsea's logo, from the existing brand artwork (public/brand/).
  *
- * emboss (default): the swoosh alone, blind-embossed. It takes the colour of the section it
- * sits on and shows through light and shadow, so it adapts to every background.
+ * deboss (default): the swoosh alone, pressed into the section it sits on. It is a shade darker
+ * than that background and shows through light and shadow, so it adapts to every background.
  * signature: the full signature, swoosh plus the "helsea" script.
  *
  * The artwork is used as masks, so its colours come from tokens: the signature's swoosh uses
  * --logo-mark (ochre, lighter on dark tones) and the script uses the text colour.
  */
 export type LogoSize = 's' | 'm' | 'l';
-export type LogoVariant = 'emboss' | 'signature';
+export type LogoVariant = 'deboss' | 'signature';
 
 interface Props {
   variant?: LogoVariant;
@@ -20,24 +20,24 @@ interface Props {
   class?: string;
 }
 
-const { variant = 'emboss', size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
+const { variant = 'deboss', size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
 
 const heights: Record<LogoSize, string> = {
   s: 'h-(--logo-height-s)',
   m: 'h-(--logo-height-m)',
   l: 'h-(--logo-height-l)',
 };
-const embossSizes: Record<LogoSize, string> = {
-  s: 'size-(--logo-emboss-s)',
-  m: 'size-(--logo-emboss-m)',
-  l: 'size-(--logo-emboss-l)',
+const debossSizes: Record<LogoSize, string> = {
+  s: 'size-(--logo-deboss-s)',
+  m: 'size-(--logo-deboss-m)',
+  l: 'size-(--logo-deboss-l)',
 };
 ---
 
 {
-  variant === 'emboss' ? (
-    <span role="img" aria-label={label} class:list={['logo-emboss relative inline-block shrink-0', embossSizes[size], className]}>
-      <span class="logo-swoosh absolute inset-0 bg-surface" aria-hidden="true" />
+  variant === 'deboss' ? (
+    <span role="img" aria-label={label} class:list={['logo-deboss relative inline-block shrink-0', debossSizes[size], className]}>
+      <span class="logo-swoosh absolute inset-0 bg-surface-alt" aria-hidden="true" />
     </span>
   ) : (
     <span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-ink', heights[size], className]}>
@@ -65,9 +65,9 @@ const embossSizes: Record<LogoSize, string> = {
     mask-image: url('/brand/logo-mark-square.svg');
     mask-position: center;
   }
-  /* The emboss sits on the outer element because a filter on the masked element itself
-     would be masked away. */
-  .logo-emboss {
-    filter: var(--emboss-filter);
+  /* The light and shadow sit on the outer element because a filter on the masked element
+     itself would be masked away. */
+  .logo-deboss {
+    filter: var(--deboss-filter);
   }
 </style>
