@@ -20,15 +20,17 @@ const { form, number, whatsappHref } = Astro.props;
 const field = 'type-body w-full rounded-control border border-line bg-surface px-4 py-3 text-ink placeholder:text-ink-muted';
 ---
 
+{/* The panel is centred with m-auto: it stays centred when it fits and scrolls from the top when
+    it doesn't (centring with items-center would push a tall panel's top off-screen). */}
 <dialog
   id="proposal-dialog"
   aria-labelledby="proposal-title"
   data-whatsapp-href={whatsappHref}
   data-number={number}
   data-message={form.message}
-  class="size-full max-h-none max-w-none items-start overflow-y-auto bg-transparent p-(--gutter) backdrop:bg-ink/50 open:flex sm:items-center"
+  class="size-full max-h-none max-w-none overflow-y-auto bg-transparent p-(--gutter) backdrop:bg-ink/50 open:flex"
 >
-  <div class="relative mx-auto flex w-full max-w-lg flex-col gap-6 rounded-card bg-surface-raised p-7 text-ink shadow-raised md:p-8">
+  <div class="relative m-auto flex w-full max-w-2xl flex-col gap-5 rounded-card bg-surface-raised p-6 text-ink shadow-raised md:p-7">
     <button
       type="button"
       data-close
@@ -43,14 +45,14 @@ const field = 'type-body w-full rounded-control border border-line bg-surface px
       {form.intro && <Text variant="body-s" tone="muted" text={form.intro} />}
     </div>
 
-    <form class="flex flex-col gap-5" novalidate>
+    <form class="flex flex-col gap-4" novalidate>
       {
         form.questions.map((q, i) => (
           <fieldset data-short={q.short} data-field={`q${i}`}>
-            <legend class="type-label mb-3 text-ink">{q.label}</legend>
+            <legend class="type-label mb-2.5 text-ink">{q.label}</legend>
             <div class="flex flex-wrap gap-2">
               {q.options.map((option) => (
-                <label class="type-body-s cursor-pointer rounded-pill border border-line px-4 py-2.5 text-ink transition-colors hover:border-ink has-checked:border-whatsapp has-checked:bg-whatsapp has-checked:text-whatsapp-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+                <label class="type-body-s cursor-pointer rounded-pill border border-line px-4 py-2 text-ink transition-colors hover:border-ink has-checked:border-whatsapp has-checked:bg-whatsapp has-checked:text-whatsapp-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
                   <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
                   {option}
                 </label>
@@ -69,7 +71,7 @@ const field = 'type-body w-full rounded-control border border-line bg-surface px
         <span class="type-label text-ink">
           {form.infoLabel} <span class="text-ink-muted">(optional)</span>
         </span>
-        <textarea name="info" rows="3" placeholder={form.infoPlaceholder} data-label={form.infoLabel} class={`${field} resize-y`}
+        <textarea name="info" rows="2" placeholder={form.infoPlaceholder} data-label={form.infoLabel} class={`${field} resize-y`}
         ></textarea>
       </label>
 
@@ -78,7 +80,7 @@ const field = 'type-body w-full rounded-control border border-line bg-surface px
           type="submit"
           disabled
           data-umami-event="proposal_send"
-          class="type-label w-full rounded-pill bg-whatsapp px-6 py-4 text-whatsapp-ink transition-opacity disabled:cursor-not-allowed disabled:opacity-45"
+          class="type-label w-full rounded-pill bg-whatsapp px-6 py-3.5 text-whatsapp-ink transition-opacity disabled:cursor-not-allowed disabled:opacity-45"
         >
           {form.button}
         </button>
