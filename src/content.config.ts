@@ -108,7 +108,8 @@ const settings = defineCollection({
       })
       .optional(),
     tagline: z.string(),
-    location: z.string(),
+    /** Optional extra after the copyright line, e.g. a city. */
+    location: optionalText,
     /** Year shown in the footer copyright line. */
     copyrightYear: z.number().int().optional(),
     stats: list(z.object({ value: z.string(), label: z.string() })),

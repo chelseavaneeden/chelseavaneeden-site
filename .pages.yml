@@ -489,9 +489,9 @@ content:
           - { name: button, label: Button text, type: string, default: Send on WhatsApp }
           - { name: note, label: Small note under the button, type: string }
           - { name: message, label: First line of the WhatsApp message, type: string, required: true, description: '{name} is replaced with their name.' }
-      - { name: tagline, label: Footer tagline, type: text, required: true }
+      - { name: tagline, label: Footer line under the logo, type: text, required: true }
       - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'e.g. 2021. Leave empty to show the current year.' }
-      - { name: location, label: Footer location line, type: string, required: true }
+      - { name: location, label: Extra after the copyright, type: string, description: 'Optional, e.g. a city. Leave empty to show just the copyright.' }
       - name: stats
         label: Credentials banner (home page, under the top of the page)
         type: object

@@ -59,8 +59,7 @@ proposalForm:
   button: Send on WhatsApp
   note: Opens WhatsApp with your answers ready to send.
   message: "Hi Chelsea, I'm {name}. I'd like a proposal/quote for the following:"
-tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
-location: Lisbon, Portugal · Teaching worldwide
+tagline: Based in Europe · Teaching worldwide
 copyrightYear: 2021
 stats:
   - value: 5,000+
