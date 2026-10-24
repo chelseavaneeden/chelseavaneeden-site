@@ -10,9 +10,11 @@ interface Props {
   testimonials: Testimonial[];
   /** Optional link under the quotes, e.g. to your Google reviews (opens in a new tab). */
   link?: { label: string; href: string };
+  /** Card colour: raised (paper) by default, or alt (sage) on a cream section. */
+  cardTone?: 'raised' | 'alt';
 }
 
-const { eyebrow, title, testimonials, link } = Astro.props;
+const { eyebrow, title, testimonials, link, cardTone = 'raised' } = Astro.props;
 const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 ---
 
@@ -22,7 +24,10 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
     {
       testimonials.map((t) => (
         <li>
-          <figure class="flex h-full flex-col justify-between gap-8 rounded-card bg-surface-raised p-7 md:p-8">
+          <figure
+            data-tone={cardTone === 'alt' ? 'alt' : undefined}
+            class:list={['flex h-full flex-col justify-between gap-8 rounded-card p-7 md:p-8', cardTone === 'alt' ? 'bg-surface' : 'bg-surface-raised']}
+          >
             <div class="flex flex-col gap-3">
               <span class="type-h1 leading-none text-logo-mark" aria-hidden="true">
                 “
