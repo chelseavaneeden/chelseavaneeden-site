@@ -4,7 +4,7 @@
 // heading and the questions are shared with the Private sessions page
 // (src/content/audience-pages/private.yaml), so they are edited in one place.
 // Section ids (investment, reviews, about, faq) are the menu links in Site settings.
-// Order: header, credentials, services, reviews, Meet Chelsea, questions.
+// Order: header, credentials, services, reviews, perfect for, Meet Chelsea, questions.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
@@ -18,6 +18,7 @@ import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import PhotoCollage from '../components/patterns/PhotoCollage.astro';
 import ProofStrip from '../components/patterns/ProofStrip.astro';
+import SplitChecklist from '../components/patterns/SplitChecklist.astro';
 import StickyNote from '../components/patterns/StickyNote.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
 import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
@@ -71,6 +72,14 @@ const testimonials = await getTestimonials('private');
             testimonials={testimonials}
             link={site.reviews}
           />
+        </Section>
+      )
+    }
+
+    {
+      page.perfectFor && (
+        <Section space="m">
+          <SplitChecklist {...page.perfectFor} />
         </Section>
       )
     }

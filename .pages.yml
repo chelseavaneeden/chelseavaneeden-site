@@ -65,6 +65,14 @@ content:
                 - { value: center, label: Centre }
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
+      - name: perfectFor
+        label: Perfect for those who…
+        type: object
+        description: 'Ticked list above Meet Chelsea. Leave the list empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: items, label: Ticks, type: string, list: true }
       - name: about
         label: Meet Chelsea
         type: object

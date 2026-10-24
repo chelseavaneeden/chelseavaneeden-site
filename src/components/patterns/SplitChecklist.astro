@@ -1,0 +1,31 @@
+---
+// Heading on the left, a ticked list on the right with a line between rows.
+// Mirrors the "Good to know" layout (FAQAccordion) so the two read as a pair.
+import Icon from '../ui/Icon.astro';
+import SectionHeader from './SectionHeader.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+  items: string[];
+}
+
+const { eyebrow, title, intro, items } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+  <div class="lg:col-span-4">
+    <SectionHeader eyebrow={eyebrow} title={title} intro={intro} />
+  </div>
+  <ul class="border-b border-line lg:col-span-8">
+    {
+      items.map((item) => (
+        <li class="flex items-start gap-4 border-t border-line py-5">
+          <Icon name="check" class="mt-1 text-xl text-accent" />
+          <span class="type-h3 text-ink">{item}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

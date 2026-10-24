@@ -157,6 +157,8 @@ const pages = defineCollection({
         intro: optionalText,
         note: optionalText,
       }),
+      /** "Perfect for those who…": a ticked list above Meet Chelsea. Empty list hides it. */
+      perfectFor: optionalSection({ ...sectionHead, items: list(z.string()) }),
     }),
 });
 
