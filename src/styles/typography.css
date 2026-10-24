@@ -68,16 +68,6 @@
   text-transform: var(--eyebrow-case);
 }
 
-/* A smaller eyebrow, for short link labels in tight spaces (e.g. the sticky note). */
-@utility type-eyebrow-s {
-  font-family: var(--font-label-family);
-  font-size: var(--step--2);
-  font-weight: var(--eyebrow-weight);
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-  text-transform: var(--eyebrow-case);
-}
-
 @utility type-lede {
   font-family: var(--font-body-family);
   font-size: var(--step-1);
