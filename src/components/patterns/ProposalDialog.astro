@@ -1,0 +1,138 @@
+---
+// The proposal form (Site settings → Proposal form). It opens as a pop-up instead of WhatsApp
+// from every link to the WhatsApp link in Site settings: the round button, "Request a proposal",
+// "Message me on WhatsApp" and any button set to whatsapp. The answers become a ready-to-send
+// WhatsApp message. Without JavaScript those links simply open WhatsApp as before.
+import Heading from '../ui/Heading.astro';
+import Icon from '../ui/Icon.astro';
+import Text from '../ui/Text.astro';
+import type { Site } from '../../lib/content';
+
+interface Props {
+  form: NonNullable<Site['proposalForm']>;
+  /** WhatsApp number the message goes to: country code and number, digits only. */
+  number: string;
+  /** Clicks on links to this address open the form instead. */
+  whatsappHref: string;
+}
+
+const { form, number, whatsappHref } = Astro.props;
+const field = 'type-body w-full rounded-control border border-line bg-surface px-4 py-3 text-ink placeholder:text-ink-muted';
+---
+
+<dialog
+  id="proposal-dialog"
+  aria-labelledby="proposal-title"
+  data-whatsapp-href={whatsappHref}
+  data-number={number}
+  data-message={form.message}
+  class="size-full max-h-none max-w-none items-start overflow-y-auto bg-transparent p-(--gutter) backdrop:bg-ink/50 open:flex sm:items-center"
+>
+  <div class="relative mx-auto flex w-full max-w-lg flex-col gap-6 rounded-card bg-surface-raised p-7 text-ink shadow-raised md:p-8">
+    <button
+      type="button"
+      data-close
+      aria-label="Close"
+      class="absolute top-3 right-3 flex size-10 items-center justify-center rounded-pill text-xl text-ink transition-colors hover:bg-surface-alt"
+    >
+      <Icon name="close" />
+    </button>
+
+    <div class="flex flex-col gap-2 pr-8">
+      <Heading level={2} variant="h3" text={form.title} id="proposal-title" />
+      {form.intro && <Text variant="body-s" tone="muted" text={form.intro} />}
+    </div>
+
+    <form class="flex flex-col gap-5" novalidate>
+      {
+        form.questions.map((q, i) => (
+          <fieldset data-short={q.short} data-field={`q${i}`}>
+            <legend class="type-label mb-3 text-ink">{q.label}</legend>
+            <div class="flex flex-wrap gap-2">
+              {q.options.map((option) => (
+                <label class="type-body-s cursor-pointer rounded-pill border border-line px-4 py-2.5 text-ink transition-colors hover:border-ink has-checked:border-whatsapp has-checked:bg-whatsapp has-checked:text-whatsapp-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+                  <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
+                  {option}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))
+      }
+
+      <label class="flex flex-col gap-2">
+        <span class="type-label text-ink">{form.nameLabel}</span>
+        <input type="text" name="name" required autocomplete="name" placeholder={form.namePlaceholder} class={field} />
+      </label>
+
+      <label class="flex flex-col gap-2">
+        <span class="type-label text-ink">
+          {form.infoLabel} <span class="text-ink-muted">(optional)</span>
+        </span>
+        <textarea name="info" rows="3" placeholder={form.infoPlaceholder} data-label={form.infoLabel} class={`${field} resize-y`}
+        ></textarea>
+      </label>
+
+      <div class="flex flex-col gap-3 pt-1">
+        <button
+          type="submit"
+          disabled
+          data-umami-event="proposal_send"
+          class="type-label w-full rounded-pill bg-whatsapp px-6 py-4 text-whatsapp-ink transition-opacity disabled:cursor-not-allowed disabled:opacity-45"
+        >
+          {form.button}
+        </button>
+        {form.note && <Text variant="caption" tone="muted" class="text-center" text={form.note} />}
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#proposal-dialog');
+  const form = dialog?.querySelector('form');
+  const send = form?.querySelector<HTMLButtonElement>('[type=submit]');
+
+  if (dialog && form && send) {
+    const { whatsappHref, number, message = '' } = dialog.dataset;
+    const update = () => {
+      const filled = (form.elements.namedItem('name') as HTMLInputElement).value.trim() !== '';
+      send.disabled = !(form.checkValidity() && filled);
+    };
+
+    // Any link to the WhatsApp link opens the form instead.
+    document.addEventListener('click', (event) => {
+      const link = (event.target as Element).closest?.('a[href]');
+      if (!link || link.getAttribute('href') !== whatsappHref) return;
+      event.preventDefault();
+      dialog.showModal();
+    });
+
+    // Close with the × or by clicking outside the panel (Esc works natively).
+    dialog.addEventListener('click', (event) => {
+      const target = event.target as Element;
+      if (target === dialog || target.closest('[data-close]')) dialog.close();
+    });
+
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (send.disabled) return;
+      const data = new FormData(form);
+      const name = String(data.get('name')).trim();
+      const lines = [...form.querySelectorAll<HTMLFieldSetElement>('fieldset')].map(
+        (set) => `• ${set.dataset.short}: ${data.get(set.dataset.field ?? '')}`,
+      );
+      const info = String(data.get('info') ?? '').trim();
+      const infoLabel = form.querySelector<HTMLTextAreaElement>('textarea')?.dataset.label;
+      if (info) lines.push(`• ${infoLabel}: ${info}`);
+      const text = `${message.replace('{name}', name)}\n\n${lines.join('\n')}`;
+      window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+      dialog.close();
+      form.reset();
+      update();
+    });
+  }
+</script>

@@ -439,7 +439,31 @@ content:
         description: 'Used by the round WhatsApp button in the bottom-right corner of every page, and by any button whose link is whatsapp. Leave the link empty to hide the round button.'
         fields:
           - { name: whatsappHref, label: Your WhatsApp link, type: string, description: 'Paste your custom wa.me link (with your number and pre-filled message).' }
+          - { name: whatsappNumber, label: WhatsApp number for the proposal form, type: string, description: 'Digits only, starting with the country code, e.g. 351912345678. Leave empty to turn the form off (links then open WhatsApp directly).' }
           - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp, description: 'Read out by screen readers on the round button, and shown on the Monthly plans page.' }
+      - name: proposalForm
+        label: Proposal form
+        type: object
+        description: 'Opens instead of WhatsApp from every WhatsApp link and button, then sends the answers to your WhatsApp number as a ready-made message.'
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: intro, label: Intro line, type: string }
+          - name: questions
+            label: Questions
+            type: object
+            list: true
+            description: 'Each question shows its options as tap-to-choose buttons. All are required.'
+            fields:
+              - { name: label, label: Question, type: string, required: true }
+              - { name: short, label: Word used in the message, type: string, required: true, description: 'e.g. When → "• When: 1–3 months"' }
+              - { name: options, label: Options, type: string, list: true }
+          - { name: nameLabel, label: Name field label, type: string, default: Name }
+          - { name: namePlaceholder, label: Name field hint, type: string }
+          - { name: infoLabel, label: Extra info label, type: string, default: More information }
+          - { name: infoPlaceholder, label: Extra info hint, type: string }
+          - { name: button, label: Button text, type: string, default: Send on WhatsApp }
+          - { name: note, label: Small note under the button, type: string }
+          - { name: message, label: First line of the WhatsApp message, type: string, required: true, description: '{name} is replaced with their name.' }
       - { name: tagline, label: Footer tagline, type: text, required: true }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats

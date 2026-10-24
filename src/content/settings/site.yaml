@@ -26,7 +26,39 @@ monthlyPlans:
 contact:
   # Replace with your own WhatsApp link (https://wa.me/<your number>?text=...)
   whatsappHref: https://wa.link/ccq3ib
+  whatsappNumber: '351939222206'
   whatsappLabel: Message me on WhatsApp
+proposalForm:
+  title: Request a proposal
+  intro: A few quick taps — I'll reply on WhatsApp, usually within a few hours.
+  questions:
+    - label: I would like a quote for
+      short: For
+      options:
+        - Retreat / Event
+        - 1-on-1 sessions
+        - Brand collaboration
+        - Something else
+    - label: When?
+      short: When
+      options:
+        - Within 1 month
+        - 1–3 months
+        - 3–6 months
+        - 6+ months / flexible
+    - label: Where?
+      short: Where
+      options:
+        - Africa
+        - Europe
+        - Elsewhere
+  nameLabel: Name
+  namePlaceholder: Your name
+  infoLabel: More information
+  infoPlaceholder: Dates, group size, ideas…
+  button: Send on WhatsApp
+  note: Opens WhatsApp with your answers ready to send.
+  message: "Hi Chelsea, I'm {name}. I'd like a proposal/quote for the following:"
 tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
 location: Lisbon, Portugal · Teaching worldwide
 stats:

@@ -80,9 +80,33 @@ const settings = defineCollection({
     contact: z
       .object({
         whatsappHref: optionalText,
+        /** Number the proposal form sends to: country code and number, digits only. */
+        whatsappNumber: z.preprocess(
+          blankToUndefined,
+          z.string().regex(/^\d{8,15}$/, 'Digits only, starting with the country code, e.g. 351912345678.').optional(),
+        ),
         whatsappLabel: z.string().default('Message me on WhatsApp'),
       })
       .default({ whatsappLabel: 'Message me on WhatsApp' }),
+    /**
+     * The proposal form that opens instead of WhatsApp from every WhatsApp link and button.
+     * It turns the answers into a ready-to-send WhatsApp message.
+     */
+    proposalForm: z
+      .object({
+        title: z.string(),
+        intro: optionalText,
+        questions: list(z.object({ label: z.string(), short: z.string(), options: list(z.string()) })),
+        nameLabel: z.string().default('Name'),
+        namePlaceholder: optionalText,
+        infoLabel: z.string().default('More information'),
+        infoPlaceholder: optionalText,
+        button: z.string().default('Send on WhatsApp'),
+        note: optionalText,
+        /** First line of the message; {name} is replaced with their name. */
+        message: z.string(),
+      })
+      .optional(),
     tagline: z.string(),
     location: z.string(),
     stats: list(z.object({ value: z.string(), label: z.string() })),
