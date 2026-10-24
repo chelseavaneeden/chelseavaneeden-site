@@ -150,3 +150,31 @@
   line-height: 1;
   letter-spacing: var(--display-tracking);
 }
+
+/* Long-form text written in Markdown (legal pages): styles the headings, paragraphs and lists inside. */
+@utility type-longform {
+  & h2 {
+    @apply type-h3 mt-12 mb-4 text-ink;
+  }
+  & h3 {
+    @apply type-h4 mt-8 mb-3 text-ink;
+  }
+  & p {
+    @apply type-body mb-4 text-ink-muted;
+  }
+  & ul {
+    @apply type-body mb-5 flex list-disc flex-col gap-1.5 pl-6 text-ink-muted;
+  }
+  & li::marker {
+    color: var(--accent);
+  }
+  & strong {
+    @apply font-medium text-ink;
+  }
+  & a {
+    @apply text-ink underline decoration-1 underline-offset-4;
+  }
+  & > :first-child {
+    @apply mt-0;
+  }
+}

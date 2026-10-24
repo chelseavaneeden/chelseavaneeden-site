@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://www.chelseavaneeden.com',
+  // The old Framer address for the terms.
+  redirects: { '/terms-and-conditions': '/terms' },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',

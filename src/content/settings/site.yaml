@@ -61,6 +61,7 @@ proposalForm:
   message: "Hi Chelsea, I'm {name}. I'd like a proposal/quote for the following:"
 tagline: Specialist Pilates from Lisbon, for people, teams and places worldwide.
 location: Lisbon, Portugal · Teaching worldwide
+copyrightYear: 2021
 stats:
   - value: 5,000+
     label: teaching hours
@@ -80,4 +81,4 @@ legal:
   - label: Terms
     href: /terms
   - label: Cancellation policy
-    href: /cancellation
+    href: /terms#4-cancellation--rescheduling-policy

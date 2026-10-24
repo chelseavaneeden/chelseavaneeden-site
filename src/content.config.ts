@@ -109,6 +109,8 @@ const settings = defineCollection({
       .optional(),
     tagline: z.string(),
     location: z.string(),
+    /** Year shown in the footer copyright line. */
+    copyrightYear: z.number().int().optional(),
     stats: list(z.object({ value: z.string(), label: z.string() })),
     /** Button under the testimonials, e.g. to your Google reviews. */
     reviews: optionalLink,
@@ -249,4 +251,17 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { settings, pages, audiencePages, offers, testimonials };
+// Legal pages (terms, privacy…): one Markdown file each in src/content/legal, published at /<file name>.
+const legal = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/legal' }),
+  schema: z.object({
+    title: z.string(),
+    /** Legal name of the business, shown under the title. */
+    business: optionalText,
+    /** e.g. "1 May 2026" */
+    effective: optionalText,
+    description: optionalText,
+  }),
+});
+
+export const collections = { settings, pages, audiencePages, offers, testimonials, legal };

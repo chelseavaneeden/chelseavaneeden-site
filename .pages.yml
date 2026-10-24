@@ -362,6 +362,24 @@ content:
       - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }
       - { name: published, label: Show on the website, type: boolean, default: true }
 
+  # ── LEGAL PAGES ─────────────────────────────────────────────────────────────
+  - name: legal
+    label: Legal pages
+    type: collection
+    path: src/content/legal
+    format: yaml-frontmatter
+    filename: '{primary}.md'
+    description: 'Each page is published at /<file name>, e.g. terms → /terms.'
+    view:
+      primary: title
+      fields: [title, effective]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: business, label: Business name (under the title), type: string }
+      - { name: effective, label: Effective date, type: string, description: 'e.g. 1 May 2026' }
+      - { name: description, label: Google description, type: string }
+      - { name: body, label: Text, type: rich-text }
+
   # ── TESTIMONIALS ───────────────────────────────────────────────────────────
   - name: testimonials
     label: Testimonials
@@ -472,6 +490,7 @@ content:
           - { name: note, label: Small note under the button, type: string }
           - { name: message, label: First line of the WhatsApp message, type: string, required: true, description: '{name} is replaced with their name.' }
       - { name: tagline, label: Footer tagline, type: text, required: true }
+      - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'e.g. 2021. Leave empty to show the current year.' }
       - { name: location, label: Footer location line, type: string, required: true }
       - name: stats
         label: Credentials banner (home page, under the top of the page)

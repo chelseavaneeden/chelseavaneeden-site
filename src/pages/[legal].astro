@@ -1,0 +1,44 @@
+---
+// Legal pages (terms, privacy…). Each Markdown file in src/content/legal becomes a page at
+// /<file name>, e.g. terms.md → /terms. Edited in the editor under "Legal pages".
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Heading from '../components/ui/Heading.astro';
+import Section from '../components/ui/Section.astro';
+import Text from '../components/ui/Text.astro';
+import Footer from '../components/patterns/Footer.astro';
+import Header from '../components/patterns/Header.astro';
+import { getSite } from '../lib/content';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('legal');
+  return pages.map((entry) => ({ params: { legal: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const site = await getSite();
+const { title, business, effective, description } = entry.data;
+---
+
+<Base title={`${title} · Chelsea van Eeden`} description={description}>
+  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+
+  <main id="main">
+    <Section space="m" width="narrow">
+      <article class="mx-auto flex max-w-prose flex-col gap-10">
+        <header class="flex flex-col gap-4 border-b border-line pb-8">
+          {business && <Eyebrow>{business}</Eyebrow>}
+          <Heading level={1} variant="h1" text={title} />
+          {effective && <Text variant="body-s" tone="muted">Effective date: {effective}</Text>}
+        </header>
+        <div class="type-longform">
+          <Content />
+        </div>
+      </article>
+    </Section>
+  </main>
+
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+</Base>

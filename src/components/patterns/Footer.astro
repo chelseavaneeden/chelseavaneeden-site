@@ -17,11 +17,13 @@ interface Props {
   location: string;
   socials: Link[];
   legal: Link[];
+  /** Year in the copyright line; defaults to the current year. */
+  copyrightYear?: number;
   lang?: Lang;
 }
 
-const { nav, tagline, location, socials, legal, lang = 'en' } = Astro.props;
-const year = new Date().getFullYear();
+const { nav, tagline, location, socials, legal, copyrightYear, lang = 'en' } = Astro.props;
+const year = copyrightYear ?? new Date().getFullYear();
 const links = nav
   .flatMap((item) => (item.children.length > 0 ? item.children : [item]))
   .filter((i) => !('external' in i && i.external));
