@@ -145,6 +145,8 @@ const pages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         cta: optionalLink,
+        /** The sticky note beside the photos; its link goes to the prices. */
+        note: z.object({ title: z.string(), caption: z.string() }).optional(),
       }),
       investment: z.object({
         eyebrow: optionalText,

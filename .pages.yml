@@ -74,6 +74,13 @@ content:
           - { name: paragraphs, label: Paragraphs, type: text, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
+          - name: note
+            label: Sticky note
+            type: object
+            description: 'The yellow note beside the photos. Its link jumps to the prices.'
+            fields:
+              - { name: title, label: Note text, type: string, required: true }
+              - { name: caption, label: Link text, type: string, required: true }
           - name: cta
             label: Link (optional)
             type: object
