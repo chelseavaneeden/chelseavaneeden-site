@@ -4,7 +4,7 @@
 // heading and the questions are shared with the Private sessions page
 // (src/content/audience-pages/private.yaml), so they are edited in one place.
 // Section ids (investment, reviews, about, faq) are the menu links in Site settings.
-// Order: header, credentials, services, reviews, perfect for, Meet Chelsea, questions.
+// Order: header, credentials, services, reviews, Meet Chelsea, perfect for, questions.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
@@ -76,14 +76,6 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    {
-      page.perfectFor && (
-        <Section space="m">
-          <Checklist {...page.perfectFor} />
-        </Section>
-      )
-    }
-
     <Section space="l" tone="light" id="about">
       <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
         <div class="flex flex-col gap-5 lg:col-span-5">
@@ -112,6 +104,14 @@ const testimonials = await getTestimonials('private');
         </div>
       </div>
     </Section>
+
+    {
+      page.perfectFor && (
+        <Section space="m">
+          <Checklist {...page.perfectFor} />
+        </Section>
+      )
+    }
 
     {
       shared.faq && (
