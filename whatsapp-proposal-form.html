@@ -1,0 +1,94 @@
+<!-- WhatsApp Proposal Mini-Form
+     1. Replace 351000000000 below with your number (country code, no + or spaces)
+     2. Paste this whole block into an HTML / Code / Embed block on your site -->
+
+<div id="wa-form">
+  <style>
+    #wa-form { max-width: 480px; margin: 0 auto; font-family: inherit; color: inherit; }
+    #wa-form h3 { margin: 0 0 4px; font-size: 1.3em; }
+    #wa-form .wa-sub { margin: 0 0 20px; opacity: .7; font-size: .95em; }
+    #wa-form .wa-q { margin-bottom: 18px; }
+    #wa-form .wa-label { display: block; font-weight: 600; margin-bottom: 8px; font-size: .95em; }
+    #wa-form .wa-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    #wa-form .wa-chip { padding: 10px 14px; border: 1px solid currentColor; border-radius: 999px;
+      background: transparent; color: inherit; font: inherit; font-size: .9em; cursor: pointer; opacity: .75; }
+    #wa-form .wa-chip.on { background: #25D366; border-color: #25D366; color: #fff; opacity: 1; }
+    #wa-form input { width: 100%; box-sizing: border-box; padding: 11px 12px; border: 1px solid #ccc;
+      border-radius: 10px; font: inherit; }
+    #wa-form .wa-send { width: 100%; margin-top: 8px; padding: 14px; border: 0; border-radius: 999px;
+      background: #25D366; color: #fff; font: inherit; font-weight: 600; font-size: 1em; cursor: pointer; }
+    #wa-form .wa-send:disabled { opacity: .45; cursor: not-allowed; }
+    #wa-form .wa-note { text-align: center; font-size: .85em; opacity: .65; margin-top: 10px; }
+  </style>
+
+  <h3>Request a proposal</h3>
+  <p class="wa-sub">4 quick taps — I'll reply on WhatsApp, usually within a few hours.</p>
+
+  <div class="wa-q">
+    <span class="wa-label">What are you planning?</span>
+    <div class="wa-chips" data-key="type">
+      <button type="button" class="wa-chip">Event</button>
+      <button type="button" class="wa-chip">Retreat</button>
+      <button type="button" class="wa-chip">Brand collaboration</button>
+      <button type="button" class="wa-chip">Something else</button>
+    </div>
+  </div>
+
+  <div class="wa-q">
+    <span class="wa-label">When?</span>
+    <div class="wa-chips" data-key="when">
+      <button type="button" class="wa-chip">Within 1 month</button>
+      <button type="button" class="wa-chip">1–3 months</button>
+      <button type="button" class="wa-chip">3–6 months</button>
+      <button type="button" class="wa-chip">6+ months / flexible</button>
+    </div>
+  </div>
+
+  <div class="wa-q">
+    <span class="wa-label">How many people?</span>
+    <div class="wa-chips" data-key="size">
+      <button type="button" class="wa-chip">Under 15</button>
+      <button type="button" class="wa-chip">15–40</button>
+      <button type="button" class="wa-chip">40–100</button>
+      <button type="button" class="wa-chip">100+</button>
+    </div>
+  </div>
+
+  <div class="wa-q">
+    <span class="wa-label">Your name & where it's happening <span style="opacity:.6;font-weight:400">(optional)</span></span>
+    <input type="text" id="wa-extra" placeholder="e.g. Sofia, Comporta">
+  </div>
+
+  <button type="button" class="wa-send" id="wa-send" disabled>Send on WhatsApp</button>
+  <p class="wa-note">Opens WhatsApp with your answers ready to send.</p>
+
+  <script>
+    (function () {
+      var PHONE = "351000000000"; // <-- your number here
+      var root = document.getElementById("wa-form");
+      var answers = {};
+      var send = document.getElementById("wa-send");
+
+      root.querySelectorAll(".wa-chips").forEach(function (group) {
+        group.addEventListener("click", function (e) {
+          var chip = e.target.closest(".wa-chip");
+          if (!chip) return;
+          group.querySelectorAll(".wa-chip").forEach(function (c) { c.classList.remove("on"); });
+          chip.classList.add("on");
+          answers[group.dataset.key] = chip.textContent;
+          send.disabled = !(answers.type && answers.when && answers.size);
+        });
+      });
+
+      send.addEventListener("click", function () {
+        var extra = document.getElementById("wa-extra").value.trim();
+        var msg = "Hi! I'd love a proposal.\n\n" +
+          "• Type: " + answers.type + "\n" +
+          "• When: " + answers.when + "\n" +
+          "• Group size: " + answers.size +
+          (extra ? "\n• Details: " + extra : "");
+        window.open("https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg), "_blank");
+      });
+    })();
+  </script>
+</div>
