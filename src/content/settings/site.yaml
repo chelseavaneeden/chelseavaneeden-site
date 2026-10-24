@@ -30,7 +30,7 @@ contact:
   whatsappLabel: Message me on WhatsApp
 proposalForm:
   title: Request a proposal
-  intro: A few quick taps — I'll reply on WhatsApp, usually within a few hours.
+  intro: A few quick taps, and I'll reply within a few hours.
   questions:
     - label: I would like a quote for
       short: For
