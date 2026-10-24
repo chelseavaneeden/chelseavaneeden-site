@@ -2,14 +2,15 @@
 /*
  * Chelsea's logo, from the existing brand artwork (public/brand/).
  *
- * seal (default): the swoosh alone, embossed on a round paper disc.
+ * emboss (default): the swoosh alone, blind-embossed. It takes the colour of the section it
+ * sits on and shows through light and shadow, so it adapts to every background.
  * signature: the full signature, swoosh plus the "helsea" script.
  *
- * The artwork is used as masks, so its colours come from tokens: the swoosh uses --logo-mark
- * (ochre, lighter on dark tones) and the script uses the text colour.
+ * The artwork is used as masks, so its colours come from tokens: the signature's swoosh uses
+ * --logo-mark (ochre, lighter on dark tones) and the script uses the text colour.
  */
 export type LogoSize = 's' | 'm' | 'l';
-export type LogoVariant = 'seal' | 'signature';
+export type LogoVariant = 'emboss' | 'signature';
 
 interface Props {
   variant?: LogoVariant;
@@ -19,26 +20,24 @@ interface Props {
   class?: string;
 }
 
-const { variant = 'seal', size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
+const { variant = 'emboss', size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
 
 const heights: Record<LogoSize, string> = {
   s: 'h-(--logo-height-s)',
   m: 'h-(--logo-height-m)',
   l: 'h-(--logo-height-l)',
 };
-const seals: Record<LogoSize, string> = {
-  s: 'size-(--logo-seal-s)',
-  m: 'size-(--logo-seal-m)',
-  l: 'size-(--logo-seal-l)',
+const embossSizes: Record<LogoSize, string> = {
+  s: 'size-(--logo-emboss-s)',
+  m: 'size-(--logo-emboss-m)',
+  l: 'size-(--logo-emboss-l)',
 };
 ---
 
 {
-  variant === 'seal' ? (
-    <span role="img" aria-label={label} class:list={['logo-seal relative inline-block shrink-0 rounded-pill', seals[size], className]}>
-      <span class="logo-emboss absolute inset-1/8" aria-hidden="true">
-        <span class="logo-swoosh absolute inset-0 bg-logo-mark" />
-      </span>
+  variant === 'emboss' ? (
+    <span role="img" aria-label={label} class:list={['logo-emboss relative inline-block shrink-0', embossSizes[size], className]}>
+      <span class="logo-swoosh absolute inset-0 bg-surface" aria-hidden="true" />
     </span>
   ) : (
     <span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-ink', heights[size], className]}>
@@ -62,17 +61,12 @@ const seals: Record<LogoSize, string> = {
   .logo-word {
     mask-image: url('/brand/logo-word.svg');
   }
-
-  /* Seal: a paper disc, lit from the top left. */
-  .logo-seal {
-    background: radial-gradient(circle at 35% 30%, var(--surface-raised), var(--surface-alt));
-    box-shadow: var(--seal-shadow-value);
-  }
   .logo-swoosh {
     mask-image: url('/brand/logo-mark-square.svg');
     mask-position: center;
   }
-  /* The emboss sits on a wrapper because a filter on the masked element itself would be masked away. */
+  /* The emboss sits on the outer element because a filter on the masked element itself
+     would be masked away. */
   .logo-emboss {
     filter: var(--emboss-filter);
   }

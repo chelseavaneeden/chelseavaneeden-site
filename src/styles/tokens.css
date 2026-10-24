@@ -211,13 +211,13 @@
   --logo-height-m: 2.25rem;
   --logo-height-l: 3rem;
 
-  /* Logo seal: the swoosh embossed on a round paper disc. Light catches the top-left
-     edge of the swoosh and a soft shadow falls bottom-right, like a pressed print. */
-  --logo-seal-s: 2.5rem;
-  --logo-seal-m: 3.25rem;
-  --logo-seal-l: 4.5rem;
-  --emboss-filter: drop-shadow(-0.5px -0.5px 0 rgb(255 255 255 / 0.85)) drop-shadow(0.75px 1px 0.75px rgb(48 26 17 / 0.4));
-  --seal-shadow-value: 0 1px 2px rgb(48 26 17 / 0.14), 0 8px 16px -10px rgb(48 26 17 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 -2px 5px rgb(48 26 17 / 0.07);
+  /* Embossed logo: the swoosh takes the colour of the surface it sits on (a "blind" emboss)
+     and shows through light and shadow alone: light catches the top-left edge, a soft
+     shadow falls bottom-right, like paper pressed from behind. */
+  --logo-emboss-s: 2.25rem;
+  --logo-emboss-m: 2.75rem;
+  --logo-emboss-l: 3.5rem;
+  --emboss-filter: drop-shadow(-0.75px -0.75px 0 rgb(255 255 255 / 0.95)) drop-shadow(0.75px 1px 0.5px rgb(48 26 17 / 0.4)) drop-shadow(1px 2px 2px rgb(48 26 17 / 0.15));
 }
 
 @media (prefers-reduced-motion: reduce) {
