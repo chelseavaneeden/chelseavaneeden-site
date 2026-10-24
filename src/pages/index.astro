@@ -76,7 +76,7 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    <Section space="l" tone="light" id="about">
+    <Section space="l" tone="light" id="about" class="pb-(--space-section-s)">
       <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
         <div class="flex flex-col gap-5 lg:col-span-5">
           {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
@@ -107,7 +107,7 @@ const testimonials = await getTestimonials('private');
 
     {
       page.perfectFor && (
-        <Section space="m">
+        <Section space="m" class="pt-0">
           <Checklist {...page.perfectFor} />
         </Section>
       )
