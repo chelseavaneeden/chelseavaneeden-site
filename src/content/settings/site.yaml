@@ -143,14 +143,15 @@ trust:
   googleRating:
   googleReviewCount:
   items: []
+# Shown two to a row, in this order.
 footerLinks:
   - label: Book your intro pack
     href: /intro-pack
-  - label: WhatsApp Chelsea
-    href: https://wa.link/ccq3ib
   # /enquire opens the email form as a pop-up, so people stay on the site.
-  - label: Email Chelsea
+  - label: Email
     href: /enquire
+  - label: WhatsApp
+    href: https://wa.link/ccq3ib
   - label: Instagram
     href: https://www.instagram.com/chelseavaneeden_/
 socials: []

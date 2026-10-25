@@ -91,8 +91,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
   The debossed swoosh (`deboss`) is still available.
 - **Buttons**: espresso with cream text on light sections, butter on dark bands (`--cta`); butter stays
   for notes and highlights (`--note`).
-- **Footer**: Book your intro pack, WhatsApp Chelsea (new tab), Email Chelsea (the form pop-up) and
-  Instagram (new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.
+- **Footer**: two rows of links, Book your intro pack and Email (the form pop-up), then WhatsApp and
+  Instagram (both open a new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.
   No links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
 - **Line breaks**: pressing Enter in an editor text field starts a new line on the page (e.g. the closing
   band always breaks after "first.").
