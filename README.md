@@ -3,6 +3,9 @@
 Astro rebuild of Chelsea van Eeden's website. **The live site is still the Framer site at chelseavaneeden.com.
 Nothing here touches that domain until Chelsea decides to launch.**
 
+> **On the `concept-scrapbook` branch (Chelsea's chosen design):** start with [docs/SCRAPBOOK.md](docs/SCRAPBOOK.md).
+> It covers how to publish the preview, where every section's words live, the copy rules and the open decisions.
+
 ## Preview only (for now)
 
 - Deploys go to a Cloudflare preview address: `https://chelseavaneeden-site.<account>.workers.dev`
