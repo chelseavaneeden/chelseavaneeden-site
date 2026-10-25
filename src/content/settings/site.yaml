@@ -16,13 +16,32 @@ availability:
   closedLabel: Fully booked · Join the waitlist
   href: /intro-pack
   closedHref: /enquire
-monthlyPlans:
-  eyebrow: Monthly plans
-  title: Choose your *plan*.
-  intro: Choose between 1 or 2 private sessions weekly, at a regular time that suits you, or start with an Intro Package.
-  # From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
+# From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
+stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
+introPack:
+  title: Book your *intro pack*.
+  intro: Four live 1-to-1 sessions online, to use within 2 months.
+  points:
+    - Pay securely below.
+    - Pick your session times from my calendar.
+    - Meet me online for your first session and assessment.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
-  stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
+monthlyPlans:
+  title: Continue with *me*.
+  intro: For clients continuing after their intro pack. Choose 1 or 2 private sessions a week, at a regular time that suits you.
+  # Add the ID of a second pricing table with the monthly plans.
+  stripePricingTableId:
+  noTableText: To continue, message me and I'll set up your monthly plan.
+welcome:
+  title: Thank you, *let's begin*.
+  intro: Your intro pack is booked. Two quick steps and we're ready for your first session.
+  bookingTitle: 1. Pick your session times
+  bookingText: Choose times that suit your week. Use your 4 sessions within 2 months.
+  bookingHref:
+  bookingLabel: Choose your times
+  bookingFallback: I'll email you within one working day to arrange your times.
+  intakeTitle: 2. Tell me about you
+  intakeText: A few questions so I can plan your first session around your body.
 contact:
   # Replace with your own WhatsApp link (https://wa.me/<your number>?text=...)
   whatsappHref: https://wa.link/ccq3ib

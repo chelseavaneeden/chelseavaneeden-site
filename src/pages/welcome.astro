@@ -1,0 +1,48 @@
+---
+// Thank-you page after paying for the intro pack. Stripe sends people here (set on the pricing table
+// in Stripe: "after payment, redirect to your website"). Hidden from search engines.
+// Step 1: pick session times from the booking link. Step 2: the intake form.
+// Words and the booking link: Site settings → Welcome page.
+import Base from '../layouts/Base.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Heading from '../components/ui/Heading.astro';
+import Section from '../components/ui/Section.astro';
+import Text from '../components/ui/Text.astro';
+import Footer from '../components/patterns/Footer.astro';
+import Header from '../components/patterns/Header.astro';
+import SectionHeader from '../components/patterns/SectionHeader.astro';
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+const w = site.welcome;
+---
+
+<Base title="Welcome · Chelsea van Eeden" description="Your intro pack is booked: pick your times and tell me about you." noindex>
+  <Header nav={site.nav} cta={site.bookCta} />
+  <main id="main">
+    <Section space="m">
+      <div class="mx-auto flex max-w-narrow flex-col gap-10">
+        <SectionHeader title={w.title} intro={w.intro} />
+
+        <Card variant="raised" padding="m" class="flex flex-col items-start gap-4">
+          <Heading level={2} variant="h3" text={w.bookingTitle} />
+          {w.bookingText && <Text tone="muted" text={w.bookingText} />}
+          {
+            w.bookingHref ? (
+              <Button href={w.bookingHref} external event="welcome_booking">{w.bookingLabel}</Button>
+            ) : (
+              <Text text={w.bookingFallback} />
+            )
+          }
+        </Card>
+
+        <Card variant="raised" padding="m" class="flex flex-col gap-4" id="intake">
+          <Heading level={2} variant="h3" text={w.intakeTitle} />
+          {w.intakeText && <Text tone="muted" text={w.intakeText} />}
+        </Card>
+      </div>
+    </Section>
+  </main>
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+</Base>

@@ -1,7 +1,12 @@
 ---
-// Monthly plans: Stripe pricing table with checkout. Copy and Stripe IDs live in Site settings → Monthly plans page.
+// Monthly plans, for clients continuing after their intro pack. Linked from nowhere on the site and
+// hidden from search engines: send the link to clients yourself.
+// Words and the table ID: Site settings → Monthly plans page. Until a monthly pricing table is set,
+// the page shows a short message with ways to get in touch.
 import Base from '../layouts/Base.astro';
+import Button from '../components/ui/Button.astro';
 import Section from '../components/ui/Section.astro';
+import Text from '../components/ui/Text.astro';
 import WhatsAppLink from '../components/ui/WhatsAppLink.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
@@ -11,25 +16,31 @@ import { getSite } from '../lib/content';
 
 const site = await getSite();
 const plans = site.monthlyPlans;
-if (!plans) throw new Error('Add the Monthly plans page in Site settings (src/content/settings/site.yaml).');
 ---
 
 <Base
   title="Monthly plans · Chelsea van Eeden"
-  description="Choose a monthly plan of live online one-to-one Pilates sessions with Chelsea van Eeden."
+  description="Monthly plans of live online one-to-one Pilates sessions with Chelsea van Eeden."
+  noindex
 >
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="m">
-      <div class="flex flex-col gap-12">
+      <div class="flex flex-col items-center gap-10">
         <SectionHeader eyebrow={plans.eyebrow} title={plans.title} intro={plans.intro} layout="centered" />
-        <StripePricingTable pricingTableId={plans.stripePricingTableId} publishableKey={plans.stripePublishableKey} />
         {
-          site.contact.whatsappHref && (
-            <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-ink-muted">
-              Questions first?{' '}
-              <WhatsAppLink href={site.contact.whatsappHref} label={site.contact.whatsappLabel} />
-            </p>
+          plans.stripePricingTableId ? (
+            <div class="w-full">
+              <StripePricingTable pricingTableId={plans.stripePricingTableId} publishableKey={site.stripePublishableKey} />
+            </div>
+          ) : (
+            <div class="flex flex-col items-center gap-5 text-center">
+              <Text tone="muted" text={plans.noTableText} />
+              <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+                <Button href="/enquire" event="monthly_page">Send me a message</Button>
+                {site.contact.whatsappHref && <WhatsAppLink href={site.contact.whatsappHref} label={site.contact.whatsappLabel} size="m" />}
+              </div>
+            </div>
           )
         }
       </div>

@@ -68,15 +68,43 @@ const settings = defineCollection({
         href: '/private-sessions#investment',
         closedHref: '/enquire?type=private',
       }),
-    monthlyPlans: z
-      .object({
-        eyebrow: optionalText,
-        title: z.string(),
-        intro: optionalText,
-        stripePricingTableId: z.string(),
-        stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
-      })
-      .optional(),
+    /** Stripe's publishable key (starts with pk_). It is designed to be public; never paste a secret key here. */
+    stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
+    /** The intro pack page (/intro-pack): every "Book your intro pack" button leads here. */
+    introPack: z.object({
+      eyebrow: optionalText,
+      title: z.string(),
+      intro: optionalText,
+      /** Short numbered lines on what happens after paying. */
+      points: list(z.string()),
+      /** Stripe → Pricing tables → the intro-only table's ID (prctbl_…). */
+      stripePricingTableId: z.string().startsWith('prctbl_', 'Paste the pricing table ID, starting with prctbl_.'),
+    }),
+    /**
+     * The monthly plans page (/monthly-plans) for clients continuing after their intro pack.
+     * It is linked from nowhere on the site: send the link to clients yourself.
+     */
+    monthlyPlans: z.object({
+      eyebrow: optionalText,
+      title: z.string(),
+      intro: optionalText,
+      /** A second Stripe pricing table with the monthly plans. Empty shows the message below instead. */
+      stripePricingTableId: z.preprocess(blankToUndefined, z.string().startsWith('prctbl_').optional()),
+      noTableText: z.string(),
+    }),
+    /** The thank-you page Stripe sends people to after they pay for the intro pack (/welcome). */
+    welcome: z.object({
+      title: z.string(),
+      intro: optionalText,
+      bookingTitle: z.string(),
+      bookingText: optionalText,
+      /** Your booking link (Google Calendar booking page, Calendly…). Empty shows bookingFallback instead. */
+      bookingHref: optionalText,
+      bookingLabel: z.string(),
+      bookingFallback: z.string(),
+      intakeTitle: z.string(),
+      intakeText: optionalText,
+    }),
     contact: z
       .object({
         whatsappHref: optionalText,

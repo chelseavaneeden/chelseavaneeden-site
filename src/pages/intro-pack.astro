@@ -1,0 +1,41 @@
+---
+// The intro pack page: every "Book your intro pack" button leads here. It shows only the intro-only
+// Stripe pricing table, so a new client has one choice and one Pay button.
+// Words and the table ID: Site settings → Intro pack page. After paying, Stripe sends people to /welcome
+// (set in Stripe on the pricing table).
+import Base from '../layouts/Base.astro';
+import Button from '../components/ui/Button.astro';
+import Section from '../components/ui/Section.astro';
+import Footer from '../components/patterns/Footer.astro';
+import Header from '../components/patterns/Header.astro';
+import NumberedList from '../components/patterns/NumberedList.astro';
+import SectionHeader from '../components/patterns/SectionHeader.astro';
+import StripePricingTable from '../components/patterns/StripePricingTable.astro';
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+const intro = site.introPack;
+---
+
+<Base
+  title="Book your intro pack · Chelsea van Eeden"
+  description="Four live 1-to-1 Pilates sessions online with Chelsea van Eeden. Pay securely, then pick your times."
+>
+  <Header nav={site.nav} cta={site.bookCta} />
+  <main id="main">
+    <Section space="m">
+      <div class="flex flex-col items-center gap-10">
+        <SectionHeader eyebrow={intro.eyebrow} title={intro.title} intro={intro.intro} layout="centered" />
+        {intro.points.length > 0 && <NumberedList items={intro.points} />}
+        <div class="w-full">
+          <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
+        </div>
+        <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-ink-muted">
+          Questions first?
+          <Button href="/enquire" variant="link" event="intro_page">Ask me</Button>
+        </p>
+      </div>
+    </Section>
+  </main>
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+</Base>
