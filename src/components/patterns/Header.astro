@@ -21,7 +21,7 @@ const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
   <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
     <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo variant="signature" size="m" label="Chelsea van Eeden" /></a>
 
-    <nav aria-label="Main" class="hidden items-center gap-8 lg:flex">
+    <nav aria-label="Main" data-track="menu" class="hidden items-center gap-8 lg:flex">
       <ul class="flex items-center gap-7">
         {
           nav.map((item) =>
@@ -65,7 +65,7 @@ const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
       <Button href={cta.href} size="s" event="header">{cta.label}</Button>
     </nav>
 
-    <details class="group/mobile lg:hidden">
+    <details class="group/mobile lg:hidden" data-track="menu">
       <summary
         class="flex size-11 cursor-pointer items-center justify-center rounded-control text-ink text-2xl"
         aria-label={t(lang, 'nav.menu')}

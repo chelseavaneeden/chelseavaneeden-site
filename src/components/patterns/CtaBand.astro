@@ -26,7 +26,7 @@ const { title, text, primary, secondary, tone = 'dark' } = Astro.props;
     <div class="flex flex-col gap-6 lg:col-span-5">
       {text && <Text tone="muted" text={text} />}
       <div class="flex flex-wrap gap-3">
-        <Button href={primary.href} size="l" icon="arrow-right" event="cta_band_primary">{primary.label}</Button>
+        <Button href={primary.href} size="l" icon="arrow-right" event="closing_band">{primary.label}</Button>
         {secondary && <Button href={secondary.href} size="l" variant="secondary">{secondary.label}</Button>}
       </div>
     </div>

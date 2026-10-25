@@ -71,9 +71,9 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
           <Heading level={1} variant="display-xl" text={title} />
           <Text variant="lede" tone="muted" class="max-w-prose" text={lede} />
           <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
+            <Button href={primary.href} size="l" event="hero">{primary.label}</Button>
             {extra && <Button href={extra.href} size="l" variant="secondary" event="hero_extra">{extra.label}</Button>}
-            {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
+            {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" event="hero" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
           </div>
           {hasTrust && <slot name="trust" />}
           {meta.length > 0 && (
@@ -108,9 +108,9 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
         <Heading level={1} variant="display-xl" text={title} />
         <Text variant="lede" tone="muted" class="max-w-prose" text={lede} />
         <div class="flex flex-wrap justify-center gap-3">
-          <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
+          <Button href={primary.href} size="l" event="hero">{primary.label}</Button>
           {extra && <Button href={extra.href} size="l" variant="secondary" event="hero_extra">{extra.label}</Button>}
-          {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
+          {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" event="hero" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
         </div>
       </Container>
       <Container width="wide" class="mt-(--space-section-s)">
@@ -158,13 +158,13 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <Heading level={1} variant="display-l" text={title} />
         <Text variant="body" tone="muted" class="max-w-md" text={lede} />
-        <Button href={primary.href} size="m" event="hero_primary">{primary.label}</Button>
+        <Button href={primary.href} size="m" event="hero">{primary.label}</Button>
         {extra && <Button href={extra.href} size="m" variant="secondary" event="hero_extra">{extra.label}</Button>}
         {secondary &&
           (secondaryStyle === 'whatsapp' ? (
             <WhatsAppLink href={secondary.href} label={secondary.label} size="m" />
           ) : (
-            <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>
+            <Button href={secondary.href} variant="link" event="hero" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>
               {secondary.label}
             </Button>
           ))}

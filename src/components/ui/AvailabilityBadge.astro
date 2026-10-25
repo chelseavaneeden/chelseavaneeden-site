@@ -20,7 +20,7 @@ const { open, openLabel, closedLabel, href, closedHref, size = 'm', class: class
 
 <a
   href={open ? href : (closedHref ?? href)}
-  data-umami-event={open ? 'availability_open' : 'availability_waitlist'}
+  data-track="availability_badge"
   class:list={[
     'inline-flex items-center gap-2.5 whitespace-nowrap rounded-pill border border-line bg-surface-raised text-ink transition-colors hover:border-ink',
     size === 's' ? 'type-caption px-3 py-1.5' : 'type-label px-4 py-2',

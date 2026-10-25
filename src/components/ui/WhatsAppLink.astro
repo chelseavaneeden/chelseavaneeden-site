@@ -16,7 +16,7 @@ const { href, label, size = 's', class: className } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener"
-  data-umami-event="whatsapp_click"
+  data-track="whatsapp_link"
   class:list={[
     'inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2',
     size === 'm' ? 'type-body' : 'type-body-s',

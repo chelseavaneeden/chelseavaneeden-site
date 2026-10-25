@@ -150,6 +150,8 @@ const settings = defineCollection({
       turnstileSiteKey: optionalText,
       forms: z.object({ question: enquiryForm, proposal: enquiryForm, intake: enquiryForm }),
     }),
+    /** Umami Cloud website ID (cookieless analytics). Empty: no analytics. */
+    analytics: z.object({ umamiWebsiteId: optionalText }).default({}),
     tagline: z.string(),
     /** Optional extra after the copyright line, e.g. a city. */
     location: optionalText,

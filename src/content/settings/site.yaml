@@ -133,6 +133,9 @@ enquiry:
           required: false
       consent: I agree that Chelsea can use this health information to plan my sessions.
       button: Send to Chelsea
+analytics:
+  # From Umami Cloud → Websites → your site → Edit → Website ID. Empty: no analytics.
+  umamiWebsiteId:
 tagline: Based in Europe · Teaching worldwide
 # Empty shows the current year.
 copyrightYear:

@@ -12,7 +12,7 @@ interface Props {
   icon?: IconName;
   external?: boolean;
   full?: boolean;
-  /** Analytics event name (Umami), e.g. "book_intro" */
+  /** Where this button is, for analytics, e.g. "hero". What it does is worked out from the link (see Base). */
   event?: string;
   class?: string;
 }
@@ -61,7 +61,7 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
     <a
       href={href}
       class:list={classes}
-      data-umami-event={event}
+      data-track={event}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
     >
@@ -71,7 +71,7 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
       )}
     </a>
   ) : (
-    <button type={type} class:list={classes} data-umami-event={event}>
+    <button type={type} class:list={classes} data-track={event}>
       <slot />
       {trailingIcon && <Icon name={trailingIcon} />}
     </button>
