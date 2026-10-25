@@ -146,16 +146,14 @@ trust:
 footerLinks:
   - label: Book your intro pack
     href: /intro-pack
-  - label: Retreats & events
-    href: /retreats-events
   - label: WhatsApp Chelsea
     href: https://wa.link/ccq3ib
   # /enquire opens the email form as a pop-up, so people stay on the site.
   - label: Email Chelsea
     href: /enquire
-socials:
   - label: Instagram
     href: https://www.instagram.com/chelseavaneeden_/
+socials: []
 legal:
   - label: Privacy
     href: /privacy

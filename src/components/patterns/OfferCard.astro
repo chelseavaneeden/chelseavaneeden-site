@@ -46,7 +46,7 @@ const hasPhoto = Boolean(offer.image);
   <div class:list={['flex flex-1 flex-col gap-6', hasPhoto && 'p-7 md:p-8']}>
     <div class="flex flex-col gap-3">
       {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
-      <Heading level={3} variant="h3" text={offer.title} />
+      <Heading level={3} variant="h3" text={offer.title} class={offer.showTitle ? undefined : 'sr-only'} />
       {offer.summary && <Text variant="body-s" tone="muted" text={offer.summary} />}
     </div>
     <div class="flex flex-col items-start gap-3">

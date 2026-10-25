@@ -3,8 +3,11 @@ const escapeHtml = (s: string) =>
 
 /**
  * Lets content editors emphasise words with *asterisks* (rendered as <em>), which the
- * design system styles per theme (e.g. serif italics). Everything else is escaped.
+ * design system styles per theme (e.g. serif italics), and start a new line where they pressed
+ * Enter. Everything else is escaped.
  */
 export function emphasis(text: string): string {
-  return escapeHtml(text).replace(/\*(.+?)\*/g, '<em>$1</em>');
+  return escapeHtml(text.trim())
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\s*\n\s*/g, '<br />');
 }

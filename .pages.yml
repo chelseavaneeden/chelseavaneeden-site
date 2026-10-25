@@ -326,6 +326,7 @@ content:
       sort: [order, title]
     fields:
       - { name: title, label: Offer name, type: string, required: true }
+      - { name: showTitle, label: Show the title on the card, type: boolean, default: true, description: 'Untick to hide it. Screen readers still hear it.' }
       - name: audience
         label: Who it's for
         type: select

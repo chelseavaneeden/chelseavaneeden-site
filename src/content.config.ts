@@ -276,6 +276,8 @@ const offers = defineCollection({
     z
       .object({
         title: z.string(),
+        /** Show the title on the card. Untick to hide it (screen readers still hear it). */
+        showTitle: z.boolean().default(true),
         audience: z.enum(audiences),
         eyebrow: optionalText,
         summary: z.preprocess(blankToUndefined, z.string().max(240).optional()),
