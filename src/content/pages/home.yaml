@@ -3,7 +3,9 @@ seo:
   description: Specialised 1-to-1 Pilates sessions online with a BASI Comprehensive instructor. For pain, injury, pregnancy, posture and stress. Start with an intro pack.
 hero:
   title: Mat & Reformer Pilates, *built around you*.
-  lede: Specialised 1-to-1 Pilates sessions online, wherever you are. For pain, injury, pregnancy, posture and stress.
+  lede: |-
+    Specialised 1-to-1 Pilates sessions online.
+    For busy professionals, new parents and people with chronic pain.
   primary:
     label: Book your intro pack
     href: /intro-pack
