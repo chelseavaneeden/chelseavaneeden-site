@@ -1,5 +1,6 @@
 ---
 import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
 import type { Testimonial } from '../../lib/content';
@@ -12,14 +13,28 @@ interface Props {
   link?: { label: string; href: string };
   /** Card colour: raised (paper) by default, or alt (sage) on a cream section. */
   cardTone?: 'raised' | 'alt';
+  /** Your Google rating, shown under the heading when both numbers are set. */
+  rating?: { value?: number; count?: number };
 }
 
-const { eyebrow, title, testimonials, link, cardTone = 'raised' } = Astro.props;
+const { eyebrow, title, testimonials, link, cardTone = 'raised', rating } = Astro.props;
+const ratingText =
+  rating?.value && rating.count ? `${rating.value.toFixed(1)} on Google from ${rating.count} review${rating.count === 1 ? '' : 's'}` : undefined;
 const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
 ---
 
 <div class="flex flex-col gap-10 md:gap-14">
-  <SectionHeader eyebrow={eyebrow} title={title} />
+  <div class="flex flex-col gap-4">
+    <SectionHeader eyebrow={eyebrow} title={title} />
+    {
+      ratingText && (
+        <p class="type-body inline-flex items-center gap-2 text-ink">
+          <Icon name="star" class="text-lg text-logo-mark" />
+          {ratingText}
+        </p>
+      )
+    }
+  </div>
   <ul class:list={['grid grid-cols-1 gap-4', cols]}>
     {
       testimonials.map((t) => (
@@ -48,7 +63,7 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
   {
     link && (
       <div>
-        <Button href={link.href} variant="secondary" external={/^https?:\/\//.test(link.href)} event="reviews_link">
+        <Button href={link.href} variant="secondary" external={/^https?:\/\//.test(link.href)} event="reviews">
           {link.label}
         </Button>
       </div>

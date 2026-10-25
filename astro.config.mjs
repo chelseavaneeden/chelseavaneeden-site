@@ -4,8 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://www.chelseavaneeden.com',
-  // The old Framer address for the terms.
-  redirects: { '/terms-and-conditions': '/terms' },
+  // The old Framer address for the terms; Private sessions is now the home page.
+  redirects: { '/terms-and-conditions': '/terms', '/private-sessions': '/' },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',

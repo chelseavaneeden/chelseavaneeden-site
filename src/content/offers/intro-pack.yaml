@@ -1,20 +1,23 @@
 title: Intro pack
 audience: private
 eyebrow: Start here
-summary: 4x Private sessions, online
+image: ../../assets/media/mat-detail.jpg
+imageAlt: A client kneeling on a mat, folding forward into a stretch
+imageFocus: top-left
 priceDisplay: exact
-price: 300
+price: 260
 currency: EUR
 unit: pack
 priceVisibility: web
-highlight: Continue & save €40
+priceNote: 4 private sessions, use within 2 months
 includes:
+  - 4 live 1-to-1 sessions online, 55 minutes each
+  - Mat or Reformer, at home or wherever you are
   - Full movement & posture assessment
   - Your written personal plan
-  - €40 off your first month when you continue within 14 days
 cta:
   label: Book your intro pack
-  href: https://buy.stripe.com/9B65kD5uFgW8dPC921fw409
+  href: /intro-pack
 featured: true
 order: 10
-published: false
+published: true

@@ -1,0 +1,50 @@
+---
+// The short proof line under the main buttons (Site settings → Trust line): the Google rating,
+// when both numbers are filled in, then a few facts. Links open in a new tab.
+import Icon from '../ui/Icon.astro';
+import type { Site } from '../../lib/content';
+
+interface Props {
+  trust: Site['trust'];
+  /** Where the rating links to: all your Google reviews. */
+  reviewsHref?: string;
+  class?: string;
+}
+
+const { trust, reviewsHref, class: className } = Astro.props;
+const { googleRating, googleReviewCount, items } = trust;
+const rating =
+  googleRating && googleReviewCount
+    ? `${googleRating.toFixed(1)} on Google · ${googleReviewCount} review${googleReviewCount === 1 ? '' : 's'}`
+    : undefined;
+const entries = [
+  ...(rating ? [{ label: rating, href: reviewsHref, icon: 'star' as const }] : []),
+  ...items.map((i) => ({ ...i, icon: i.href?.includes('youtube.com') ? ('play' as const) : undefined })),
+];
+const external = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
+---
+
+{
+  entries.length > 0 && (
+    <ul class:list={['flex flex-wrap items-center gap-x-5 gap-y-2', className]}>
+      {entries.map((e) => (
+        <li class="type-body-s inline-flex items-center gap-1.5 text-ink-muted">
+          {e.icon && <Icon name={e.icon} class="text-base text-logo-mark" />}
+          {e.href ? (
+            <a
+              href={e.href}
+              target={external(e.href) ? '_blank' : undefined}
+              rel={external(e.href) ? 'noopener' : undefined}
+              data-track="trust_line"
+              class="underline decoration-line decoration-1 underline-offset-4 transition-colors hover:text-ink hover:decoration-current"
+            >
+              {e.label}
+            </a>
+          ) : (
+            e.label
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

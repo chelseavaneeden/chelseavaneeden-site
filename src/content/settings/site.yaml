@@ -1,21 +1,21 @@
 nav:
-  - label: Services
-    href: /#investment
-  - label: Client Reviews
+  - label: Reviews
     href: /#reviews
-  - label: About Chelsea
+  - label: About
     href: /#about
   - label: FAQ
     href: /#faq
+  - label: Retreats & events
+    href: /retreats-events
 bookCta:
   label: Book your intro pack
-  href: /#investment
+  href: /intro-pack
 availability:
   open: true
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
-  href: /#investment
-  closedHref: /enquire?type=private
+  href: /intro-pack
+  closedHref: /enquire
 monthlyPlans:
   eyebrow: Monthly plans
   title: Choose your *plan*.
@@ -61,17 +61,16 @@ proposalForm:
   message: "Hi Chelsea, I'm {name}. I'd like a proposal/quote for the following:"
 tagline: Based in Europe · Teaching worldwide
 copyrightYear: 2021
-stats:
-  - value: 5,000+
-    label: teaching hours
-  - value: 5+ yrs
-    label: teaching worldwide
-  - value: 9.3K
-    label: Online community
-  - value: BASI
-    label: Comprehensive Instructor
+trust:
+  # Fill in both to show the star rating, e.g. 5.0 and 12.
+  googleRating:
+  googleReviewCount:
+  items:
+    - label: BASI Comprehensive Instructor
+    - label: 9.4K on YouTube
+      href: https://www.youtube.com/@chelseavaneeden
 reviews:
-  label: Read my Google reviews
+  label: All reviews on Google
   href: https://www.google.com/search?hl=en-NL&sxsrf=APpeQnv2oa5SlsqzGMce54noDq6KYR_7Yw:1789395207368&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
 socials: []
 legal:

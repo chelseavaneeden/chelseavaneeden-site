@@ -1,15 +1,15 @@
 seo:
   title: Chelsea van Eeden · Specialist online Pilates
-  description: Specialist one-to-one Pilates online, plus Pilates for retreats, events, hotels, studios and brands in Europe and South Africa.
+  description: Specialised 1-to-1 Pilates sessions online with a BASI Comprehensive instructor. For pain, injury, pregnancy, posture and stress. Start with an intro pack.
 hero:
   title: Mat & Reformer Pilates, *built around you*.
-  lede: Specialised 1-to-1 Pilates sessions online, or elevate your wellness retreat with mixed-level, feel-good Pilates sessions.
+  lede: Specialised 1-to-1 Pilates sessions online, wherever you are. For pain, injury, pregnancy, posture and stress.
   primary:
     label: Book your intro pack
-    href: '#investment'
+    href: /intro-pack
   secondary:
-    label: Retreats & Collaborations
-    href: '#investment'
+    label: Questions first? Ask me
+    href: /enquire
   image: ../../assets/media/chelsea-teaching-online.jpg
   imageAlt: Chelsea guiding a client through a live online Reformer session on her laptop
   imageFocus: center
@@ -24,21 +24,38 @@ perfectFor:
     - Need consistency, but have a busy schedule
     - Overstimulated by gyms/studios, prefer at-home exercise
     - Have a Reformer Pilates machine, gathering dust
+    - Are pregnant, or rebuilding your core after birth
+    - Feel stressed or anxious, and want movement that calms
+investment:
+  title: Start with your *intro pack*.
+  intro: Four private sessions to get to know your body, find what works for you and build your plan.
+  note: After your intro pack, continue weekly or twice weekly from €260 a month.
+steps:
+  title: How it *works*.
+  items:
+    - title: Book your intro pack
+      text: Pay securely online in a minute.
+    - title: Pick your times
+      text: Choose session times that suit your week from my calendar.
+    - title: Assessment
+      text: In our first session we look at how you move, any pain or injuries, and what you want to change.
+    - title: Your plan
+      text: I build a programme around your body, your goals and your schedule.
 about:
   eyebrow: Meet your instructor
   title: Hi, I’m *Chelsea*.
   paragraphs:
-    - South African, living in Lisbon. I have a busy-brain (peep the sticky-notes) and fully understand the struggles of stress, anxiety and chronic pain. As a BASI Comprehensive Pilates Instructor I specialise in movement for mental health.
-    - When I’m not teaching, you’ll find me baking treats, making coffees, exploring new cities or shaking out stress on the dance floor!
-    - My teaching style blends somatics, stress relief and Pilates. Helping new parents, frequent travellers and busy professionals feel less stressed, more mobile and energised after every session.
+    - My teaching style blends somatics, stress relief and Pilates. I help new parents, frequent travellers and busy professionals feel less stressed, more mobile and energised after every session.
+    - As a BASI Comprehensive Pilates Instructor, I specialise in movement for mental health. I know first-hand what stress, anxiety and chronic pain do to the body, so every session is calm, precise and built around how you feel that day.
+    - When I’m not teaching, you’ll find me shaking out stress on the dance floor.
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session
-  note:
-    title: Strong, calm & cared for. Wherever you are.
-    caption: Start Pilates
-  cta:
-    label: More about me
-    href: /about
-investment:
-  eyebrow: My services
-  title: How we work *together*.
+ctaBand:
+  title: Ready when *you* are.
+  text: Start with an intro pack, or send me a question first. I reply personally within one working day.
+  primary:
+    label: Book your intro pack
+    href: /intro-pack
+  secondary:
+    label: Ask a question
+    href: /enquire

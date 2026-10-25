@@ -1,10 +1,10 @@
 ---
-// Home page: the one-pager. All words, images and prices come from the editor
+// Home page: the page for 1-on-1 clients. All words, images and prices come from the editor
 // (src/content/pages/home.yaml, offers/, testimonials/ and settings/site.yaml). The testimonials
-// heading and the questions are shared with the Private sessions page
-// (src/content/audience-pages/private.yaml), so they are edited in one place.
-// Section ids (investment, reviews, about, faq) are the menu links in Site settings.
-// Order: header, credentials, services, reviews, Meet Chelsea, perfect for, questions.
+// heading and the questions are shared with src/content/audience-pages/private.yaml, so they are
+// edited in one place. Section ids (investment, reviews, about, faq) are the menu links in Site settings.
+// Order: header, who it's for, intro pack, how it works, reviews, Meet Chelsea, questions, closing band.
+// Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
@@ -12,15 +12,16 @@ import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
 import Checklist from '../components/patterns/Checklist.astro';
+import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import PhotoCollage from '../components/patterns/PhotoCollage.astro';
-import ProofStrip from '../components/patterns/ProofStrip.astro';
-import StickyNote from '../components/patterns/StickyNote.astro';
+import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
+import TrustLine from '../components/patterns/TrustLine.astro';
 import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import { getAudiencePage, getOffers, getPage, getSite, getTestimonials, resolveHeroLinks } from '../lib/content';
 
@@ -33,17 +34,18 @@ const testimonials = await getTestimonials('private');
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <Header nav={site.nav} cta={site.bookCta} />
 
   <main id="main">
     <Hero layout="split" {...hero}>
       <AvailabilityBadge slot="badge" {...site.availability} />
+      <TrustLine slot="trust" trust={site.trust} reviewsHref={site.reviews?.href} />
     </Hero>
 
     {
-      site.stats.length > 0 && (
-        <Section space="none" width="wide" class="pb-(--space-section-s)">
-          <ProofStrip stats={site.stats} />
+      page.perfectFor && (
+        <Section space="m" tone="alt">
+          <Checklist {...page.perfectFor} />
         </Section>
       )
     }
@@ -64,6 +66,14 @@ const testimonials = await getTestimonials('private');
     }
 
     {
+      page.steps && (
+        <Section space="m" class="pt-0">
+          <StepList {...page.steps} />
+        </Section>
+      )
+    }
+
+    {
       testimonials.length > 0 && (
         <Section space="m" tone="alt" id="reviews">
           <TestimonialGrid
@@ -71,47 +81,28 @@ const testimonials = await getTestimonials('private');
             title={shared.proof.title}
             testimonials={testimonials}
             link={site.reviews}
+            rating={{ value: site.trust.googleRating, count: site.trust.googleReviewCount }}
           />
         </Section>
       )
     }
 
-    <Section space="l" tone="light" id="about" class="pb-(--space-section-s)">
+    <Section space="l" tone="light" id="about">
       <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
-        <div class="flex flex-col gap-5 lg:col-span-5">
+        <div class="flex flex-col gap-5 lg:col-span-6">
           {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
           <Heading variant="h1" text={page.about.title} />
           {page.about.paragraphs.map((p) => <Text tone="muted" text={p} />)}
         </div>
-        <div class="relative lg:col-span-7">
-          <div class="grid grid-cols-1 items-center gap-10 sm:grid-cols-12">
-            {page.about.note && (
-              <StickyNote
-                class="relative z-20 order-last mx-auto -mt-4 sm:order-none sm:col-span-5 sm:mx-0 sm:-mr-10 sm:mt-0"
-                title={page.about.note.title}
-                caption={page.about.note.caption}
-                href="#investment"
-              />
-            )}
-            <PhotoCollage
-              class="sm:col-span-7"
-              photos={[
-                { src: page.about.image, alt: page.about.imageAlt },
-                { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
-              ]}
-            />
-          </div>
-        </div>
+        <PhotoCollage
+          class="mx-auto w-full max-w-xl lg:col-span-5 lg:col-start-8"
+          photos={[
+            { src: page.about.image, alt: page.about.imageAlt },
+            { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
+          ]}
+        />
       </div>
     </Section>
-
-    {
-      page.perfectFor && (
-        <Section space="m" class="pt-0">
-          <Checklist {...page.perfectFor} />
-        </Section>
-      )
-    }
 
     {
       shared.faq && (
@@ -120,6 +111,8 @@ const testimonials = await getTestimonials('private');
         </Section>
       )
     }
+
+    {page.ctaBand && <CtaBand {...page.ctaBand} />}
   </main>
 
   <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />

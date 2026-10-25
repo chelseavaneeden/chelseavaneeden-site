@@ -25,7 +25,7 @@ interface Props {
   /** Optional outlined button shown right after the main button. */
   extra?: Link;
   secondary?: Link;
-  /** Show the second action as the WhatsApp link instead of a button. */
+  /** Show the second action as the WhatsApp link instead of a text link. */
   secondaryStyle?: 'button' | 'whatsapp';
   meta?: string[];
   image: ImageMetadata;
@@ -57,6 +57,8 @@ const {
   tone = 'light',
 } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
+const hasTrust = Astro.slots.has('trust');
+const isExternal = (href: string) => /^https?:\/\//.test(href);
 ---
 
 {
@@ -71,8 +73,9 @@ const hasBadge = Astro.slots.has('badge');
           <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
             <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
             {extra && <Button href={extra.href} size="l" variant="secondary" event="hero_extra">{extra.label}</Button>}
-            {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon="arrow-up-right">{secondary.label}</Button>)}
+            {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
           </div>
+          {hasTrust && <slot name="trust" />}
           {meta.length > 0 && (
             <ul class="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-6">
               {meta.map((m) => (
@@ -107,7 +110,7 @@ const hasBadge = Astro.slots.has('badge');
         <div class="flex flex-wrap justify-center gap-3">
           <Button href={primary.href} size="l" event="hero_primary">{primary.label}</Button>
           {extra && <Button href={extra.href} size="l" variant="secondary" event="hero_extra">{extra.label}</Button>}
-          {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon="arrow-up-right">{secondary.label}</Button>)}
+          {secondary && (secondaryStyle === 'whatsapp' ? <WhatsAppLink href={secondary.href} label={secondary.label} size="m" /> : <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>{secondary.label}</Button>)}
         </div>
       </Container>
       <Container width="wide" class="mt-(--space-section-s)">
@@ -161,7 +164,7 @@ const hasBadge = Astro.slots.has('badge');
           (secondaryStyle === 'whatsapp' ? (
             <WhatsAppLink href={secondary.href} label={secondary.label} size="m" />
           ) : (
-            <Button href={secondary.href} variant="link" icon="arrow-up-right">
+            <Button href={secondary.href} variant="link" icon={isExternal(secondary.href) ? 'arrow-up-right' : undefined}>
               {secondary.label}
             </Button>
           ))}

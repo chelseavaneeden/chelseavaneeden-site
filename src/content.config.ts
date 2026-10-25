@@ -112,8 +112,18 @@ const settings = defineCollection({
     location: optionalText,
     /** Year shown in the footer copyright line. */
     copyrightYear: z.number().int().optional(),
-    stats: list(z.object({ value: z.string(), label: z.string() })),
-    /** Button under the testimonials, e.g. to your Google reviews. */
+    /**
+     * The short proof line under the main buttons: a Google rating (shown only when both numbers
+     * are filled in) and a few facts, each with an optional link.
+     */
+    trust: z
+      .object({
+        googleRating: z.preprocess(blankToUndefined, z.number().min(1).max(5).optional()),
+        googleReviewCount: optionalNumber,
+        items: list(z.object({ label: z.string(), href: optionalText })),
+      })
+      .default({ items: [] }),
+    /** Link under the testimonials to all your Google reviews (opens in a new tab). */
     reviews: optionalLink,
     socials: list(link),
     legal: list(link),
@@ -148,17 +158,20 @@ const pages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         cta: optionalLink,
-        /** The sticky note beside the photos; its link goes to the prices. */
-        note: z.object({ title: z.string(), caption: z.string() }).optional(),
       }),
+      /** The intro pack section: heading above the offer card, note under it (e.g. the ongoing price). */
       investment: z.object({
         eyebrow: optionalText,
         title: z.string(),
         intro: optionalText,
         note: optionalText,
       }),
-      /** "Perfect for those who…": a ticked list above Meet Chelsea. Empty list hides it. */
+      /** "Perfect for those who…": a ticked list under the top of the page. Empty list hides it. */
       perfectFor: optionalSection({ ...sectionHead, items: list(z.string()) }),
+      /** "How it works": numbered steps. Empty list hides it. */
+      steps: optionalSection({ ...sectionHead, items: titledItems }),
+      /** The closing band at the bottom of the page. */
+      ctaBand: ctaBand.optional(),
     }),
 });
 

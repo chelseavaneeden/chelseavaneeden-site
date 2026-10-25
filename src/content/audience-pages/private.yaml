@@ -60,10 +60,8 @@ investment:
   eyebrow: My services
   title: How we work *together*.
 proof:
-  eyebrow: Client words
   title: What clients *notice*.
 faq:
-  eyebrow: Questions
   title: Good to *know*.
   items:
     - question: Do I need any experience?
@@ -82,8 +80,10 @@ faq:
       answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
     - question: What if I do not use all my sessions in a month?
       answer: All good. You can roll over up to 2 sessions to the following month when life happens.
+    - question: How do I book my session times?
+      answer: Right after you pay, you choose your times from my calendar. Use your 4 intro sessions within 2 months.
     - question: What happens after my intro pack?
-      answer: We look back at your progress together and agree the right rhythm, weekly or twice weekly. Start a monthly plan within 14 days of your intro pack and you save €40 on your monthly package of choice.
+      answer: We look back at your progress together and agree the right rhythm, weekly or twice weekly, from €260 a month. Start a monthly plan within 14 days of your intro pack and you save €40 on your monthly package of choice.
     - question: How do I pay?
       answer: Securely online by card. Monthly plans are billed once a month.
 ctaBand:
