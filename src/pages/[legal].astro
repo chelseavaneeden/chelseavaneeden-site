@@ -23,7 +23,7 @@ const { title, business, effective, description } = entry.data;
 ---
 
 <Base title={`${title} · Chelsea van Eeden`} description={description}>
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <Header nav={site.nav} cta={site.bookCta} />
 
   <main id="main">
     <Section space="m" width="narrow">
@@ -40,5 +40,5 @@ const { title, business, effective, description } = entry.data;
     </Section>
   </main>
 
-  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+  <Footer links={site.footerLinks} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
 </Base>

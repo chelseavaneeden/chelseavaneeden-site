@@ -2,26 +2,24 @@
 import Button from '../ui/Button.astro';
 import Container from '../ui/Container.astro';
 import Icon from '../ui/Icon.astro';
-import AvailabilityBadge from '../ui/AvailabilityBadge.astro';
 import Logo from '../ui/Logo.astro';
 import { t, type Lang } from '../../i18n/ui';
-import type { NavItem, Site } from '../../lib/content';
+import type { NavItem } from '../../lib/content';
 
 interface Props {
   nav: NavItem[];
+  /** The button on the right: Book your intro pack, or the page's own main action. */
   cta: { label: string; href: string };
-  /** Shown next to the Book button on wide screens. */
-  availability?: Site['availability'];
   tone?: 'light' | 'dark';
   lang?: Lang;
 }
 
-const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
+const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
 ---
 
 <header data-tone={tone} class="sticky top-0 z-(--z-header) border-b border-line">
   <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
-    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo size="m" label="Chelsea van Eeden" /></a>
+    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo variant="signature" size="m" label="Chelsea van Eeden" /></a>
 
     <nav aria-label="Main" class="hidden items-center gap-8 lg:flex">
       <ul class="flex items-center gap-7">
@@ -64,16 +62,7 @@ const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
           )
         }
       </ul>
-      <div class="flex items-center gap-3">
-        {
-          availability && (
-            <div class="hidden xl:block">
-              <AvailabilityBadge {...availability} size="s" />
-            </div>
-          )
-        }
-        <Button href={cta.href} size="s" event="nav_book">{cta.label}</Button>
-      </div>
+      <Button href={cta.href} size="s" event="header">{cta.label}</Button>
     </nav>
 
     <details class="group/mobile lg:hidden">
@@ -111,7 +100,7 @@ const { nav, cta, availability, tone = 'light', lang = 'en' } = Astro.props;
             ))
           }
         </ul>
-        <Button href={cta.href} full class="mt-8" event="nav_book">{cta.label}</Button>
+        <Button href={cta.href} full class="mt-8" event="menu">{cta.label}</Button>
       </div>
     </details>
   </Container>

@@ -16,11 +16,11 @@ const Tag = href ? 'a' : 'div';
 <Tag
   href={href}
   class:list={[
-    'flex w-full max-w-60 flex-col justify-between gap-6 bg-cta p-5 text-cta-ink shadow-raised sm:aspect-square sm:max-w-xs sm:min-w-64 sm:gap-0 sm:p-7 transition-transform duration-(--duration-base) ease-soft hover:rotate-0',
+    'flex w-full max-w-60 flex-col justify-between gap-6 bg-note p-5 text-note-ink shadow-raised sm:aspect-square sm:max-w-xs sm:min-w-64 sm:gap-0 sm:p-7 transition-transform duration-(--duration-base) ease-soft hover:rotate-0',
     tilt === 'right' ? 'rotate-2' : '-rotate-2',
     className,
   ]}
 >
-  <span class="type-note text-cta-ink sm:type-h2">{title}</span>
-  {caption && <span class="type-eyebrow text-cta-ink underline decoration-1 underline-offset-4">{caption}</span>}
+  <span class="type-note text-note-ink sm:type-h2">{title}</span>
+  {caption && <span class="type-eyebrow text-note-ink underline decoration-1 underline-offset-4">{caption}</span>}
 </Tag>

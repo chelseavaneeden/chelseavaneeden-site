@@ -153,8 +153,8 @@ const settings = defineCollection({
     tagline: z.string(),
     /** Optional extra after the copyright line, e.g. a city. */
     location: optionalText,
-    /** Year shown in the footer copyright line. */
-    copyrightYear: z.number().int().optional(),
+    /** Year shown in the footer copyright line. Empty shows the current year. */
+    copyrightYear: z.preprocess(blankToUndefined, z.number().int().optional()),
     /**
      * The short proof line under the main buttons: a Google rating (shown only when both numbers
      * are filled in) and a few facts, each with an optional link.
@@ -168,6 +168,8 @@ const settings = defineCollection({
       .default({ items: [] }),
     /** Link under the testimonials to all your Google reviews (opens in a new tab). */
     reviews: optionalLink,
+    /** Footer links to real pages (the menu's jump links are left out on purpose). */
+    footerLinks: list(link),
     socials: list(link),
     legal: list(link),
   }),

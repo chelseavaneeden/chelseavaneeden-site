@@ -13,7 +13,7 @@ const site = await getSite();
 ---
 
 <Base title="Page not found · Chelsea van Eeden" noindex>
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="l" width="narrow">
       <div class="flex flex-col items-start gap-6">
@@ -30,5 +30,5 @@ const site = await getSite();
       </div>
     </Section>
   </main>
-  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+  <Footer links={site.footerLinks} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
 </Base>

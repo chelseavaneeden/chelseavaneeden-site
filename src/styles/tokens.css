@@ -56,8 +56,13 @@
   --ink-muted: var(--brown-700);
   --accent: var(--amber-600);
   --accent-ink: var(--linen-0);
-  --cta: var(--butter-300);
-  --cta-ink: var(--brown-900);
+  /* Main buttons: espresso on light sections, so they stand out from the cream (butter on cream is 1.1:1). */
+  --cta: var(--brown-900);
+  --cta-ink: var(--cream-100);
+  --cta-hover: var(--brown-700);
+  /* Butter stays for notes and highlights. */
+  --note: var(--butter-300);
+  --note-ink: var(--brown-900);
   --line: var(--cream-300);
   --focus: var(--amber-600);
   --success: var(--sage-700);
@@ -82,6 +87,9 @@
   --ink-muted: var(--brown-300);
   --accent: var(--butter-300);
   --accent-ink: var(--brown-900);
+  --cta: var(--butter-300);
+  --cta-ink: var(--brown-900);
+  --cta-hover: var(--butter-100);
   --line: var(--brown-700);
   --focus: var(--butter-300);
   --logo-mark: var(--amber-300);
@@ -108,6 +116,9 @@
   --color-accent-ink: var(--accent-ink);
   --color-cta: var(--cta);
   --color-cta-ink: var(--cta-ink);
+  --color-cta-hover: var(--cta-hover);
+  --color-note: var(--note);
+  --color-note-ink: var(--note-ink);
   --color-line: var(--line);
   --color-focus: var(--focus);
   --color-success: var(--success);
