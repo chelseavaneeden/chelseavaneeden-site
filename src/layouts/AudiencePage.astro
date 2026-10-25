@@ -1,14 +1,15 @@
 ---
 /*
- * One layout for every audience page (private sessions, retreats & events, brands,
- * studios & clinics, companies). Content comes from src/content/audience-pages/<audience>.yaml,
- * plus the offers and testimonials tagged for that audience. Sections the editor leaves
- * empty are skipped.
+ * One layout for every audience page (retreats & events, and later brands, studios & clinics,
+ * companies). Content comes from src/content/audience-pages/<audience>.yaml, plus the offers and
+ * testimonials tagged for that audience. Sections the editor leaves empty are skipped.
+ * Private clients have the home page instead; private.yaml only holds the shared reviews heading
+ * and questions.
  *
- * Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
+ * The header button is the page's own main action (e.g. Request a proposal), so organisers never see
+ * the intro pack button. Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
  */
 import Base from './Base.astro';
-import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Section from '../components/ui/Section.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
@@ -17,8 +18,10 @@ import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
+import SectionHeader from '../components/patterns/SectionHeader.astro';
 import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
+import TrustLine from '../components/patterns/TrustLine.astro';
 import { getAudiencePage, getOffers, getSite, getTestimonials, resolveHeroLinks, type Audience } from '../lib/content';
 
 interface Props {
@@ -34,20 +37,20 @@ const hero = resolveHeroLinks(page.hero, site);
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} availability={site.availability} />
+  <Header nav={site.nav} cta={page.hero.primary} />
 
   <main id="main">
     <Hero layout="split" {...hero}>
-      {audience === 'private' && <AvailabilityBadge slot="badge" {...site.availability} />}
+      <TrustLine slot="trust" trust={{ items: site.trust.items }} />
     </Hero>
 
-    <Section space="m">
+    <Section space="m" tone="alt">
       <FeatureGrid {...page.whoFor} variant="lines" />
     </Section>
 
     {
       page.formats && (
-        <Section space="m" tone="alt">
+        <Section space="m">
           <FeatureGrid {...page.formats} variant="cards" />
         </Section>
       )
@@ -63,7 +66,7 @@ const hero = resolveHeroLinks(page.hero, site);
     }
 
     {
-      offers.length > 0 && (
+      offers.length > 0 && page.investment && (
         <Section space="m" tone="alt" id="investment" labelledby="investment-title">
           <OfferGrid {...page.investment} offers={offers} headingId="investment-title" />
         </Section>
@@ -87,7 +90,22 @@ const hero = resolveHeroLinks(page.hero, site);
       )
     }
 
-    <CtaBand {...page.ctaBand} />
+    {
+      page.enquiry && (
+        <Section space="m" id="enquire">
+          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <SectionHeader {...page.enquiry} />
+            </div>
+            <div class="lg:col-span-7">
+              <slot name="enquiry" />
+            </div>
+          </div>
+        </Section>
+      )
+    }
+
+    {page.ctaBand && <CtaBand {...page.ctaBand} />}
   </main>
 
   <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />

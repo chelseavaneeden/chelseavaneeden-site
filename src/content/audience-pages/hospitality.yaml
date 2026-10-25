@@ -1,0 +1,55 @@
+title: Retreats & events
+audience: hospitality
+seo:
+  title: Pilates for retreats, events & teams · Chelsea van Eeden
+  description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events, teams and brands, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
+hero:
+  eyebrow: For organisers
+  title: Feel-good Pilates for your *retreat or event*.
+  lede: Mixed-level Pilates sessions for wellness retreats, festivals, events, teams and brands. Based in Lisbon, available across Europe and South Africa.
+  primary:
+    label: Request a proposal
+    href: '#enquire'
+  # Swap for a photo of you teaching a group, outdoors or at a retreat when you have one.
+  image: ../../assets/media/chelsea-portrait.jpg
+  imageAlt: Chelsea van Eeden smiling
+  imageFocus: center
+  layout: split
+whoFor:
+  title: Who I work *with*.
+  items:
+    - title: Retreat hosts
+      text: Classes that fit the rhythm of your retreat, from gentle mornings to stronger sessions, with options for every level.
+    - title: Festivals & events
+      text: Feel-good sessions for small or large groups, indoors or out. Beginners welcome.
+    - title: Teams & companies
+      text: Corporate wellbeing and team sessions that ease desk stiffness and stress.
+    - title: Brands
+      text: Classes and content for wellness brand events, launches and collaborations.
+steps:
+  title: How it *works*.
+  items:
+    - title: Tell me about your event
+      text: Dates, location, group size and the feel you're after.
+    - title: Your proposal
+      text: I reply with a tailored proposal within 48 hours.
+    - title: We plan it together
+      text: Session lengths, levels and space, planned around your schedule.
+    - title: I teach
+      text: Calm, mixed-level classes that leave your group feeling good.
+proof:
+  title: What hosts *say*.
+faq:
+  title: Good to *know*.
+  items:
+    - question: Where can you teach?
+      answer: I'm based in Lisbon and travel across Europe and South Africa.
+    - question: Is it suitable for beginners?
+      answer: Yes. Sessions are mixed-level and beginner-friendly, with options to make every exercise easier or harder.
+    - question: How much does it cost?
+      answer: Every event is different, so I send a tailored proposal based on your dates, location, group size and travel.
+    - question: How far ahead should I get in touch?
+      answer: As early as you can, especially for peak retreat and festival season.
+enquiry:
+  title: Request a *proposal*.
+  intro: Tell me about your retreat or event, and I'll reply with a tailored proposal within 48 hours.

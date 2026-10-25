@@ -203,13 +203,16 @@ const audiencePages = defineCollection({
       whoFor: z.object({ ...sectionHead, items: titledItems }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),
       steps: optionalSection({ ...sectionHead, items: titledItems }),
-      investment: z.object({ ...sectionHead, note: optionalText }),
+      /** Heading above the offer cards; only shown when this audience has published offers. */
+      investment: z.object({ ...sectionHead, note: optionalText }).optional(),
       proof: z.object({ eyebrow: optionalText, title: z.string() }),
       faq: optionalSection({
         ...sectionHead,
         items: list(z.object({ question: z.string(), answer: z.string() })),
       }),
-      ctaBand,
+      /** The enquiry form near the bottom of the page (organisers: the proposal form). */
+      enquiry: z.object(sectionHead).optional(),
+      ctaBand: ctaBand.optional(),
     }),
 });
 
