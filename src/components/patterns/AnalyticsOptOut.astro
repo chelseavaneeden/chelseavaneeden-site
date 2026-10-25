@@ -1,0 +1,50 @@
+---
+// Lets a visitor switch website analytics (Umami) off or on for their browser. Shown on the
+// Privacy page. Umami skips tracking while localStorage holds "umami.disabled".
+---
+
+<div class="flex flex-col items-start gap-3 rounded-card border border-line p-6" data-optout>
+  <p class="type-label text-ink">Website analytics</p>
+  <p class="type-body-s text-ink-muted" data-optout-status>Analytics are on for this browser.</p>
+  <button
+    type="button"
+    class="type-label rounded-control border border-current px-5 py-2.5 text-ink transition-colors hover:bg-ink hover:text-surface"
+    data-optout-button
+  >
+    Turn analytics off
+  </button>
+</div>
+
+<script>
+  const box = document.querySelector('[data-optout]');
+  const status = box?.querySelector('[data-optout-status]');
+  const button = box?.querySelector<HTMLButtonElement>('[data-optout-button]');
+  const KEY = 'umami.disabled';
+
+  const read = () => {
+    try {
+      return localStorage.getItem(KEY) !== null;
+    } catch {
+      return false;
+    }
+  };
+  const render = (off: boolean) => {
+    if (!status || !button) return;
+    status.textContent = off ? 'Analytics are off for this browser.' : 'Analytics are on for this browser.';
+    button.textContent = off ? 'Turn analytics back on' : 'Turn analytics off';
+  };
+
+  if (button) {
+    render(read());
+    button.addEventListener('click', () => {
+      const off = !read();
+      try {
+        if (off) localStorage.setItem(KEY, '1');
+        else localStorage.removeItem(KEY);
+      } catch {
+        // Storage blocked: nothing is tracked to begin with.
+      }
+      render(off);
+    });
+  }
+</script>

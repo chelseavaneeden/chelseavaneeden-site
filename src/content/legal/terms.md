@@ -152,6 +152,8 @@ By booking or participating in any session, package, or service, you (“the Cli
 
 **8.3** Sessions may not be recorded, reproduced, distributed, or shared by the client without prior written consent.
 
+**8.4** How personal information is collected, used and stored is explained in the [Privacy policy](/privacy).
+
 ## 9. Intellectual property
 
 **9.1** All content, classes, videos, branding, materials, and programmes provided by Chelsea Van Eeden Pilates remain the intellectual property of Chelsea Van Eeden Pilates.
@@ -181,20 +183,20 @@ By booking or participating in any session, package, or service, you (“the Cli
 
 **12.2** Any disputes arising from these Terms & Conditions shall be subject to the jurisdiction of the South African court.
 
-## 14. Testimonials & feedback
+## 13. Testimonials & feedback
 
-**14.1** Clients agree that any feedback, reviews, testimonials, comments, or written communications voluntarily provided to Chelsea Van Eeden Pilates may be used for marketing, promotional, and educational purposes.
+**13.1** Clients agree that any feedback, reviews, testimonials, comments, or written communications voluntarily provided to Chelsea Van Eeden Pilates may be used for marketing, promotional, and educational purposes.
 
-**14.2** Personal information will not be publicly disclosed without consent. Testimonials may be anonymised where appropriate.
+**13.2** Personal information will not be publicly disclosed without consent. Testimonials may be anonymised where appropriate.
 
-**14.3** Chelsea Van Eeden Pilates reserves the right to edit testimonials for clarity, grammar, or length while maintaining the original meaning.
+**13.3** Chelsea Van Eeden Pilates reserves the right to edit testimonials for clarity, grammar, or length while maintaining the original meaning.
 
-**14.4** Clients may request removal of a testimonial from future marketing materials by submitting a written request.
+**13.4** Clients may request removal of a testimonial from future marketing materials by submitting a written request.
 
-## 15. Media & recording consent
+## 14. Media & recording consent
 
-**15.1** Online sessions may occasionally be recorded for training, educational, scheduling, or quality purposes.
+**14.1** Online sessions may occasionally be recorded for training, educational, scheduling, or quality purposes.
 
-**15.2** No identifiable images, video recordings, screenshots, or recordings of clients will be shared publicly without the client’s prior written consent.
+**14.2** No identifiable images, video recordings, screenshots, or recordings of clients will be shared publicly without the client’s prior written consent.
 
-**15.3** Clients may not record, reproduce, distribute, or share sessions without prior written permission from Chelsea Van Eeden Pilates.
+**14.3** Clients may not record, reproduce, distribute, or share sessions without prior written permission from Chelsea Van Eeden Pilates.
