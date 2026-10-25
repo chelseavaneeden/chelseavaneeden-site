@@ -59,6 +59,13 @@ const enquiryForm = z.object({
   button: z.string(),
 });
 
+// A block the editor can leave empty: without a title it is treated as not set (and hidden).
+const optionalBlock = <T extends z.ZodType>(schema: T) =>
+  z.preprocess(
+    (v) => (v && typeof v === 'object' && (v as { title?: unknown }).title ? v : undefined),
+    schema.optional(),
+  );
+
 const yamlIn = (dir: string) => glob({ pattern: '*.{yaml,yml}', base: `./src/content/${dir}` });
 
 const settings = defineCollection({
@@ -218,7 +225,7 @@ const pages = defineCollection({
       /** "How it works": numbered steps. Empty list hides it. */
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** The closing band at the bottom of the page. */
-      ctaBand: ctaBand.optional(),
+      ctaBand: optionalBlock(ctaBand),
     }),
 });
 
@@ -251,15 +258,15 @@ const audiencePages = defineCollection({
       formats: optionalSection({ ...sectionHead, items: titledItems }),
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** Heading above the offer cards; only shown when this audience has published offers. */
-      investment: z.object({ ...sectionHead, note: optionalText }).optional(),
+      investment: optionalBlock(z.object({ ...sectionHead, note: optionalText })),
       proof: z.object({ eyebrow: optionalText, title: z.string() }),
       faq: optionalSection({
         ...sectionHead,
         items: list(z.object({ question: z.string(), answer: z.string() })),
       }),
       /** The enquiry form near the bottom of the page (organisers: the proposal form). */
-      enquiry: z.object(sectionHead).optional(),
-      ctaBand: ctaBand.optional(),
+      enquiry: optionalBlock(z.object(sectionHead)),
+      ctaBand: optionalBlock(ctaBand),
     }),
 });
 

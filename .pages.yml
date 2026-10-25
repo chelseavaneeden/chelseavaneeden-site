@@ -46,7 +46,7 @@ content:
           - name: secondary
             label: Text link (optional)
             type: object
-            description: 'Underlined link after the buttons. #investment jumps to My services.'
+            description: 'Underlined link after the buttons. /enquire opens the Ask me a question pop-up.'
             fields:
               - { name: label, label: Link text, type: string }
               - { name: href, label: Link, type: string, description: 'Type whatsapp to use your WhatsApp link from Site settings (shown with the chat icon).' }
@@ -68,7 +68,7 @@ content:
       - name: perfectFor
         label: Perfect for those who…
         type: object
-        description: 'Ticked list above Meet Chelsea. Leave the list empty to hide this section.'
+        description: 'Ticked list under the top of the page. Leave the list empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
@@ -82,28 +82,48 @@ content:
           - { name: paragraphs, label: Paragraphs, type: text, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
-          - name: note
-            label: Sticky note
-            type: object
-            description: 'The yellow note beside the photos. Its link jumps to the prices.'
-            fields:
-              - { name: title, label: Note text, type: string, required: true }
-              - { name: caption, label: Link text, type: string, required: true }
-          - name: cta
-            label: Link (optional)
-            type: object
-            fields:
-              - { name: label, label: Link text, type: string }
-              - { name: href, label: Link, type: string }
       - name: investment
-        label: Prices section
+        label: Intro pack section
         type: object
-        description: The offers themselves are edited under "Offers & prices".
+        description: The intro pack card itself is edited under "Offers & prices".
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
           - { name: intro, label: Intro text, type: text }
-          - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
+          - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro pack. Leave empty to hide.' }
+      - name: steps
+        label: How it works
+        type: object
+        description: 'Numbered steps under the intro pack. Leave the list empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - name: items
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Step, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+      - name: ctaBand
+        label: Closing band
+        type: object
+        description: The dark band at the bottom of the page.
+        fields:
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: text, label: Text, type: text }
+          - name: primary
+            label: Main button
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, required: true }
+              - { name: href, label: Link, type: string, required: true }
+          - name: secondary
+            label: Second button (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string, description: '/enquire opens the Ask me a question pop-up.' }
 
   # ── SERVICE PAGES (private sessions, retreats & events, brands, studios & clinics, companies) ─
   - name: audiencePages
@@ -231,10 +251,10 @@ content:
       - name: investment
         label: Prices section
         type: object
-        description: 'The offers themselves are edited under "Offers & prices".'
+        description: 'Only shown when this audience has published offers under "Offers & prices". Leave the title empty to hide.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true }
+          - { name: title, label: Title, type: string }
           - { name: intro, label: Intro text, type: text }
           - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
       - name: proof
@@ -259,18 +279,27 @@ content:
             fields:
               - { name: question, label: Question, type: string, required: true }
               - { name: answer, label: Answer, type: text, required: true, description: 'Leave a blank line to start a new paragraph.' }
-      - name: ctaBand
-        label: Dark band at the bottom
+      - name: enquiry
+        label: Enquiry form section
         type: object
+        description: 'Heading beside the form near the bottom of the page (Retreats & events: the proposal form). The questions are under Site settings → Enquiry forms. Leave the title empty to hide.'
         fields:
-          - { name: title, label: Title, type: string, required: true }
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic.' }
+          - { name: intro, label: Intro text, type: text }
+      - name: ctaBand
+        label: Dark band at the bottom (optional)
+        type: object
+        description: Leave the title empty to hide.
+        fields:
+          - { name: title, label: Title, type: string }
           - { name: text, label: Text, type: text }
           - name: primary
             label: Main button
             type: object
             fields:
-              - { name: label, label: Button text, type: string, required: true }
-              - { name: href, label: Link, type: string, required: true }
+              - { name: label, label: Button text, type: string }
+              - { name: href, label: Link, type: string }
           - name: secondary
             label: Second button (optional)
             type: object
@@ -443,77 +472,214 @@ content:
       - name: availability
         label: Availability badge
         type: object
-        description: 'The "Accepting new clients" badge with the pulsing green dot (top of the home and Private sessions pages, and in the menu on wide screens).'
+        description: 'The "Accepting new clients" badge with the pulsing green dot, at the top of the home page.'
         fields:
           - { name: open, label: Accepting new clients, type: boolean, default: true, description: 'Untick when you are fully booked: the dot stops pulsing and the badge shows the waitlist message instead.' }
           - { name: openLabel, label: Text when open, type: string, default: Accepting new clients }
           - { name: closedLabel, label: Text when fully booked, type: string, default: Fully booked · Join the waitlist }
-          - { name: href, label: Link when open, type: string, default: /private-sessions#investment }
-          - { name: closedHref, label: Link when fully booked, type: string, default: /enquire?type=private }
+          - { name: href, label: Link when open, type: string, default: /intro-pack }
+          - { name: closedHref, label: Link when fully booked, type: string, default: /enquire }
       - name: bookCta
-        label: Menu button
+        label: Book button (menu and every "Book your intro pack")
         type: object
         fields:
           - { name: label, label: Button text, type: string, required: true }
-          - { name: href, label: Link, type: string, required: true }
-      - name: monthlyPlans
-        label: Monthly plans page
+          - { name: href, label: Link, type: string, required: true, description: '/intro-pack is the intro pack page.' }
+      - { name: stripePublishableKey, label: Stripe publishable key, type: string, required: true, description: 'Starts with pk_. Never paste a secret key (sk_).' }
+      - name: introPack
+        label: Intro pack page (/intro-pack)
         type: object
-        description: 'The page "Start your monthly plan" opens, with your Stripe pricing table.'
+        description: 'Where every "Book your intro pack" button leads: a few lines, then your intro-only Stripe pricing table.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
           - { name: intro, label: Intro text, type: text }
-          - { name: stripePricingTableId, label: Stripe pricing table ID, type: string, required: true, description: 'Starts with prctbl_ (Stripe → Pricing tables → Copy code).' }
-          - { name: stripePublishableKey, label: Stripe publishable key, type: string, required: true, description: 'Starts with pk_. Never paste a secret key (sk_).' }
+          - { name: points, label: Numbered steps, type: string, list: true, description: 'What happens after paying, one short line each.' }
+          - { name: stripePricingTableId, label: Stripe pricing table ID (intro only), type: string, required: true, description: 'Starts with prctbl_ (Stripe → Pricing tables → Copy code).' }
+      - name: monthlyPlans
+        label: Monthly plans page (/monthly-plans, for existing clients)
+        type: object
+        description: 'Linked from nowhere on the site and hidden from Google: send the link to clients yourself.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: intro, label: Intro text, type: text }
+          - { name: stripePricingTableId, label: Stripe pricing table ID (monthly plans), type: string, description: 'A second table with the monthly plans. Starts with prctbl_. Leave empty to show the message below instead.' }
+          - { name: noTableText, label: Message when there is no table, type: text, required: true }
+      - name: welcome
+        label: Welcome page (/welcome, after paying)
+        type: object
+        description: 'Set this page in Stripe as where people go after paying (pricing table → after payment → redirect to your website).'
+        fields:
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: intro, label: Intro text, type: text }
+          - { name: bookingTitle, label: Booking step title, type: string, required: true }
+          - { name: bookingText, label: Booking step text, type: text }
+          - { name: bookingHref, label: Your booking link, type: string, description: 'Google Calendar booking page, Calendly… Opens in a new tab. Leave empty to show the line below instead.' }
+          - { name: bookingLabel, label: Booking button text, type: string, required: true }
+          - { name: bookingFallback, label: Line when there is no booking link, type: text, required: true }
+          - { name: intakeTitle, label: Intake step title, type: string, required: true }
+          - { name: intakeText, label: Intake step text, type: text }
       - name: contact
         label: WhatsApp link
         type: object
-        description: 'Used by the round WhatsApp button in the bottom-right corner of every page, and by any button whose link is whatsapp. Leave the link empty to hide the round button.'
+        description: 'Shown as a small "Prefer WhatsApp?" link under every form. It opens WhatsApp directly. Leave empty to hide it.'
         fields:
-          - { name: whatsappHref, label: Your WhatsApp link, type: string, description: 'Paste your custom wa.me link (with your number and pre-filled message).' }
-          - { name: whatsappNumber, label: WhatsApp number for the proposal form, type: string, description: 'Digits only, starting with the country code, e.g. 351912345678. Leave empty to turn the form off (links then open WhatsApp directly).' }
-          - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp, description: 'Read out by screen readers on the round button, and shown on the Monthly plans page.' }
-      - name: proposalForm
-        label: Proposal form
+          - { name: whatsappHref, label: Your WhatsApp link, type: string, description: 'Your wa.me or wa.link address.' }
+          - { name: whatsappLabel, label: Link text, type: string, default: Message me on WhatsApp }
+      - name: enquiry
+        label: Enquiry forms
         type: object
-        description: 'Opens instead of WhatsApp from every WhatsApp link and button, then sends the answers to your WhatsApp number as a ready-made message.'
+        description: 'Answers arrive in your inbox by email. question: the Ask me pop-up and /enquire. proposal: the Retreats & events page. intake: the welcome page after paying.'
         fields:
-          - { name: title, label: Title, type: string, required: true }
-          - { name: intro, label: Intro line, type: string }
-          - name: questions
-            label: Questions
+          - { name: nameLabel, label: Name field label, type: string, default: Name }
+          - { name: emailLabel, label: Email field label, type: string, default: Email }
+          - { name: replyPromise, label: Reply promise under the send button, type: string, description: 'Only promise what you can keep, e.g. I reply personally within one working day.' }
+          - { name: privacyNote, label: Privacy line, type: string, description: 'Shown before the Privacy policy link under the send button.' }
+          - { name: success, label: Message after sending, type: text, required: true }
+          - { name: error, label: Message if sending fails, type: text, required: true }
+          - { name: turnstileSiteKey, label: Turnstile site key (spam check), type: string, description: 'From Cloudflare → Turnstile. Leave empty until it is set up.' }
+          - name: forms
+            label: Forms
+            type: object
+            fields:
+              - name: question
+                label: Question form (Ask me pop-up and /enquire)
+                type: object
+                fields:
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: intro, label: Intro line, type: string }
+                  - name: questions
+                    label: Tap-to-choose questions
+                    type: object
+                    list: true
+                    description: 'Each option shows as a button. All are required.'
+                    fields:
+                      - { name: label, label: Question, type: string, required: true }
+                      - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: options, label: Options, type: string, list: true }
+                  - name: fields
+                    label: Extra fields
+                    type: object
+                    list: true
+                    fields:
+                      - { name: name, label: Field id, type: string, required: true, description: 'Lower-case letters and dashes, e.g. message. Must be different for each field.' }
+                      - { name: label, label: Label, type: string, required: true }
+                      - name: type
+                        label: Size
+                        type: select
+                        default: textarea
+                        options:
+                          values:
+                            - { value: text, label: One line }
+                            - { value: textarea, label: Several lines }
+                      - { name: required, label: Required, type: boolean }
+                      - { name: placeholder, label: Hint inside the field, type: string }
+                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                  - { name: button, label: Send button text, type: string, required: true }
+              - name: proposal
+                label: Proposal form (Retreats & events)
+                type: object
+                fields:
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: intro, label: Intro line, type: string }
+                  - name: questions
+                    label: Tap-to-choose questions
+                    type: object
+                    list: true
+                    description: 'Each option shows as a button. All are required.'
+                    fields:
+                      - { name: label, label: Question, type: string, required: true }
+                      - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: options, label: Options, type: string, list: true }
+                  - name: fields
+                    label: Extra fields
+                    type: object
+                    list: true
+                    fields:
+                      - { name: name, label: Field id, type: string, required: true, description: 'Lower-case letters and dashes, e.g. message. Must be different for each field.' }
+                      - { name: label, label: Label, type: string, required: true }
+                      - name: type
+                        label: Size
+                        type: select
+                        default: textarea
+                        options:
+                          values:
+                            - { value: text, label: One line }
+                            - { value: textarea, label: Several lines }
+                      - { name: required, label: Required, type: boolean }
+                      - { name: placeholder, label: Hint inside the field, type: string }
+                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                  - { name: button, label: Send button text, type: string, required: true }
+              - name: intake
+                label: Intake form (welcome page)
+                type: object
+                fields:
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: intro, label: Intro line, type: string }
+                  - name: questions
+                    label: Tap-to-choose questions
+                    type: object
+                    list: true
+                    description: 'Each option shows as a button. All are required.'
+                    fields:
+                      - { name: label, label: Question, type: string, required: true }
+                      - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: options, label: Options, type: string, list: true }
+                  - name: fields
+                    label: Extra fields
+                    type: object
+                    list: true
+                    fields:
+                      - { name: name, label: Field id, type: string, required: true, description: 'Lower-case letters and dashes, e.g. message. Must be different for each field.' }
+                      - { name: label, label: Label, type: string, required: true }
+                      - name: type
+                        label: Size
+                        type: select
+                        default: textarea
+                        options:
+                          values:
+                            - { value: text, label: One line }
+                            - { value: textarea, label: Several lines }
+                      - { name: required, label: Required, type: boolean }
+                      - { name: placeholder, label: Hint inside the field, type: string }
+                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                  - { name: button, label: Send button text, type: string, required: true }
+      - name: analytics
+        label: Analytics
+        type: object
+        fields:
+          - { name: umamiWebsiteId, label: Umami website ID, type: string, description: 'From Umami Cloud → Websites → Edit. Leave empty for no analytics.' }
+      - { name: tagline, label: Footer line under the logo, type: text, required: true }
+      - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'Leave empty to show the current year.' }
+      - { name: location, label: Extra after the copyright, type: string, description: 'Optional, e.g. a city. Leave empty to show just the copyright.' }
+      - name: trust
+        label: Trust line (under the main buttons)
+        type: object
+        fields:
+          - { name: googleRating, label: Google rating, type: number, description: 'e.g. 5.0. Shown with a star when the number of reviews is filled in too.' }
+          - { name: googleReviewCount, label: Number of Google reviews, type: number }
+          - name: items
+            label: Facts
             type: object
             list: true
-            description: 'Each question shows its options as tap-to-choose buttons. All are required.'
             fields:
-              - { name: label, label: Question, type: string, required: true }
-              - { name: short, label: Word used in the message, type: string, required: true, description: 'e.g. When → "• When: 1–3 months"' }
-              - { name: options, label: Options, type: string, list: true }
-          - { name: nameLabel, label: Name field label, type: string, default: Name }
-          - { name: namePlaceholder, label: Name field hint, type: string }
-          - { name: infoLabel, label: Extra info label, type: string, default: More information }
-          - { name: infoPlaceholder, label: Extra info hint, type: string }
-          - { name: button, label: Button text, type: string, default: Send on WhatsApp }
-          - { name: note, label: Small note under the button, type: string }
-          - { name: message, label: First line of the WhatsApp message, type: string, required: true, description: '{name} is replaced with their name.' }
-      - { name: tagline, label: Footer line under the logo, type: text, required: true }
-      - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'e.g. 2021. Leave empty to show the current year.' }
-      - { name: location, label: Extra after the copyright, type: string, description: 'Optional, e.g. a city. Leave empty to show just the copyright.' }
-      - name: stats
-        label: Credentials banner (home page, under the top of the page)
+              - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive Instructor' }
+              - { name: href, label: Link (optional), type: string }
+      - name: reviews
+        label: Reviews link (under the testimonials)
+        type: object
+        description: 'Opens in a new tab. Leave the text empty to hide it.'
+        fields:
+          - { name: label, label: Link text, type: string }
+          - { name: href, label: Link, type: string, description: 'Your Google reviews. A g.page/r/… link from your Business Profile lasts longest.' }
+      - name: footerLinks
+        label: Footer links
         type: object
         list: true
         fields:
-          - { name: value, label: Number, type: string, required: true, description: 'e.g. 5,000+' }
-          - { name: label, label: What it means, type: string, required: true }
-      - name: reviews
-        label: Reviews button (under the testimonials)
-        type: object
-        description: 'Opens in a new tab. Leave the button text empty to hide it.'
-        fields:
-          - { name: label, label: Button text, type: string }
-          - { name: href, label: Link, type: string }
+          - { name: label, label: Name, type: string, required: true }
+          - { name: href, label: Link, type: string, required: true }
       - name: socials
         label: Social links
         type: object
