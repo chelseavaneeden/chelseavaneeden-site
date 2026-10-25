@@ -39,6 +39,26 @@ const optionalSection = <T extends z.ZodRawShape>(shape: T) =>
     z.object(shape).optional(),
   );
 
+// One enquiry form: tap-to-choose questions, extra fields and an optional required tick box.
+// Name and email are always asked.
+const enquiryForm = z.object({
+  title: z.string(),
+  intro: optionalText,
+  questions: list(z.object({ label: z.string(), short: z.string(), options: list(z.string()) })),
+  fields: list(
+    z.object({
+      name: z.string().regex(/^[a-z][a-z0-9-]*$/, 'Lower-case letters, numbers and dashes only, e.g. message.'),
+      label: z.string(),
+      type: z.enum(['text', 'textarea']).default('textarea'),
+      required: z.boolean().default(false),
+      placeholder: optionalText,
+    }),
+  ),
+  /** A tick box people must tick before sending, e.g. consent to use health information. */
+  consent: optionalText,
+  button: z.string(),
+});
+
 const yamlIn = (dir: string) => glob({ pattern: '*.{yaml,yml}', base: `./src/content/${dir}` });
 
 const settings = defineCollection({
@@ -107,34 +127,29 @@ const settings = defineCollection({
     }),
     contact: z
       .object({
+        /** Your WhatsApp link. It opens WhatsApp directly, as a small "Prefer WhatsApp?" link. */
         whatsappHref: optionalText,
-        /** Number the proposal form sends to: country code and number, digits only. */
-        whatsappNumber: z.preprocess(
-          blankToUndefined,
-          z.string().regex(/^\d{8,15}$/, 'Digits only, starting with the country code, e.g. 351912345678.').optional(),
-        ),
         whatsappLabel: z.string().default('Message me on WhatsApp'),
       })
       .default({ whatsappLabel: 'Message me on WhatsApp' }),
     /**
-     * The proposal form that opens instead of WhatsApp from every WhatsApp link and button.
-     * It turns the answers into a ready-to-send WhatsApp message.
+     * The enquiry forms. Answers arrive in your inbox by email (sent by the site's /api/enquire).
+     * question: "Ask me" from the 1-on-1 pages (a pop-up, and /enquire). proposal: the Retreats & events
+     * page. intake: the welcome page after paying.
      */
-    proposalForm: z
-      .object({
-        title: z.string(),
-        intro: optionalText,
-        questions: list(z.object({ label: z.string(), short: z.string(), options: list(z.string()) })),
-        nameLabel: z.string().default('Name'),
-        namePlaceholder: optionalText,
-        infoLabel: z.string().default('More information'),
-        infoPlaceholder: optionalText,
-        button: z.string().default('Send on WhatsApp'),
-        note: optionalText,
-        /** First line of the message; {name} is replaced with their name. */
-        message: z.string(),
-      })
-      .optional(),
+    enquiry: z.object({
+      nameLabel: z.string().default('Name'),
+      emailLabel: z.string().default('Email'),
+      /** Shown under every send button, e.g. "I reply personally within one working day." */
+      replyPromise: optionalText,
+      /** Short line next to the privacy policy link under the send button. */
+      privacyNote: optionalText,
+      success: z.string(),
+      error: z.string(),
+      /** Cloudflare Turnstile site key (the spam check). Empty: forms send without it. */
+      turnstileSiteKey: optionalText,
+      forms: z.object({ question: enquiryForm, proposal: enquiryForm, intake: enquiryForm }),
+    }),
     tagline: z.string(),
     /** Optional extra after the copyright line, e.g. a city. */
     location: optionalText,

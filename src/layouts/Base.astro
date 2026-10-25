@@ -1,8 +1,7 @@
 ---
 import '../styles/global.css';
 import { Font } from 'astro:assets';
-import ProposalDialog from '../components/patterns/ProposalDialog.astro';
-import WhatsAppFloat from '../components/patterns/WhatsAppFloat.astro';
+import EnquiryDialog from '../components/patterns/EnquiryDialog.astro';
 import { t, type Lang } from '../i18n/ui';
 import { getSite } from '../lib/content';
 
@@ -18,7 +17,7 @@ const { title, description, lang = 'en', noindex = false } = Astro.props;
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev preview out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
-const { contact, proposalForm } = await getSite();
+const { contact, enquiry } = await getSite();
 ---
 
 <!doctype html>
@@ -45,12 +44,7 @@ const { contact, proposalForm } = await getSite();
     >
       {t(lang, 'a11y.skip')}
     </a>
-    {contact.whatsappHref && <WhatsAppFloat href={contact.whatsappHref} label={contact.whatsappLabel} />}
     <slot />
-    {
-      contact.whatsappHref && contact.whatsappNumber && proposalForm && (
-        <ProposalDialog form={proposalForm} number={contact.whatsappNumber} whatsappHref={contact.whatsappHref} />
-      )
-    }
+    <EnquiryDialog enquiry={enquiry} contact={contact} />
   </body>
 </html>

@@ -43,41 +43,96 @@ welcome:
   intakeTitle: 2. Tell me about you
   intakeText: A few questions so I can plan your first session around your body.
 contact:
-  # Replace with your own WhatsApp link (https://wa.me/<your number>?text=...)
   whatsappHref: https://wa.link/ccq3ib
-  whatsappNumber: '351939222206'
   whatsappLabel: Message me on WhatsApp
-proposalForm:
-  title: Request a proposal
-  intro: A few quick taps, and I'll reply within a few hours.
-  questions:
-    - label: I would like a quote for
-      short: For
-      options:
-        - Retreat / Event
-        - 1-on-1 sessions
-        - Brand collaboration
-        - Something else
-    - label: When?
-      short: When
-      options:
-        - Within 1 month
-        - 1–3 months
-        - 3–6 months
-        - 6+ months / flexible
-    - label: Where?
-      short: Where
-      options:
-        - Africa
-        - Europe
-        - Elsewhere
+enquiry:
   nameLabel: Name
-  namePlaceholder: Your name
-  infoLabel: More information
-  infoPlaceholder: Dates, group size, ideas…
-  button: Send on WhatsApp
-  note: Opens WhatsApp with your answers ready to send.
-  message: "Hi Chelsea, I'm {name}. I'd like a proposal/quote for the following:"
+  emailLabel: Email
+  replyPromise: I reply personally within one working day.
+  privacyNote: I only use your details to reply to you.
+  success: Thank you, your message is on its way. I'll reply by email soon.
+  error: Sorry, that didn't send. Please try again in a moment, or message me on WhatsApp.
+  # From Cloudflare → Turnstile. Leave empty until the widget is set up.
+  turnstileSiteKey:
+  forms:
+    question:
+      title: Ask me a *question*.
+      intro: Not sure the intro pack is right for you? Ask me anything.
+      fields:
+        - name: message
+          label: Your question
+          type: textarea
+          required: true
+          placeholder: e.g. I have lower back pain. Is the intro pack right for me?
+      button: Send my question
+    proposal:
+      title: Request a *proposal*.
+      questions:
+        - label: I'm planning
+          short: Planning
+          options:
+            - Retreat
+            - Event or festival
+            - Team wellbeing
+            - Brand collaboration
+            - Something else
+        - label: When?
+          short: When
+          options:
+            - Within 1 month
+            - 1–3 months
+            - 3–6 months
+            - 6+ months / flexible
+        - label: Where?
+          short: Where
+          options:
+            - Portugal
+            - Rest of Europe
+            - South Africa
+            - Elsewhere
+        - label: Group size
+          short: Group size
+          options:
+            - Under 10
+            - 10–25
+            - 25–50
+            - 50+
+      fields:
+        - name: organisation
+          label: Organisation or event
+          type: text
+          required: false
+        - name: info
+          label: More information
+          type: textarea
+          required: false
+          placeholder: Dates, venue, ideas…
+      button: Request my proposal
+    intake:
+      title: Tell me about *you*.
+      questions:
+        - label: Mat or Reformer?
+          short: Equipment
+          options:
+            - Mat
+            - Reformer at home
+            - Not sure yet
+      fields:
+        - name: location
+          label: Where are you, and what's your time zone?
+          type: text
+          required: true
+          placeholder: e.g. London, UK time
+        - name: goals
+          label: What would you like to work on?
+          type: textarea
+          required: true
+        - name: health
+          label: Any injuries, pain, pregnancy or health conditions I should know about?
+          type: textarea
+          required: false
+      consent: I agree that Chelsea can use this health information to plan my sessions.
+      button: Send to Chelsea
 tagline: Based in Europe · Teaching worldwide
 copyrightYear: 2021
 trust:

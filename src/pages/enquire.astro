@@ -1,0 +1,28 @@
+---
+// Ask a question. The same form also opens as a pop-up from every link to /enquire; this page is
+// for links from outside the site and for browsers without JavaScript.
+// Words: Site settings → Enquiry forms → question.
+import Base from '../layouts/Base.astro';
+import Section from '../components/ui/Section.astro';
+import EnquiryForm from '../components/patterns/EnquiryForm.astro';
+import Footer from '../components/patterns/Footer.astro';
+import Header from '../components/patterns/Header.astro';
+import SectionHeader from '../components/patterns/SectionHeader.astro';
+import { getSite } from '../lib/content';
+
+const site = await getSite();
+const form = site.enquiry.forms.question;
+---
+
+<Base title="Ask a question · Chelsea van Eeden" description="Ask Chelsea van Eeden a question about private online Pilates sessions.">
+  <Header nav={site.nav} cta={site.bookCta} />
+  <main id="main">
+    <Section space="m">
+      <div class="mx-auto flex max-w-2xl flex-col gap-10">
+        <SectionHeader title={form.title} intro={form.intro} />
+        <EnquiryForm type="question" enquiry={site.enquiry} contact={site.contact} idPrefix="page-question" />
+      </div>
+    </Section>
+  </main>
+  <Footer nav={site.nav} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
+</Base>

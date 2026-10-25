@@ -9,6 +9,7 @@ import Card from '../components/ui/Card.astro';
 import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
+import EnquiryForm from '../components/patterns/EnquiryForm.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import SectionHeader from '../components/patterns/SectionHeader.astro';
@@ -37,9 +38,10 @@ const w = site.welcome;
           }
         </Card>
 
-        <Card variant="raised" padding="m" class="flex flex-col gap-4" id="intake">
+        <Card variant="raised" padding="m" class="flex flex-col gap-4">
           <Heading level={2} variant="h3" text={w.intakeTitle} />
           {w.intakeText && <Text tone="muted" text={w.intakeText} />}
+          <EnquiryForm type="intake" enquiry={site.enquiry} contact={site.contact} />
         </Card>
       </div>
     </Section>

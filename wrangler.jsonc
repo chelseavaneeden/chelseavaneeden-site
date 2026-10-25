@@ -2,15 +2,22 @@
 // PREVIEW ONLY: there are deliberately no `routes` or custom domains here, so deploys go to
 // https://chelseavaneeden-site.<account>.workers.dev and never touch chelseavaneeden.com
 // (the live Framer site). Add the domain only at launch, on Chelsea's go-ahead.
+//
+// The site is static files, plus one small script (worker/index.ts) that only runs for /api/*:
+// the enquiry forms post there and it emails the answers. Its keys are Cloudflare secrets, never
+// stored here (see the comment at the top of worker/index.ts).
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "chelseavaneeden-site",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
   "preview_urls": true,
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
   }
 }

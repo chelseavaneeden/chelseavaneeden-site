@@ -1,0 +1,216 @@
+---
+// An enquiry form whose answers arrive in Chelsea's inbox by email (via /api/enquire, worker/index.ts).
+// Words come from Site settings → Enquiry forms; `type` picks the form: question, proposal or intake.
+// Tap-to-choose questions, name and email, extra fields, an optional required tick box, a hidden
+// spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
+// opens WhatsApp directly.
+import Heading from '../ui/Heading.astro';
+import Text from '../ui/Text.astro';
+import WhatsAppLink from '../ui/WhatsAppLink.astro';
+import type { Site } from '../../lib/content';
+
+export type EnquiryType = keyof Site['enquiry']['forms'];
+
+interface Props {
+  type: EnquiryType;
+  enquiry: Site['enquiry'];
+  contact: Site['contact'];
+  /** Show the form's own heading (in the pop-up). Inline forms sit under a section heading instead. */
+  showTitle?: boolean;
+  /** Prefix for field ids, so the same form can appear twice on a page (inline and in the pop-up). */
+  idPrefix?: string;
+}
+
+const { type, enquiry, contact, showTitle = false, idPrefix = type } = Astro.props;
+const form = enquiry.forms[type];
+const field = 'type-body w-full rounded-control border border-line bg-surface-raised px-4 py-3 text-ink placeholder:text-ink-muted';
+const id = (name: string) => `${idPrefix}-${name}`;
+---
+
+<div class="flex flex-col gap-5" data-enquiry-wrap>
+  {
+    showTitle && (
+      <div class="flex flex-col gap-2 pr-8">
+        <Heading level={2} variant="h3" text={form.title} id={id('title')} />
+        {form.intro && <Text variant="body-s" tone="muted" text={form.intro} />}
+      </div>
+    )
+  }
+
+  <form class="flex flex-col gap-5" data-enquiry={type} novalidate>
+    {
+      form.questions.map((q, i) => (
+        <fieldset data-short={q.short} data-field={`q${i}`}>
+          <legend class="type-label mb-2.5 text-ink">{q.label}</legend>
+          <div class="flex flex-wrap gap-2">
+            {q.options.map((option) => (
+              <label class="type-body-s cursor-pointer rounded-pill border border-line bg-surface-raised px-4 py-2 text-ink transition-colors hover:border-ink has-checked:border-ink has-checked:bg-ink has-checked:text-surface has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+                <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
+                {option}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ))
+    }
+
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <label class="flex flex-col gap-2" for={id('name')}>
+        <span class="type-label text-ink">{enquiry.nameLabel}</span>
+        <input id={id('name')} type="text" name="name" required maxlength="100" autocomplete="name" class={field} />
+      </label>
+      <label class="flex flex-col gap-2" for={id('email')}>
+        <span class="type-label text-ink">{enquiry.emailLabel}</span>
+        <input id={id('email')} type="email" name="email" required maxlength="200" autocomplete="email" class={field} />
+      </label>
+    </div>
+
+    {
+      form.fields.map((f) => (
+        <label class="flex flex-col gap-2" for={id(f.name)}>
+          <span class="type-label text-ink">
+            {f.label} {!f.required && <span class="text-ink-muted">(optional)</span>}
+          </span>
+          {f.type === 'textarea' ? (
+            <textarea
+              id={id(f.name)}
+              name={f.name}
+              rows="3"
+              maxlength="3000"
+              required={f.required}
+              placeholder={f.placeholder}
+              data-answer={f.label}
+              class={`${field} resize-y`}
+            />
+          ) : (
+            <input
+              id={id(f.name)}
+              type="text"
+              name={f.name}
+              maxlength="200"
+              required={f.required}
+              placeholder={f.placeholder}
+              data-answer={f.label}
+              class={field}
+            />
+          )}
+        </label>
+      ))
+    }
+
+    {
+      form.consent && (
+        <label class="type-body-s flex items-start gap-3 text-ink" for={id('consent')}>
+          <input id={id('consent')} type="checkbox" name="consent" required class="mt-1 size-4 shrink-0 accent-ink" />
+          <span>
+            {form.consent}{' '}
+            <a href="/privacy" class="underline underline-offset-4">Privacy policy</a>
+          </span>
+        </label>
+      )
+    }
+
+    {/* Spam trap: hidden from people, often filled in by bots. */}
+    <div class="sr-only" aria-hidden="true">
+      <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+    </div>
+
+    {enquiry.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={enquiry.turnstileSiteKey} data-size="flexible" data-theme="light" />}
+
+    <div class="flex flex-col gap-3 pt-1">
+      <button
+        type="submit"
+        disabled
+        class="type-label w-full rounded-control bg-cta px-6 py-3.5 text-cta-ink transition-colors hover:bg-cta-hover disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-cta"
+      >
+        {form.button}
+      </button>
+      <p class="type-caption text-center text-ink-muted" data-enquiry-status role="status" aria-live="polite">
+        {enquiry.replyPromise}
+        {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
+      </p>
+      <p class="type-body-s hidden text-center text-error" data-enquiry-error role="alert">{enquiry.error}</p>
+      {
+        contact.whatsappHref && (
+          <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 text-center text-ink-muted">
+            Prefer WhatsApp? <WhatsAppLink href={contact.whatsappHref} label={contact.whatsappLabel} />
+          </p>
+        )
+      }
+    </div>
+  </form>
+
+  <div class="hidden flex-col items-start gap-3 py-4" data-enquiry-done role="status">
+    <Heading level={3} variant="h3" text="Sent, *thank you*." />
+    <Text tone="muted" text={enquiry.success} />
+  </div>
+</div>
+
+{enquiry.turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+  type Answer = { label: string; value: string };
+  type Umami = { track: (name: string, data?: Record<string, string>) => void };
+  type Turnstile = { reset: (el?: Element) => void };
+
+  document.querySelectorAll<HTMLFormElement>('form[data-enquiry]').forEach((form) => {
+    const wrap = form.closest('[data-enquiry-wrap]');
+    const send = form.querySelector<HTMLButtonElement>('[type=submit]');
+    const error = form.querySelector<HTMLElement>('[data-enquiry-error]');
+    const done = wrap?.querySelector<HTMLElement>('[data-enquiry-done]');
+    if (!send || !error || !done) return;
+    const label = send.textContent;
+
+    const update = () => {
+      send.disabled = !form.checkValidity();
+    };
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    update();
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) return;
+      const data = new FormData(form);
+      const answers: Answer[] = [];
+      form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-short]').forEach((set) => {
+        answers.push({ label: set.dataset.short ?? '', value: String(data.get(set.dataset.field ?? '') ?? '') });
+      });
+      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-answer]').forEach((el) => {
+        const value = el.value.trim();
+        if (value) answers.push({ label: el.dataset.answer ?? el.name, value });
+      });
+
+      send.disabled = true;
+      send.textContent = 'Sending…';
+      error.classList.add('hidden');
+      try {
+        const response = await fetch('/api/enquire', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            type: form.dataset.enquiry,
+            name: String(data.get('name') ?? '').trim(),
+            email: String(data.get('email') ?? '').trim(),
+            answers,
+            consent: data.get('consent') === 'on',
+            page: location.pathname,
+            website: String(data.get('website') ?? ''),
+            token: String(data.get('cf-turnstile-response') ?? ''),
+          }),
+        });
+        if (!response.ok) throw new Error(String(response.status));
+        (window as unknown as { umami?: Umami }).umami?.track('enquiry_submit', { type: form.dataset.enquiry ?? '' });
+        form.reset();
+        form.classList.add('hidden');
+        done.classList.replace('hidden', 'flex');
+      } catch {
+        error.classList.remove('hidden');
+        (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);
+      } finally {
+        send.textContent = label;
+        update();
+      }
+    });
+  });
+</script>

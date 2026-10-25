@@ -1,0 +1,63 @@
+---
+// The "Ask me a question" pop-up. Every link to /enquire opens it instead of leaving the page
+// (Questions first? Ask me, Ask a question…). Without JavaScript those links open the /enquire page.
+import Icon from '../ui/Icon.astro';
+import EnquiryForm from './EnquiryForm.astro';
+import type { Site } from '../../lib/content';
+
+interface Props {
+  enquiry: Site['enquiry'];
+  contact: Site['contact'];
+}
+
+const { enquiry, contact } = Astro.props;
+---
+
+{/* The panel is centred with m-auto: it stays centred when it fits and scrolls from the top when
+    it doesn't (centring with items-center would push a tall panel's top off-screen). */}
+<dialog
+  id="enquiry-dialog"
+  aria-labelledby="dialog-question-title"
+  class="size-full max-h-none max-w-none overflow-y-auto bg-transparent p-(--gutter) backdrop:bg-ink/50 open:flex"
+>
+  <div class="relative m-auto flex w-full max-w-2xl flex-col rounded-card bg-surface p-6 text-ink shadow-raised md:p-8">
+    <button
+      type="button"
+      data-close
+      aria-label="Close"
+      class="absolute top-3 right-3 flex size-10 items-center justify-center rounded-pill text-xl text-ink transition-colors hover:bg-surface-alt"
+    >
+      <Icon name="close" />
+    </button>
+    <EnquiryForm type="question" enquiry={enquiry} contact={contact} showTitle idPrefix="dialog-question" />
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#enquiry-dialog');
+
+  if (dialog) {
+    // Any link to /enquire opens the pop-up instead.
+    document.addEventListener('click', (event) => {
+      const link = (event.target as Element).closest?.('a[href]');
+      const href = link?.getAttribute('href') ?? '';
+      if (!/^\/enquire\/?(\?.*)?$/.test(href)) return;
+      event.preventDefault();
+      dialog.showModal();
+    });
+
+    // Close with the × or by clicking outside the panel (Esc works natively).
+    dialog.addEventListener('click', (event) => {
+      const target = event.target as Element;
+      if (target === dialog || target.closest('[data-close]')) dialog.close();
+    });
+
+    // After a message is sent, the next opening shows an empty form again.
+    dialog.addEventListener('close', () => {
+      const done = dialog.querySelector<HTMLElement>('[data-enquiry-done]');
+      if (!done?.classList.contains('flex')) return;
+      done.classList.replace('flex', 'hidden');
+      dialog.querySelector('form')?.classList.remove('hidden');
+    });
+  }
+</script>
