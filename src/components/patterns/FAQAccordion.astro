@@ -9,7 +9,7 @@ interface Props {
   title: string;
   intro?: string;
   items: { question: string; answer: string }[];
-  /** Optional link under the questions, e.g. Another question? Ask me (/enquire opens the pop-up). */
+  /** Optional outlined button under the questions, e.g. Ask me a question (/enquire opens the pop-up). */
   link?: { label: string; href: string };
 }
 
@@ -22,29 +22,31 @@ const paragraphs = (answer: string) => answer.split(/\n\s*\n/).map((p) => p.trim
   <div class="lg:col-span-4">
     <SectionHeader eyebrow={eyebrow} title={title} intro={intro} />
   </div>
-  <div class="border-b border-line lg:col-span-8">
-    {
-      items.map((item) => (
-        <details class="group/faq border-t border-line">
-          <summary class="flex cursor-pointer items-start justify-between gap-6 py-6">
-            <span class="type-h3 text-ink">{item.question}</span>
-            <span class="mt-1 text-xl text-ink transition-transform duration-(--duration-base) ease-soft group-open/faq:rotate-45">
-              <Icon name="plus" />
-            </span>
-          </summary>
-          <div class="flex max-w-prose flex-col gap-3 pb-7">
-            {paragraphs(item.answer).map((p) => (
-              <Text tone="muted" text={p} />
-            ))}
-          </div>
-        </details>
-      ))
-    }
+  <div class="flex flex-col items-start gap-10 lg:col-span-8">
+    <div class="w-full border-b border-line">
+      {
+        items.map((item) => (
+          <details class="group/faq border-t border-line">
+            <summary class="flex cursor-pointer items-start justify-between gap-6 py-6">
+              <span class="type-h3 text-ink">{item.question}</span>
+              <span class="mt-1 text-xl text-ink transition-transform duration-(--duration-base) ease-soft group-open/faq:rotate-45">
+                <Icon name="plus" />
+              </span>
+            </summary>
+            <div class="flex max-w-prose flex-col gap-3 pb-7">
+              {paragraphs(item.answer).map((p) => (
+                <Text tone="muted" text={p} />
+              ))}
+            </div>
+          </details>
+        ))
+      }
+    </div>
     {
       link && (
-        <div class="border-t border-line py-6">
-          <Button href={link.href} variant="link" event="faq">{link.label}</Button>
-        </div>
+        <Button href={link.href} size="l" variant="secondary" event="faq">
+          {link.label}
+        </Button>
       )
     }
   </div>

@@ -53,6 +53,3 @@ ctaBand:
   primary:
     label: Book your intro pack
     href: /intro-pack
-  secondary:
-    label: Ask a question
-    href: /enquire

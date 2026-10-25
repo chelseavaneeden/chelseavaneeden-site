@@ -280,10 +280,10 @@ content:
               - { name: question, label: Question, type: string, required: true }
               - { name: answer, label: Answer, type: text, required: true, description: 'Leave a blank line to start a new paragraph.' }
           - name: link
-            label: Link under the questions (optional)
+            label: Button under the questions (optional)
             type: object
             fields:
-              - { name: label, label: Link text, type: string, description: 'e.g. Another question? Ask me' }
+              - { name: label, label: Button text, type: string, description: 'e.g. Ask me a question' }
               - { name: href, label: Link, type: string, description: '/enquire opens the Ask me a question pop-up.' }
       - name: enquiry
         label: Enquiry form section
