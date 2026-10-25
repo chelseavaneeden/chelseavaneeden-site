@@ -148,7 +148,7 @@ footerLinks:
   - label: Book your intro pack
     href: /intro-pack
   # /enquire opens the email form as a pop-up, so people stay on the site.
-  - label: Email
+  - label: Ask a question
     href: /enquire
   - label: WhatsApp
     href: https://wa.link/ccq3ib
