@@ -64,28 +64,21 @@ proof:
 faq:
   title: Good to *know*.
   items:
-    - question: Do I need any experience?
-      answer: No. Sessions start where you are, whether you’ve never done Pilates or have practised for years.
-    - question: What do I need for online sessions?
-      answer: A mat (8mm+) and a laptop or phone with a camera. I’ll suggest a few small props if they would help. If you have a Reformer at home, we can use it.
-    - question: Do I need a Reformer?
-      answer: No. I build every session around the space and equipment you have. Many of my clients practise on the mat only, and if you have a Reformer, we can bring it in too.
+    - question: Do I need experience or a Reformer?
+      answer: No. Sessions start where you are, whether you’ve never done Pilates or have practised for years. All you need is a mat (8mm+) and a laptop or phone with a camera. If you have a Reformer at home, we can use it.
     - question: I have an injury or pain. Is this right for me?
       answer: Often, yes. I guide clients through rehab and chronic pain, and I’m happy to work alongside your physiotherapist or doctor.
     - question: Is it safe during pregnancy?
       answer: Yes, with the right adaptations. I have guided clients through pre and post-natal Pilates and adjust every session to your stage and how you feel. Please check with your midwife or doctor before you start.
-    - question: How long is a session?
-      answer: Each private session lasts 55 minutes, or 45 minutes if you prefer.
+    - question: How long are sessions, and how do I book?
+      answer: Each private session lasts 55 minutes, or 45 minutes if you prefer. Right after you pay, you choose your times from my calendar. Use your 4 intro sessions within 2 months.
     - question: Can I cancel or reschedule?
-      answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
-    - question: What if I do not use all my sessions in a month?
-      answer: All good. You can roll over up to 2 sessions to the following month when life happens.
-    - question: How do I book my session times?
-      answer: Right after you pay, you choose your times from my calendar. Use your 4 intro sessions within 2 months.
+      answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full. On a monthly plan, you can roll over up to 2 unused sessions to the next month when life happens.
     - question: What happens after my intro pack?
-      answer: We look back at your progress together and agree the right rhythm, weekly or twice weekly, from €260 a month. Start a monthly plan within 14 days of your intro pack and you save €40 on your monthly package of choice.
-    - question: How do I pay?
-      answer: Securely online by card. Monthly plans are billed once a month.
+      answer: We look back at your progress together and agree the right rhythm, weekly or twice weekly, from €260 a month, paid securely online by card. Start a monthly plan within 14 days of your intro pack and you save €40 on your first month.
+  link:
+    label: Another question? Ask me
+    href: /enquire
 ctaBand:
   title: Ready when *you* are.
   text: Start with an intro pack, or send me a question first. I reply personally within two working days.

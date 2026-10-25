@@ -28,7 +28,6 @@ perfectFor:
     - Feel stressed or anxious, and want movement that calms
 investment:
   title: Start with your *intro pack*.
-  intro: Four private sessions to get to know your body, find what works for you and build your plan.
   note: After your intro pack, continue weekly or twice weekly from €260 a month.
 steps:
   title: How it *works*.
@@ -42,12 +41,10 @@ steps:
     - title: Your plan
       text: I build a programme around your body, your goals and your schedule.
 about:
-  eyebrow: Meet your instructor
   title: Hi, I’m *Chelsea*.
   paragraphs:
     - My teaching style blends somatics, stress relief and Pilates. I help new parents, frequent travellers and busy professionals feel less stressed, more mobile and energised after every session.
     - As a BASI Comprehensive Pilates Instructor, I specialise in movement for mental health. I know first-hand what stress, anxiety and chronic pain do to the body, so every session is calm, precise and built around how you feel that day.
-    - When I’m not teaching, you’ll find me shaking out stress on the dance floor.
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session
 ctaBand:

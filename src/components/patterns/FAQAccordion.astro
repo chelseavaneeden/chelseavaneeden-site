@@ -1,4 +1,5 @@
 ---
+import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
@@ -8,9 +9,11 @@ interface Props {
   title: string;
   intro?: string;
   items: { question: string; answer: string }[];
+  /** Optional link under the questions, e.g. Another question? Ask me (/enquire opens the pop-up). */
+  link?: { label: string; href: string };
 }
 
-const { eyebrow, title, intro, items } = Astro.props;
+const { eyebrow, title, intro, items, link } = Astro.props;
 // Answers are plain text; a blank line in the editor starts a new paragraph.
 const paragraphs = (answer: string) => answer.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 ---
@@ -36,6 +39,13 @@ const paragraphs = (answer: string) => answer.split(/\n\s*\n/).map((p) => p.trim
           </div>
         </details>
       ))
+    }
+    {
+      link && (
+        <div class="border-t border-line py-6">
+          <Button href={link.href} variant="link" event="faq">{link.label}</Button>
+        </div>
+      )
     }
   </div>
 </div>

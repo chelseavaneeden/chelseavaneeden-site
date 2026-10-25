@@ -38,7 +38,12 @@ const year = copyrightYear ?? new Date().getFullYear();
           {
             links.map((l) => (
               <li>
-                <a href={l.href} class="type-body-s text-ink transition-colors hover:text-ink-muted">
+                <a
+                  href={l.href}
+                  target={/^https?:\/\//.test(l.href) ? '_blank' : undefined}
+                  rel={/^https?:\/\//.test(l.href) ? 'noopener' : undefined}
+                  class="type-body-s text-ink transition-colors hover:text-ink-muted"
+                >
                   {l.label}
                 </a>
               </li>

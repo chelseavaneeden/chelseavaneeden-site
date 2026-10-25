@@ -19,7 +19,7 @@ const { title, description, lang = 'en', noindex = false, pageEvent } = Astro.pr
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev preview out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
-const { contact, enquiry, analytics, bookCta, reviews } = await getSite();
+const { contact, enquiry, analytics, bookCta } = await getSite();
 ---
 
 <!doctype html>
@@ -47,7 +47,6 @@ const { contact, enquiry, analytics, bookCta, reviews } = await getSite();
   <body
     data-book-href={bookCta.href}
     data-whatsapp-href={contact.whatsappHref}
-    data-reviews-href={reviews?.href}
     data-page-event={pageEvent}
   >
     <a
@@ -63,18 +62,17 @@ const { contact, enquiry, analytics, bookCta, reviews } = await getSite();
 
 <script>
   // Analytics (Umami, only when a website ID is set in Site settings). Clicks are recorded by what they
-  // do, wherever the button sits: book_intro, enquiry_open, organiser_page, whatsapp_click, reviews_click.
+  // do, wherever the button sits: book_intro, enquiry_open, organiser_page, whatsapp_click.
   // "from" says where: the button's data-track label, or the section it's in.
   type Umami = { track: (name: string, data?: Record<string, string>) => void };
   const umami = () => (window as unknown as { umami?: Umami }).umami;
-  const { bookHref, whatsappHref, reviewsHref, pageEvent } = document.body.dataset;
+  const { bookHref, whatsappHref, pageEvent } = document.body.dataset;
 
   const eventFor = (href: string): string | undefined => {
     if (href === bookHref) return 'book_intro';
     if (/^\/enquire\/?(\?.*)?$/.test(href)) return 'enquiry_open';
     if (href.startsWith('/retreats-events')) return 'organiser_page';
     if (whatsappHref && href === whatsappHref) return 'whatsapp_click';
-    if (reviewsHref && href === reviewsHref) return 'reviews_click';
     return undefined;
   };
 

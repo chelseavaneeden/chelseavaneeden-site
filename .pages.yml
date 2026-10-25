@@ -279,6 +279,12 @@ content:
             fields:
               - { name: question, label: Question, type: string, required: true }
               - { name: answer, label: Answer, type: text, required: true, description: 'Leave a blank line to start a new paragraph.' }
+          - name: link
+            label: Link under the questions (optional)
+            type: object
+            fields:
+              - { name: label, label: Link text, type: string, description: 'e.g. Another question? Ask me' }
+              - { name: href, label: Link, type: string, description: '/enquire opens the Ask me a question pop-up.' }
       - name: enquiry
         label: Enquiry form section
         type: object
@@ -666,13 +672,6 @@ content:
             fields:
               - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive Instructor' }
               - { name: href, label: Link (optional), type: string }
-      - name: reviews
-        label: Reviews link (under the testimonials)
-        type: object
-        description: 'Opens in a new tab. Leave the text empty to hide it.'
-        fields:
-          - { name: label, label: Link text, type: string }
-          - { name: href, label: Link, type: string, description: 'Your Google reviews. A g.page/r/… link from your Business Profile lasts longest.' }
       - name: footerLinks
         label: Footer links
         type: object

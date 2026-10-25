@@ -20,9 +20,8 @@ availability:
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
   title: Book your *intro pack*.
-  intro: Four live 1-to-1 sessions online, to use within 2 months.
   points:
-    - Pay securely below.
+    - Pay securely online.
     - Pick your session times from my calendar.
     - Meet me online for your first session and assessment.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
@@ -143,25 +142,20 @@ trust:
   # Fill in both to show the star rating, e.g. 5.0 and 12.
   googleRating:
   googleReviewCount:
-  items:
-    - label: BASI Comprehensive Instructor
-    - label: 9.4K on YouTube
-      href: https://www.youtube.com/@chelseavaneeden
-reviews:
-  label: All reviews on Google
-  href: https://www.google.com/search?hl=en-NL&sxsrf=APpeQnv2oa5SlsqzGMce54noDq6KYR_7Yw:1789395207368&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
+  items: []
 footerLinks:
   - label: Book your intro pack
     href: /intro-pack
   - label: Retreats & events
     href: /retreats-events
-  - label: Ask a question
+  - label: WhatsApp Chelsea
+    href: https://wa.link/ccq3ib
+  # /enquire opens the email form as a pop-up, so people stay on the site.
+  - label: Email Chelsea
     href: /enquire
 socials:
-  - label: YouTube
-    href: https://www.youtube.com/@chelseavaneeden
-  - label: LinkedIn
-    href: https://www.linkedin.com/in/chelseavaneeden/
+  - label: Instagram
+    href: https://www.instagram.com/chelseavaneeden_/
 legal:
   - label: Privacy
     href: /privacy

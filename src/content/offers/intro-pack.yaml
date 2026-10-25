@@ -9,12 +9,13 @@ price: 260
 currency: EUR
 unit: pack
 priceVisibility: web
-priceNote: 4 private sessions, use within 2 months
 includes:
-  - 4 live 1-to-1 sessions online, 55 minutes each
-  - Mat or Reformer, at home or wherever you are
-  - Full movement & posture assessment
-  - Your written personal plan
+  - 4 x 1-to-1 sessions, live online
+  - Ease back, neck & shoulder pain
+  - Rebuild strength after injury or surgery
+  - Recover your core after pregnancy
+  - Better posture, less desk stiffness
+  - Your own plan, built around your body
 cta:
   label: Book your intro pack
   href: /intro-pack

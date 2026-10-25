@@ -39,7 +39,7 @@ const testimonials = await getTestimonials('private');
   <main id="main">
     <Hero layout="split" {...hero}>
       <AvailabilityBadge slot="badge" {...site.availability} />
-      <TrustLine slot="trust" trust={site.trust} reviewsHref={site.reviews?.href} />
+      <TrustLine slot="trust" trust={site.trust} />
     </Hero>
 
     {
@@ -80,7 +80,6 @@ const testimonials = await getTestimonials('private');
             eyebrow={shared.proof.eyebrow}
             title={shared.proof.title}
             testimonials={testimonials}
-            link={site.reviews}
             rating={{ value: site.trust.googleRating, count: site.trust.googleReviewCount }}
           />
         </Section>

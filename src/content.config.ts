@@ -175,8 +175,6 @@ const settings = defineCollection({
         items: list(z.object({ label: z.string(), href: optionalText })),
       })
       .default({ items: [] }),
-    /** Link under the testimonials to all your Google reviews (opens in a new tab). */
-    reviews: optionalLink,
     /** Footer links to real pages (the menu's jump links are left out on purpose). */
     footerLinks: list(link),
     socials: list(link),
@@ -263,6 +261,8 @@ const audiencePages = defineCollection({
       faq: optionalSection({
         ...sectionHead,
         items: list(z.object({ question: z.string(), answer: z.string() })),
+        /** Link under the questions, e.g. Another question? Ask me (/enquire opens the pop-up). */
+        link: optionalLink,
       }),
       /** The enquiry form near the bottom of the page (organisers: the proposal form). */
       enquiry: optionalBlock(z.object(sectionHead)),
