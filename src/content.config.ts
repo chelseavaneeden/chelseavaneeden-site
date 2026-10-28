@@ -235,6 +235,8 @@ const audiencePages = defineCollection({
     z.object({
       title: z.string(),
       audience: z.enum(audiences),
+      /** Colour of the alternate sections and footer on this page. */
+      sectionColour: z.enum(['sage', 'butter']).default('sage'),
       seo: z.object({ title: z.string(), description: z.string() }),
       hero: z.object({
         eyebrow: optionalText,

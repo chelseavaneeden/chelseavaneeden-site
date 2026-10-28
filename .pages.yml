@@ -149,6 +149,15 @@ content:
             - { value: hospitality, label: Retreats & Events }
             - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
+      - name: sectionColour
+        label: Section colour
+        type: select
+        default: sage
+        description: Colour of the alternating sections and the footer on this page.
+        options:
+          values:
+            - { value: sage, label: Sage green }
+            - { value: butter, label: Butter yellow }
       - name: seo
         label: Google listing
         type: object

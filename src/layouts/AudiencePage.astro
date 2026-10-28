@@ -37,7 +37,7 @@ const testimonials = await getTestimonials(audience);
 const hero = resolveHeroLinks(page.hero, site);
 ---
 
-<Base title={page.seo.title} description={page.seo.description}>
+<Base title={page.seo.title} description={page.seo.description} altColour={page.sectionColour}>
   <Header nav={site.nav} cta={page.hero.primary} />
 
   <main id="main">

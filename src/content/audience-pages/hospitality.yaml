@@ -1,5 +1,6 @@
 title: Retreats & events
 audience: hospitality
+sectionColour: butter
 seo:
   title: Pilates for retreats, events & teams · Chelsea van Eeden
   description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events, teams and brands, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
@@ -20,12 +21,12 @@ hero:
     speed: 1
   layout: split
 whoFor:
-  title: Perfect for *retreats & events that*…
+  title: Perfect for *retreats that*…
   items:
-    - Are looking for feel-good, mixed-level Pilates for all ages
+    - Want feel-good, mixed-level Pilates for all ages and stages
     - Value a calm, caring and collaborative instructor
-    - Want somatic movement that releases tension and calms the nervous system
-    - Want guests to leave feeling grounded, energised and cared for
+    - Want guests feeling grounded, energised and cared for after the session
+    - Prefer a class that blends Pilates strength with somatic techniques
 steps:
   title: How it *works*.
   items:
