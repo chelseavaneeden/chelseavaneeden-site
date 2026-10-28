@@ -9,10 +9,15 @@ hero:
   primary:
     label: Request a proposal
     href: '#enquire'
-  # Swap for a photo of you teaching a group, outdoors or at a retreat when you have one.
+  # Photo shown if the video is removed.
   image: ../../assets/media/chelsea-portrait.jpg
-  imageAlt: Chelsea van Eeden smiling
+  imageAlt: A group Pilates class on mats outdoors
   imageFocus: center
+  # PLACEHOLDER stock clip (Pexels 15565770, free licence). Swap for Chelsea's own video before launch.
+  video:
+    src: /media/placeholder-group-class.mp4
+    poster: /media/placeholder-group-class-poster.jpg
+    speed: 1
   layout: split
 whoFor:
   title: Who I work *with*…

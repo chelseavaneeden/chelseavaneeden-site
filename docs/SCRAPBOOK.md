@@ -132,7 +132,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 6. Facts for the organiser page: insurance, what she brings (mats, props), group sizes, travel terms.
 7. Rollover (1 or 2 sessions), personal line in About, Instagram link, business details for the privacy
    policy, Livro de Reclamações registration.
-8. **Group/outdoor photos or a 30–60s teaching clip** for the organiser page.
+8. **Group/outdoor photos or a 30–60s teaching clip** for the organiser page. The Retreats & events header currently plays a **placeholder stock clip** (Pexels 15565770, `public/media/placeholder-group-class.mp4`); replace it with Chelsea's own video before launch, as visitors would assume it shows her.
 9. **Lawyer check** of Terms and Privacy: "non-refundable" vs the EU 14-day withdrawal right, South African
    governing law while living in Portugal, retention periods.
 
