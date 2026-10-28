@@ -12,12 +12,12 @@ hero:
     href: '#enquire'
   # Photo shown if the video is removed.
   image: ../../assets/media/chelsea-portrait.jpg
-  imageAlt: A group Pilates class on mats outdoors
+  imageAlt: Moments from a group Pilates class
   imageFocus: center
-  # PLACEHOLDER stock clip (Pexels 15565770, free licence). Swap for Chelsea's own video before launch.
+  # Chelsea's video (28 Oct). The poster is a still from it, shown while the video loads.
   video:
-    src: /media/placeholder-group-class.mp4
-    poster: /media/placeholder-group-class-poster.jpg
+    src: /media/retreats-teaching.mp4
+    poster: /media/retreats-teaching-poster.jpg
     speed: 1
   layout: split
 whoFor:
