@@ -37,11 +37,11 @@ steps:
     - title: Book your intro pack
       text: Pay securely online in a minute.
     - title: Pick your times
-      text: Choose session times that suit your week from my calendar.
-    - title: Assessment
-      text: In our first session we look at how you move, any pain or injuries, and what you want to change.
+      text: You'll receive an email with a link to book your sessions.
+    - title: First session
+      text: We'll see how you're moving and chat about your goals for upcoming sessions.
     - title: Your plan
-      text: I build a programme around your body, your goals and your schedule.
+      text: We'll set up a personalised plan around your goals and schedule.
 about:
   title: Hi, I’m *Chelsea*.
   paragraphs:
