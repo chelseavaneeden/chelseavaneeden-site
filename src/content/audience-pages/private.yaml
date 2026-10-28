@@ -64,14 +64,16 @@ proof:
 faq:
   title: Good to *know*.
   items:
-    - question: Do I need experience or a Reformer?
-      answer: No experience needed. All you need is a Pilates mat and a laptop/phone with a camera. If you have a Reformer at home, we can use it.
-    - question: I have an injury / chronic pain. Is this right for me?
+    - question: I have an injury or chronic pain. Is this right for me?
       answer: Often, yes. I guide clients through rehab and chronic pain, and I’m happy to work alongside your physiotherapist, osteopath or doctor.
+    - question: How long are sessions and how do I book?
+      answer: You can choose between 45 and 55 minutes. Let me know what works best for your schedule.
+    - question: I’m a beginner, do I need experience?
+      answer: No experience needed. Online private sessions are perfect for beginners.
+    - question: Do I need a Reformer?
+      answer: No. All you need is a Pilates mat and a laptop/phone with a camera. If you have a Reformer, let me know.
     - question: Is it safe during pregnancy?
       answer: Yes, with the right adaptations. I’ve taught clients throughout their pregnancy and post-natal recovery. Please check with your midwife or doctor before you start.
-    - question: How long are sessions, and how do I book?
-      answer: Sessions are 55 minutes, or 45 minutes if you prefer. After payment, you choose your timeslots from my calendar.
     - question: Can I cancel or reschedule?
       answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
     - question: What happens after my intro pack?
