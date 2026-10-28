@@ -4,9 +4,8 @@ seo:
   title: Pilates for retreats, events & teams · Chelsea van Eeden
   description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events, teams and brands, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
 hero:
-  eyebrow: For organisers
-  title: Feel-good Pilates for your *retreat or event*.
-  lede: Mixed-level Pilates sessions for wellness retreats, festivals, events, teams and brands. Based in Lisbon, available across Europe and South Africa.
+  title: Feel-good Pilates for your ==retreat or event==
+  lede: Bespoke mixed-level Pilates sessions for your wellness retreats and events. Based in Lisbon, available across Europe and South Africa.
   primary:
     label: Request a proposal
     href: '#enquire'

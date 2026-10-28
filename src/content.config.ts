@@ -237,7 +237,7 @@ const audiencePages = defineCollection({
       audience: z.enum(audiences),
       seo: z.object({ title: z.string(), description: z.string() }),
       hero: z.object({
-        eyebrow: z.string(),
+        eyebrow: optionalText,
         title: z.string(),
         lede: z.string(),
         primary: link,
