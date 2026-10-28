@@ -28,7 +28,7 @@ content:
         type: object
         fields:
           - { name: eyebrow, label: Small line above the headline, type: string, description: 'Optional. Leave empty to hide.' }
-          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates.' }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates. Wrap words in ==double equals== to highlight them in yellow.' }
           - { name: lede, label: Intro sentence, type: text, required: true }
           - name: primary
             label: Main button
@@ -160,7 +160,7 @@ content:
         type: object
         fields:
           - { name: eyebrow, label: Small line above the headline, type: string, required: true }
-          - { name: title, label: Headline, type: string, required: true, description: 'Wrap words in *asterisks* to make them italic.' }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap words in *asterisks* to make them italic, or in ==double equals== to highlight them in yellow.' }
           - { name: lede, label: Intro sentence, type: text, required: true }
           - name: primary
             label: Main button

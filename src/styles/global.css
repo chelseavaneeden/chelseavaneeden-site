@@ -52,6 +52,18 @@
     font-style: italic;
   }
 
+  /* Highlighted words (==words== in the CMS): a butter marker behind italic text. */
+  mark {
+    font-style: italic;
+    color: var(--note-ink);
+    background-color: var(--color-transparent);
+    background-image: linear-gradient(var(--color-transparent) 22%, var(--note) 22%, var(--note) 92%, var(--color-transparent) 92%);
+    padding-inline: 0.12em;
+    margin-inline: -0.06em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
   summary {
     list-style: none;
   }
