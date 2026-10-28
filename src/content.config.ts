@@ -164,17 +164,19 @@ const settings = defineCollection({
     location: optionalText,
     /** Year shown in the footer copyright line. Empty shows the current year. */
     copyrightYear: z.preprocess(blankToUndefined, z.number().int().optional()),
+    /** The short proof line under the main buttons: a few facts, each with an optional link. */
+    trust: z.object({ items: list(z.object({ label: z.string(), href: optionalText })) }).default({ items: [] }),
     /**
-     * The short proof line under the main buttons: a Google rating (shown only when both numbers
-     * are filled in) and a few facts, each with an optional link.
+     * The bar above the reviews: your Google rating and number of reviews (shown when both are
+     * filled in), and a short line under the reviews. Nothing links to Google.
      */
-    trust: z
+    googleReviews: z
       .object({
-        googleRating: z.preprocess(blankToUndefined, z.number().min(1).max(5).optional()),
-        googleReviewCount: optionalNumber,
-        items: list(z.object({ label: z.string(), href: optionalText })),
+        rating: z.preprocess(blankToUndefined, z.number().min(1).max(5).optional()),
+        count: optionalNumber,
+        note: optionalText,
       })
-      .default({ items: [] }),
+      .default({}),
     /** Footer links to real pages (the menu's jump links are left out on purpose). */
     footerLinks: list(link),
     socials: list(link),
@@ -318,6 +320,12 @@ const testimonials = defineCollection({
     quote: z.string(),
     name: z.string(),
     context: optionalText,
+    /** A Google review (shown with "Google review" and its stars) or a quote from a client. */
+    source: z.enum(['client', 'google']).default('client'),
+    /** Stars, 1 to 5. Empty shows no stars. */
+    rating: z.preprocess(blankToUndefined, z.number().int().min(1).max(5).optional()),
+    /** When it was written, e.g. March 2026. */
+    date: optionalText,
     audiences: list(z.enum(audiences)),
     /** Only testimonials with written permission are ever shown. */
     consent: z.boolean().default(false),

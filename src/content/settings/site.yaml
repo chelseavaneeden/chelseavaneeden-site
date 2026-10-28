@@ -139,10 +139,12 @@ tagline: Based in Europe · Teaching worldwide
 # Empty shows the current year.
 copyrightYear:
 trust:
-  # Fill in both to show the star rating, e.g. 5.0 and 12.
-  googleRating:
-  googleReviewCount:
   items: []
+# Your Google profile: 5.0 from 5 reviews (checked 28 Oct 2026). Update when new reviews come in.
+googleReviews:
+  rating: 5
+  count: 5
+  note: Shared with each client's permission.
 # Shown two to a row, in this order.
 footerLinks:
   - label: Book your intro pack

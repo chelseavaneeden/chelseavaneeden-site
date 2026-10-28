@@ -44,6 +44,8 @@
   --green-500: #3f9a5c;
   /* WhatsApp's official brand green, only for the WhatsApp button. */
   --whatsapp-500: #25d366;
+  /* Google's review-star yellow, only for star ratings. */
+  --star-400: #fbbc04;
 }
 
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
@@ -70,6 +72,7 @@
   --status-open: var(--green-500);
   --status-closed: var(--brown-300);
   --logo-mark: var(--ochre-600);
+  --rating-star: var(--star-400);
 }
 
 [data-tone='alt'] {
@@ -127,6 +130,7 @@
   --color-status-closed: var(--status-closed);
   --color-logo-mark: var(--logo-mark);
   --color-whatsapp: var(--whatsapp-500);
+  --color-rating-star: var(--rating-star);
   --color-whatsapp-ink: var(--linen-0);
   --color-transparent: transparent;
   --color-current: currentColor;
@@ -229,6 +233,10 @@
   --logo-deboss-m: 2.75rem;
   --logo-deboss-l: 3.5rem;
   --deboss-filter: drop-shadow(0 -0.75px 0 rgb(48 26 17 / 0.3)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.95));
+
+  /* Review cards in a row: two (tablet) or three (desktop) across, with a gap-4 (1rem) between. */
+  --review-card-2: calc((100% - 1rem) / 2);
+  --review-card-3: calc((100% - 2rem) / 3);
 }
 
 @media (prefers-reduced-motion: reduce) {
