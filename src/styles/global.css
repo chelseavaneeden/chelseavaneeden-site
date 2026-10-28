@@ -71,4 +71,21 @@
   summary::-webkit-details-marker {
     display: none;
   }
+
+  /* Fade-in on scroll: add data-reveal to an element. Hidden only once the script in Base.astro has
+     switched it on, so without JavaScript everything simply shows. Items that come into view together
+     fade in one after another. */
+  :root[data-reveal='on'] [data-reveal] {
+    opacity: 0;
+    translate: 0 var(--reveal-distance);
+    transition:
+      opacity var(--duration-reveal) var(--ease-soft),
+      translate var(--duration-reveal) var(--ease-soft);
+    transition-delay: calc(var(--reveal-order, 0) * var(--reveal-stagger));
+  }
+
+  :root[data-reveal='on'] [data-reveal][data-revealed] {
+    opacity: 1;
+    translate: 0 0;
+  }
 }

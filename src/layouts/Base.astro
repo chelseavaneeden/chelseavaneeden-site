@@ -85,4 +85,26 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
   });
 
   if (pageEvent) window.addEventListener('load', () => umami()?.track(pageEvent));
+
+  // Fade-in on scroll for [data-reveal] items (styles in global.css). Skipped for people who prefer
+  // reduced motion. Items that enter the screen together get increasing delays, so they appear in order.
+  const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  if (revealItems.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.dataset.reveal = 'on';
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((e) => e.isIntersecting)
+          .map((e) => e.target as HTMLElement)
+          .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+          .forEach((el, order) => {
+            el.style.setProperty('--reveal-order', String(order));
+            el.dataset.revealed = '';
+            observer.unobserve(el);
+          });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.2 },
+    );
+    revealItems.forEach((el) => observer.observe(el));
+  }
 </script>

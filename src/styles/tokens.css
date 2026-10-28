@@ -182,6 +182,10 @@
   --duration-fast: 160ms;
   --duration-base: 320ms;
   --duration-slow: 700ms;
+  /* Items that fade in as you scroll (data-reveal): each fade, the pause between items, how far they rise. */
+  --duration-reveal: 900ms;
+  --reveal-stagger: 350ms;
+  --reveal-distance: 1rem;
 
   /* Layers */
   --z-header: 50;
@@ -237,5 +241,7 @@
     --duration-fast: 0ms;
     --duration-base: 0ms;
     --duration-slow: 0ms;
+    --duration-reveal: 0ms;
+    --reveal-stagger: 0ms;
   }
 }
