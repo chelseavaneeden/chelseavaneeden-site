@@ -1,6 +1,7 @@
 ---
-// The short proof line under the main buttons (Site settings → Trust line): a few facts.
-// A fact's link opens in a new tab.
+// The short proof line under the main buttons (Site settings → Trust line): the Google rating,
+// when both numbers are filled in, then a few facts. The rating never links away from the site;
+// a fact's link opens in a new tab.
 import Icon from '../ui/Icon.astro';
 import type { Site } from '../../lib/content';
 
@@ -10,7 +11,15 @@ interface Props {
 }
 
 const { trust, class: className } = Astro.props;
-const entries = trust.items.map((i) => ({ ...i, icon: i.href?.includes('youtube.com') ? ('play' as const) : undefined }));
+const { googleRating, googleReviewCount, items } = trust;
+const rating =
+  googleRating && googleReviewCount
+    ? `${googleRating.toFixed(1)} on Google · ${googleReviewCount} review${googleReviewCount === 1 ? '' : 's'}`
+    : undefined;
+const entries = [
+  ...(rating ? [{ label: rating, href: undefined, icon: 'star' as const }] : []),
+  ...items.map((i) => ({ ...i, icon: i.href?.includes('youtube.com') ? ('play' as const) : undefined })),
+];
 const external = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
 ---
 

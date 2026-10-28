@@ -20,7 +20,7 @@ import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import PhotoCollage from '../components/patterns/PhotoCollage.astro';
 import StepList from '../components/patterns/StepList.astro';
-import ReviewCarousel from '../components/patterns/ReviewCarousel.astro';
+import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
 import TrustLine from '../components/patterns/TrustLine.astro';
 import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import { getAudiencePage, getOffers, getPage, getSite, getTestimonials, resolveHeroLinks } from '../lib/content';
@@ -76,13 +76,11 @@ const testimonials = await getTestimonials('private');
     {
       testimonials.length > 0 && (
         <Section space="m" tone="alt" id="reviews">
-          <ReviewCarousel
+          <TestimonialGrid
             eyebrow={shared.proof.eyebrow}
             title={shared.proof.title}
             testimonials={testimonials}
-            rating={site.googleReviews.rating}
-            count={site.googleReviews.count}
-            note={site.googleReviews.note}
+            rating={{ value: site.trust.googleRating, count: site.trust.googleReviewCount }}
           />
         </Section>
       )

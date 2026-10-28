@@ -433,22 +433,12 @@ content:
     filename: '{primary}.yaml'
     view:
       primary: name
-      fields: [name, source, consent, featured]
+      fields: [name, context, consent, featured]
       sort: [order, name]
     fields:
       - { name: quote, label: Quote, type: text, required: true }
       - { name: name, label: Name as shown, type: string, required: true, description: 'e.g. Sarah M., Head of People at Acme, or Private client.' }
       - { name: context, label: Context, type: string, description: 'e.g. Online Reformer sessions, Lisbon' }
-      - name: source
-        label: Where it's from
-        type: select
-        default: client
-        options:
-          values:
-            - { value: client, label: A client (message, email…) }
-            - { value: google, label: Google review }
-      - { name: rating, label: Stars (1 to 5), type: number, description: 'For Google reviews. Leave empty for no stars.' }
-      - { name: date, label: Date, type: string, description: 'e.g. March 2026' }
       - name: audiences
         label: Show on pages for
         type: select
@@ -674,6 +664,8 @@ content:
         label: Trust line (under the main buttons)
         type: object
         fields:
+          - { name: googleRating, label: Google rating, type: number, description: 'e.g. 5.0. Shown with a star when the number of reviews is filled in too.' }
+          - { name: googleReviewCount, label: Number of Google reviews, type: number }
           - name: items
             label: Facts
             type: object
@@ -681,14 +673,6 @@ content:
             fields:
               - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive Instructor' }
               - { name: href, label: Link (optional), type: string }
-      - name: googleReviews
-        label: Google rating (above the reviews)
-        type: object
-        description: 'Copy these from your Google profile when new reviews come in. Nothing on the site links to Google.'
-        fields:
-          - { name: rating, label: Google rating, type: number, description: 'e.g. 5 or 4.9' }
-          - { name: count, label: Number of Google reviews, type: number }
-          - { name: note, label: Line under the reviews, type: string, description: "e.g. Shared with each client's permission." }
       - name: footerLinks
         label: Footer links
         type: object

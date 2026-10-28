@@ -9,13 +9,6 @@
 @utility object-lower {
   object-position: var(--focus-lower);
 }
-/* Rows you swipe or scroll sideways (review cards) without a visible scrollbar. */
-@utility scrollbar-none {
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
 
 @layer base {
   html {

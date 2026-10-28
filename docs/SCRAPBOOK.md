@@ -39,7 +39,7 @@ Two audiences, two pages, so neither reads the other's offer:
 | 2 | Perfect for *those who*… | Home page → Perfect for those who… |
 | 3 | Start with your *intro pack*: one card (€260, 4 sessions, use within 2 months) and a line on the ongoing price | Home page → Intro pack section; the card: Offers & prices → Intro pack |
 | 4 | How it *works*: four steps | Home page → How it works |
-| 5 | What clients *notice*: Google rating bar (5.0, 5 reviews) and review cards you scroll with arrows or swipe, Read more opens a review in place; no link to Google | Heading: Service pages → Private sessions → Testimonials heading. Rating: Site settings → Google rating. Reviews: Testimonials (Where it's from: Google review, Stars, Date, permission ticked) |
+| 5 | What clients *notice* (with Google rating when set) and All reviews on Google | Heading: Service pages → Private sessions → Testimonials heading. Quotes: Testimonials |
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
 | 7 | Good to *know* (questions) | Service pages → Private sessions → Questions |
 | 8 | Closing band: Book your intro pack / Ask a question | Home page → Closing band |
@@ -104,7 +104,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 - Tokens: espresso CTA with hover, note (butter), WhatsApp green (unused now), deboss filter, logo sizes.
 - Text styles: `type-note` (small sticky-note headline on phones), `type-longform` (Markdown pages).
 - Patterns: `Checklist`, `EnquiryForm`, `EnquiryDialog`, `TrustLine`, `NumberedList`, `AnalyticsOptOut`,
-  `StickyNote` (unused now), `ReviewCarousel`, `StarRating` (ui), `PhotoCollage`, `BgVideo`; `OfferCard` supports a side photo and a single card
+  `StickyNote` (unused now), `PhotoCollage`, `BgVideo`; `OfferCard` supports a side photo and a single card
   spans the full width; `TestimonialGrid` has a reviews link, a rating line and `cardTone`; `Hero` split
   layout supports video and a `trust` slot. Icons: `star`, `play` added.
 
