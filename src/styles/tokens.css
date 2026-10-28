@@ -72,11 +72,18 @@
   --logo-mark: var(--ochre-600);
 }
 
+/* Alternate sections (and the footer): butter yellow, the same as the headline highlight (Chelsea, 28 Oct).
+   Lines and hover fills are the butter tinted with espresso; ticks and quote marks go brown so they read
+   on the yellow; anything that would use butter itself (highlights, pills) turns cream instead.
+   The logo keeps its ochre. */
 [data-tone='alt'] {
-  --surface: var(--sage-200);
-  --surface-alt: var(--sage-300);
+  --surface: var(--butter-300);
+  --surface-alt: color-mix(in srgb, var(--brown-900) 7%, var(--butter-300));
   --surface-raised: var(--cream-50);
-  --line: var(--sage-300);
+  --line: color-mix(in srgb, var(--brown-900) 18%, var(--butter-300));
+  --accent: var(--brown-700);
+  --accent-ink: var(--cream-100);
+  --note: var(--cream-50);
 }
 
 [data-tone='dark'] {

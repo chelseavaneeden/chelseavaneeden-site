@@ -71,8 +71,7 @@ enquiry:
           short: Planning
           options:
             - Retreat
-            - Event or festival
-            - Team wellbeing
+            - Event
             - Brand collaboration
             - Something else
         - label: When?
@@ -97,12 +96,8 @@ enquiry:
             - 25–50
             - 50+
       fields:
-        - name: organisation
-          label: Organisation or event
-          type: text
-          required: false
         - name: info
-          label: More information
+          label: More information or questions
           type: textarea
           required: false
           placeholder: Dates, venue, ideas…
