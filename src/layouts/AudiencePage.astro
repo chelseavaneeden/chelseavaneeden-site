@@ -11,6 +11,7 @@
  */
 import Base from './Base.astro';
 import Section from '../components/ui/Section.astro';
+import Checklist from '../components/patterns/Checklist.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import FeatureGrid from '../components/patterns/FeatureGrid.astro';
@@ -45,7 +46,7 @@ const hero = resolveHeroLinks(page.hero, site);
     </Hero>
 
     <Section space="m" tone="alt">
-      <FeatureGrid {...page.whoFor} variant="lines" />
+      <Checklist {...page.whoFor} />
     </Section>
 
     {

@@ -15,16 +15,12 @@ hero:
   imageFocus: center
   layout: split
 whoFor:
-  title: Who I work *with*.
+  title: Who I work *with*…
   items:
-    - title: Retreat hosts
-      text: Classes that fit the rhythm of your retreat, from gentle mornings to stronger sessions, with options for every level.
-    - title: Festivals & events
-      text: Feel-good sessions for small or large groups, indoors or out. Beginners welcome.
-    - title: Teams & companies
-      text: Corporate wellbeing and team sessions that ease desk stiffness and stress.
-    - title: Brands
-      text: Classes and content for wellness brand events, launches and collaborations.
+    - Retreat hosts
+    - Luxury events
+    - Teams & companies
+    - Brands
 steps:
   title: How it *works*.
   items:
@@ -46,7 +42,7 @@ faq:
     - question: Is it suitable for beginners?
       answer: Yes. Sessions are mixed-level and beginner-friendly, with options to make every exercise easier or harder.
     - question: How much does it cost?
-      answer: Every event is different, so I send a tailored proposal based on your dates, location, group size and travel.
+      answer: Whether it’s an intimate retreat, a festival, or a corporate gathering, each experience is tailored to the event and its needs. Sessions start at €150, with room to explore collaborations that feel meaningful and aligned.
     - question: How far ahead should I get in touch?
       answer: As early as you can, especially for peak retreat and festival season.
 enquiry:

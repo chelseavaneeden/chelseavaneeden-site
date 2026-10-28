@@ -22,18 +22,12 @@ whoFor:
   title: For bodies that *carry a lot*.
   intro: Most clients come to me with something specific to work on. Every session is planned around your body, your history and your week.
   items:
-    - title: Injury & rehab
-      text: Rebuild strength and trust in your body after injury or surgery, working alongside your physio when you have one.
-    - title: Chronic pain
-      text: Back, neck and shoulder pain that keeps coming back. We work on the patterns behind it, gently and progressively.
-    - title: Pre & post-natal
-      text: Stay strong through pregnancy, then rebuild your core, pelvic floor and confidence afterwards, at the right pace.
-    - title: Posture & desk-body
-      text: For long days at a desk or on flights. Better alignment, freer breathing and the energy to lead.
-    - title: Stress & nervous system
-      text: Somatic and myofascial work that helps your body settle, so strength comes with ease rather than tension.
-    - title: Strength for life
-      text: No injury, just a goal. Precise, challenging work that makes you stronger, more mobile and more balanced.
+    - Injury & rehab
+    - Chronic pain
+    - Pre & post-natal
+    - Posture & desk-body
+    - Stress & nervous system
+    - Strength for life
 formats:
   eyebrow: Where we train
   title: Online, *wherever you are*.

@@ -252,7 +252,8 @@ const audiencePages = defineCollection({
         layout: z.enum(['split', 'overlay']).default('split'),
         textPosition: z.enum(['center', 'left']).default('left'),
       }),
-      whoFor: z.object({ ...sectionHead, items: titledItems }),
+      /** One-line ticked points, the same look as "Perfect for those who…" on the home page. */
+      whoFor: z.object({ ...sectionHead, items: list(z.string()) }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** Heading above the offer cards; only shown when this audience has published offers. */

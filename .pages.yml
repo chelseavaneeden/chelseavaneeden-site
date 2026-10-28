@@ -211,13 +211,7 @@ content:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true }
           - { name: intro, label: Intro text, type: text }
-          - name: items
-            label: Points
-            type: object
-            list: true
-            fields:
-              - { name: title, label: Title, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+          - { name: items, label: Points (one line each, shown with a tick), type: string, list: true, required: true }
       - name: formats
         label: Formats / where we work
         type: object
