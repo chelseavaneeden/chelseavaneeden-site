@@ -30,6 +30,9 @@
   --brown-300: #cdbbaa;
   --butter-300: #f1ef83;
   --butter-100: #fffda6;
+  /* Butter with a little espresso mixed in (7% and 18%), for fills and lines on butter sections. */
+  --butter-400: #e3e07b;
+  --butter-500: #cec96e;
   --amber-600: #9f5c09;
   --amber-300: #d99a4e;
   --ochre-600: #95601e;
@@ -78,9 +81,9 @@
    The logo keeps its ochre. */
 [data-tone='alt'] {
   --surface: var(--butter-300);
-  --surface-alt: color-mix(in srgb, var(--brown-900) 7%, var(--butter-300));
+  --surface-alt: var(--butter-400);
   --surface-raised: var(--cream-50);
-  --line: color-mix(in srgb, var(--brown-900) 18%, var(--butter-300));
+  --line: var(--butter-500);
   --accent: var(--brown-700);
   --accent-ink: var(--cream-100);
   --note: var(--cream-50);
