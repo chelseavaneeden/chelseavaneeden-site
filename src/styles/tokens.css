@@ -36,8 +36,9 @@
   --amber-600: #9f5c09;
   --amber-300: #d99a4e;
   --ochre-600: #95601e;
-  --sage-200: #d8dac0;
-  --sage-300: #c3c6a3;
+  /* Fresher sage for the green sections (Chelsea, 28 Oct; was #d8dac0 / #c3c6a3), with a deeper shade for lines. */
+  --sage-200: #c6dac0;
+  --sage-300: #a9c2a1;
   /* Green options compared on /fonts */
   --sage-cool-200: #ccd3c4;
   --pistachio-200: #dfe5c6;
