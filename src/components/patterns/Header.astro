@@ -12,9 +12,20 @@ interface Props {
   cta: { label: string; href: string };
   tone?: 'light' | 'dark';
   lang?: Lang;
+  /** Section ids on this page (e.g. faq). A menu link to /#faq then jumps to this page's own FAQ. */
+  sections?: string[];
 }
 
-const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
+const { nav: allNav, cta, tone = 'light', lang = 'en', sections = [] } = Astro.props;
+const local = (href: string) => {
+  const id = /^\/#(.+)$/.exec(href)?.[1];
+  return id && sections.includes(id) ? `#${id}` : href;
+};
+const nav = allNav.map((item) => ({
+  ...item,
+  href: local(item.href),
+  children: item.children.map((child) => ({ ...child, href: local(child.href) })),
+}));
 ---
 
 <header data-tone={tone} class="sticky top-0 z-(--z-header) border-b border-line">
@@ -65,7 +76,7 @@ const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
       <Button href={cta.href} size="s" event="header">{cta.label}</Button>
     </nav>
 
-    <details class="group/mobile lg:hidden" data-track="menu">
+    <details class="group/mobile lg:hidden" data-track="menu" data-mobile-menu>
       <summary
         class="flex size-11 cursor-pointer items-center justify-center rounded-control text-ink text-2xl"
         aria-label={t(lang, 'nav.menu')}
@@ -116,5 +127,12 @@ const { nav, cta, tone = 'light', lang = 'en' } = Astro.props;
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') dropdowns.forEach((d) => (d.open = false));
+  });
+
+  // Close the phone menu when one of its links is tapped, so jumps within the page aren't hidden behind it.
+  document.querySelectorAll<HTMLDetailsElement>('details[data-mobile-menu]').forEach((menu) => {
+    menu.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) menu.open = false;
+    });
   });
 </script>

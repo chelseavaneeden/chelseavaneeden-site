@@ -38,7 +38,7 @@ const hero = resolveHeroLinks(page.hero, site);
 ---
 
 <Base title={page.seo.title} description={page.seo.description} altColour={page.sectionColour}>
-  <Header nav={site.nav} cta={page.hero.primary} />
+  <Header nav={site.nav} cta={page.hero.primary} sections={[testimonials.length > 0 && 'reviews', page.faq && 'faq'].filter((s): s is string => !!s)} />
 
   <main id="main">
     <Hero layout="split" {...hero}>
@@ -77,7 +77,7 @@ const hero = resolveHeroLinks(page.hero, site);
 
     {
       testimonials.length > 0 && (
-        <Section space="m">
+        <Section space="m" id="reviews">
           <TestimonialGrid eyebrow={page.proof.eyebrow} title={page.proof.title} testimonials={testimonials} />
         </Section>
       )
@@ -85,7 +85,7 @@ const hero = resolveHeroLinks(page.hero, site);
 
     {
       page.faq && (
-        <Section space="m" tone="alt">
+        <Section space="m" tone="alt" id="faq">
           <FAQAccordion {...page.faq} />
         </Section>
       )

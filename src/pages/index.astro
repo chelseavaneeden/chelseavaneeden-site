@@ -34,7 +34,7 @@ const testimonials = await getTestimonials('private');
 ---
 
 <Base title={page.seo.title} description={page.seo.description}>
-  <Header nav={site.nav} cta={site.bookCta} />
+  <Header nav={site.nav} cta={site.bookCta} sections={['reviews', 'about', 'faq']} />
 
   <main id="main">
     <Hero layout="split" {...hero}>
