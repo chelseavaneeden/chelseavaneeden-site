@@ -89,8 +89,11 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 
 - **Logo**: the `signature` variant (swoosh + script) in the header and footer, so the name reads.
   The debossed swoosh (`deboss`) is still available.
-- **Buttons**: espresso with cream text on light sections, butter on dark bands (`--cta`); butter stays
-  for notes and highlights (`--note`).
+- **Colours** (brand style guide, 29 Oct): Deep Forest Green `#213926` for headings, the logo and ticks;
+  Dark Chocolate `#3B2620` for all copy; Warm Cream `#F5EDE0` background; Soft Oat `#E8DCC8` alternate
+  sections and footer; Mustard Yellow `#FFD751` for buttons (green text) and highlighted words. Dark
+  bands (intro card, closing band) are forest green with mustard buttons. Each page's "Section colour"
+  is Soft oat (default) or Soft mustard; both pages use oat.
 - **Footer**: two rows of links, Book your intro pack and Ask a question (the form pop-up), then WhatsApp and
   Instagram (both open a new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.
   No links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
@@ -101,7 +104,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 ## Design system additions on this branch
 
 - Fonts: Playfair Display (headings), Host Grotesk (body), Martian Mono (labels).
-- Tokens: espresso CTA with hover, note (butter), WhatsApp green (unused now), deboss filter, logo sizes.
+- Tokens: the style-guide palette, a `heading` colour (green) separate from `ink` (chocolate copy), mustard CTA
+  with hover, note (mustard), WhatsApp green (unused now), deboss filter, logo sizes.
 - Text styles: `type-note` (small sticky-note headline on phones), `type-longform` (Markdown pages).
 - Patterns: `Checklist`, `EnquiryForm`, `EnquiryDialog`, `TrustLine`, `NumberedList`, `AnalyticsOptOut`,
   `StickyNote` (unused now), `PhotoCollage`, `BgVideo`; `OfferCard` supports a side photo and a single card
@@ -142,7 +146,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 2. **Draft copy to approve**: home intro line, two new "Perfect for" ticks (pregnancy, stress), the About
    rewrite and its one personal line, How it works, the whole organiser page, the forms, Privacy.
 3. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 48 hours.
-4. **Butter vs espresso buttons**: espresso was chosen for contrast; butter is a one-line token change back.
+4. **Mustard buttons on cream** stand out by colour more than by lightness (1.2:1 against the cream); the
+   green text inside them is very clear. Forest green buttons are a one-line token change if wanted.
 5. **Google reviews link** is a long search URL; a Business Profile link (g.page/r/…) would last longer.
 
 ## Testing tips
