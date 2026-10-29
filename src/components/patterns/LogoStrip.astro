@@ -1,6 +1,10 @@
 ---
-// A quiet band of logos (places Chelsea trained or worked with), all in one colour. One row on wide
-// screens, two columns on phones. Logos are not links, so visitors stay on the site.
+// A quiet band of logos (places Chelsea trained or worked with), all in one colour, gliding slowly
+// from right to left on a loop. It pauses on hover. For people who prefer reduced motion it is a
+// still, centred row. Logos are not links, so visitors stay on the site.
+//
+// The row is repeated so it always fills the widest screens, then the whole track moves by half its
+// width, which lines the second half up exactly where the first began (a seamless loop).
 import type { ImageMetadata } from 'astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import LogoMark from '../ui/LogoMark.astro';
@@ -11,17 +15,73 @@ interface Props {
 }
 
 const { label, items } = Astro.props;
+// Rows per half of the track: enough for a few logos to fill a very wide screen.
+const rowsPerHalf = Math.max(1, Math.ceil(12 / items.length));
+const rows = rowsPerHalf * 2;
 ---
 
 <div class="flex flex-col items-center gap-8 md:gap-10">
   {label && <Eyebrow>{label}</Eyebrow>}
-  <ul class="grid w-full grid-cols-2 items-center justify-items-center gap-x-8 gap-y-10 text-ink-muted md:flex md:flex-wrap md:justify-evenly md:gap-x-16">
-    {
-      items.map((logo) => (
-        <li class="flex items-center justify-center">
-          <LogoMark name={logo.name} image={logo.image} />
-        </li>
-      ))
-    }
-  </ul>
+  <div class="logo-strip w-full overflow-hidden">
+    <div class="logo-track flex w-max">
+      {
+        Array.from({ length: rows }, (_, row) => (
+          <ul
+            class="logo-row flex shrink-0 items-center gap-x-(--logo-strip-gap) pr-(--logo-strip-gap) text-ink-muted"
+            aria-hidden={row > 0 ? 'true' : undefined}
+            data-copy={row > 0 ? '' : undefined}
+          >
+            {items.map((logo) => (
+              <li class="flex shrink-0 items-center justify-center">
+                <LogoMark name={logo.name} image={logo.image} />
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
 </div>
+
+<style>
+  .logo-strip {
+    -webkit-mask-image: linear-gradient(to right, transparent, black var(--logo-strip-fade), black calc(100% - var(--logo-strip-fade)), transparent);
+    mask-image: linear-gradient(to right, transparent, black var(--logo-strip-fade), black calc(100% - var(--logo-strip-fade)), transparent);
+  }
+
+  .logo-track {
+    animation: logo-glide var(--logo-strip-duration) linear infinite;
+  }
+
+  .logo-strip:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes logo-glide {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Reduced motion: one still, centred row (wrapping on small screens), no fade at the edges. */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-strip {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .logo-track {
+      animation: none;
+      width: 100%;
+      justify-content: center;
+    }
+    .logo-row {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: var(--space-stack-l);
+      padding-inline: var(--gutter);
+    }
+    .logo-row[data-copy] {
+      display: none;
+    }
+  }
+</style>
