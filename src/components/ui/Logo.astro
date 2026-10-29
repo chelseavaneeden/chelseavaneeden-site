@@ -7,7 +7,7 @@
  * signature: the full signature, swoosh plus the "helsea" script.
  *
  * The artwork is used as masks, so its colours come from tokens: the signature's swoosh uses
- * --logo-mark (forest green, mustard on dark tones) and the script uses the heading colour.
+ * --logo-mark (forest green, mustard on dark tones) and so does the script, so the whole signature is one colour.
  */
 export type LogoSize = 's' | 'm' | 'l';
 export type LogoVariant = 'deboss' | 'signature';
@@ -40,7 +40,7 @@ const debossSizes: Record<LogoSize, string> = {
       <span class="logo-swoosh absolute inset-0 bg-surface-alt" aria-hidden="true" />
     </span>
   ) : (
-    <span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-heading', heights[size], className]}>
+    <span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-logo-mark', heights[size], className]}>
       <span class="logo-mark absolute inset-0 bg-logo-mark" aria-hidden="true" />
       <span class="logo-word absolute inset-0 bg-current" aria-hidden="true" />
     </span>

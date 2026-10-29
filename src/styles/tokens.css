@@ -6,8 +6,8 @@
  *
  * Layers in this file:
  *   1. Brand palette   → named colour ramps (primitives). From the brand style guide (29 Oct):
- *                        forest green headings, chocolate copy, cream and oat backgrounds,
- *                        mustard for buttons and highlights.
+ *                        chocolate for all words, forest green logo, ticks and dark bands,
+ *                        cream and oat backgrounds, mustard for buttons, highlights and quote marks.
  *   2. Semantic colours → what components use (surface, ink, accent…), per section tone.
  *   3. Tailwind mapping → turns semantic tokens into utilities (bg-surface, text-ink, rounded-card…).
  *   4. Shared scales    → type steps, spacing, layout, motion.
@@ -21,10 +21,10 @@
    buttons, highlights and moments of energy; Dark Chocolate for copy. The five guide colours are
    marked; the rest are shades made from them. */
 :root {
-  --forest-900: #213926; /* Deep Forest Green: headings, logo, ticks, dark bands */
+  --forest-900: #213926; /* Deep Forest Green: logo, ticks, dark bands */
   --forest-800: #2b4831;
   --forest-700: #3a5a40;
-  --chocolate-900: #3b2620; /* Dark Chocolate: copy */
+  --chocolate-900: #3b2620; /* Dark Chocolate: all words */
   --cream-50: #fbf6ee;
   --cream-100: #f5ede0; /* Warm Cream: background */
   --cream-300: #e6d9c4;
@@ -55,19 +55,21 @@
   --surface: var(--cream-100);
   --surface-alt: var(--oat-300);
   --surface-raised: var(--cream-50);
-  /* Copy is Dark Chocolate; headings (titles, step and card titles, questions) are forest green. */
+  /* All words are Dark Chocolate: copy, headings, button labels and highlighted words.
+     Green stays for the logo, ticks and the dark bands. */
   --ink: var(--chocolate-900);
   --ink-muted: var(--chocolate-900);
-  --heading: var(--forest-900);
+  --heading: var(--chocolate-900);
   --accent: var(--forest-900);
   --accent-ink: var(--cream-100);
-  /* Main buttons: mustard with green text, as the style guide asks. */
+  /* Main buttons: mustard, as the style guide asks. */
   --cta: var(--mustard-400);
-  --cta-ink: var(--forest-900);
+  --cta-ink: var(--chocolate-900);
   --cta-hover: var(--mustard-300);
-  /* Mustard also marks highlighted words and small labels. */
+  /* Mustard also marks highlighted words and small labels, and colours the quotation marks. */
   --note: var(--mustard-400);
-  --note-ink: var(--forest-900);
+  --note-ink: var(--chocolate-900);
+  --quote-mark: var(--mustard-400);
   --line: var(--cream-300);
   --focus: var(--forest-900);
   --success: var(--forest-700);
@@ -103,10 +105,10 @@
   --accent: var(--mustard-400);
   --accent-ink: var(--forest-900);
   --cta: var(--mustard-400);
-  --cta-ink: var(--forest-900);
+  --cta-ink: var(--chocolate-900);
   --cta-hover: var(--mustard-300);
   --note: var(--mustard-400);
-  --note-ink: var(--forest-900);
+  --note-ink: var(--chocolate-900);
   --line: var(--forest-700);
   --focus: var(--mustard-400);
   --logo-mark: var(--mustard-400);
@@ -130,6 +132,7 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-heading: var(--heading);
+  --color-quote-mark: var(--quote-mark);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-cta: var(--cta);

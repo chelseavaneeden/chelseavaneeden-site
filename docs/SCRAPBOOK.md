@@ -89,10 +89,11 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 
 - **Logo**: the `signature` variant (swoosh + script) in the header and footer, so the name reads.
   The debossed swoosh (`deboss`) is still available.
-- **Colours** (brand style guide, 29 Oct): Deep Forest Green `#213926` for headings, the logo and ticks;
-  Dark Chocolate `#3B2620` for all copy; Warm Cream `#F5EDE0` background; Soft Oat `#E8DCC8` alternate
-  sections and footer; Mustard Yellow `#FFD751` for buttons (green text) and highlighted words. Dark
-  bands (intro card, closing band) are forest green with mustard buttons. Each page's "Section colour"
+- **Colours** (brand style guide, 29 Oct): Dark Chocolate `#3B2620` for every word (copy, headings,
+  button labels, highlighted words); Deep Forest Green `#213926` for the logo, ticks and the dark bands
+  (intro card, closing band, where the words are cream); Warm Cream `#F5EDE0` background; Soft Oat
+  `#E8DCC8` alternate sections and footer; Mustard Yellow `#FFD751` for buttons, highlights and the
+  quotation marks on reviews. Each page's "Section colour"
   is Soft oat (default) or Soft mustard; both pages use oat.
 - **Footer**: two rows of links, Book your intro pack and Ask a question (the form pop-up), then WhatsApp and
   Instagram (both open a new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.

@@ -12,7 +12,7 @@ const { quote, name, context, align = 'left' } = Astro.props;
 ---
 
 <figure class:list={['flex max-w-narrow flex-col gap-8', align === 'center' && 'mx-auto items-center text-center']}>
-  <span class="type-display-l text-accent leading-none" aria-hidden="true">“</span>
+  <span class="type-display-l text-quote-mark leading-none" aria-hidden="true">“</span>
   <Text as="blockquote" variant="quote" class="-mt-6">{quote}</Text>
   <figcaption class="flex flex-col gap-1">
     <span class="type-label text-ink">{name}</span>
