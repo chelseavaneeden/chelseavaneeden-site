@@ -200,6 +200,9 @@
   --duration-fast: 160ms;
   --duration-base: 320ms;
   --duration-slow: 700ms;
+  /* Logo banner: the height of a typical (4:1) logo; squarer logos are a little taller. */
+  --logo-strip-height: clamp(2rem, 1.6rem + 1.2vw, 3rem);
+
   /* Items that fade in as you scroll (data-reveal): each fade, the pause between items, how far they rise. */
   --duration-reveal: 900ms;
   --reveal-stagger: 350ms;

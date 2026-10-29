@@ -31,17 +31,6 @@ perfectFor:
 investment:
   title: Start with your *intro pack*.
   note: After your intro pack, continue with a monthly package, from €260 a month.
-steps:
-  title: How it *works*.
-  items:
-    - title: Book your intro pack
-      text: Pay securely online via Stripe.
-    - title: Pick your times
-      text: You'll receive an email with a link to book your sessions.
-    - title: First session
-      text: From your first session, we'll see how you're moving and chat about your goals for upcoming sessions.
-    - title: Your plan
-      text: I'll create a personalised plan around your goals and schedule.
 about:
   title: Hi, I’m *Chelsea*.
   paragraphs:
@@ -49,6 +38,17 @@ about:
     - As a BASI Comprehensive Pilates Instructor, I continue learning about the connections between stress, movement and chronic pain. Specialising in movement for mental health.
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session
+logos:
+  label: Trained & worked with
+  items:
+    - name: BASI Pilates Graduate
+      image: ../../assets/media/logos/basi-pilates-graduate.png
+    - name: Insight Timer
+      image: ../../assets/media/logos/insight-timer.png
+    - name: Datchet Osteopath Clinic
+      image: ../../assets/media/logos/datchet-osteopath-clinic.png
+    - name: Elf
+      image: ../../assets/media/logos/elf.png
 ctaBand:
   title: Ready when *you* are.
   text: Start your intro pack, to feel the benefits of movement for your mental health.

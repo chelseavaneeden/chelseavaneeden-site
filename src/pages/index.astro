@@ -12,6 +12,7 @@ import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
 import Text from '../components/ui/Text.astro';
 import Checklist from '../components/patterns/Checklist.astro';
+import LogoStrip from '../components/patterns/LogoStrip.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import Footer from '../components/patterns/Footer.astro';
@@ -102,6 +103,14 @@ const testimonials = await getTestimonials('private');
         />
       </div>
     </Section>
+
+    {
+      page.logos && (
+        <Section space="s" class="border-y border-line bg-surface-raised">
+          <LogoStrip {...page.logos} />
+        </Section>
+      )
+    }
 
     {
       shared.faq && (

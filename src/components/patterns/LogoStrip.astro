@@ -1,0 +1,27 @@
+---
+// A quiet band of logos (places Chelsea trained or worked with), all in one colour. One row on wide
+// screens, two columns on phones. Logos are not links, so visitors stay on the site.
+import type { ImageMetadata } from 'astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import LogoMark from '../ui/LogoMark.astro';
+
+interface Props {
+  label?: string;
+  items: { name: string; image: ImageMetadata }[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<div class="flex flex-col items-center gap-8 md:gap-10">
+  {label && <Eyebrow>{label}</Eyebrow>}
+  <ul class="grid w-full grid-cols-2 items-center justify-items-center gap-x-8 gap-y-10 text-ink-muted md:flex md:flex-wrap md:justify-evenly md:gap-x-16">
+    {
+      items.map((logo) => (
+        <li class="flex items-center justify-center">
+          <LogoMark name={logo.name} image={logo.image} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

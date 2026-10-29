@@ -211,6 +211,8 @@ const pages = defineCollection({
         imageAlt: z.string(),
         cta: optionalLink,
       }),
+      /** Logo banner under "Meet Chelsea": places she trained or worked with. Empty list hides it. */
+      logos: optionalSection({ label: optionalText, items: list(z.object({ name: z.string(), image: image() })) }),
       /** The intro pack section: heading above the offer card, note under it (e.g. the ongoing price). */
       investment: z.object({
         eyebrow: optionalText,

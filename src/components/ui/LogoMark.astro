@@ -1,0 +1,28 @@
+---
+// One logo in a logo banner, shown in the text colour (the file is used as a stencil, so every logo
+// matches the site). Files must be transparent PNG or SVG. Sized by area, so wide and compact logos
+// look equally important: wider logos get a little shorter, compact ones a little taller.
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  name: string;
+  image: ImageMetadata;
+}
+
+const { name, image } = Astro.props;
+const ratio = image.width / image.height;
+// Relative height: 1 for a 4:1 logo, more for squarer ones, less for longer ones.
+const scale = Math.sqrt(4 / ratio).toFixed(3);
+---
+
+<span role="img" aria-label={name} class="logo-strip-mark block bg-current"></span>
+
+<style define:vars={{ src: `url("${image.src}")`, ratio, scale }}>
+  .logo-strip-mark {
+    aspect-ratio: var(--ratio);
+    height: calc(var(--logo-strip-height) * var(--scale));
+    max-width: 100%;
+    -webkit-mask: var(--src) center / contain no-repeat;
+    mask: var(--src) center / contain no-repeat;
+  }
+</style>

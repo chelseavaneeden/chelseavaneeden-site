@@ -82,6 +82,19 @@ content:
           - { name: paragraphs, label: Paragraphs, type: text, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
+      - name: logos
+        label: Logo banner
+        type: object
+        description: 'Shown under Meet Chelsea, all in one colour. Upload transparent PNG or SVG files (no white box behind the logo). Only add places you have worked with, with their OK. Leave the list empty to hide.'
+        fields:
+          - { name: label, label: Small line above the logos, type: string, description: 'e.g. Trained & worked with. Leave empty to hide.' }
+          - name: items
+            label: Logos
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Company name, type: string, required: true, description: 'Read out by screen readers.' }
+              - { name: image, label: Logo file, type: image, required: true }
       - name: investment
         label: Intro pack section
         type: object
