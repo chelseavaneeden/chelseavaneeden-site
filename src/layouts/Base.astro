@@ -12,11 +12,11 @@ interface Props {
   noindex?: boolean;
   /** An analytics event to record when this page opens, e.g. "intro_purchase" on /welcome. */
   pageEvent?: string;
-  /** Colour of the alternate sections and footer: sage (default) or butter (see tokens.css). */
-  altColour?: 'sage' | 'butter';
+  /** Colour of the alternate sections and footer: oat (default) or mustard (see tokens.css). */
+  altColour?: 'oat' | 'mustard';
 }
 
-const { title, description, lang = 'en', noindex = false, pageEvent, altColour = 'sage' } = Astro.props;
+const { title, description, lang = 'en', noindex = false, pageEvent, altColour = 'oat' } = Astro.props;
 
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev preview out of Google while the live Framer site carries on.

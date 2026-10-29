@@ -27,7 +27,7 @@ const cols = items.length % 3 === 0 || items.length > 4 ? 'lg:grid-cols-3' : 'lg
             variant === 'cards' ? 'rounded-card bg-surface-raised p-7 md:p-8' : 'border-t border-line py-7',
           ]}
         >
-          <h3 class="type-h3 text-ink">{item.title}</h3>
+          <h3 class="type-h3 text-heading">{item.title}</h3>
           <Text variant="body-s" tone="muted" text={item.text} />
         </li>
       ))

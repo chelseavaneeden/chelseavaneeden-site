@@ -4,7 +4,7 @@ const escapeHtml = (s: string) =>
 /**
  * Lets content editors emphasise words with *asterisks* (rendered as <em>), which the
  * design system styles per theme (e.g. serif italics), highlight words with ==double equals==
- * (rendered as <mark>, a butter-yellow marker), and start a new line where they pressed Enter.
+ * (rendered as <mark>, a mustard-yellow marker), and start a new line where they pressed Enter.
  * Everything else is escaped.
  */
 export function emphasis(text: string): string {

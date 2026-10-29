@@ -43,7 +43,7 @@ const doors = items.map((d, i) => ({ ...d, number: String(i + 1).padStart(2, '0'
               class="group/door grid grid-cols-12 items-baseline gap-x-4 gap-y-2 py-7 transition-colors md:py-9"
             >
               <span class="type-eyebrow col-span-2 text-ink-muted md:col-span-1">{door.number}</span>
-              <span class="type-h2 col-span-10 text-ink transition-transform duration-(--duration-base) ease-soft group-hover/door:translate-x-2 md:col-span-5">
+              <span class="type-h2 col-span-10 text-heading transition-transform duration-(--duration-base) ease-soft group-hover/door:translate-x-2 md:col-span-5">
                 {door.title}
               </span>
               <span class="type-body col-span-10 col-start-3 text-ink-muted md:col-span-5 md:col-start-auto">{door.text}</span>
@@ -72,7 +72,7 @@ const doors = items.map((d, i) => ({ ...d, number: String(i + 1).padStart(2, '0'
             >
               <span class="type-eyebrow text-ink-muted">{door.number}</span>
               <span class="flex flex-col gap-3">
-                <span class:list={[i === 0 ? 'type-h1' : 'type-h2', 'text-ink']}>{door.title}</span>
+                <span class:list={[i === 0 ? 'type-h1' : 'type-h2', 'text-heading']}>{door.title}</span>
                 <Text as="span" variant="body-s" tone="muted">
                   {door.text}
                 </Text>

@@ -52,7 +52,7 @@
     font-style: italic;
   }
 
-  /* Highlighted words (==words== in the CMS): a butter marker behind italic text. */
+  /* Highlighted words (==words== in the CMS): a mustard marker behind italic text. */
   mark {
     font-style: italic;
     color: var(--note-ink);

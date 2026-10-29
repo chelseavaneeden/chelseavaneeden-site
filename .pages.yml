@@ -165,12 +165,12 @@ content:
       - name: sectionColour
         label: Section colour
         type: select
-        default: sage
+        default: oat
         description: Colour of the alternating sections and the footer on this page.
         options:
           values:
-            - { value: sage, label: Sage green }
-            - { value: butter, label: Butter yellow }
+            - { value: oat, label: Soft oat }
+            - { value: mustard, label: Soft mustard }
       - name: seo
         label: Google listing
         type: object

@@ -16,7 +16,7 @@ const view = priceView(offer, lang, context);
 <div class:list={['flex flex-col gap-1', className]}>
   {
     view.kind === 'quote' ? (
-      <p class="type-h3 text-ink">{view.label}</p>
+      <p class="type-h3 text-heading">{view.label}</p>
     ) : (
       <p class="flex flex-wrap items-baseline gap-x-2">
         {view.prefix && <span class="type-eyebrow text-ink-muted">{view.prefix}</span>}

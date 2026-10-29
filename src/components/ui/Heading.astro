@@ -2,7 +2,7 @@
 import { emphasis } from '../../lib/text';
 
 export type HeadingVariant = 'display-xl' | 'display-l' | 'h1' | 'h2' | 'h3' | 'h4';
-export type TextTone = 'ink' | 'muted' | 'accent';
+export type TextTone = 'heading' | 'ink' | 'muted' | 'accent';
 
 interface Props {
   /** Document outline level (h1–h6). Independent of how it looks. */
@@ -16,7 +16,7 @@ interface Props {
   class?: string;
 }
 
-const { level = 2, variant = 'h2', tone = 'ink', text, id, class: className } = Astro.props;
+const { level = 2, variant = 'h2', tone = 'heading', text, id, class: className } = Astro.props;
 
 const Tag = `h${level}` as 'h1';
 const variantClass: Record<HeadingVariant, string> = {
@@ -27,7 +27,7 @@ const variantClass: Record<HeadingVariant, string> = {
   h3: 'type-h3',
   h4: 'type-h4',
 };
-const toneClass: Record<TextTone, string> = { ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' };
+const toneClass: Record<TextTone, string> = { heading: 'text-heading', ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' };
 ---
 
 {

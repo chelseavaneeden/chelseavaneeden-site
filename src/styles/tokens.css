@@ -5,9 +5,9 @@
  * Everything else references these tokens; scripts/check-tokens.mjs enforces this at build time.
  *
  * Layers in this file:
- *   1. Brand palette   → named colour ramps (primitives). Taken from the existing brand:
- *                        amber buttons, chocolate text, espresso headings, linen background,
- *                        ochre logo, plus sage as the calm secondary tone.
+ *   1. Brand palette   → named colour ramps (primitives). From the brand style guide (29 Oct):
+ *                        forest green headings, chocolate copy, cream and oat backgrounds,
+ *                        mustard for buttons and highlights.
  *   2. Semantic colours → what components use (surface, ink, accent…), per section tone.
  *   3. Tailwind mapping → turns semantic tokens into utilities (bg-surface, text-ink, rounded-card…).
  *   4. Shared scales    → type steps, spacing, layout, motion.
@@ -17,32 +17,32 @@
  */
 
 /* 1. BRAND PALETTE ------------------------------------------------------- */
-/* Concept "Scrapbook": cream paper, butter-yellow notes, espresso bands, sage. */
+/* Brand style guide: let green, Warm Cream and Soft Oat carry the brand; mustard sparingly for
+   buttons, highlights and moments of energy; Dark Chocolate for copy. The five guide colours are
+   marked; the rest are shades made from them. */
 :root {
-  --cream-50: #fffcf5;
-  --cream-100: #faf4e9;
-  --cream-200: #f0e7d8;
-  --cream-300: #e2d6c3;
+  --forest-900: #213926; /* Deep Forest Green: headings, logo, ticks, dark bands */
+  --forest-800: #2b4831;
+  --forest-700: #3a5a40;
+  --chocolate-900: #3b2620; /* Dark Chocolate: copy */
+  --cream-50: #fbf6ee;
+  --cream-100: #f5ede0; /* Warm Cream: background */
+  --cream-300: #e6d9c4;
+  --oat-300: #e8dcc8; /* Soft Oat: alternate sections and footer */
+  --oat-400: #ddcdb2;
+  --oat-500: #cfbc9c;
+  --mustard-400: #ffd751; /* Mustard Yellow: buttons and highlights */
+  --mustard-300: #ffe388;
+  /* Mustard mixed into the cream (about 30%, 50%, 65%), for the optional mustard sections. */
+  --mustard-tint-100: #f8e6b5;
+  --mustard-tint-200: #f0d68c;
+  --mustard-tint-300: #e2c477;
   --linen-0: #ffffff;
-  --brown-900: #301a11;
-  --brown-700: #572e1e;
-  --brown-500: #7a5e4f;
-  --brown-300: #cdbbaa;
-  --butter-300: #f1ef83;
-  --butter-100: #fffda6;
-  /* Butter with a little espresso mixed in (7% and 18%), for fills and lines on butter sections. */
-  --butter-400: #e3e07b;
-  --butter-500: #cec96e;
-  --amber-600: #9f5c09;
-  --amber-300: #d99a4e;
-  --ochre-600: #95601e;
+  /* Earlier greens, still compared on /fonts */
   --sage-200: #d8dac0;
-  --sage-300: #c3c6a3;
-  /* Green options compared on /fonts */
   --sage-cool-200: #ccd3c4;
   --pistachio-200: #dfe5c6;
   --oat-200: #e8dccb;
-  --sage-700: #4f5b44;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
   /* WhatsApp's official brand green, only for the WhatsApp button. */
@@ -53,64 +53,63 @@
 :root,
 [data-tone='light'] {
   --surface: var(--cream-100);
-  --surface-alt: var(--cream-200);
+  --surface-alt: var(--oat-300);
   --surface-raised: var(--cream-50);
-  --ink: var(--brown-900);
-  --ink-muted: var(--brown-700);
-  --accent: var(--amber-600);
-  --accent-ink: var(--linen-0);
-  /* Main buttons: espresso on light sections, so they stand out from the cream (butter on cream is 1.1:1). */
-  --cta: var(--brown-900);
-  --cta-ink: var(--cream-100);
-  --cta-hover: var(--brown-700);
-  /* Butter stays for notes and highlights. */
-  --note: var(--butter-300);
-  --note-ink: var(--brown-900);
+  /* Copy is Dark Chocolate; headings (titles, step and card titles, questions) are forest green. */
+  --ink: var(--chocolate-900);
+  --ink-muted: var(--chocolate-900);
+  --heading: var(--forest-900);
+  --accent: var(--forest-900);
+  --accent-ink: var(--cream-100);
+  /* Main buttons: mustard with green text, as the style guide asks. */
+  --cta: var(--mustard-400);
+  --cta-ink: var(--forest-900);
+  --cta-hover: var(--mustard-300);
+  /* Mustard also marks highlighted words and small labels. */
+  --note: var(--mustard-400);
+  --note-ink: var(--forest-900);
   --line: var(--cream-300);
-  --focus: var(--amber-600);
-  --success: var(--sage-700);
+  --focus: var(--forest-900);
+  --success: var(--forest-700);
   --error: var(--rust-600);
   --status-open: var(--green-500);
-  --status-closed: var(--brown-300);
-  --logo-mark: var(--ochre-600);
+  --status-closed: var(--oat-500);
+  --logo-mark: var(--forest-900);
 }
 
 [data-tone='alt'] {
-  --surface: var(--sage-200);
-  --surface-alt: var(--sage-300);
+  --surface: var(--oat-300);
+  --surface-alt: var(--oat-400);
   --surface-raised: var(--cream-50);
-  --line: var(--sage-300);
+  --line: var(--oat-500);
 }
 
-/* Pages with butter sections (Retreats & events): every alternate section and the footer turn butter
-   yellow, the same as the headline highlight. Set per page with "Section colour" in the editor.
-   Lines and hover fills are butter tinted with espresso; ticks and quote marks go brown so they read
-   on the yellow; anything that would use butter itself (highlights, pills) turns cream instead.
-   The logo keeps its ochre. */
-[data-alt-colour='butter'] [data-tone='alt'] {
-  --surface: var(--butter-300);
-  --surface-alt: var(--butter-400);
+/* Pages with mustard sections: every alternate section and the footer turn a soft mustard instead of
+   oat. Set per page with "Section colour" in the editor (all pages use oat for now). */
+[data-alt-colour='mustard'] [data-tone='alt'] {
+  --surface: var(--mustard-tint-100);
+  --surface-alt: var(--mustard-tint-200);
   --surface-raised: var(--cream-50);
-  --line: var(--butter-500);
-  --accent: var(--brown-700);
-  --accent-ink: var(--cream-100);
-  --note: var(--cream-50);
+  --line: var(--mustard-tint-300);
 }
 
 [data-tone='dark'] {
-  --surface: var(--brown-900);
-  --surface-alt: var(--brown-700);
-  --surface-raised: var(--brown-700);
+  --surface: var(--forest-900);
+  --surface-alt: var(--forest-800);
+  --surface-raised: var(--forest-800);
   --ink: var(--cream-100);
-  --ink-muted: var(--brown-300);
-  --accent: var(--butter-300);
-  --accent-ink: var(--brown-900);
-  --cta: var(--butter-300);
-  --cta-ink: var(--brown-900);
-  --cta-hover: var(--butter-100);
-  --line: var(--brown-700);
-  --focus: var(--butter-300);
-  --logo-mark: var(--amber-300);
+  --ink-muted: var(--oat-300);
+  --heading: var(--cream-100);
+  --accent: var(--mustard-400);
+  --accent-ink: var(--forest-900);
+  --cta: var(--mustard-400);
+  --cta-ink: var(--forest-900);
+  --cta-hover: var(--mustard-300);
+  --note: var(--mustard-400);
+  --note-ink: var(--forest-900);
+  --line: var(--forest-700);
+  --focus: var(--mustard-400);
+  --logo-mark: var(--mustard-400);
 }
 
 /* 3. TAILWIND MAPPING ----------------------------------------------------- */
@@ -130,6 +129,7 @@
   --color-surface-raised: var(--surface-raised);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
+  --color-heading: var(--heading);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-cta: var(--cta);
@@ -240,7 +240,7 @@
   --radius-card-value: 0.25rem;
   --radius-control-value: 0.25rem;
   --radius-media-value: 0.25rem;
-  --shadow-raised-value: 0 24px 48px -28px rgb(48 26 17 / 0.45);
+  --shadow-raised-value: 0 24px 48px -28px rgb(59 38 32 / 0.45);
   --hero-overlay-height: min(88svh, 56rem);
 
   /* Photo focus points for cropped images (object-position) */
@@ -258,7 +258,7 @@
   --logo-deboss-s: 2.25rem;
   --logo-deboss-m: 2.75rem;
   --logo-deboss-l: 3.5rem;
-  --deboss-filter: drop-shadow(0 -0.75px 0 rgb(48 26 17 / 0.3)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.95));
+  --deboss-filter: drop-shadow(0 -0.75px 0 rgb(59 38 32 / 0.3)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.95));
 }
 
 @media (prefers-reduced-motion: reduce) {
