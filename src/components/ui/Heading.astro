@@ -1,7 +1,7 @@
 ---
 import { emphasis } from '../../lib/text';
 
-export type HeadingVariant = 'display-xl' | 'display-l' | 'h1' | 'h2' | 'h3' | 'h4';
+export type HeadingVariant = 'display-stretch' | 'display-xl' | 'display-l' | 'h1' | 'h2' | 'h3' | 'h4';
 export type TextTone = 'heading' | 'ink' | 'muted' | 'accent';
 
 interface Props {
@@ -20,6 +20,7 @@ const { level = 2, variant = 'h2', tone = 'heading', text, id, class: className 
 
 const Tag = `h${level}` as 'h1';
 const variantClass: Record<HeadingVariant, string> = {
+  'display-stretch': 'type-display-stretch',
   'display-xl': 'type-display-xl',
   'display-l': 'type-display-l',
   h1: 'type-h1',

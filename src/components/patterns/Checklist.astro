@@ -1,5 +1,5 @@
 ---
-// A section heading with a ticked list below it, a line between rows.
+// A section heading with a list below it, each line marked with a yellow ✺, a line between rows.
 // The list runs in two columns on wide screens; balanced wrapping avoids a lone word on the last line.
 import Icon from '../ui/Icon.astro';
 import SectionHeader from './SectionHeader.astro';
@@ -20,7 +20,7 @@ const { eyebrow, title, intro, items } = Astro.props;
     {
       items.map((item) => (
         <li class="flex items-start gap-4 border-t border-line py-5">
-          <Icon name="check" class="mt-1 text-lg text-accent" />
+          <Icon name="burst" class="mt-0.5 size-(--list-mark-size) stroke-2 text-list-mark" />
           <span class="type-body text-balance text-ink">{item}</span>
         </li>
       ))

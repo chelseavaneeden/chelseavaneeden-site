@@ -14,6 +14,17 @@
   text-wrap: balance;
 }
 
+/* A single line that stretches across the page (font size from --step-stretch). */
+@utility type-display-stretch {
+  font-family: var(--font-display-family);
+  font-size: var(--step-stretch);
+  font-weight: var(--display-weight);
+  line-height: 0.95;
+  letter-spacing: var(--display-tracking);
+  text-transform: var(--display-case);
+  white-space: nowrap;
+}
+
 @utility type-display-l {
   font-family: var(--font-display-family);
   font-size: calc(var(--step-5) * var(--display-scale));

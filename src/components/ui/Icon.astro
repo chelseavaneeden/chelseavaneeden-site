@@ -4,6 +4,7 @@ export type IconName =
   | 'arrow-right'
   | 'arrow-up-right'
   | 'check'
+  | 'burst'
   | 'plus'
   | 'menu'
   | 'close'
@@ -24,6 +25,9 @@ const paths: Record<IconName, string> = {
   'arrow-right': 'M4 12h15M13 6l6 6-6 6',
   'arrow-up-right': 'M7 17 17 7M8 7h9v9',
   check: 'm5 12.5 4.5 4.5L19 7.5',
+  // ✺ sixteen rays, like the sunburst in the brand style guide
+  burst:
+    'M15.2 12L22.8 12M14.96 13.22L21.98 16.13M14.26 14.26L19.64 19.64M13.22 14.96L16.13 21.98M12 15.2L12 22.8M10.78 14.96L7.87 21.98M9.74 14.26L4.36 19.64M9.04 13.22L2.02 16.13M8.8 12L1.2 12M9.04 10.78L2.02 7.87M9.74 9.74L4.36 4.36M10.78 9.04L7.87 2.02M12 8.8L12 1.2M13.22 9.04L16.13 2.02M14.26 9.74L19.64 4.36M14.96 10.78L21.98 7.87',
   plus: 'M12 5v14M5 12h14',
   menu: 'M4 8h16M4 16h16',
   close: 'M6 6l12 12M18 6 6 18',

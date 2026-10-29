@@ -6,8 +6,8 @@
  *
  * Layers in this file:
  *   1. Brand palette   → named colour ramps (primitives). From the brand style guide (29 Oct):
- *                        chocolate for all words, forest green logo, ticks and dark bands,
- *                        cream and oat backgrounds, mustard for buttons, highlights and quote marks.
+ *                        chocolate words on cream, forest green words on oat, forest green logo,
+ *                        ticks and dark bands, mustard for buttons, highlights, quote marks and ✺ marks.
  *   2. Semantic colours → what components use (surface, ink, accent…), per section tone.
  *   3. Tailwind mapping → turns semantic tokens into utilities (bg-surface, text-ink, rounded-card…).
  *   4. Shared scales    → type steps, spacing, layout, motion.
@@ -33,6 +33,8 @@
   --oat-500: #cfbc9c;
   --mustard-400: #ffd751; /* Mustard Yellow: buttons and highlights */
   --mustard-300: #ffe388;
+  /* A deeper, sunnier yellow for the ✺ marks in the "Perfect for" lists. */
+  --mustard-500: #ffd230;
   /* Mustard mixed into the cream (about 30%, 50%, 65%), for the optional mustard sections. */
   --mustard-tint-100: #f8e6b5;
   --mustard-tint-200: #f0d68c;
@@ -70,6 +72,7 @@
   --note: var(--mustard-400);
   --note-ink: var(--chocolate-900);
   --quote-mark: var(--mustard-400);
+  --list-mark: var(--mustard-500);
   --line: var(--cream-300);
   --focus: var(--forest-900);
   --success: var(--forest-700);
@@ -79,11 +82,17 @@
   --logo-mark: var(--forest-900);
 }
 
+/* Oat sections and the footer: the words turn forest green. */
 [data-tone='alt'] {
   --surface: var(--oat-300);
   --surface-alt: var(--oat-400);
   --surface-raised: var(--cream-50);
   --line: var(--oat-500);
+  --ink: var(--forest-900);
+  --ink-muted: var(--forest-900);
+  --heading: var(--forest-900);
+  --cta-ink: var(--forest-900);
+  --note-ink: var(--forest-900);
 }
 
 /* Pages with mustard sections: every alternate section and the footer turn a soft mustard instead of
@@ -133,6 +142,7 @@
   --color-ink-muted: var(--ink-muted);
   --color-heading: var(--heading);
   --color-quote-mark: var(--quote-mark);
+  --color-list-mark: var(--list-mark);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-cta: var(--cta);
@@ -189,6 +199,8 @@
   --step-5: clamp(2.49rem, 1.6rem + 4.2vw, 5rem);
   /* Page headlines: about 10% smaller than the original scale (Chelsea, 28 Oct). */
   --step-6: clamp(2.7rem, 1.45rem + 5.85vw, 6.3rem);
+  /* One line that stretches across the page (Hi, I'm Chelsea): grows with the screen, stops at the widest layout. */
+  --step-stretch: min(13.6vw, 13.2rem);
 
   /* Page rhythm */
   --gutter: clamp(1rem, 0.6rem + 2.4vw, 2.75rem);
@@ -251,6 +263,9 @@
   --focus-lower: 50% 78%;
 
   /* Logo: the signature artwork is 82 × 36 */
+  /* The yellow ✺ beside each line of the "Perfect for" lists. */
+  --list-mark-size: 1.5rem;
+
   --logo-height-s: 1.75rem;
   --logo-height-m: 2.25rem;
   --logo-height-l: 3rem;

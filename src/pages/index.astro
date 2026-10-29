@@ -7,6 +7,7 @@
 // Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
+import Container from '../components/ui/Container.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
@@ -87,11 +88,14 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    <Section space="l" tone="light" id="about">
-      <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+    <Section space="l" tone="light" id="about" bare>
+      {/* The greeting stretches across the page in forest green, above the words and photos. */}
+      <Container width="wide" class="flex flex-col gap-5">
+        {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
+        <Heading variant="display-stretch" tone="accent" text={page.about.title} />
+      </Container>
+      <Container class="mt-12 grid grid-cols-1 items-center gap-16 md:mt-16 lg:grid-cols-12">
         <div class="flex flex-col gap-5 lg:col-span-6">
-          {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
-          <Heading variant="h1" text={page.about.title} />
           {page.about.paragraphs.map((p) => <Text tone="muted" text={p} />)}
         </div>
         <PhotoCollage
@@ -101,7 +105,7 @@ const testimonials = await getTestimonials('private');
             { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
           ]}
         />
-      </div>
+      </Container>
     </Section>
 
     {
