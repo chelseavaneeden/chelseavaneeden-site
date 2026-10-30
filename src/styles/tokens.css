@@ -37,6 +37,9 @@
   --honey-500: #d6a64f; /* deeper honey: button hover */
   --amber-500: #c9802f; /* Amber */
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
+  /* Camel brown for the header's buttons, so they stand apart from the golden light behind them. */
+  --camel-500: #c4975f;
+  --camel-400: #cba16a;
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
   /* A warm sand wall in morning light, for the intro card. */
@@ -73,15 +76,6 @@
   --sun-rays-mask-dusk: radial-gradient(70% 90% at 5% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 70%);
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
-  /* Option B (preview with ?look=green): the header's light in sage and olive instead of butter and honey,
-     with a little warm sun left in it. */
-  --glow-forest:
-    radial-gradient(45% 55% at 100% 0%, rgb(90 99 56 / 0.55) 0%, rgb(90 99 56 / 0) 70%),
-    radial-gradient(70% 85% at 85% 10%, rgb(123 125 78 / 0.55) 0%, rgb(123 125 78 / 0) 75%),
-    radial-gradient(90% 80% at 40% 0%, rgb(167 173 140 / 0.75) 0%, rgb(167 173 140 / 0) 75%),
-    radial-gradient(60% 70% at 0% 100%, rgb(167 173 140 / 0.6) 0%, rgb(167 173 140 / 0) 72%),
-    radial-gradient(24% 30% at 70% 22%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%);
-  --dapple-olive: radial-gradient(circle, rgb(123 125 78 / 0.38) 0%, rgb(123 125 78 / 0) 65%);
   /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
   --dapple-honey: radial-gradient(circle, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 65%);
   --dapple-butter: radial-gradient(circle, rgb(239 217 160 / 0.7) 0%, rgb(239 217 160 / 0) 65%);
@@ -143,11 +137,11 @@
   --heading-em: var(--amber-700);
   --accent: var(--amber-700);
   --accent-ink: var(--linen-50);
-  /* Main buttons: moss pills with honey words (they stand out against the golden light);
-     darker moss on hover. Option B (?look=green) keeps Wild Honey pills instead. */
-  --cta: var(--moss-800);
-  --cta-ink: var(--honey-400);
-  --cta-hover: var(--moss-900);
+  /* Main buttons: Wild Honey pills, a deeper honey on hover. In the header they are camel instead
+     (see [data-cta='camel']). */
+  --cta: var(--honey-400);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--honey-500);
   /* Butter marks highlighted words; honey for quote marks; amber for the ✺ marks. */
   --note: var(--butter-200);
   --note-ink: var(--coffee-900);
@@ -201,17 +195,12 @@
   --line: var(--sand-300);
 }
 
-/* Option B, previewed by adding ?look=green to the address: green morning light, honey buttons. */
-:root[data-look='green'] {
-  --glow-sunrise: var(--glow-forest);
-  --dapple-butter: var(--dapple-olive);
-}
-
-:root[data-look='green'],
-:root[data-look='green'] [data-tone='light'] {
-  --cta: var(--honey-400);
+/* The header (menu bar and the page's opening section): camel buttons with Coffee Bean words, which
+   stand out against the golden light where honey buttons would blend in. */
+[data-cta='camel'] {
+  --cta: var(--camel-500);
   --cta-ink: var(--coffee-900);
-  --cta-hover: var(--honey-500);
+  --cta-hover: var(--camel-400);
 }
 
 [data-tone='dark'] {
