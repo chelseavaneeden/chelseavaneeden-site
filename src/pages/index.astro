@@ -7,7 +7,7 @@
 // Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
-import LinenFlow from '../components/ui/LinenFlow.astro';
+import LightSwirl from '../components/ui/LightSwirl.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
@@ -90,8 +90,8 @@ const testimonials = await getTestimonials('private');
 
     <Section space="l" tone="light" id="about" class="relative isolate overflow-hidden">
       {/* The greeting sits above the words in one moss green, the words are larger so they balance the
-          photos, and linen lines flow softly behind. */}
-      <LinenFlow class="inset-x-0 top-0 h-64 w-full md:h-96" />
+          photos, and a swirl of golden light turns slowly behind the photos. */}
+      <LightSwirl placement="about" class="-z-10" />
       <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
         <div data-reveal class="flex flex-col gap-6 lg:col-span-6">
           {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}

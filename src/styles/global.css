@@ -224,19 +224,6 @@
   }
 }
 
-/* Orbs of light rise a little and glow brighter, then settle. */
-@keyframes float {
-  0%,
-  100% {
-    translate: 0 0;
-    opacity: 0.55;
-  }
-  50% {
-    translate: 0 -2.25rem;
-    opacity: 1;
-  }
-}
-
 /* The swirl of light turns very slowly. */
 @keyframes spin {
   to {
@@ -244,16 +231,16 @@
   }
 }
 
-/* Linen lines lift and settle, like fabric in a breeze. */
-@keyframes sway {
+/* Contour lines breathe: they widen a touch and soften, then settle back. */
+@keyframes contour-breathe {
   0%,
   100% {
-    translate: 0 0;
-    rotate: 0deg;
+    scale: 1;
+    opacity: 0.7;
   }
   50% {
-    translate: 0 -3%;
-    rotate: -1.5deg;
+    scale: 1.045;
+    opacity: 1;
   }
 }
 

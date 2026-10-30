@@ -1,11 +1,10 @@
 ---
 // Decorative light for a section, like sun coming through trees: a warm glow, soft sun rays that
-// slowly brighten and shift, patches of light that drift, a slowly turning swirl of light and
-// floating orbs of sunlight (from the mood board). Put it inside an element with
+// slowly brighten and shift, and patches of light that drift. The sunrise version also has fine
+// contour lines breathing in its bottom left corner. Put it inside an element with
 // `relative isolate overflow-hidden`; it sits behind the content and is hidden from screen readers.
 // The movement stops for people who prefer reduced motion (data-ambient, see global.css).
-import LightOrbs from './LightOrbs.astro';
-import LightSwirl from './LightSwirl.astro';
+import Topography from './Topography.astro';
 
 interface Props {
   /** sunrise: butter and honey light from the top right, for light sections. dusk: honey light on moss. */
@@ -22,8 +21,7 @@ const { variant = 'sunrise', class: className } = Astro.props;
   <div class="sunlight-dapple sunlight-dapple-1 absolute" data-ambient></div>
   <div class="sunlight-dapple sunlight-dapple-2 absolute" data-ambient></div>
   <div class="sunlight-dapple sunlight-dapple-3 absolute" data-ambient></div>
-  <LightSwirl placement={variant === 'sunrise' ? 'sun' : 'panel'} />
-  <LightOrbs tone={variant === 'sunrise' ? 'light' : 'dusk'} count={variant === 'sunrise' ? 6 : 8} />
+  {variant === 'sunrise' && <Topography corner="bottom-left" />}
 </div>
 
 <style>

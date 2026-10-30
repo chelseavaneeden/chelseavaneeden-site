@@ -1,6 +1,5 @@
 ---
 import Container, { type ContainerWidth } from './Container.astro';
-import LightOrbs from './LightOrbs.astro';
 
 export type SectionTone = 'light' | 'alt' | 'dark';
 export type SectionSpace = 'none' | 's' | 'm' | 'l';
@@ -38,10 +37,8 @@ const spaces: Record<SectionSpace, string> = {
   id={id}
   aria-labelledby={labelledby}
   data-tone={tone}
-  class:list={[spaces[space], tone === 'alt' && 'relative isolate overflow-hidden', className]}
+  class:list={[spaces[space], className]}
 >
-  {/* Tinted sections carry a few floating orbs of sunlight behind their content. */}
-  {tone === 'alt' && <LightOrbs count={4} />}
   {
     bare ? (
       <slot />

@@ -1,0 +1,62 @@
+---
+// Fine contour lines tucked into a corner, like a topographic map (from the mood board): rings of
+// gently uneven circles that slowly breathe in and out. Subtle and out of the way of the words.
+// Put it inside an element with `relative overflow-hidden`; `corner` picks where it sits. Hidden from
+// screen readers, and still for people who prefer reduced motion (data-ambient, see global.css).
+interface Props {
+  corner?: 'bottom-left' | 'top-right';
+  class?: string;
+}
+
+const { corner = 'bottom-left', class: className } = Astro.props;
+
+// Each ring wobbles a little differently, like the contours around a hill.
+const rings = Array.from({ length: 11 }, (_, i) => {
+  const base = 46 + i * 36;
+  const points = Array.from({ length: 96 }, (_, j) => {
+    const a = (j / 96) * Math.PI * 2;
+    const r = base * (1 + 0.07 * Math.sin(3 * a + i * 0.6) + 0.04 * Math.sin(5 * a - i * 0.45) + 0.025 * Math.sin(8 * a + i));
+    return `${(Math.cos(a) * r).toFixed(1)} ${(Math.sin(a) * r).toFixed(1)}`;
+  });
+  return `M${points.join(' L')}Z`;
+});
+---
+
+<div class:list={['topography pointer-events-none absolute', `topography-${corner}`, className]} aria-hidden="true">
+  <svg viewBox="-500 -500 1000 1000" fill="none" data-ambient>
+    {rings.map((d) => <path d={d} />)}
+  </svg>
+</div>
+
+<style>
+  .topography {
+    aspect-ratio: 1;
+    width: clamp(20rem, 38vw, 36rem);
+    -webkit-mask-image: var(--topography-fade);
+    mask-image: var(--topography-fade);
+  }
+
+  .topography-bottom-left {
+    left: 0;
+    bottom: 0;
+    translate: -48% 42%;
+  }
+
+  .topography-top-right {
+    right: 0;
+    top: 0;
+    translate: 48% -42%;
+  }
+
+  .topography svg {
+    width: 100%;
+    height: 100%;
+    animation: contour-breathe var(--duration-contour) var(--ease-in-out-soft) infinite;
+  }
+
+  .topography path {
+    stroke: var(--contour-line);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+</style>

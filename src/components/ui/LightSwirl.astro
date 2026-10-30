@@ -4,12 +4,12 @@
 // Put it inside an element with `relative`; `placement` picks where it sits. Hidden from screen
 // readers, and still for people who prefer reduced motion (data-ambient, see global.css).
 interface Props {
-  /** sun: centred on the top right corner, where the header's light comes from. panel: right of centre. */
-  placement?: 'sun' | 'panel';
+  /** about: behind the photos in the Hi, I'm Chelsea section. */
+  placement?: 'about';
   class?: string;
 }
 
-const { placement = 'sun', class: className } = Astro.props;
+const { placement = 'about', class: className } = Astro.props;
 // Each swirl needs its own gradient id, as a page can have more than one.
 const fadeId = `light-swirl-fade-${Math.random().toString(36).slice(2, 8)}`;
 
@@ -54,20 +54,23 @@ const strands = Array.from({ length: 16 }, (_, k) => {
     aspect-ratio: 1;
   }
 
-  .light-swirl-sun {
-    width: clamp(26rem, 58vw, 60rem);
-    top: 0;
-    right: 0;
-    translate: 38% -42%;
-    opacity: 0.75;
+  /* Behind the photos: right of centre on wide screens, under the words (where the photos are) on
+     phones and tablets. */
+  /* Its glowing heart sits just to the left of the photos, between them and the words. */
+  .light-swirl-about {
+    width: clamp(26rem, 52vw, 54rem);
+    top: 50%;
+    right: 18%;
+    translate: 0 -50%;
   }
 
-  .light-swirl-panel {
-    width: clamp(22rem, 52vw, 44rem);
-    top: 50%;
-    right: 0;
-    translate: 30% -50%;
-    opacity: 0.6;
+  @media (max-width: 1023px) {
+    .light-swirl-about {
+      top: auto;
+      right: 50%;
+      bottom: 0;
+      translate: 50% 15%;
+    }
   }
 
   .light-swirl-spin {
@@ -106,12 +109,17 @@ const strands = Array.from({ length: 16 }, (_, k) => {
     stop-color: var(--swirl-edge);
   }
 
-  .light-swirl-sun .light-swirl-core {
+  /* On the light linen the strands are honey and amber, so they show against the page. */
+  .light-swirl-about .light-swirl-core {
     stop-color: var(--swirl-core-sun);
   }
 
-  .light-swirl-sun .light-swirl-mid {
+  .light-swirl-about .light-swirl-mid {
     stop-color: var(--swirl-mid-sun);
+  }
+
+  .light-swirl-about .light-swirl-centre {
+    background-image: var(--swirl-centre-sun);
   }
 
   /* The bright heart of the swirl, gently breathing. */
