@@ -28,7 +28,14 @@ const nav = allNav.map((item) => ({
 }));
 ---
 
-<header data-tone={tone} class="sticky top-0 z-(--z-header) border-b border-line">
+<header data-tone={tone} data-site-header class="group/header sticky top-0 z-(--z-header) bg-transparent">
+  <!-- At the top of the page the header floats on the morning light. Once you scroll, frosted linen
+       fades in behind it. A separate layer, because a blur on the header itself would trap the phone
+       menu (fixed) inside the header's box. -->
+  <span
+    class="absolute inset-0 -z-10 bg-surface/70 opacity-0 backdrop-blur-md transition-opacity duration-(--duration-slow) ease-soft group-data-scrolled/header:opacity-100"
+    aria-hidden="true"
+  ></span>
   <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
     <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo variant="signature" size="m" label="Chelsea van Eeden" /></a>
 
@@ -135,4 +142,10 @@ const nav = allNav.map((item) => ({
       if ((e.target as Element).closest('a')) menu.open = false;
     });
   });
+
+  // Frosted header once the page has scrolled.
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const markScrolled = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', markScrolled, { passive: true });
+  markScrolled();
 </script>

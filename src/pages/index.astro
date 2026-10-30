@@ -8,6 +8,7 @@
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
 import Container from '../components/ui/Container.astro';
+import LinenFlow from '../components/ui/LinenFlow.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
@@ -88,14 +89,16 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    <Section space="l" tone="light" id="about" bare>
-      {/* The greeting stretches across the page in forest green, above the words and photos. */}
-      <Container width="wide" class="flex flex-col gap-5">
+    <Section space="l" tone="light" id="about" bare class="relative isolate overflow-hidden">
+      {/* The greeting stretches across the page in moss green, above the words and photos, with linen
+          lines flowing behind it. */}
+      <LinenFlow class="inset-x-0 top-0 h-64 w-full md:h-96" />
+      <Container width="wide" class="flex flex-col gap-5" data-reveal>
         {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
-        <Heading variant="display-stretch" tone="accent" text={page.about.title} />
+        <Heading variant="display-stretch" tone="brand" text={page.about.title} />
       </Container>
       <Container class="mt-12 grid grid-cols-1 items-center gap-16 md:mt-16 lg:grid-cols-12">
-        <div class="flex flex-col gap-5 lg:col-span-6">
+        <div data-reveal class="flex flex-col gap-5 lg:col-span-6">
           {page.about.paragraphs.map((p) => <Text tone="muted" text={p} />)}
         </div>
         <PhotoCollage

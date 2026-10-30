@@ -38,7 +38,7 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
   <ul class:list={['grid grid-cols-1 gap-4', cols]}>
     {
       testimonials.map((t) => (
-        <li>
+        <li data-reveal>
           <figure
             data-tone={cardTone === 'alt' ? 'alt' : undefined}
             class:list={['flex h-full flex-col justify-between gap-8 rounded-card p-7 md:p-8', cardTone === 'alt' ? 'bg-surface' : 'bg-surface-raised']}

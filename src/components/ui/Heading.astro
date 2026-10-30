@@ -2,7 +2,7 @@
 import { emphasis } from '../../lib/text';
 
 export type HeadingVariant = 'display-stretch' | 'display-xl' | 'display-l' | 'h1' | 'h2' | 'h3' | 'h4';
-export type TextTone = 'heading' | 'ink' | 'muted' | 'accent';
+export type TextTone = 'heading' | 'ink' | 'muted' | 'accent' | 'brand';
 
 interface Props {
   /** Document outline level (h1–h6). Independent of how it looks. */
@@ -28,7 +28,14 @@ const variantClass: Record<HeadingVariant, string> = {
   h3: 'type-h3',
   h4: 'type-h4',
 };
-const toneClass: Record<TextTone, string> = { heading: 'text-heading', ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' };
+const toneClass: Record<TextTone, string> = {
+  heading: 'text-heading',
+  ink: 'text-ink',
+  muted: 'text-ink-muted',
+  accent: 'text-accent',
+  // The brand green of the logo (moss).
+  brand: 'text-logo-mark',
+};
 ---
 
 {

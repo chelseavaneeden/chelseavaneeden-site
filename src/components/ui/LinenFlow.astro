@@ -1,0 +1,56 @@
+---
+// Decorative flowing lines, like a length of linen unfolding in a breeze. Two layers of fine curves
+// in amber and honey sway slowly at different speeds. Place inside an element with `relative`;
+// size and position it with classes (e.g. "inset-x-0 bottom-0 h-40"). Hidden from screen readers,
+// and still for people who prefer reduced motion (data-ambient, see global.css).
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Each layer is a fan of curves that start together on the left, open out and gather again.
+const fan = (count: number, lift: number) =>
+  Array.from({ length: count }, (_, i) => {
+    const t = i / (count - 1);
+    const y0 = 230 + t * 90 + lift;
+    return `M-80 ${y0} C 260 ${70 + t * 280 + lift}, 600 ${420 - t * 220 + lift}, 960 ${250 + t * 50 + lift} S 1380 ${110 + t * 230 + lift}, 1540 ${200 + t * 120 + lift}`;
+  });
+
+const front = fan(9, 0);
+const back = fan(7, -40);
+---
+
+<svg
+  class:list={['linen-flow pointer-events-none absolute -z-10', className]}
+  viewBox="0 0 1440 480"
+  preserveAspectRatio="none"
+  fill="none"
+  aria-hidden="true"
+>
+  <g class="linen-flow-back" data-ambient>
+    {back.map((d) => <path d={d} />)}
+  </g>
+  <g class="linen-flow-front" data-ambient>
+    {front.map((d) => <path d={d} />)}
+  </g>
+</svg>
+
+<style>
+  .linen-flow path {
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .linen-flow-front {
+    stroke: var(--linen-line);
+    transform-origin: 50% 50%;
+    animation: sway var(--duration-sway) var(--ease-in-out-soft) infinite;
+  }
+
+  .linen-flow-back {
+    stroke: var(--linen-line-soft);
+    transform-origin: 40% 60%;
+    animation: sway calc(var(--duration-sway) * 1.4) var(--ease-in-out-soft) infinite reverse;
+  }
+</style>

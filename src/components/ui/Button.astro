@@ -33,16 +33,16 @@ const base =
   'group/button inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors duration-(--duration-base) ease-soft';
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'rounded-control bg-cta text-cta-ink hover:bg-cta-hover',
-  secondary: 'rounded-control border border-current text-ink hover:bg-ink hover:text-surface hover:border-ink',
-  ghost: 'rounded-control text-ink hover:bg-surface-alt',
+  primary: 'rounded-pill bg-cta text-cta-ink hover:bg-cta-hover hover:shadow-glow',
+  secondary: 'rounded-pill border border-current text-ink hover:bg-ink hover:text-surface hover:border-ink',
+  ghost: 'rounded-pill text-ink hover:bg-surface-alt',
   link: 'text-ink underline decoration-1 underline-offset-4 hover:decoration-2',
 };
 
 const sizes: Record<ButtonSize, string> = {
-  s: 'type-label px-4 py-2',
-  m: 'type-label px-6 py-3.5',
-  l: 'type-body font-medium px-8 py-4',
+  s: 'type-label px-5 py-2.5',
+  m: 'type-button px-7 py-3.5',
+  l: 'type-button px-9 py-4.5',
 };
 
 const classes = [

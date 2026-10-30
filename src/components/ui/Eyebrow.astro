@@ -7,7 +7,7 @@ interface Props {
   class?: string;
 }
 
-const { rule = false, tone = 'muted', as: Tag = 'p', class: className } = Astro.props;
+const { rule = false, tone = 'accent', as: Tag = 'p', class: className } = Astro.props;
 const toneClass = { ink: 'text-ink', muted: 'text-ink-muted', accent: 'text-accent' }[tone];
 ---
 

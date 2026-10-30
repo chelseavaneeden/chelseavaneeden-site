@@ -1,0 +1,84 @@
+---
+// Decorative light for a section, like sun coming through trees: a warm glow, soft sun rays that
+// slowly brighten and shift, and patches of light that drift. Put it inside an element with
+// `relative isolate overflow-hidden`; it sits behind the content and is hidden from screen readers.
+// The movement stops for people who prefer reduced motion (data-ambient, see global.css).
+interface Props {
+  /** sunrise: butter and honey light from the top right, for light sections. dusk: honey light on moss. */
+  variant?: 'sunrise' | 'dusk';
+  class?: string;
+}
+
+const { variant = 'sunrise', class: className } = Astro.props;
+---
+
+<div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
+  <div class="sunlight-glow absolute inset-0"></div>
+  <div class="sunlight-rays absolute" data-ambient></div>
+  <div class="sunlight-dapple sunlight-dapple-1 absolute" data-ambient></div>
+  <div class="sunlight-dapple sunlight-dapple-2 absolute" data-ambient></div>
+  <div class="sunlight-dapple sunlight-dapple-3 absolute" data-ambient></div>
+</div>
+
+<style>
+  .sunlight-sunrise {
+    -webkit-mask-image: var(--fade-bottom-mask);
+    mask-image: var(--fade-bottom-mask);
+  }
+
+  .sunlight-sunrise .sunlight-glow {
+    background-image: var(--glow-sunrise);
+  }
+
+  .sunlight-rays {
+    inset: -25% -15% -10% -10%;
+    background-image: var(--sun-rays);
+    -webkit-mask-image: var(--sun-rays-mask);
+    mask-image: var(--sun-rays-mask);
+    filter: blur(5px);
+    animation: breathe var(--duration-breathe) var(--ease-in-out-soft) infinite;
+  }
+
+  .sunlight-dusk .sunlight-rays {
+    -webkit-mask-image: var(--sun-rays-mask-dusk);
+    mask-image: var(--sun-rays-mask-dusk);
+    opacity: 0.6;
+  }
+
+  .sunlight-dapple {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: drift var(--duration-drift) var(--ease-in-out-soft) infinite;
+  }
+
+  .sunlight-dapple-1 {
+    width: 42vmax;
+    top: -18%;
+    right: -6%;
+    background-image: var(--dapple-butter);
+  }
+
+  .sunlight-dapple-2 {
+    width: 24vmax;
+    top: 35%;
+    right: 34%;
+    background-image: var(--dapple-honey);
+    animation-duration: calc(var(--duration-drift) * 1.35);
+    animation-direction: reverse;
+  }
+
+  .sunlight-dapple-3 {
+    width: 32vmax;
+    bottom: -22%;
+    left: -10%;
+    background-image: var(--dapple-sage);
+    animation-duration: calc(var(--duration-drift) * 0.8);
+  }
+
+  .sunlight-dusk .sunlight-dapple-1 {
+    top: -30%;
+    left: -10%;
+    right: auto;
+    background-image: var(--dapple-honey);
+  }
+</style>

@@ -29,13 +29,46 @@
     color: var(--ink);
     font-family: var(--font-body-family);
     font-size: var(--step-0);
+    font-weight: var(--body-weight);
     line-height: var(--body-leading);
+  }
+
+  /* Film grain over the whole page, like light on linen paper. It never catches clicks. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-grain);
+    pointer-events: none;
+    background-image: var(--grain-image);
+    background-size: var(--grain-size);
+    opacity: var(--grain-opacity);
+    mix-blend-mode: multiply;
   }
 
   /* Any element with a tone paints its own surface and text colour. */
   [data-tone] {
     background-color: var(--surface);
     color: var(--ink);
+  }
+
+  /* Tinted sections melt into the page: a soft haze of light, faded out at the top and bottom. */
+  section[data-tone='alt'] {
+    background-image: var(--edge-fade), var(--wash);
+  }
+
+  footer[data-tone='alt'] {
+    background-image: var(--edge-fade-top), var(--wash);
+  }
+
+  /* Moss bands and cards: lit by low golden sun. */
+  [data-tone='dark'] {
+    background-image: var(--glow-moss);
+  }
+
+  /* Emphasised words in headings (*words* in the editor) turn amber. */
+  :where(.type-display-xl, .type-display-stretch, .type-display-l, .type-h1, .type-h2) em {
+    color: var(--heading-em);
   }
 
   :focus-visible {
@@ -52,14 +85,23 @@
     font-style: italic;
   }
 
-  /* Highlighted words (==words== in the CMS): a mustard marker behind italic text. */
+  /* Highlighted words (==words== in the CMS): a soft butter brushstroke under the lower half of the words. */
   mark {
     font-style: italic;
     color: var(--note-ink);
     background-color: var(--color-transparent);
-    background-image: linear-gradient(var(--color-transparent) 22%, var(--note) 22%, var(--note) 92%, var(--color-transparent) 92%);
-    padding-inline: 0.12em;
-    margin-inline: -0.06em;
+    background-image: linear-gradient(
+      100deg,
+      var(--color-transparent) 0%,
+      var(--note) 5%,
+      var(--note) 95%,
+      var(--color-transparent) 100%
+    );
+    background-size: 100% 45%;
+    background-position: 0 85%;
+    background-repeat: no-repeat;
+    padding-inline: 0.1em;
+    margin-inline: -0.05em;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
@@ -78,14 +120,116 @@
   :root[data-reveal='on'] [data-reveal] {
     opacity: 0;
     translate: 0 var(--reveal-distance);
+    filter: blur(var(--reveal-blur));
     transition:
       opacity var(--duration-reveal) var(--ease-soft),
-      translate var(--duration-reveal) var(--ease-soft);
+      translate var(--duration-reveal) var(--ease-soft),
+      filter var(--duration-reveal) var(--ease-soft);
     transition-delay: calc(var(--reveal-order, 0) * var(--reveal-stagger));
   }
 
   :root[data-reveal='on'] [data-reveal][data-revealed] {
     opacity: 1;
     translate: 0 0;
+    filter: blur(0);
   }
+
+  /* Slow, always-on movement (sun rays, drifting light, swaying linen) stops for people who prefer
+     reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-ambient] {
+      animation: none;
+    }
+  }
+}
+
+/* Movement ---------------------------------------------------------------- */
+
+/* The header rises in on load like the sun coming up: add rise-1 … rise-5 for the order. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+
+@keyframes sun-in {
+  from {
+    opacity: 0;
+    scale: 1.04;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    filter: blur(0);
+  }
+}
+
+/* Sun rays brighten and soften, and shift a little, like light through moving leaves. */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    translate: 0 0;
+  }
+  50% {
+    opacity: 1;
+    translate: -3% 1.5%;
+  }
+}
+
+/* Patches of light wander slowly. */
+@keyframes drift {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+  33% {
+    translate: 8% -6%;
+    scale: 1.1;
+  }
+  66% {
+    translate: -6% 7%;
+    scale: 0.94;
+  }
+}
+
+/* Linen lines lift and settle, like fabric in a breeze. */
+@keyframes sway {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -3%;
+    rotate: -1.5deg;
+  }
+}
+
+@utility rise-1 {
+  animation: rise var(--duration-rise) var(--ease-soft) both;
+}
+@utility rise-2 {
+  animation: rise var(--duration-rise) var(--ease-soft) calc(var(--rise-step) * 1) both;
+}
+@utility rise-3 {
+  animation: rise var(--duration-rise) var(--ease-soft) calc(var(--rise-step) * 2) both;
+}
+@utility rise-4 {
+  animation: rise var(--duration-rise) var(--ease-soft) calc(var(--rise-step) * 3) both;
+}
+@utility rise-5 {
+  animation: rise var(--duration-rise) var(--ease-soft) calc(var(--rise-step) * 4) both;
+}
+@utility sun-in {
+  animation: sun-in calc(var(--duration-rise) * 1.4) var(--ease-soft) calc(var(--rise-step) * 1) both;
 }

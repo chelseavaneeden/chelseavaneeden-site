@@ -5,40 +5,40 @@
  * Everything else references these tokens; scripts/check-tokens.mjs enforces this at build time.
  *
  * Layers in this file:
- *   1. Brand palette   → named colour ramps (primitives). From the brand style guide (29 Oct):
- *                        chocolate words on cream, forest green words on oat, forest green logo,
- *                        ticks and dark bands, mustard for buttons, highlights, quote marks and ✺ marks.
+ *   1. Brand palette   → named colour ramps (primitives). From the "Forest & Amber" mood board (30 Oct):
+ *                        moss and sage greens, raw linen, butter, wild honey, amber and coffee bean.
  *   2. Semantic colours → what components use (surface, ink, accent…), per section tone.
  *   3. Tailwind mapping → turns semantic tokens into utilities (bg-surface, text-ink, rounded-card…).
  *   4. Shared scales    → type steps, spacing, layout, motion.
  *
- * Direction: "Somatic Minimal" (B) with the brand palette. Satoshi only, light display weights,
- * soft rounded shapes, generous space.
+ * Direction: "Golden light, deep in the forest". Warm linen with grain, soft honey light and sun rays,
+ * sections that melt into each other instead of hard blocks, slow flowing movement.
+ * Cormorant Garamond Italic headings, Jost for labels and body.
  */
 
 /* 1. BRAND PALETTE ------------------------------------------------------- */
-/* Brand style guide: let green, Warm Cream and Soft Oat carry the brand; mustard sparingly for
-   buttons, highlights and moments of energy; Dark Chocolate for copy. The five guide colours are
-   marked; the rest are shades made from them. */
+/* Mood board swatches are marked; the rest are shades made from them. */
 :root {
-  --forest-900: #213926; /* Deep Forest Green: logo, ticks, dark bands */
-  --forest-800: #2b4831;
-  --forest-700: #3a5a40;
-  --chocolate-900: #3b2620; /* Dark Chocolate: all words */
-  --cream-50: #fbf6ee;
-  --cream-100: #f5ede0; /* Warm Cream: background */
-  --cream-300: #e6d9c4;
-  --oat-300: #e8dcc8; /* Soft Oat: alternate sections and footer */
-  --oat-400: #ddcdb2;
-  --oat-500: #cfbc9c;
-  --mustard-400: #ffd751; /* Mustard Yellow: buttons and highlights */
-  --mustard-300: #ffe388;
-  /* A deeper, sunnier yellow for the ✺ marks in the "Perfect for" lists. */
-  --mustard-500: #ffd230;
-  /* Mustard mixed into the cream (about 30%, 50%, 65%), for the optional mustard sections. */
-  --mustard-tint-100: #f8e6b5;
-  --mustard-tint-200: #f0d68c;
-  --mustard-tint-300: #e2c477;
+  --moss-900: #3a4124;
+  --moss-800: #4a522c;
+  --moss-700: #5a6338; /* Moss */
+  --olive-600: #7b7d4e; /* Olive Grove */
+  --sage-leaf-400: #a7ad8c; /* Sage Leaf */
+  --sage-leaf-300: #cdd0b6;
+  --sage-leaf-200: #dcdec9;
+  --sage-leaf-100: #e7e8d9;
+  --linen-50: #faf6ee;
+  --linen-100: #f4eee3;
+  --linen-200: #e9e2d3; /* Raw Linen */
+  --linen-300: #ddd4c1;
+  --butter-100: #f5e9c8;
+  --butter-200: #efd9a0; /* Butter */
+  --honey-400: #e2b866; /* Wild Honey: buttons */
+  --honey-500: #d6a64f; /* deeper honey: button hover */
+  --amber-500: #c9802f; /* Amber */
+  --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
+  --coffee-900: #3b2a1e; /* Coffee Bean: words */
+  --coffee-700: #5c4636;
   --linen-0: #ffffff;
   /* Earlier greens, still compared on /fonts */
   --sage-200: #d8dac0;
@@ -49,78 +49,137 @@
   --green-500: #3f9a5c;
   /* WhatsApp's official brand green, only for the WhatsApp button. */
   --whatsapp-500: #25d366;
+
+  /* Light, texture and washes (see global.css). Colours here are the swatches above with transparency. */
+  /* Sunrise: butter and honey light from the top right, a little sage shade at the bottom left. */
+  --glow-sunrise:
+    radial-gradient(55% 70% at 88% 6%, rgb(239 217 160 / 0.95) 0%, rgb(239 217 160 / 0) 72%),
+    radial-gradient(38% 50% at 100% 0%, rgb(226 184 102 / 0.6) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(45% 60% at 0% 100%, rgb(167 173 140 / 0.38) 0%, rgb(167 173 140 / 0) 70%);
+  /* Sun rays falling through trees: soft diagonal bands, faded out away from the sun. */
+  --sun-rays: repeating-linear-gradient(
+    116deg,
+    rgb(239 217 160 / 0) 0 2.5rem,
+    rgb(239 217 160 / 0.7) 3.5rem 5rem,
+    rgb(239 217 160 / 0) 6rem 7.5rem,
+    rgb(226 184 102 / 0.35) 8rem 8.75rem,
+    rgb(226 184 102 / 0) 9.5rem 12rem
+  );
+  --sun-rays-mask: radial-gradient(75% 85% at 92% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 75%);
+  --sun-rays-mask-dusk: radial-gradient(70% 90% at 5% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 70%);
+  /* The header's light fades out towards its bottom edge, so it melts into the next section. */
+  --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
+  /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
+  --dapple-honey: radial-gradient(circle, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 65%);
+  --dapple-butter: radial-gradient(circle, rgb(239 217 160 / 0.7) 0%, rgb(239 217 160 / 0) 65%);
+  --dapple-sage: radial-gradient(circle, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 65%);
+  /* Tinted sections fade into the page at top and bottom, so there are no hard edges. */
+  --edge-fade: linear-gradient(
+    180deg,
+    rgb(244 238 227 / 1) 0%,
+    rgb(244 238 227 / 0) 18%,
+    rgb(244 238 227 / 0) 82%,
+    rgb(244 238 227 / 1) 100%
+  );
+  --edge-fade-top: linear-gradient(180deg, rgb(244 238 227 / 1) 0%, rgb(244 238 227 / 0) 30%);
+  --wash-sage:
+    radial-gradient(60% 55% at 12% 35%, rgb(239 217 160 / 0.5) 0%, rgb(239 217 160 / 0) 70%),
+    radial-gradient(55% 50% at 92% 70%, rgb(167 173 140 / 0.4) 0%, rgb(167 173 140 / 0) 70%);
+  --wash-butter:
+    radial-gradient(60% 55% at 85% 25%, rgb(226 184 102 / 0.45) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(55% 50% at 10% 80%, rgb(239 217 160 / 0.6) 0%, rgb(239 217 160 / 0) 70%);
+  /* Moss bands lit by low golden sun. */
+  --glow-moss:
+    radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
+    radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.32) 0%, rgb(201 128 47 / 0) 62%),
+    linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
+  /* A golden-hour tint laid softly over the header video. */
+  --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
+  /* Film grain over the whole page: fractal noise, tinted coffee. */
+  --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-opacity: 0.16;
+  --grain-size: 240px;
+  /* Flowing linen lines and the button's warm glow. */
+  --linen-line: rgb(201 128 47 / 0.32);
+  --linen-line-soft: rgb(226 184 102 / 0.4);
 }
 
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
 :root,
 [data-tone='light'] {
-  --surface: var(--cream-100);
-  --surface-alt: var(--oat-300);
-  --surface-raised: var(--cream-50);
-  /* All words are Dark Chocolate: copy, headings, button labels and highlighted words.
-     Green stays for the logo, ticks and the dark bands. */
-  --ink: var(--chocolate-900);
-  --ink-muted: var(--chocolate-900);
-  --heading: var(--chocolate-900);
-  --accent: var(--forest-900);
-  --accent-ink: var(--cream-100);
-  /* Main buttons: mustard, as the style guide asks. */
-  --cta: var(--mustard-400);
-  --cta-ink: var(--chocolate-900);
-  --cta-hover: var(--mustard-300);
-  /* Mustard also marks highlighted words and small labels, and colours the quotation marks. */
-  --note: var(--mustard-400);
-  --note-ink: var(--chocolate-900);
-  --quote-mark: var(--mustard-400);
-  --list-mark: var(--mustard-500);
-  --line: var(--cream-300);
-  --focus: var(--forest-900);
-  --success: var(--forest-700);
+  --surface: var(--linen-100);
+  --surface-alt: var(--linen-200);
+  --surface-raised: var(--linen-50);
+  /* Coffee Bean for words; emphasised words in headings turn amber. */
+  --ink: var(--coffee-900);
+  --ink-muted: var(--coffee-700);
+  --heading: var(--coffee-900);
+  --heading-em: var(--amber-700);
+  --accent: var(--amber-700);
+  --accent-ink: var(--linen-50);
+  /* Main buttons: Wild Honey pills, a deeper honey on hover. */
+  --cta: var(--honey-400);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--honey-500);
+  /* Butter marks highlighted words; honey for quote marks; amber for the ✺ marks. */
+  --note: var(--butter-200);
+  --note-ink: var(--coffee-900);
+  --quote-mark: var(--honey-400);
+  --list-mark: var(--amber-500);
+  --line: var(--linen-300);
+  --focus: var(--amber-700);
+  --success: var(--moss-700);
   --error: var(--rust-600);
   --status-open: var(--green-500);
-  --status-closed: var(--oat-500);
-  --logo-mark: var(--forest-900);
+  --status-closed: var(--linen-300);
+  --logo-mark: var(--moss-700);
 }
 
-/* Oat sections and the footer: the words turn forest green. */
+/* Tinted sections and the footer: a sage haze with butter light, and the words turn moss green. */
 [data-tone='alt'] {
-  --surface: var(--oat-300);
-  --surface-alt: var(--oat-400);
-  --surface-raised: var(--cream-50);
-  --line: var(--oat-500);
-  --ink: var(--forest-900);
-  --ink-muted: var(--forest-900);
-  --heading: var(--forest-900);
-  --cta-ink: var(--forest-900);
-  --note-ink: var(--forest-900);
+  --surface: var(--sage-leaf-100);
+  --surface-alt: var(--sage-leaf-200);
+  --surface-raised: var(--linen-50);
+  --line: var(--sage-leaf-300);
+  --ink: var(--moss-800);
+  --ink-muted: var(--moss-800);
+  --heading: var(--moss-800);
+  --note-ink: var(--moss-800);
+  --wash: var(--wash-sage);
 }
 
-/* Pages with mustard sections: every alternate section and the footer turn a soft mustard instead of
-   oat. Set per page with "Section colour" in the editor (all pages use oat for now). */
+/* Pages with the "Soft mustard" section colour: a butter haze with honey light instead of sage. */
 [data-alt-colour='mustard'] [data-tone='alt'] {
-  --surface: var(--mustard-tint-100);
-  --surface-alt: var(--mustard-tint-200);
-  --surface-raised: var(--cream-50);
-  --line: var(--mustard-tint-300);
+  --surface: var(--butter-100);
+  --surface-alt: var(--butter-200);
+  --line: var(--butter-200);
+  --ink: var(--coffee-900);
+  --ink-muted: var(--coffee-700);
+  --heading: var(--coffee-900);
+  --note-ink: var(--coffee-900);
+  --wash: var(--wash-butter);
 }
 
 [data-tone='dark'] {
-  --surface: var(--forest-900);
-  --surface-alt: var(--forest-800);
-  --surface-raised: var(--forest-800);
-  --ink: var(--cream-100);
-  --ink-muted: var(--oat-300);
-  --heading: var(--cream-100);
-  --accent: var(--mustard-400);
-  --accent-ink: var(--forest-900);
-  --cta: var(--mustard-400);
-  --cta-ink: var(--chocolate-900);
-  --cta-hover: var(--mustard-300);
-  --note: var(--mustard-400);
-  --note-ink: var(--chocolate-900);
-  --line: var(--forest-700);
-  --focus: var(--mustard-400);
-  --logo-mark: var(--mustard-400);
+  --surface: var(--moss-800);
+  --surface-alt: var(--moss-900);
+  --surface-raised: var(--moss-900);
+  --ink: var(--linen-100);
+  --ink-muted: var(--linen-200);
+  --heading: var(--linen-50);
+  --heading-em: var(--honey-400);
+  --accent: var(--honey-400);
+  --accent-ink: var(--coffee-900);
+  --cta: var(--honey-400);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--butter-200);
+  --note: var(--honey-400);
+  --note-ink: var(--coffee-900);
+  --quote-mark: var(--honey-400);
+  --list-mark: var(--honey-400);
+  --line: var(--olive-600);
+  --focus: var(--honey-400);
+  --logo-mark: var(--honey-400);
 }
 
 /* 3. TAILWIND MAPPING ----------------------------------------------------- */
@@ -174,6 +233,7 @@
   --radius-pill: 999px;
 
   --shadow-raised: var(--shadow-raised-value);
+  --shadow-glow: var(--shadow-glow-value);
 
   /* Layout widths (max-w-content, max-w-prose…) */
   --container-prose: 40rem;
@@ -200,7 +260,7 @@
   /* Page headlines: about 10% smaller than the original scale (Chelsea, 28 Oct). */
   --step-6: clamp(2.7rem, 1.45rem + 5.85vw, 6.3rem);
   /* One line that stretches across the page (Hi, I'm Chelsea): grows with the screen, stops at the widest layout. */
-  --step-stretch: min(13.6vw, 13.2rem);
+  --step-stretch: min(15.8vw, 15.4rem);
 
   /* Page rhythm */
   --gutter: clamp(1rem, 0.6rem + 2.4vw, 2.75rem);
@@ -222,50 +282,75 @@
   --logo-strip-duration: 60s;
   --logo-strip-fade: 10%;
 
-  /* Items that fade in as you scroll (data-reveal): each fade, the pause between items, how far they rise. */
-  --duration-reveal: 900ms;
-  --reveal-stagger: 350ms;
-  --reveal-distance: 1rem;
+  /* Items that fade in as you scroll (data-reveal): each fade, the pause between items, how far they rise,
+     and how soft they start (like coming into focus). */
+  --duration-reveal: 1300ms;
+  --reveal-stagger: 160ms;
+  --reveal-distance: 1.5rem;
+  --reveal-blur: 6px;
+
+  /* Slow ambient movement: the header rising in on load, sun rays breathing, light drifting,
+     linen lines swaying. */
+  --duration-rise: 1600ms;
+  --rise-step: 180ms;
+  --duration-breathe: 11s;
+  --duration-drift: 34s;
+  --duration-sway: 18s;
 
   /* Layers */
+  --z-grain: 70;
   --z-header: 50;
   --z-overlay: 80;
   --z-banner: 90;
 
   /* Type families and character */
-  --font-display-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
-  --font-body-family: var(--font-host-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-label-family: var(--font-martian-mono), ui-monospace, 'SF Mono', monospace;
-  --display-scale: 0.72;
-  --display-weight: 400;
-  --display-leading: 1.08;
-  --display-tracking: -0.015em;
+  --font-display-family: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-body-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  --font-label-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  /* Cormorant runs small, so headings are drawn a little larger than the steps. */
+  --display-scale: 0.98;
+  --display-weight: 500;
+  --display-style: italic;
+  --display-leading: 1.02;
+  --display-tracking: -0.01em;
   --display-case: none;
   /* Optical size match for the headline candidates on /fonts */
   --display-scale-playfair: 0.72;
   --display-scale-garamond: 0.8;
   --display-scale-cormorant: 0.86;
   --heading-weight: 500;
-  --eyebrow-weight: 400;
-  --eyebrow-tracking: 0.06em;
+  --eyebrow-weight: 500;
+  --eyebrow-tracking: 0.24em;
   --eyebrow-case: uppercase;
-  --body-leading: 1.6;
+  /* Labels and buttons: small Jost capitals, widely spaced, as on the mood board. */
+  --label-weight: 500;
+  --label-tracking: 0.16em;
+  --label-case: uppercase;
+  --body-weight: 400;
+  --body-leading: 1.7;
+
+  /* Header height (h-16, md:h-20), so the header's sunrise can run up behind it. */
+  --header-h: 4rem;
+  --header-h-md: 5rem;
+  --hero-pad: calc(var(--header-h) + var(--space-section-s));
+  --hero-pad-md: calc(var(--header-h-md) + var(--space-section-s));
 
   /* Shape */
-  --radius-card-value: 0.25rem;
-  --radius-control-value: 0.25rem;
-  --radius-media-value: 0.25rem;
-  --shadow-raised-value: 0 24px 48px -28px rgb(59 38 32 / 0.45);
+  --radius-card-value: 1.75rem;
+  --radius-control-value: 0.75rem;
+  --radius-media-value: 1.75rem;
+  --shadow-raised-value: 0 30px 60px -32px rgb(59 42 30 / 0.4);
+  --shadow-glow-value: 0 12px 34px -10px rgb(214 166 79 / 0.75);
   --hero-overlay-height: min(88svh, 56rem);
 
   /* Photo focus points for cropped images (object-position) */
   --focus-upper: 50% 22%;
   --focus-lower: 50% 78%;
 
-  /* Logo: the signature artwork is 82 × 36 */
-  /* The yellow ✺ beside each line of the "Perfect for" lists. */
+  /* The ✺ beside each line of the "Perfect for" lists. */
   --list-mark-size: 1.5rem;
 
+  /* Logo: the signature artwork is 82 × 36 */
   --logo-height-s: 1.75rem;
   --logo-height-m: 2.25rem;
   --logo-height-l: 3rem;
@@ -286,5 +371,8 @@
     --duration-slow: 0ms;
     --duration-reveal: 0ms;
     --reveal-stagger: 0ms;
+    --reveal-blur: 0px;
+    --duration-rise: 0ms;
+    --rise-step: 0ms;
   }
 }
