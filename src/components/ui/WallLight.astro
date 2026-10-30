@@ -4,45 +4,12 @@
 // plaster has a fine grain. Use inside a Card with variant="wall" (which is `relative isolate
 // overflow-hidden`); it sits behind the content and is hidden from screen readers. The movement stops
 // for people who prefer reduced motion (data-ambient, see global.css).
-
-// A branch reaching in from the top right corner, with leaves on alternating sides.
-const branch = { x0: 640, y0: -20, cx: 470, cy: 120, x1: 250, y1: 300 };
-const point = (t: number) => {
-  const u = 1 - t;
-  return {
-    x: u * u * branch.x0 + 2 * u * t * branch.cx + t * t * branch.x1,
-    y: u * u * branch.y0 + 2 * u * t * branch.cy + t * t * branch.y1,
-    // Direction of the branch at this point, in degrees.
-    angle:
-      (Math.atan2(2 * u * (branch.cy - branch.y0) + 2 * t * (branch.y1 - branch.cy), 2 * u * (branch.cx - branch.x0) + 2 * t * (branch.x1 - branch.cx)) *
-        180) /
-      Math.PI,
-  };
-};
-const leaves = Array.from({ length: 13 }, (_, i) => {
-  const t = 0.08 + i * 0.07;
-  const p = point(t);
-  const side = i % 2 === 0 ? 1 : -1;
-  const angle = p.angle + side * 48;
-  const length = 46 - i * 1.6;
-  const rad = (angle * Math.PI) / 180;
-  return {
-    cx: (p.x + Math.cos(rad) * length * 0.9).toFixed(1),
-    cy: (p.y + Math.sin(rad) * length * 0.9).toFixed(1),
-    rx: length.toFixed(1),
-    ry: (length * 0.36).toFixed(1),
-    angle: angle.toFixed(1),
-  };
-});
-const branchPath = `M${branch.x0} ${branch.y0} Q${branch.cx} ${branch.cy} ${branch.x1} ${branch.y1}`;
+import LeafShadow from './LeafShadow.astro';
 ---
 
 <div class="wall-light pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
   <div class="wall-sun absolute" data-ambient></div>
-  <svg class="wall-leaves absolute" viewBox="0 0 600 400" preserveAspectRatio="xMaxYMin slice" data-ambient>
-    <path class="wall-branch" d={branchPath} />
-    {leaves.map((l) => <ellipse cx={l.cx} cy={l.cy} rx={l.rx} ry={l.ry} transform={`rotate(${l.angle} ${l.cx} ${l.cy})`} />)}
-  </svg>
+  <LeafShadow placement="wall" />
   <div class="wall-grain absolute inset-0"></div>
 </div>
 
@@ -51,33 +18,6 @@ const branchPath = `M${branch.x0} ${branch.y0} Q${branch.cx} ${branch.cy} ${bran
     inset: -15%;
     background-image: var(--wall-sun), var(--wall-glow);
     animation: breathe calc(var(--duration-breathe) * 1.3) var(--ease-in-out-soft) infinite;
-  }
-
-  /* A small branch in the top right corner, soft and in the background. */
-  .wall-leaves {
-    inset: -6% -4% 42% 58%;
-    width: auto;
-    height: auto;
-    fill: var(--wall-shadow);
-    filter: blur(7px);
-    opacity: 0.26;
-    mix-blend-mode: multiply;
-    transform-origin: 100% 0%;
-    animation: leaf-sway calc(var(--duration-breathe) * 0.9) var(--ease-in-out-soft) infinite;
-  }
-
-  /* On phones the photo sits on top of the card, so the shadow falls just below it, on the right. */
-  @media (max-width: 767px) {
-    .wall-leaves {
-      inset: 42% -10% 28% 40%;
-    }
-  }
-
-  .wall-branch {
-    fill: none;
-    stroke: var(--wall-shadow);
-    stroke-width: 7;
-    stroke-linecap: round;
   }
 
   .wall-grain {

@@ -56,12 +56,14 @@ const strands = Array.from({ length: 16 }, (_, k) => {
 
   /* Behind the photos: right of centre on wide screens, under the words (where the photos are) on
      phones and tablets. */
-  /* Its glowing heart sits just to the left of the photos, between them and the words. */
+  /* Behind the polaroids, off to the side of the page, soft enough to feel like sunlight coming into
+     a room rather than a glowing orb. */
   .light-swirl-about {
     width: clamp(26rem, 52vw, 54rem);
     top: 50%;
-    right: 18%;
+    right: -4%;
     translate: 0 -50%;
+    opacity: 0.5;
   }
 
   @media (max-width: 1023px) {

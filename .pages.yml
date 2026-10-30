@@ -163,14 +163,14 @@ content:
             - { value: studios, label: Studios & Clinics }
             - { value: brands, label: Brands }
       - name: sectionColour
-        label: Section colour
+        label: Page mood
         type: select
-        default: oat
-        description: Colour of the alternating sections and the footer on this page.
+        default: golden
+        description: 'The feel of the page: Golden (warm honey light) or Sage (light green light, linen and leaf shadows).'
         options:
           values:
-            - { value: oat, label: Soft oat }
-            - { value: mustard, label: Soft mustard }
+            - { value: golden, label: Golden }
+            - { value: sage, label: Sage }
       - name: seo
         label: Google listing
         type: object

@@ -1,14 +1,17 @@
 ---
-// Decorative light for a section, like sun coming through trees: a warm glow, soft sun rays that
-// slowly brighten and shift, and patches of light that drift. The sunrise version also has fine
-// contour lines breathing in its bottom left corner. Put it inside an element with
-// `relative isolate overflow-hidden`; it sits behind the content and is hidden from screen readers.
-// The movement stops for people who prefer reduced motion (data-ambient, see global.css).
+// Decorative light for a section. Put it inside an element with `relative isolate overflow-hidden`;
+// it sits behind the content and is hidden from screen readers. The movement stops for people who
+// prefer reduced motion (data-ambient, see global.css).
+//   sunrise: golden morning light from the top right, soft sun rays that slowly brighten and shift,
+//            and fine contour lines breathing in the bottom left corner (the private page).
+//   meadow:  light sage morning light, the shadow of a leafy branch swaying in the top right, a linen
+//            weave texture and the contour lines (the retreats & events page).
+//   dusk:    honey light and sun rays on the moss panels.
+import LeafShadow from './LeafShadow.astro';
 import Topography from './Topography.astro';
 
 interface Props {
-  /** sunrise: butter and honey light from the top right, for light sections. dusk: honey light on moss. */
-  variant?: 'sunrise' | 'dusk';
+  variant?: 'sunrise' | 'meadow' | 'dusk';
   class?: string;
 }
 
@@ -17,21 +20,31 @@ const { variant = 'sunrise', class: className } = Astro.props;
 
 <div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
   <div class="sunlight-glow absolute inset-0"></div>
-  <div class="sunlight-rays absolute" data-ambient></div>
-  <div class="sunlight-dapple sunlight-dapple-1 absolute" data-ambient></div>
-  <div class="sunlight-dapple sunlight-dapple-2 absolute" data-ambient></div>
-  <div class="sunlight-dapple sunlight-dapple-3 absolute" data-ambient></div>
-  {variant === 'sunrise' && <Topography corner="bottom-left" />}
+  {variant !== 'meadow' && <div class="sunlight-rays absolute" data-ambient></div>}
+  {
+    variant === 'meadow' && (
+      <>
+        <div class="sunlight-weave absolute inset-0" />
+        <LeafShadow placement="hero" />
+      </>
+    )
+  }
+  {variant !== 'dusk' && <Topography corner="bottom-left" />}
 </div>
 
 <style>
-  .sunlight-sunrise {
+  .sunlight-sunrise,
+  .sunlight-meadow {
     -webkit-mask-image: var(--fade-bottom-mask);
     mask-image: var(--fade-bottom-mask);
   }
 
   .sunlight-sunrise .sunlight-glow {
     background-image: var(--glow-sunrise);
+  }
+
+  .sunlight-meadow .sunlight-glow {
+    background-image: var(--glow-meadow);
   }
 
   .sunlight-rays {
@@ -49,40 +62,11 @@ const { variant = 'sunrise', class: className } = Astro.props;
     opacity: 0.6;
   }
 
-  .sunlight-dapple {
-    aspect-ratio: 1;
-    border-radius: 50%;
-    animation: drift var(--duration-drift) var(--ease-in-out-soft) infinite;
-  }
-
-  .sunlight-dapple-1 {
-    width: 42vmax;
-    top: -18%;
-    right: -6%;
-    background-image: var(--dapple-butter);
-  }
-
-  .sunlight-dapple-2 {
-    width: 24vmax;
-    top: 35%;
-    right: 34%;
-    background-image: var(--dapple-honey);
-    animation-duration: calc(var(--duration-drift) * 1.35);
-    animation-direction: reverse;
-  }
-
-  .sunlight-dapple-3 {
-    width: 32vmax;
-    bottom: -22%;
-    left: -10%;
-    background-image: var(--dapple-sage);
-    animation-duration: calc(var(--duration-drift) * 0.8);
-  }
-
-  .sunlight-dusk .sunlight-dapple-1 {
-    top: -30%;
-    left: -10%;
-    right: auto;
-    background-image: var(--dapple-honey);
+  /* Woven linen, like a cloth laid out in the sun. */
+  .sunlight-weave {
+    background-image: var(--linen-weave);
+    background-size: var(--linen-weave-size);
+    opacity: var(--linen-weave-opacity);
+    mix-blend-mode: multiply;
   }
 </style>

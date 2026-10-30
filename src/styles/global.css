@@ -61,6 +61,26 @@
     background-image: var(--edge-fade-top), var(--wash);
   }
 
+  /* On sage pages (retreats), tinted sections have woven linen texture, faded at the top and bottom. */
+  [data-mood='sage'] :is(section, footer)[data-tone='alt'] {
+    position: relative;
+    isolation: isolate;
+  }
+
+  [data-mood='sage'] :is(section, footer)[data-tone='alt']::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--linen-weave);
+    background-size: var(--linen-weave-size);
+    opacity: var(--linen-weave-opacity);
+    mix-blend-mode: multiply;
+    -webkit-mask-image: var(--fade-y-mask);
+    mask-image: var(--fade-y-mask);
+  }
+
   /* The intro card's sand wall (light and leaf shadows are added by WallLight). */
   [data-tone='wall'] {
     background-image: var(--wall-base);
@@ -187,23 +207,6 @@
   50% {
     opacity: 1;
     translate: -3% 1.5%;
-  }
-}
-
-/* Patches of light wander slowly. */
-@keyframes drift {
-  0%,
-  100% {
-    translate: 0 0;
-    scale: 1;
-  }
-  33% {
-    translate: 8% -6%;
-    scale: 1.1;
-  }
-  66% {
-    translate: -6% 7%;
-    scale: 0.94;
   }
 }
 

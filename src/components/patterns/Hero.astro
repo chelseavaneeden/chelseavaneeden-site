@@ -38,6 +38,8 @@ interface Props {
   /** Glass layout only: where the text card sits on wide screens. */
   textPosition?: 'center' | 'left';
   tone?: 'light' | 'alt' | 'dark';
+  /** The light behind the split header: golden sunrise, or light sage meadow with leaf shadows. */
+  light?: 'sunrise' | 'meadow';
 }
 
 const {
@@ -56,6 +58,7 @@ const {
   textPosition = 'center',
   video,
   tone = 'light',
+  light = 'sunrise',
 } = Astro.props;
 const hasBadge = Astro.slots.has('badge');
 const hasTrust = Astro.slots.has('trust');
@@ -69,9 +72,9 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
       data-cta="camel"
       class="relative isolate -mt-(--header-h) overflow-hidden pt-(--hero-pad) pb-(--space-section-m) md:-mt-(--header-h-md) md:pt-(--hero-pad-md)"
     >
-      {/* Sunrise in the forest: warm light from the top right, sun rays, drifting light, and contour
+      {/* Morning light from the top right (golden sunrise, or a sage meadow with leaf shadows) and contour
           lines in the bottom left corner. The header's text rises in on load. */}
-      <Sunlight />
+      <Sunlight variant={light} />
       <Container width="wide" class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <div class:list={['flex flex-col gap-7', video ? 'lg:col-span-6' : 'lg:col-span-7']}>
           {hasBadge && <div class="rise-1"><slot name="badge" /></div>}

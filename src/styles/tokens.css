@@ -31,6 +31,7 @@
   --linen-100: #f4eee3;
   --linen-200: #e9e2d3; /* Raw Linen */
   --linen-300: #ddd4c1;
+  --butter-50: #f8f0dc;
   --butter-100: #f5e9c8;
   --butter-200: #efd9a0; /* Butter */
   --honey-400: #e2b866; /* Wild Honey: buttons */
@@ -61,9 +62,22 @@
   /* Light, texture and washes (see global.css). Colours here are the swatches above with transparency. */
   /* Sunrise: butter and honey light from the top right, a little sage shade at the bottom left. */
   --glow-sunrise:
-    radial-gradient(55% 70% at 88% 6%, rgb(239 217 160 / 0.95) 0%, rgb(239 217 160 / 0) 72%),
-    radial-gradient(38% 50% at 100% 0%, rgb(226 184 102 / 0.6) 0%, rgb(226 184 102 / 0) 70%),
-    radial-gradient(45% 60% at 0% 100%, rgb(167 173 140 / 0.38) 0%, rgb(167 173 140 / 0) 70%);
+    radial-gradient(65% 80% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 74%),
+    radial-gradient(42% 55% at 100% 0%, rgb(226 184 102 / 0.7) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(60% 70% at 18% 0%, rgb(239 217 160 / 0.55) 0%, rgb(239 217 160 / 0) 72%),
+    radial-gradient(50% 60% at 0% 100%, rgb(226 184 102 / 0.28) 0%, rgb(226 184 102 / 0) 70%);
+  /* Meadow (the retreats page): light sage morning light with a small warm sun in it, never dark. */
+  --glow-meadow:
+    radial-gradient(70% 85% at 86% 4%, rgb(220 222 201 / 1) 0%, rgb(220 222 201 / 0) 74%),
+    radial-gradient(42% 55% at 100% 0%, rgb(167 173 140 / 0.55) 0%, rgb(167 173 140 / 0) 70%),
+    radial-gradient(26% 34% at 74% 16%, rgb(239 217 160 / 0.45) 0%, rgb(239 217 160 / 0) 70%),
+    radial-gradient(55% 65% at 0% 100%, rgb(167 173 140 / 0.35) 0%, rgb(167 173 140 / 0) 70%);
+  /* Woven linen: fine fibres running both ways, like cloth in sunlight. */
+  --linen-weave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.035' numOctaves='2' seed='3' result='h'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035 0.9' numOctaves='2' seed='8' result='v'/%3E%3CfeBlend in='h' in2='v' mode='multiply'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.36 0 0 0 0 0.24 0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+  --linen-weave-size: 180px;
+  --linen-weave-opacity: 0.35;
+  /* Textures on tinted sections fade out at the top and bottom, like the sections themselves. */
+  --fade-y-mask: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 22%, rgb(0 0 0 / 1) 78%, rgb(0 0 0 / 0) 100%);
   /* Sun rays falling through trees: soft diagonal bands, faded out away from the sun. */
   --sun-rays: repeating-linear-gradient(
     116deg,
@@ -78,9 +92,6 @@
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
   /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
-  --dapple-honey: radial-gradient(circle, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 65%);
-  --dapple-butter: radial-gradient(circle, rgb(239 217 160 / 0.7) 0%, rgb(239 217 160 / 0) 65%);
-  --dapple-sage: radial-gradient(circle, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 65%);
   /* The swirl of light: fine strands that brighten towards a glowing centre. */
   --swirl-core: rgb(255 244 214 / 0.95);
   --swirl-mid: rgb(239 217 160 / 0.7);
@@ -88,7 +99,7 @@
   /* On the light header the strands are honey and amber, so they show against the pale glow. */
   --swirl-core-sun: rgb(226 184 102 / 0.95);
   --swirl-mid-sun: rgb(201 128 47 / 0.45);
-  --swirl-centre-sun: radial-gradient(circle, rgb(255 238 196 / 1) 0%, rgb(226 184 102 / 0.6) 26%, rgb(226 184 102 / 0) 68%);
+  --swirl-centre-sun: radial-gradient(circle, rgb(255 238 196 / 0.6) 0%, rgb(226 184 102 / 0.3) 30%, rgb(226 184 102 / 0) 70%);
   --swirl-centre: radial-gradient(circle, rgb(255 246 222 / 0.95) 0%, rgb(239 217 160 / 0.55) 30%, rgb(239 217 160 / 0) 70%);
   /* Tinted sections fade into the page at top and bottom, so there are no hard edges. */
   --edge-fade: linear-gradient(
@@ -99,12 +110,13 @@
     rgb(244 238 227 / 1) 100%
   );
   --edge-fade-top: linear-gradient(180deg, rgb(244 238 227 / 1) 0%, rgb(244 238 227 / 0) 30%);
-  --wash-sage:
-    radial-gradient(60% 55% at 12% 35%, rgb(239 217 160 / 0.5) 0%, rgb(239 217 160 / 0) 70%),
-    radial-gradient(55% 50% at 92% 70%, rgb(167 173 140 / 0.4) 0%, rgb(167 173 140 / 0) 70%);
-  --wash-butter:
-    radial-gradient(60% 55% at 85% 25%, rgb(226 184 102 / 0.45) 0%, rgb(226 184 102 / 0) 70%),
-    radial-gradient(55% 50% at 10% 80%, rgb(239 217 160 / 0.6) 0%, rgb(239 217 160 / 0) 70%);
+  --wash-golden:
+    radial-gradient(60% 60% at 85% 25%, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(60% 55% at 10% 75%, rgb(239 217 160 / 0.75) 0%, rgb(239 217 160 / 0) 70%);
+  --wash-meadow:
+    radial-gradient(60% 55% at 12% 30%, rgb(220 222 201 / 0.9) 0%, rgb(220 222 201 / 0) 70%),
+    radial-gradient(55% 50% at 90% 70%, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 70%),
+    radial-gradient(30% 30% at 70% 15%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%);
   /* Moss bands lit by low golden sun. */
   --glow-moss:
     radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
@@ -167,28 +179,27 @@
 }
 
 /* Tinted sections and the footer: a sage haze with butter light, and the words turn moss green. */
+/* Tinted sections and the footer. Each page has a mood (Site colour in the editor):
+   golden (the private page): a warm butter haze with honey light;
+   sage (the retreats page): a light sage haze with linen and leaf-shadow textures.
+   On both, the words in tinted sections are moss green. */
 [data-tone='alt'] {
-  --surface: var(--sage-leaf-100);
-  --surface-alt: var(--sage-leaf-200);
+  --surface: var(--butter-50);
+  --surface-alt: var(--butter-100);
   --surface-raised: var(--linen-50);
-  --line: var(--sage-leaf-300);
+  --line: var(--butter-200);
   --ink: var(--moss-800);
   --ink-muted: var(--moss-800);
   --heading: var(--moss-800);
   --note-ink: var(--moss-800);
-  --wash: var(--wash-sage);
+  --wash: var(--wash-golden);
 }
 
-/* Pages with the "Soft mustard" section colour: a butter haze with honey light instead of sage. */
-[data-alt-colour='mustard'] [data-tone='alt'] {
-  --surface: var(--butter-100);
-  --surface-alt: var(--butter-200);
-  --line: var(--butter-200);
-  --ink: var(--coffee-900);
-  --ink-muted: var(--coffee-700);
-  --heading: var(--coffee-900);
-  --note-ink: var(--coffee-900);
-  --wash: var(--wash-butter);
+[data-mood='sage'] [data-tone='alt'] {
+  --surface: var(--sage-leaf-100);
+  --surface-alt: var(--sage-leaf-200);
+  --line: var(--sage-leaf-300);
+  --wash: var(--wash-meadow);
 }
 
 /* The intro card: a sand wall in morning sun. Coffee words, moss headings and ticks. */
@@ -347,7 +358,6 @@
   --duration-rise: 1600ms;
   --rise-step: 180ms;
   --duration-breathe: 11s;
-  --duration-drift: 34s;
   --duration-contour: 14s;
   --duration-swirl: 150s;
 
@@ -394,11 +404,8 @@
   --radius-control-value: 0.75rem;
   --radius-media-value: 1.75rem;
   --shadow-raised-value: 0 30px 60px -32px rgb(59 42 30 / 0.4);
-  /* The warm glow around a button on hover, like light around the sun. */
-  --shadow-glow-value:
-    0 0 0 1px rgb(255 240 200 / 0.6),
-    0 6px 26px -2px rgb(226 184 102 / 1),
-    0 0 56px 8px rgb(239 217 160 / 0.75);
+  /* A gentle, warm glow around a button on hover, soft like morning light. */
+  --shadow-glow-value: 0 4px 18px -6px rgb(226 184 102 / 0.6);
   --hero-overlay-height: min(88svh, 56rem);
 
   /* Photo focus points for cropped images (object-position) */
