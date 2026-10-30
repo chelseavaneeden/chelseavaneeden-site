@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Font } from 'astro:assets';
 import EnquiryDialog from '../components/patterns/EnquiryDialog.astro';
+import ScrollGrow from '../components/ui/ScrollGrow.astro';
 import { t, type Lang } from '../i18n/ui';
 import { getSite } from '../lib/content';
 
@@ -61,6 +62,7 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     </a>
     <slot />
     <EnquiryDialog enquiry={enquiry} contact={contact} />
+    <ScrollGrow />
   </body>
 </html>
 

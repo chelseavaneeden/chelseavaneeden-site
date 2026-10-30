@@ -10,9 +10,11 @@ interface Props {
   /** stacked: everything in one column. split: title left, intro right (wide screens). */
   layout?: 'stacked' | 'split' | 'centered';
   id?: string;
+  /** Stacked only: the title grows across the screen and settles as the section scrolls in (ScrollGrow). */
+  grow?: boolean;
 }
 
-const { eyebrow, title, intro, layout = 'stacked', id } = Astro.props;
+const { eyebrow, title, intro, layout = 'stacked', id, grow = false } = Astro.props;
 ---
 
 {
@@ -25,10 +27,16 @@ const { eyebrow, title, intro, layout = 'stacked', id } = Astro.props;
       {intro && <Text tone="muted" class="lg:col-span-5" text={intro} />}
     </div>
   ) : (
-    <div data-reveal class:list={['flex max-w-narrow flex-col gap-4', layout === 'centered' && 'mx-auto items-center text-center']}>
+    <div data-reveal={grow ? undefined : true} class:list={['flex max-w-narrow flex-col gap-4', layout === 'centered' && 'mx-auto items-center text-center']}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <Heading variant="h1" text={title} id={id} />
-      {intro && <Text tone="muted" class="max-w-prose" text={intro} />}
+      {grow ? (
+        <div data-grow-heading class="w-fit">
+          <Heading variant="h1" text={title} id={id} />
+        </div>
+      ) : (
+        <Heading variant="h1" text={title} id={id} />
+      )}
+      {intro && (grow ? <div data-grow-follow><Text tone="muted" class="max-w-prose" text={intro} /></div> : <Text tone="muted" class="max-w-prose" text={intro} />)}
     </div>
   )
 }

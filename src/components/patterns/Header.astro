@@ -21,11 +21,18 @@ const local = (href: string) => {
   const id = /^\/#(.+)$/.exec(href)?.[1];
   return id && sections.includes(id) ? `#${id}` : href;
 };
-const nav = allNav.map((item) => ({
-  ...item,
-  href: local(item.href),
-  children: item.children.map((child) => ({ ...child, href: local(child.href) })),
-}));
+// On an item's own page (e.g. Retreats & events), the menu shows its swap instead (Private sessions).
+const trim = (path: string) => path.replace(/\/+$/, '') || '/';
+const here = trim(Astro.url.pathname);
+const nav = allNav.map((item) => {
+  const swap = item.onItsPage?.label && item.onItsPage.href && trim(item.href) === here ? item.onItsPage : undefined;
+  return {
+    ...item,
+    label: swap?.label ?? item.label,
+    href: local(swap?.href ?? item.href),
+    children: item.children.map((child) => ({ ...child, href: local(child.href) })),
+  };
+});
 ---
 
 <header data-tone={tone} data-site-header data-cta="header" class="group/header sticky top-0 z-(--z-header) bg-transparent">

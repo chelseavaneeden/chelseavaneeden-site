@@ -77,6 +77,8 @@ const settings = defineCollection({
         href: z.string(),
         external: z.boolean().default(false),
         children: list(link),
+        /** Shown instead while you are on this item's own page, e.g. "Private sessions" on Retreats & events. */
+        onItsPage: link.optional(),
       }),
     ),
     bookCta: link,

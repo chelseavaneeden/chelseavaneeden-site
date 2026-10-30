@@ -15,9 +15,11 @@ interface Props {
   cardTone?: 'raised' | 'alt';
   /** Your Google rating, shown under the heading when both numbers are set. */
   rating?: { value?: number; count?: number };
+  /** The title grows across the screen and settles as the section scrolls in; the reviews follow (ScrollGrow). */
+  grow?: boolean;
 }
 
-const { eyebrow, title, testimonials, link, cardTone = 'raised', rating } = Astro.props;
+const { eyebrow, title, testimonials, link, cardTone = 'raised', rating, grow = false } = Astro.props;
 const ratingText =
   rating?.value && rating.count ? `${rating.value.toFixed(1)} on Google from ${rating.count} review${rating.count === 1 ? '' : 's'}` : undefined;
 const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
@@ -25,20 +27,20 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
 
 <div class="flex flex-col gap-10 md:gap-14">
   <div class="flex flex-col gap-4">
-    <SectionHeader eyebrow={eyebrow} title={title} />
+    <SectionHeader eyebrow={eyebrow} title={title} grow={grow} />
     {
       ratingText && (
-        <p class="type-body inline-flex items-center gap-2 text-ink">
+        <p data-grow-follow={grow || undefined} class="type-body inline-flex items-center gap-2 text-ink">
           <Icon name="star" class="text-lg text-logo-mark" />
           {ratingText}
         </p>
       )
     }
   </div>
-  <ul class:list={['grid grid-cols-1 gap-4', cols]}>
+  <ul data-grow-follow={grow || undefined} class:list={['grid grid-cols-1 gap-4', cols]}>
     {
       testimonials.map((t) => (
-        <li data-reveal>
+        <li data-reveal={grow ? undefined : true}>
           <figure
             data-tone={cardTone === 'alt' ? 'alt' : undefined}
             class:list={['flex h-full flex-col justify-between gap-8 rounded-card p-7 md:p-8', cardTone === 'alt' ? 'bg-surface' : 'bg-surface-raised']}
@@ -62,7 +64,7 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
   </ul>
   {
     link && (
-      <div>
+      <div data-grow-follow={grow || undefined}>
         <Button href={link.href} variant="secondary" external={/^https?:\/\//.test(link.href)} event="reviews">
           {link.label}
         </Button>

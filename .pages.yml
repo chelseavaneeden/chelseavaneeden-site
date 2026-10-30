@@ -494,6 +494,13 @@ content:
           - { name: label, label: Menu text, type: string, required: true }
           - { name: href, label: Link, type: string, required: true }
           - { name: external, label: Opens another website, type: boolean }
+          - name: onItsPage
+            label: On its own page, show instead
+            type: object
+            description: 'Optional. While a visitor is on this page, the menu shows this link instead (e.g. on Retreats & events: Private sessions, linking to the home page).'
+            fields:
+              - { name: label, label: Menu text, type: string }
+              - { name: href, label: Link, type: string }
           - name: children
             label: Drop-down items
             type: object

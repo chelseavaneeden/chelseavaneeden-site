@@ -76,12 +76,13 @@ const testimonials = await getTestimonials('private');
 
     {
       testimonials.length > 0 && (
-        <Section space="m" tone="alt" id="reviews">
+        <Section space="m" tone="alt" id="reviews" data-grow-section>
           <TestimonialGrid
             eyebrow={shared.proof.eyebrow}
             title={shared.proof.title}
             testimonials={testimonials}
             rating={{ value: site.trust.googleRating, count: site.trust.googleReviewCount }}
+            grow
           />
         </Section>
       )
@@ -90,7 +91,7 @@ const testimonials = await getTestimonials('private');
     <Section space="l" tone="light" id="about" data-grow-section>
       {/* The greeting sits above the words in one moss green; the words are larger so they balance the
           photos. As the section scrolls in, the greeting starts stretched across the screen and shrinks
-          into its place above the words, then the words and photos fade in (script below). */}
+          into its place above the words, then the words and photos fade in (see ScrollGrow). */}
       <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
         <div class="flex flex-col gap-6 lg:col-span-6">
           {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
@@ -134,59 +135,3 @@ const testimonials = await getTestimonials('private');
   <Footer links={site.footerLinks} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
 </Base>
 
-<script>
-  // "Hi, I'm Chelsea": as the About section scrolls into view, the greeting starts stretched across the
-  // screen and shrinks into its place above the words; then the words and photos fade in. It is driven
-  // by scrolling, so it follows the visitor's pace in both directions. Skipped for people who prefer
-  // reduced motion (everything simply shows in place). Styles in global.css ([data-grow-…]).
-  const section = document.querySelector<HTMLElement>('[data-grow-section]');
-  const wrap = section?.querySelector<HTMLElement>('[data-grow-heading]');
-  const heading = wrap?.firstElementChild as HTMLElement | null | undefined;
-  const pageEdge = document.querySelector<HTMLElement>('[data-site-header] > div');
-
-  if (section && wrap && heading && pageEdge && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let startScale = 1;
-    let startShift = 0;
-    let frame = 0;
-
-    const clamp = (n: number) => Math.min(1, Math.max(0, n));
-    // Slow at both ends: it lingers wide, then eases gently into place.
-    const ease = (t: number) => t * t * (3 - 2 * t);
-
-    const update = () => {
-      frame = 0;
-      // 0 when the words' column reaches the bottom of the screen, 1 when it is 30% from the top.
-      const top = (wrap.parentElement ?? wrap).getBoundingClientRect().top;
-      const progress = clamp((innerHeight - top) / (innerHeight * 0.7));
-      const settle = ease(progress);
-      section.style.setProperty('--grow-scale', String(startScale + (1 - startScale) * settle));
-      section.style.setProperty('--grow-x', `${startShift * (1 - settle)}px`);
-      section.style.setProperty('--grow-follow', String(clamp((progress - 0.7) / 0.3)));
-    };
-
-    // How big the greeting starts: as wide as the page, from the page's left edge.
-    const measure = () => {
-      section.style.setProperty('--grow-scale', '1');
-      section.style.setProperty('--grow-x', '0px');
-      const range = document.createRange();
-      range.selectNodeContents(heading);
-      const text = range.getBoundingClientRect();
-      const edge = pageEdge.getBoundingClientRect();
-      const padding = parseFloat(getComputedStyle(pageEdge).paddingLeft);
-      const available = edge.width - padding * 2;
-      startScale = Math.max(1, available / text.width);
-      startShift = edge.left + padding - text.left;
-      update();
-    };
-
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    section.dataset.grow = 'on';
-    addEventListener('scroll', onScroll, { passive: true });
-    addEventListener('resize', measure);
-    document.fonts?.ready.then(measure);
-    measure();
-  }
-</script>

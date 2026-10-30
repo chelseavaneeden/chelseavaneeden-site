@@ -7,6 +7,9 @@ nav:
     href: /#faq
   - label: Retreats & events
     href: /retreats-events
+    onItsPage:
+      label: Private sessions
+      href: /
 bookCta:
   label: Book your intro pack
   href: /intro-pack
