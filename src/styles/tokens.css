@@ -38,10 +38,8 @@
   --honey-500: #d6a64f; /* deeper honey: button hover */
   --amber-500: #c9802f; /* Amber */
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
-  /* Toasted camel for the header's buttons, deep enough for light linen words (4.7:1), so they stand
-     apart from the golden light behind them. */
-  --camel-700: #8f673c;
-  --camel-800: #7f5b34;
+  /* A slightly deeper amber, for the header buttons on hover. */
+  --amber-600: #b5712a;
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
   /* A warm sand wall in morning light, for the intro card. */
@@ -160,7 +158,7 @@
   --accent: var(--amber-700);
   --accent-ink: var(--linen-50);
   /* Main buttons: Wild Honey pills that light up on hover (butter and a warm glow). In the header they
-     are camel instead (see [data-cta='camel']). */
+     are amber instead (see [data-cta='amber']). */
   --cta: var(--honey-400);
   --cta-ink: var(--coffee-900);
   --cta-hover: var(--butter-200);
@@ -216,12 +214,12 @@
   --line: var(--sand-300);
 }
 
-/* The header (menu bar and the page's opening section): camel buttons with light linen words, which
-   stand out against the golden light where honey buttons would blend in. */
-[data-cta='camel'] {
-  --cta: var(--camel-700);
+/* The header (menu bar and the page's opening section): Amber buttons with light linen words, which
+   stand out against the golden light where honey buttons would blend in; a deeper amber on hover. */
+[data-cta='amber'] {
+  --cta: var(--amber-500);
   --cta-ink: var(--linen-50);
-  --cta-hover: var(--camel-800);
+  --cta-hover: var(--amber-600);
 }
 
 [data-tone='dark'] {
