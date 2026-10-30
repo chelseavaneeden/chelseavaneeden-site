@@ -171,6 +171,15 @@ content:
           values:
             - { value: golden, label: Golden }
             - { value: sage, label: Sage }
+      - name: headerLight
+        label: Header light
+        type: select
+        default: golden
+        description: 'The light behind the header: Golden (warm sunrise) or Sage (light green, linen and a leaf shadow).'
+        options:
+          values:
+            - { value: golden, label: Golden }
+            - { value: sage, label: Sage }
       - name: seo
         label: Google listing
         type: object

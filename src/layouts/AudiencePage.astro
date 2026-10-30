@@ -43,11 +43,12 @@ const sage = page.sectionColour === 'sage';
   <Header nav={site.nav} cta={page.hero.primary} sections={[testimonials.length > 0 && 'reviews', page.faq && 'faq'].filter((s): s is string => !!s)} />
 
   <main id="main">
-    <Hero layout="split" {...hero} light={sage ? 'meadow' : 'sunrise'}>
+    <Hero layout="split" {...hero} light={page.headerLight === 'sage' ? 'meadow' : 'sunrise'}>
       <TrustLine slot="trust" trust={{ items: site.trust.items }} />
     </Hero>
 
-    <Section space="m" tone="alt">
+    {/* "Perfect for" is a light, faded sage, like on the private page. */}
+    <Section space="m" tone="alt" tint="sage">
       {sage && <LeafShadow placement="section" />}
       <Checklist {...page.whoFor} />
     </Section>

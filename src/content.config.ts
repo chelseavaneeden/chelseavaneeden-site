@@ -237,8 +237,10 @@ const audiencePages = defineCollection({
     z.object({
       title: z.string(),
       audience: z.enum(audiences),
-      /** Colour of the alternate sections and footer on this page. */
+      /** The page's mood: colour of the tinted sections and footer (golden or sage with linen and leaves). */
       sectionColour: z.enum(['golden', 'sage']).default('golden'),
+      /** The light behind the header: golden sunrise, or sage with linen and a leaf shadow. */
+      headerLight: z.enum(['golden', 'sage']).default('golden'),
       seo: z.object({ title: z.string(), description: z.string() }),
       hero: z.object({
         eyebrow: optionalText,
