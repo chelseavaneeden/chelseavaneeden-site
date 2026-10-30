@@ -224,6 +224,26 @@
   }
 }
 
+/* Orbs of light rise a little and glow brighter, then settle. */
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 0.55;
+  }
+  50% {
+    translate: 0 -2.25rem;
+    opacity: 1;
+  }
+}
+
+/* The swirl of light turns very slowly. */
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
 /* Linen lines lift and settle, like fabric in a breeze. */
 @keyframes sway {
   0%,

@@ -1,0 +1,124 @@
+---
+// A swirl of golden light, like the spiral of light on the mood board: fine strands of light spiral
+// in towards a glowing centre, softly blurred so they glow, and the whole swirl turns very slowly.
+// Put it inside an element with `relative`; `placement` picks where it sits. Hidden from screen
+// readers, and still for people who prefer reduced motion (data-ambient, see global.css).
+interface Props {
+  /** sun: centred on the top right corner, where the header's light comes from. panel: right of centre. */
+  placement?: 'sun' | 'panel';
+  class?: string;
+}
+
+const { placement = 'sun', class: className } = Astro.props;
+// Each swirl needs its own gradient id, as a page can have more than one.
+const fadeId = `light-swirl-fade-${Math.random().toString(36).slice(2, 8)}`;
+
+// Strands of light curl in towards the centre. Each one starts at its own distance, curls its own
+// amount and has its own weight, so the swirl looks like silk rather than a pattern.
+const vary = (k: number, seed: number) => (Math.sin(k * 12.9898 + seed * 78.233) * 43758.5453) % 1;
+const strands = Array.from({ length: 16 }, (_, k) => {
+  const start = (k / 16) * Math.PI * 2 + Math.abs(vary(k, 1)) * 0.4;
+  const outer = 300 + Math.abs(vary(k, 2)) * 180;
+  const turn = Math.PI * (1.25 + Math.abs(vary(k, 3)) * 0.7);
+  const points = Array.from({ length: 56 }, (_, i) => {
+    const t = i / 55;
+    const r = 14 + (outer - 14) * Math.pow(1 - t, 1.6);
+    const a = start + t * turn;
+    return `${(Math.cos(a) * r).toFixed(1)} ${(Math.sin(a) * r).toFixed(1)}`;
+  });
+  return { d: `M${points.join(' L')}`, weight: (0.6 + Math.abs(vary(k, 4)) * 1.4).toFixed(2) };
+});
+---
+
+<div class:list={['light-swirl pointer-events-none absolute', `light-swirl-${placement}`, className]} aria-hidden="true">
+  <svg class="light-swirl-spin" viewBox="-500 -500 1000 1000" data-ambient>
+    <defs>
+      <radialGradient id={fadeId} gradientUnits="userSpaceOnUse" cx="0" cy="0" r="480">
+        <stop offset="0" class="light-swirl-core" />
+        <stop offset="0.45" class="light-swirl-mid" />
+        <stop offset="1" class="light-swirl-edge" />
+      </radialGradient>
+    </defs>
+    <g class="light-swirl-glow" stroke={`url(#${fadeId})`}>
+      {strands.map((s) => <path d={s.d} />)}
+    </g>
+    <g class="light-swirl-fine" stroke={`url(#${fadeId})`}>
+      {strands.map((s) => <path d={s.d} stroke-width={s.weight} />)}
+    </g>
+  </svg>
+  <div class="light-swirl-centre absolute" data-ambient></div>
+</div>
+
+<style>
+  .light-swirl {
+    aspect-ratio: 1;
+  }
+
+  .light-swirl-sun {
+    width: clamp(26rem, 58vw, 60rem);
+    top: 0;
+    right: 0;
+    translate: 38% -42%;
+    opacity: 0.75;
+  }
+
+  .light-swirl-panel {
+    width: clamp(22rem, 52vw, 44rem);
+    top: 50%;
+    right: 0;
+    translate: 30% -50%;
+    opacity: 0.6;
+  }
+
+  .light-swirl-spin {
+    width: 100%;
+    height: 100%;
+    animation: spin var(--duration-swirl) linear infinite;
+  }
+
+  .light-swirl path {
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .light-swirl-glow path {
+    stroke-width: 12;
+  }
+
+  .light-swirl-glow {
+    filter: blur(12px);
+    opacity: 0.6;
+  }
+
+  .light-swirl-fine {
+    opacity: 0.7;
+  }
+
+  .light-swirl-core {
+    stop-color: var(--swirl-core);
+  }
+
+  .light-swirl-mid {
+    stop-color: var(--swirl-mid);
+  }
+
+  .light-swirl-edge {
+    stop-color: var(--swirl-edge);
+  }
+
+  .light-swirl-sun .light-swirl-core {
+    stop-color: var(--swirl-core-sun);
+  }
+
+  .light-swirl-sun .light-swirl-mid {
+    stop-color: var(--swirl-mid-sun);
+  }
+
+  /* The bright heart of the swirl, gently breathing. */
+  .light-swirl-centre {
+    inset: 26%;
+    border-radius: 50%;
+    background-image: var(--swirl-centre);
+    animation: breathe var(--duration-breathe) var(--ease-in-out-soft) infinite;
+  }
+</style>

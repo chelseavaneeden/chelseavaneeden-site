@@ -81,6 +81,29 @@
   --dapple-honey: radial-gradient(circle, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 65%);
   --dapple-butter: radial-gradient(circle, rgb(239 217 160 / 0.7) 0%, rgb(239 217 160 / 0) 65%);
   --dapple-sage: radial-gradient(circle, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 65%);
+  /* Orbs of sunlight, like out-of-focus light through leaves: soft glowing discs. */
+  --orb-light: radial-gradient(
+    circle,
+    rgb(255 236 186 / 0.75) 0%,
+    rgb(239 217 160 / 0.5) 38%,
+    rgb(226 184 102 / 0.18) 58%,
+    rgb(226 184 102 / 0) 70%
+  );
+  --orb-dusk: radial-gradient(
+    circle,
+    rgb(255 240 200 / 0.5) 0%,
+    rgb(239 217 160 / 0.28) 40%,
+    rgb(226 184 102 / 0.1) 58%,
+    rgb(226 184 102 / 0) 70%
+  );
+  /* The swirl of light: fine strands that brighten towards a glowing centre. */
+  --swirl-core: rgb(255 244 214 / 0.95);
+  --swirl-mid: rgb(239 217 160 / 0.7);
+  --swirl-edge: rgb(226 184 102 / 0);
+  /* On the light header the strands are honey and amber, so they show against the pale glow. */
+  --swirl-core-sun: rgb(226 184 102 / 0.95);
+  --swirl-mid-sun: rgb(201 128 47 / 0.45);
+  --swirl-centre: radial-gradient(circle, rgb(255 246 222 / 0.95) 0%, rgb(239 217 160 / 0.55) 30%, rgb(239 217 160 / 0) 70%);
   /* Tinted sections fade into the page at top and bottom, so there are no hard edges. */
   --edge-fade: linear-gradient(
     180deg,
@@ -340,6 +363,8 @@
   --duration-breathe: 11s;
   --duration-drift: 34s;
   --duration-sway: 18s;
+  --duration-float: 17s;
+  --duration-swirl: 150s;
 
   /* Layers */
   --z-grain: 70;
