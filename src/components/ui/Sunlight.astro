@@ -6,7 +6,8 @@
 //            and fine contour lines breathing in the bottom left corner (the private page).
 //   meadow:  light sage morning light, the shadow of a leafy branch swaying in the top right, a linen
 //            weave texture and the contour lines (the retreats & events page).
-//   dusk:    honey light and sun rays on the moss panels.
+//   dusk:    honey light and sun rays on the moss panels, with woven linen and honey contour lines in
+//            the top right corner.
 import LeafShadow from './LeafShadow.astro';
 import Topography from './Topography.astro';
 
@@ -21,15 +22,9 @@ const { variant = 'sunrise', class: className } = Astro.props;
 <div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
   <div class="sunlight-glow absolute inset-0"></div>
   {variant !== 'meadow' && <div class="sunlight-rays absolute" data-ambient></div>}
-  {
-    variant === 'meadow' && (
-      <>
-        <div class="sunlight-weave absolute inset-0" />
-        <LeafShadow placement="hero" />
-      </>
-    )
-  }
-  {variant !== 'dusk' && <Topography corner="bottom-left" />}
+  {variant !== 'sunrise' && <div class="sunlight-weave absolute inset-0" />}
+  {variant === 'meadow' && <LeafShadow placement="hero" />}
+  <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />
 </div>
 
 <style>

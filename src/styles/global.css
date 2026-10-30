@@ -227,13 +227,6 @@
   }
 }
 
-/* The swirl of light turns very slowly. */
-@keyframes spin {
-  to {
-    rotate: 360deg;
-  }
-}
-
 /* Contour lines breathe: they widen a touch and soften, then settle back. */
 @keyframes contour-breathe {
   0%,

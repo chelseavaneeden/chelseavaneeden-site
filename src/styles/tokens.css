@@ -25,7 +25,6 @@
   --olive-600: #7b7d4e; /* Olive Grove */
   --sage-leaf-400: #a7ad8c; /* Sage Leaf */
   --sage-leaf-300: #cdd0b6;
-  --sage-leaf-hover: #b9be9f; /* a paler sage, for the header buttons on hover */
   --sage-leaf-200: #dcdec9;
   --sage-leaf-100: #e7e8d9;
   --linen-50: #faf6ee;
@@ -89,15 +88,6 @@
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
   /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
-  /* The swirl of light: fine strands that brighten towards a glowing centre. */
-  --swirl-core: rgb(255 244 214 / 0.95);
-  --swirl-mid: rgb(239 217 160 / 0.7);
-  --swirl-edge: rgb(226 184 102 / 0);
-  /* On the light header the strands are honey and amber, so they show against the pale glow. */
-  --swirl-core-sun: rgb(226 184 102 / 0.95);
-  --swirl-mid-sun: rgb(201 128 47 / 0.45);
-  --swirl-centre-sun: radial-gradient(circle, rgb(255 238 196 / 0.6) 0%, rgb(226 184 102 / 0.3) 30%, rgb(226 184 102 / 0) 70%);
-  --swirl-centre: radial-gradient(circle, rgb(255 246 222 / 0.95) 0%, rgb(239 217 160 / 0.55) 30%, rgb(239 217 160 / 0) 70%);
   /* Tinted sections fade into the page at top and bottom, so there are no hard edges. */
   --edge-fade: linear-gradient(
     180deg,
@@ -157,7 +147,7 @@
   --accent: var(--amber-700);
   --accent-ink: var(--linen-50);
   /* Main buttons: Wild Honey pills that light up on hover (butter and a warm glow). In the header they
-     are sage instead (see [data-cta='sage']). */
+     are Coffee Bean instead (see [data-cta='header']). */
   --cta: var(--honey-400);
   --cta-ink: var(--coffee-900);
   --cta-hover: var(--butter-200);
@@ -192,7 +182,9 @@
   --wash: var(--wash-golden);
 }
 
-[data-mood='sage'] [data-tone='alt'] {
+/* A single tinted section can be sage on a golden page: <Section tone="alt" tint="sage">. */
+[data-mood='sage'] [data-tone='alt'],
+[data-tone='alt'][data-tint='sage'] {
   --surface: var(--sage-leaf-100);
   --surface-alt: var(--sage-leaf-200);
   --line: var(--sage-leaf-300);
@@ -213,12 +205,12 @@
   --line: var(--sand-300);
 }
 
-/* The header (menu bar and the page's opening section): Sage Leaf buttons with Coffee Bean words
-   (5.9:1), soft against the sage linen light; a paler sage on hover. */
-[data-cta='sage'] {
-  --cta: var(--sage-leaf-400);
-  --cta-ink: var(--coffee-900);
-  --cta-hover: var(--sage-leaf-hover);
+/* The header (menu bar and the page's opening section): Coffee Bean buttons with Butter words (9.9:1),
+   grounded against the golden light; a softer coffee on hover. */
+[data-cta='header'] {
+  --cta: var(--coffee-900);
+  --cta-ink: var(--butter-200);
+  --cta-hover: var(--coffee-700);
 }
 
 [data-tone='dark'] {
@@ -241,6 +233,9 @@
   --line: var(--olive-600);
   --focus: var(--honey-400);
   --logo-mark: var(--honey-400);
+  /* Textures on moss: honey contour lines and a soft linen weave. */
+  --contour-line: rgb(239 217 160 / 0.3);
+  --linen-weave-opacity: 0.25;
 }
 
 /* 3. TAILWIND MAPPING ----------------------------------------------------- */
@@ -356,7 +351,6 @@
   --rise-step: 180ms;
   --duration-breathe: 11s;
   --duration-contour: 14s;
-  --duration-swirl: 150s;
 
   /* Layers */
   --z-grain: 70;

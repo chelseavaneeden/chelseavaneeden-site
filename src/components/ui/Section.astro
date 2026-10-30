@@ -8,6 +8,8 @@ interface Props {
   tone?: SectionTone;
   space?: SectionSpace;
   width?: ContainerWidth;
+  /** Tinted (alt) sections only: a light, faded sage instead of the page's own tint. */
+  tint?: 'sage';
   /** Skip the inner container (for full-bleed layouts that manage their own width). */
   bare?: boolean;
   id?: string;
@@ -19,6 +21,7 @@ const {
   tone = 'light',
   space = 'm',
   width = 'content',
+  tint,
   bare = false,
   id,
   labelledby,
@@ -37,6 +40,7 @@ const spaces: Record<SectionSpace, string> = {
   id={id}
   aria-labelledby={labelledby}
   data-tone={tone}
+  data-tint={tint}
   class:list={[spaces[space], className]}
 >
   {

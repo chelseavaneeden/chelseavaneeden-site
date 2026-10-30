@@ -50,7 +50,7 @@ const hasPhoto = Boolean(offer.image);
     <div class="flex flex-col gap-3">
       {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
       <Heading level={3} variant="h3" text={offer.title} class={offer.showTitle ? undefined : 'sr-only'} />
-      {offer.summary && <Text variant="body-s" tone="muted" text={offer.summary} />}
+      {offer.summary && <Text variant={offer.featured ? 'body' : 'body-s'} tone="muted" text={offer.summary} />}
     </div>
     <div class="flex flex-col items-start gap-3">
       <Price offer={offer} />
@@ -60,8 +60,8 @@ const hasPhoto = Boolean(offer.image);
     <ul class="flex flex-col gap-2.5">
       {
         offer.includes.map((item) => (
-          <li class="type-body-s flex items-start gap-2.5 text-ink">
-            <Icon name="check" class="mt-0.5 text-lg text-accent" />
+          <li class:list={[offer.featured ? 'type-body gap-3' : 'type-body-s gap-2.5', 'flex items-start text-ink']}>
+            <Icon name="check" class="mt-1 shrink-0 text-accent" />
             {item}
           </li>
         ))
@@ -72,6 +72,7 @@ const hasPhoto = Boolean(offer.image);
       <Button
         href={offer.cta.href}
         variant={offer.featured ? 'primary' : 'secondary'}
+        size={offer.featured ? 'l' : 'm'}
         external={/^https?:\/\//.test(offer.cta.href)}
         event="offer_card"
       >
