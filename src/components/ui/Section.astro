@@ -15,6 +15,8 @@ interface Props {
   id?: string;
   labelledby?: string;
   class?: string;
+  /** Hooks for page scripts, e.g. data-grow-section on the home page's About section. */
+  [key: `data-${string}`]: string | boolean | undefined;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   id,
   labelledby,
   class: className,
+  ...rest
 } = Astro.props;
 
 const spaces: Record<SectionSpace, string> = {
@@ -37,6 +40,7 @@ const spaces: Record<SectionSpace, string> = {
 ---
 
 <section
+  {...rest}
   id={id}
   aria-labelledby={labelledby}
   data-tone={tone}

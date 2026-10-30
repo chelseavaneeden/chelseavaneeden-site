@@ -42,7 +42,8 @@ const variants: Record<ButtonVariant, string> = {
 const sizes: Record<ButtonSize, string> = {
   s: 'type-label px-5 py-2.5',
   m: 'type-button px-7 py-3.5',
-  l: 'type-button px-9 py-4.5',
+  // A little less padding on phones, so long labels fit inside cards.
+  l: 'type-button px-6 py-4.5 sm:px-9',
 };
 
 const classes = [

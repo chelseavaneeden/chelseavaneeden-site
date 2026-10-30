@@ -159,6 +159,20 @@
     filter: blur(0);
   }
 
+  /* Hi, I'm Chelsea (home page): the script there sets --grow-scale, --grow-x and --grow-follow as the
+     About section scrolls in. The greeting grows from its bottom left corner, so when it is large it
+     reaches up and across the page; the words and photos wait until it has settled. */
+  [data-grow='on'] [data-grow-heading] {
+    transform-origin: 0 100%;
+    transform: translateX(var(--grow-x)) scale(var(--grow-scale));
+    will-change: transform;
+  }
+
+  [data-grow='on'] [data-grow-follow] {
+    opacity: var(--grow-follow);
+    translate: 0 calc((1 - var(--grow-follow)) * var(--reveal-distance));
+  }
+
   /* Slow, always-on movement (sun rays, drifting light, swaying linen) stops for people who prefer
      reduced motion. */
   @media (prefers-reduced-motion: reduce) {

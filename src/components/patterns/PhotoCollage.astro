@@ -18,10 +18,10 @@ const [first, second] = photos;
 ---
 
 <div class:list={['relative grid grid-cols-6 grid-rows-6', className]}>
-  <figure data-reveal class="relative col-span-4 col-start-1 row-span-5 row-start-1 -rotate-2 rounded-control bg-surface-raised p-2.5 pb-10 shadow-raised">
+  <figure class="relative col-span-4 col-start-1 row-span-5 row-start-1 -rotate-2 rounded-control bg-surface-raised p-2.5 pb-10 shadow-raised">
     <Img src={first.src} alt={first.alt} rounded={false} ratio="portrait" sizes="(min-width: 1024px) 26vw, 60vw" />
   </figure>
-  <figure data-reveal class="relative z-10 col-span-3 col-start-4 row-span-4 row-start-3 rotate-3 rounded-control bg-surface-raised p-2.5 pb-8 shadow-raised">
+  <figure class="relative z-10 col-span-3 col-start-4 row-span-4 row-start-3 rotate-3 rounded-control bg-surface-raised p-2.5 pb-8 shadow-raised">
     <Img src={second.src} alt={second.alt} rounded={false} ratio="portrait" sizes="(min-width: 1024px) 20vw, 45vw" />
   </figure>
 </div>
