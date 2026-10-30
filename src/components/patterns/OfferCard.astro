@@ -45,7 +45,8 @@ const hasPhoto = Boolean(offer.image);
       </div>
     )
   }
-  <div class:list={['flex flex-1 flex-col gap-6', hasPhoto && 'p-7 md:p-8']}>
+  {/* The featured card (the intro pack) gets more room inside, so it stands a little taller. */}
+  <div class:list={['flex flex-1 flex-col gap-6', hasPhoto && (offer.featured ? 'px-8 py-10 md:px-12 md:py-14' : 'p-7 md:p-8')]}>
     <div class="flex flex-col gap-3">
       {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
       <Heading level={3} variant="h3" text={offer.title} class={offer.showTitle ? undefined : 'sr-only'} />
@@ -66,11 +67,11 @@ const hasPhoto = Boolean(offer.image);
         ))
       }
     </ul>
-    <div class="mt-auto pt-2">
+    {/* The button is as wide as its words plus some breathing room, not the whole card. */}
+    <div class="mt-auto pt-4">
       <Button
         href={offer.cta.href}
         variant={offer.featured ? 'primary' : 'secondary'}
-        full
         external={/^https?:\/\//.test(offer.cta.href)}
         event="offer_card"
       >
