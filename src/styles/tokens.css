@@ -38,8 +38,8 @@
   --honey-500: #d6a64f; /* deeper honey: button hover */
   --amber-500: #c9802f; /* Amber */
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
-  /* A slightly deeper amber, for the header buttons on hover. */
-  --amber-600: #b5712a;
+  /* A lighter amber, for the header buttons on hover (they light up, like the honey buttons). */
+  --amber-400: #d4924a;
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
   /* A warm sand wall in morning light, for the intro card. */
@@ -214,12 +214,12 @@
   --line: var(--sand-300);
 }
 
-/* The header (menu bar and the page's opening section): Amber buttons with light linen words, which
-   stand out against the golden light where honey buttons would blend in; a deeper amber on hover. */
+/* The header (menu bar and the page's opening section): Amber buttons with Coffee Bean words (4.3:1),
+   which stand out against the golden light where honey buttons would blend in; lighter amber on hover. */
 [data-cta='amber'] {
   --cta: var(--amber-500);
-  --cta-ink: var(--linen-50);
-  --cta-hover: var(--amber-600);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--amber-400);
 }
 
 [data-tone='dark'] {
