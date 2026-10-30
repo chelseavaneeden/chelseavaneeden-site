@@ -8,11 +8,12 @@ import Icon from '../ui/Icon.astro';
 import Img from '../ui/Img.astro';
 import Price from '../ui/Price.astro';
 import Text from '../ui/Text.astro';
+import WallLight from '../ui/WallLight.astro';
 import type { Offer } from '../../lib/content';
 
 interface Props {
   offer: Offer;
-  /** Card style for non-featured offers; featured offers always use the inverse tone. */
+  /** Card style for non-featured offers; featured offers are a sand wall in morning light. */
   variant?: 'raised' | 'outline';
 }
 
@@ -24,10 +25,11 @@ const hasPhoto = Boolean(offer.image);
 
 <Card
   as="article"
-  variant={offer.featured ? 'inverse' : variant}
+  variant={offer.featured ? 'wall' : variant}
   padding={hasPhoto ? 'none' : 'm'}
   class={hasPhoto ? 'h-full overflow-hidden md:flex-row' : 'h-full'}
 >
+  {offer.featured && <WallLight />}
   {
     offer.image && (
       <div class="relative shrink-0 md:w-1/3">

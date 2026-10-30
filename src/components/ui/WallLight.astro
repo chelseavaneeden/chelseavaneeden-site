@@ -1,0 +1,88 @@
+---
+// The surface of a card made to feel like a sand-coloured wall in morning sun: a soft beam of window
+// light falls across it and slowly brightens, the shadow of a leafy branch sways over it, and the
+// plaster has a fine grain. Use inside a Card with variant="wall" (which is `relative isolate
+// overflow-hidden`); it sits behind the content and is hidden from screen readers. The movement stops
+// for people who prefer reduced motion (data-ambient, see global.css).
+
+// A branch reaching in from the top right corner, with leaves on alternating sides.
+const branch = { x0: 640, y0: -20, cx: 470, cy: 120, x1: 250, y1: 300 };
+const point = (t: number) => {
+  const u = 1 - t;
+  return {
+    x: u * u * branch.x0 + 2 * u * t * branch.cx + t * t * branch.x1,
+    y: u * u * branch.y0 + 2 * u * t * branch.cy + t * t * branch.y1,
+    // Direction of the branch at this point, in degrees.
+    angle:
+      (Math.atan2(2 * u * (branch.cy - branch.y0) + 2 * t * (branch.y1 - branch.cy), 2 * u * (branch.cx - branch.x0) + 2 * t * (branch.x1 - branch.cx)) *
+        180) /
+      Math.PI,
+  };
+};
+const leaves = Array.from({ length: 13 }, (_, i) => {
+  const t = 0.08 + i * 0.07;
+  const p = point(t);
+  const side = i % 2 === 0 ? 1 : -1;
+  const angle = p.angle + side * 48;
+  const length = 46 - i * 1.6;
+  const rad = (angle * Math.PI) / 180;
+  return {
+    cx: (p.x + Math.cos(rad) * length * 0.9).toFixed(1),
+    cy: (p.y + Math.sin(rad) * length * 0.9).toFixed(1),
+    rx: length.toFixed(1),
+    ry: (length * 0.36).toFixed(1),
+    angle: angle.toFixed(1),
+  };
+});
+const branchPath = `M${branch.x0} ${branch.y0} Q${branch.cx} ${branch.cy} ${branch.x1} ${branch.y1}`;
+---
+
+<div class="wall-light pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <div class="wall-sun absolute" data-ambient></div>
+  <svg class="wall-leaves absolute" viewBox="0 0 600 400" preserveAspectRatio="xMaxYMin slice" data-ambient>
+    <path class="wall-branch" d={branchPath} />
+    {leaves.map((l) => <ellipse cx={l.cx} cy={l.cy} rx={l.rx} ry={l.ry} transform={`rotate(${l.angle} ${l.cx} ${l.cy})`} />)}
+  </svg>
+  <div class="wall-grain absolute inset-0"></div>
+</div>
+
+<style>
+  .wall-sun {
+    inset: -15%;
+    background-image: var(--wall-sun), var(--wall-glow);
+    animation: breathe calc(var(--duration-breathe) * 1.3) var(--ease-in-out-soft) infinite;
+  }
+
+  .wall-leaves {
+    inset: -12% -8% -10% 25%;
+    width: auto;
+    height: auto;
+    fill: var(--wall-shadow);
+    filter: blur(9px);
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    transform-origin: 100% 0%;
+    animation: leaf-sway calc(var(--duration-breathe) * 0.9) var(--ease-in-out-soft) infinite;
+  }
+
+  /* On phones the photo sits on top of the card, so the shadows fall lower, across the words. */
+  @media (max-width: 767px) {
+    .wall-leaves {
+      inset: 38% -25% -5% 5%;
+    }
+  }
+
+  .wall-branch {
+    fill: none;
+    stroke: var(--wall-shadow);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+
+  .wall-grain {
+    background-image: var(--grain-image);
+    background-size: var(--grain-size);
+    opacity: var(--wall-grain-opacity);
+    mix-blend-mode: multiply;
+  }
+</style>

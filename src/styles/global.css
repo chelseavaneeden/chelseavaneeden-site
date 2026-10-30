@@ -61,6 +61,11 @@
     background-image: var(--edge-fade-top), var(--wash);
   }
 
+  /* The intro card's sand wall (light and leaf shadows are added by WallLight). */
+  [data-tone='wall'] {
+    background-image: var(--wall-base);
+  }
+
   /* Moss bands and cards: lit by low golden sun. */
   [data-tone='dark'] {
     background-image: var(--glow-moss);
@@ -202,6 +207,23 @@
   }
 }
 
+/* Leaf shadows on a wall, moving in a morning breeze. */
+@keyframes leaf-sway {
+  0%,
+  100% {
+    rotate: 0deg;
+    translate: 0 0;
+  }
+  35% {
+    rotate: 2.5deg;
+    translate: -1% 1%;
+  }
+  70% {
+    rotate: -1.5deg;
+    translate: 1% -0.5%;
+  }
+}
+
 /* Linen lines lift and settle, like fabric in a breeze. */
 @keyframes sway {
   0%,
@@ -212,6 +234,13 @@
   50% {
     translate: 0 -3%;
     rotate: -1.5deg;
+  }
+}
+
+/* Emphasised words keep the heading's own colour (one-colour headings). */
+@utility em-plain {
+  & em {
+    color: inherit;
   }
 }
 

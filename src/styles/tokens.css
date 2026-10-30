@@ -39,6 +39,10 @@
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
+  /* A warm sand wall in morning light, for the intro card. */
+  --sand-100: #f3ecdf;
+  --sand-200: #ebe1cf;
+  --sand-300: #dccfb6;
   --linen-0: #ffffff;
   /* Earlier greens, still compared on /fonts */
   --sage-200: #d8dac0;
@@ -69,6 +73,15 @@
   --sun-rays-mask-dusk: radial-gradient(70% 90% at 5% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 70%);
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
+  /* Option B (preview with ?look=green): the header's light in sage and olive instead of butter and honey,
+     with a little warm sun left in it. */
+  --glow-forest:
+    radial-gradient(45% 55% at 100% 0%, rgb(90 99 56 / 0.55) 0%, rgb(90 99 56 / 0) 70%),
+    radial-gradient(70% 85% at 85% 10%, rgb(123 125 78 / 0.55) 0%, rgb(123 125 78 / 0) 75%),
+    radial-gradient(90% 80% at 40% 0%, rgb(167 173 140 / 0.75) 0%, rgb(167 173 140 / 0) 75%),
+    radial-gradient(60% 70% at 0% 100%, rgb(167 173 140 / 0.6) 0%, rgb(167 173 140 / 0) 72%),
+    radial-gradient(24% 30% at 70% 22%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%);
+  --dapple-olive: radial-gradient(circle, rgb(123 125 78 / 0.38) 0%, rgb(123 125 78 / 0) 65%);
   /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
   --dapple-honey: radial-gradient(circle, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 65%);
   --dapple-butter: radial-gradient(circle, rgb(239 217 160 / 0.7) 0%, rgb(239 217 160 / 0) 65%);
@@ -95,6 +108,19 @@
     linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
   /* A golden-hour tint laid softly over the header video. */
   --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
+  /* The intro card's wall: sand plaster lit from the top left, a beam of window light across it,
+     a warm glow, and the colour of the leaf shadows that move over it. */
+  --wall-base: linear-gradient(150deg, #f4eee2 0%, #ebe1cf 45%, #dfd1b8 100%);
+  --wall-sun: linear-gradient(
+    116deg,
+    rgb(255 248 230 / 0) 16%,
+    rgb(255 245 218 / 0.8) 32%,
+    rgb(255 242 210 / 0.65) 50%,
+    rgb(255 245 218 / 0) 66%
+  );
+  --wall-glow: radial-gradient(55% 70% at 78% 22%, rgb(239 217 160 / 0.55) 0%, rgb(239 217 160 / 0) 70%);
+  --wall-shadow: rgb(74 56 38 / 0.6);
+  --wall-grain-opacity: 0.4;
   /* Film grain over the whole page: fractal noise, tinted coffee. */
   --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain-opacity: 0.16;
@@ -117,10 +143,11 @@
   --heading-em: var(--amber-700);
   --accent: var(--amber-700);
   --accent-ink: var(--linen-50);
-  /* Main buttons: Wild Honey pills, a deeper honey on hover. */
-  --cta: var(--honey-400);
-  --cta-ink: var(--coffee-900);
-  --cta-hover: var(--honey-500);
+  /* Main buttons: moss pills with honey words (they stand out against the golden light);
+     darker moss on hover. Option B (?look=green) keeps Wild Honey pills instead. */
+  --cta: var(--moss-800);
+  --cta-ink: var(--honey-400);
+  --cta-hover: var(--moss-900);
   /* Butter marks highlighted words; honey for quote marks; amber for the ✺ marks. */
   --note: var(--butter-200);
   --note-ink: var(--coffee-900);
@@ -158,6 +185,33 @@
   --heading: var(--coffee-900);
   --note-ink: var(--coffee-900);
   --wash: var(--wash-butter);
+}
+
+/* The intro card: a sand wall in morning sun. Coffee words, moss headings and ticks. */
+[data-tone='wall'] {
+  --surface: var(--sand-200);
+  --surface-alt: var(--sand-300);
+  --surface-raised: var(--sand-100);
+  --ink: var(--coffee-900);
+  --ink-muted: var(--coffee-700);
+  --heading: var(--moss-800);
+  --heading-em: var(--amber-700);
+  --accent: var(--moss-800);
+  --accent-ink: var(--linen-50);
+  --line: var(--sand-300);
+}
+
+/* Option B, previewed by adding ?look=green to the address: green morning light, honey buttons. */
+:root[data-look='green'] {
+  --glow-sunrise: var(--glow-forest);
+  --dapple-butter: var(--dapple-olive);
+}
+
+:root[data-look='green'],
+:root[data-look='green'] [data-tone='light'] {
+  --cta: var(--honey-400);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--honey-500);
 }
 
 [data-tone='dark'] {

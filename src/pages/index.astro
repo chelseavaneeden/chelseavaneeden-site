@@ -7,7 +7,6 @@
 // Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
-import Container from '../components/ui/Container.astro';
 import LinenFlow from '../components/ui/LinenFlow.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Heading from '../components/ui/Heading.astro';
@@ -89,17 +88,15 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    <Section space="l" tone="light" id="about" bare class="relative isolate overflow-hidden">
-      {/* The greeting stretches across the page in moss green, above the words and photos, with linen
-          lines flowing behind it. */}
+    <Section space="l" tone="light" id="about" class="relative isolate overflow-hidden">
+      {/* The greeting sits above the words in one moss green, the words are larger so they balance the
+          photos, and linen lines flow softly behind. */}
       <LinenFlow class="inset-x-0 top-0 h-64 w-full md:h-96" />
-      <Container width="wide" class="flex flex-col gap-5" data-reveal>
-        {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
-        <Heading variant="display-stretch" tone="brand" text={page.about.title} />
-      </Container>
-      <Container class="mt-12 grid grid-cols-1 items-center gap-16 md:mt-16 lg:grid-cols-12">
-        <div data-reveal class="flex flex-col gap-5 lg:col-span-6">
-          {page.about.paragraphs.map((p) => <Text tone="muted" text={p} />)}
+      <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+        <div data-reveal class="flex flex-col gap-6 lg:col-span-6">
+          {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
+          <Heading variant="h1" tone="brand" text={page.about.title} class="em-plain" />
+          {page.about.paragraphs.map((p) => <Text variant="lede" tone="muted" text={p} />)}
         </div>
         <PhotoCollage
           class="mx-auto w-full max-w-xl lg:col-span-5 lg:col-start-8"
@@ -108,7 +105,7 @@ const testimonials = await getTestimonials('private');
             { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
           ]}
         />
-      </Container>
+      </div>
     </Section>
 
     {

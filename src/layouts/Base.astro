@@ -32,6 +32,10 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {(noindex || !indexable) && <meta name="robots" content="noindex, nofollow" />}
+    <!-- Exploration: add ?look=green to the address to preview option B (green light, honey buttons). -->
+    <script is:inline>
+      if (new URLSearchParams(location.search).get('look') === 'green') document.documentElement.dataset.look = 'green';
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
