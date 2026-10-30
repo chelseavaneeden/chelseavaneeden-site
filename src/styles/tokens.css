@@ -117,7 +117,7 @@
   /* Limewash plaster: soft, cloudy patches of lighter and darker, like a hand-finished wall. */
   --plaster-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1000'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.011' numOctaves='5' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.84 0 0 0 1.5 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
   --plaster-size: cover;
-  --plaster-opacity: 0.22;
+  --plaster-opacity: 0.1;
   /* A golden-hour tint laid softly over the header video. */
   --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
   /* The intro card's wall: sand plaster lit from the top left, a beam of window light across it,
