@@ -96,10 +96,10 @@ const testimonials = await getTestimonials('private');
         <div class="flex flex-col gap-6 lg:col-span-6">
           {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
           <div data-grow-heading class="w-fit">
-            <Heading variant="h1" tone="brand" text={page.about.title} class="em-plain" />
+            <Heading variant="display-l" tone="brand" text={page.about.title} class="em-plain" />
           </div>
           <div data-grow-follow class="flex flex-col gap-6">
-            {page.about.paragraphs.map((p) => <Text variant="lede" tone="muted" text={p} />)}
+            {page.about.paragraphs.map((p) => <Text variant="lede-l" tone="muted" text={p} />)}
           </div>
         </div>
         <div data-grow-follow class="mx-auto w-full max-w-xl lg:col-span-5 lg:col-start-8">

@@ -323,6 +323,8 @@
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.42rem);
+  /* Between step-1 and step-2: large reading text, like the About section. */
+  --step-1-5: clamp(1.3rem, 1.14rem + 0.65vw, 1.68rem);
   --step-2: clamp(1.44rem, 1.27rem + 0.8vw, 1.9rem);
   --step-3: clamp(1.73rem, 1.42rem + 1.45vw, 2.6rem);
   --step-4: clamp(2.07rem, 1.55rem + 2.5vw, 3.6rem);

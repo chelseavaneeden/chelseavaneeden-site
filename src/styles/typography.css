@@ -84,6 +84,15 @@
   text-transform: var(--eyebrow-case);
 }
 
+/* Larger reading text for a personal section (About): a size up from type-lede. */
+@utility type-lede-l {
+  font-family: var(--font-body-family);
+  font-size: var(--step-1-5);
+  font-weight: var(--body-weight);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
 @utility type-lede {
   font-family: var(--font-body-family);
   font-size: var(--step-1);

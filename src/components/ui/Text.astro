@@ -2,6 +2,7 @@
 import { emphasis } from '../../lib/text';
 
 export type TextVariant =
+  | 'lede-l'
   | 'lede'
   | 'body'
   | 'body-s'
@@ -26,6 +27,7 @@ const { variant = 'body', tone = 'ink', as = 'p', text, class: className } = Ast
 const Tag = as;
 // Literal class names so Tailwind can find them.
 const variantClass: Record<TextVariant, string> = {
+  'lede-l': 'type-lede-l',
   lede: 'type-lede',
   body: 'type-body',
   'body-s': 'type-body-s',
