@@ -27,6 +27,7 @@
   --sage-leaf-300: #cdd0b6;
   --sage-leaf-200: #dcdec9;
   --sage-leaf-100: #e7e8d9;
+  --sage-leaf-50: #eeeee3;
   --linen-50: #faf6ee;
   --linen-100: #f4eee3;
   --linen-200: #e9e2d3; /* Raw Linen */
@@ -104,11 +105,19 @@
     radial-gradient(60% 55% at 12% 30%, rgb(220 222 201 / 0.9) 0%, rgb(220 222 201 / 0) 70%),
     radial-gradient(55% 50% at 90% 70%, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 70%),
     radial-gradient(30% 30% at 70% 15%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%);
-  /* Moss bands lit by low golden sun. */
+  /* A single sage section on a golden page: just a whisper of green. */
+  --wash-sage-soft:
+    radial-gradient(60% 55% at 15% 35%, rgb(220 222 201 / 0.5) 0%, rgb(220 222 201 / 0) 70%),
+    radial-gradient(50% 45% at 88% 70%, rgb(167 173 140 / 0.18) 0%, rgb(167 173 140 / 0) 70%);
+  /* Moss bands lit by low golden sun, a soft moss (lighter than the logo green). */
   --glow-moss:
-    radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
-    radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.32) 0%, rgb(201 128 47 / 0) 62%),
-    linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
+    radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.32) 0%, rgb(226 184 102 / 0) 62%),
+    radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.26) 0%, rgb(201 128 47 / 0) 62%),
+    linear-gradient(155deg, #636c3e 0%, #565f36 100%);
+  /* Limewash plaster: soft, cloudy patches of lighter and darker, like a hand-finished wall. */
+  --plaster-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1000'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.011' numOctaves='5' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.84 0 0 0 1.5 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  --plaster-size: cover;
+  --plaster-opacity: 0.22;
   /* A golden-hour tint laid softly over the header video. */
   --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
   /* The intro card's wall: sand plaster lit from the top left, a beam of window light across it,
@@ -182,13 +191,19 @@
   --wash: var(--wash-golden);
 }
 
-/* A single tinted section can be sage on a golden page: <Section tone="alt" tint="sage">. */
-[data-mood='sage'] [data-tone='alt'],
-[data-tone='alt'][data-tint='sage'] {
+[data-mood='sage'] [data-tone='alt'] {
   --surface: var(--sage-leaf-100);
   --surface-alt: var(--sage-leaf-200);
   --line: var(--sage-leaf-300);
   --wash: var(--wash-meadow);
+}
+
+/* A single tinted section can be a light, faded sage on a golden page: <Section tone="alt" tint="sage">. */
+[data-tone='alt'][data-tint='sage'] {
+  --surface: var(--sage-leaf-50);
+  --surface-alt: var(--sage-leaf-100);
+  --line: var(--sage-leaf-200);
+  --wash: var(--wash-sage-soft);
 }
 
 /* The intro card: a sand wall in morning sun. Coffee words, moss headings and ticks. */
@@ -233,9 +248,8 @@
   --line: var(--olive-600);
   --focus: var(--honey-400);
   --logo-mark: var(--honey-400);
-  /* Textures on moss: honey contour lines and a soft linen weave. */
+  /* Honey contour lines on moss. */
   --contour-line: rgb(239 217 160 / 0.3);
-  --linen-weave-opacity: 0.25;
 }
 
 /* 3. TAILWIND MAPPING ----------------------------------------------------- */

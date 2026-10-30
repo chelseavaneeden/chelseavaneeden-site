@@ -8,8 +8,9 @@ interface Props {
    * wall: small, top right of the intro card (lower down on phones, below the photo).
    * hero: larger, in the top right corner of the header.
    * section: medium, in the top right corner of a tinted section.
+   * panel: in the top left corner of the moss panel, where the sun rays fall.
    */
-  placement?: 'wall' | 'hero' | 'section';
+  placement?: 'wall' | 'hero' | 'section' | 'panel';
 }
 
 const { placement = 'wall' } = Astro.props;
@@ -96,6 +97,18 @@ const branchPath = `M${branch.x0} ${branch.y0} Q${branch.cx} ${branch.cy} ${bran
     aspect-ratio: 3 / 2;
     filter: blur(10px);
     opacity: 0.2;
+  }
+
+  /* A branch reaching in from the top left of the moss panel (mirrored), among the sun rays. */
+  .leaf-shadow-panel {
+    top: -6%;
+    left: -3%;
+    width: clamp(18rem, 36vw, 34rem);
+    aspect-ratio: 3 / 2;
+    scale: -1 1;
+    transform-origin: 50% 0%;
+    filter: blur(7px);
+    opacity: 0.7;
   }
 
   /* A branch in the top right corner of a tinted section. */

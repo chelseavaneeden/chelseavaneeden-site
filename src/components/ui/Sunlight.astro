@@ -6,8 +6,8 @@
 //            and fine contour lines breathing in the bottom left corner (the private page).
 //   meadow:  light sage morning light, the shadow of a leafy branch swaying in the top right, a linen
 //            weave texture and the contour lines (the retreats & events page).
-//   dusk:    honey light and sun rays on the moss panels, with woven linen and honey contour lines in
-//            the top right corner.
+//   dusk:    honey light and sun rays on the moss panels, with a limewash plaster texture, the soft
+//            shadow of a leafy branch in the top left and honey contour lines in the top right.
 import LeafShadow from './LeafShadow.astro';
 import Topography from './Topography.astro';
 
@@ -22,8 +22,10 @@ const { variant = 'sunrise', class: className } = Astro.props;
 <div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
   <div class="sunlight-glow absolute inset-0"></div>
   {variant !== 'meadow' && <div class="sunlight-rays absolute" data-ambient></div>}
-  {variant !== 'sunrise' && <div class="sunlight-weave absolute inset-0" />}
+  {variant === 'meadow' && <div class="sunlight-weave absolute inset-0" />}
+  {variant === 'dusk' && <div class="sunlight-plaster absolute inset-0" />}
   {variant === 'meadow' && <LeafShadow placement="hero" />}
+  {variant === 'dusk' && <LeafShadow placement="panel" />}
   <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />
 </div>
 
@@ -55,6 +57,14 @@ const { variant = 'sunrise', class: className } = Astro.props;
     -webkit-mask-image: var(--sun-rays-mask-dusk);
     mask-image: var(--sun-rays-mask-dusk);
     opacity: 0.6;
+  }
+
+  /* Limewash plaster: cloudy patches of lighter colour, like a hand-finished wall. */
+  .sunlight-plaster {
+    background-image: var(--plaster-image);
+    background-size: var(--plaster-size);
+    opacity: var(--plaster-opacity);
+    mix-blend-mode: soft-light;
   }
 
   /* Woven linen, like a cloth laid out in the sun. */
