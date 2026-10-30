@@ -39,7 +39,8 @@ const testimonials = await getTestimonials('private');
   <Header nav={site.nav} cta={site.bookCta} sections={['reviews', 'about', 'faq']} />
 
   <main id="main">
-    <Hero layout="split" {...hero}>
+    {/* The header has the sage linen light (like the retreats page); the rest of the page stays golden. */}
+    <Hero layout="split" {...hero} light="meadow">
       <AvailabilityBadge slot="badge" {...site.availability} />
       <TrustLine slot="trust" trust={site.trust} />
     </Hero>

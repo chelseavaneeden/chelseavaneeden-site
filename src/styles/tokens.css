@@ -25,6 +25,7 @@
   --olive-600: #7b7d4e; /* Olive Grove */
   --sage-leaf-400: #a7ad8c; /* Sage Leaf */
   --sage-leaf-300: #cdd0b6;
+  --sage-leaf-hover: #b9be9f; /* a paler sage, for the header buttons on hover */
   --sage-leaf-200: #dcdec9;
   --sage-leaf-100: #e7e8d9;
   --linen-50: #faf6ee;
@@ -38,10 +39,6 @@
   --honey-500: #d6a64f; /* deeper honey: button hover */
   --amber-500: #c9802f; /* Amber */
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
-  /* Toasted camel for the header's buttons, deep enough for light linen words (4.7:1), so they stand
-     apart from the golden light behind them. */
-  --camel-700: #8f673c;
-  --camel-800: #7f5b34;
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
   /* A warm sand wall in morning light, for the intro card. */
@@ -160,7 +157,7 @@
   --accent: var(--amber-700);
   --accent-ink: var(--linen-50);
   /* Main buttons: Wild Honey pills that light up on hover (butter and a warm glow). In the header they
-     are camel instead (see [data-cta='camel']). */
+     are sage instead (see [data-cta='sage']). */
   --cta: var(--honey-400);
   --cta-ink: var(--coffee-900);
   --cta-hover: var(--butter-200);
@@ -216,12 +213,12 @@
   --line: var(--sand-300);
 }
 
-/* The header (menu bar and the page's opening section): toasted camel buttons with light linen words,
-   which stand out against the golden light where honey buttons would blend in. */
-[data-cta='camel'] {
-  --cta: var(--camel-700);
-  --cta-ink: var(--linen-50);
-  --cta-hover: var(--camel-800);
+/* The header (menu bar and the page's opening section): Sage Leaf buttons with Coffee Bean words
+   (5.9:1), soft against the sage linen light; a paler sage on hover. */
+[data-cta='sage'] {
+  --cta: var(--sage-leaf-400);
+  --cta-ink: var(--coffee-900);
+  --cta-hover: var(--sage-leaf-hover);
 }
 
 [data-tone='dark'] {
