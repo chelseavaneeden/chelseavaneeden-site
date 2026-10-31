@@ -52,13 +52,35 @@
     color: var(--ink);
   }
 
-  /* Tinted sections melt into the page: a soft haze of light, faded out at the top and bottom. */
-  section[data-tone='alt'] {
-    background-image: var(--edge-fade), var(--wash);
+  /* Sections are clear (the page itself is linen). Tinted sections and the footer are soft clouds of
+     colour that spill a little above and below, so the gradients sit between sections and help them
+     flow into one another, rather than filling one rectangle. */
+  section:is([data-tone='light'], [data-tone='alt']),
+  footer[data-tone='alt'] {
+    background-color: transparent;
   }
 
+  section[data-tone='alt'],
   footer[data-tone='alt'] {
-    background-image: var(--edge-fade-top), var(--wash);
+    position: relative;
+  }
+
+  section[data-tone='alt']::before,
+  footer[data-tone='alt']::before {
+    content: '';
+    position: absolute;
+    inset: var(--wash-spill) 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--wash);
+    -webkit-mask-image: var(--wash-mask);
+    mask-image: var(--wash-mask);
+  }
+
+  footer[data-tone='alt']::before {
+    inset: var(--wash-spill-footer) 0 0;
+    -webkit-mask-image: var(--wash-mask-top);
+    mask-image: var(--wash-mask-top);
   }
 
   /* On sage pages (retreats), tinted sections have woven linen texture, faded at the top and bottom. */

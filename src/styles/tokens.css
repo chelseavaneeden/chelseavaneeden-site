@@ -89,26 +89,27 @@
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
   /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
-  /* Tinted sections fade into the page at top and bottom, so there are no hard edges. */
-  --edge-fade: linear-gradient(
-    180deg,
-    rgb(244 238 227 / 1) 0%,
-    rgb(244 238 227 / 0) 18%,
-    rgb(244 238 227 / 0) 82%,
-    rgb(244 238 227 / 1) 100%
-  );
-  --edge-fade-top: linear-gradient(180deg, rgb(244 238 227 / 1) 0%, rgb(244 238 227 / 0) 30%);
+  /* Tinted sections are soft clouds of colour that spill a little above and below their section, so
+     neighbouring sections flow into each other (see global.css). Each wash ends with a broad cloud of
+     the section's tint; the mask fades the cloud out at the top and bottom. */
+  --wash-spill: -22%;
+  --wash-spill-footer: -8rem;
+  --wash-mask: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 24%, rgb(0 0 0 / 1) 76%, rgb(0 0 0 / 0) 100%);
+  --wash-mask-top: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 40%);
   --wash-golden:
-    radial-gradient(60% 60% at 85% 25%, rgb(226 184 102 / 0.5) 0%, rgb(226 184 102 / 0) 70%),
-    radial-gradient(60% 55% at 10% 75%, rgb(239 217 160 / 0.75) 0%, rgb(239 217 160 / 0) 70%);
+    radial-gradient(55% 60% at 82% 38%, rgb(226 184 102 / 0.22) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(55% 55% at 18% 62%, rgb(239 217 160 / 0.42) 0%, rgb(239 217 160 / 0) 70%),
+    radial-gradient(85% 65% at 50% 50%, rgb(248 240 220 / 0.85) 0%, rgb(248 240 220 / 0) 78%);
   --wash-meadow:
     radial-gradient(60% 55% at 12% 30%, rgb(220 222 201 / 0.9) 0%, rgb(220 222 201 / 0) 70%),
     radial-gradient(55% 50% at 90% 70%, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 70%),
-    radial-gradient(30% 30% at 70% 15%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%);
+    radial-gradient(30% 30% at 70% 15%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%),
+    radial-gradient(85% 65% at 50% 50%, rgb(231 232 217 / 0.95) 0%, rgb(231 232 217 / 0) 78%);
   /* A single sage section on a golden page: just a whisper of green. */
   --wash-sage-soft:
-    radial-gradient(60% 55% at 15% 35%, rgb(220 222 201 / 0.5) 0%, rgb(220 222 201 / 0) 70%),
-    radial-gradient(50% 45% at 88% 70%, rgb(167 173 140 / 0.18) 0%, rgb(167 173 140 / 0) 70%);
+    radial-gradient(60% 55% at 15% 40%, rgb(220 222 201 / 0.5) 0%, rgb(220 222 201 / 0) 70%),
+    radial-gradient(50% 45% at 88% 65%, rgb(167 173 140 / 0.16) 0%, rgb(167 173 140 / 0) 70%),
+    radial-gradient(85% 65% at 50% 50%, rgb(238 238 227 / 0.9) 0%, rgb(238 238 227 / 0) 78%);
   /* Moss bands lit by low golden sun. */
   --glow-moss:
     radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),

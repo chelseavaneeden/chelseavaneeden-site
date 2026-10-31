@@ -53,22 +53,6 @@ const sage = page.sectionColour === 'sage';
       <Checklist {...page.whoFor} />
     </Section>
 
-    {/* The proposal form comes straight after "Perfect for", so organisers can ask right away. */}
-    {
-      page.enquiry && (
-        <Section space="m" id="enquire">
-          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div class="lg:col-span-5">
-              <SectionHeader {...page.enquiry} />
-            </div>
-            <div class="lg:col-span-7">
-              <slot name="enquiry" />
-            </div>
-          </div>
-        </Section>
-      )
-    }
-
     {
       page.formats && (
         <Section space="m">
@@ -83,6 +67,22 @@ const sage = page.sectionColour === 'sage';
         <Section space="m" tone="alt">
           {sage && <LeafShadow placement="section" />}
           <StepList {...page.steps} />
+        </Section>
+      )
+    }
+
+    {/* The proposal form comes after "How it works", so organisers know what happens before they ask. */}
+    {
+      page.enquiry && (
+        <Section space="m" id="enquire">
+          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <SectionHeader {...page.enquiry} />
+            </div>
+            <div class="lg:col-span-7">
+              <slot name="enquiry" />
+            </div>
+          </div>
         </Section>
       )
     }
