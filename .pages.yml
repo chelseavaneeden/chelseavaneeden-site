@@ -28,7 +28,7 @@ content:
         type: object
         fields:
           - { name: eyebrow, label: Small line above the headline, type: string, description: 'Optional. Leave empty to hide.' }
-          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates. Wrap words in ==double equals== to highlight them in yellow.' }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates. Wrap words in ==double equals== to highlight them in yellow. No full stop at the end (commas and … are fine).' }
           - { name: lede, label: Intro sentence, type: text, required: true }
           - name: primary
             label: Main button
@@ -71,14 +71,14 @@ content:
         description: 'Ticked list under the top of the page. Leave the list empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: items, label: Ticks, type: string, list: true }
       - name: about
         label: Meet Chelsea
         type: object
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: paragraphs, label: Paragraphs, type: text, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
@@ -101,7 +101,7 @@ content:
         description: The intro pack card itself is edited under "Offers & prices".
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
           - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro pack. Leave empty to hide.' }
       - name: steps
@@ -110,7 +110,7 @@ content:
         description: 'Numbered steps under the intro pack. Leave the list empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - name: items
             label: Steps
             type: object
@@ -123,7 +123,7 @@ content:
         type: object
         description: The dark band at the bottom of the page.
         fields:
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: text, label: Text, type: text }
           - name: primary
             label: Main button
@@ -316,7 +316,7 @@ content:
         description: 'Heading beside the form near the bottom of the page (Retreats & events: the proposal form). The questions are under Site settings → Enquiry forms. Leave the title empty to hide.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
       - name: ctaBand
         label: Dark band at the bottom (optional)
@@ -531,7 +531,7 @@ content:
         description: 'Where every "Book your intro pack" button leads: a few lines, then your intro-only Stripe pricing table.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
           - { name: points, label: Numbered steps, type: string, list: true, description: 'What happens after paying, one short line each.' }
           - { name: stripePricingTableId, label: Stripe pricing table ID (intro only), type: string, required: true, description: 'Starts with prctbl_ (Stripe → Pricing tables → Copy code).' }
@@ -541,7 +541,7 @@ content:
         description: 'Linked from nowhere on the site and hidden from Google: send the link to clients yourself.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
           - { name: stripePricingTableId, label: Stripe pricing table ID (monthly plans), type: string, description: 'A second table with the monthly plans. Starts with prctbl_. Leave empty to show the message below instead.' }
           - { name: noTableText, label: Message when there is no table, type: text, required: true }
@@ -550,7 +550,7 @@ content:
         type: object
         description: 'Set this page in Stripe as where people go after paying (pricing table → after payment → redirect to your website).'
         fields:
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
           - { name: bookingTitle, label: Booking step title, type: string, required: true }
           - { name: bookingText, label: Booking step text, type: text }
@@ -586,7 +586,7 @@ content:
                 label: Question form (Ask me pop-up and /enquire)
                 type: object
                 fields:
-                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
                   - { name: intro, label: Intro line, type: string }
                   - name: questions
                     label: Tap-to-choose questions
@@ -620,7 +620,7 @@ content:
                 label: Proposal form (Retreats & events)
                 type: object
                 fields:
-                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
                   - { name: intro, label: Intro line, type: string }
                   - name: questions
                     label: Tap-to-choose questions
@@ -654,7 +654,7 @@ content:
                 label: Intake form (welcome page)
                 type: object
                 fields:
-                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic.' }
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
                   - { name: intro, label: Intro line, type: string }
                   - name: questions
                     label: Tap-to-choose questions

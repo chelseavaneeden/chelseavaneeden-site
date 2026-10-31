@@ -5,7 +5,7 @@ seo:
   description: One-to-one Pilates with a BASI-certified specialist, live online wherever you are. Rehab, chronic pain, pre & post-natal and posture. Start with an intro pack.
 hero:
   eyebrow: Private sessions · Online, worldwide
-  title: One-to-one Pilates, *built around you*.
+  title: One-to-one Pilates, *built around you*
   lede: Live private sessions online, wherever you are. Specialist care for injury, pain, posture and pregnancy, at a pace that fits your life.
   primary:
     label: Book your intro pack
@@ -19,7 +19,7 @@ hero:
   layout: split
 whoFor:
   eyebrow: Who it's for
-  title: For bodies that *carry a lot*.
+  title: For bodies that *carry a lot*
   intro: Most clients come to me with something specific to work on. Every session is planned around your body, your history and your week.
   items:
     - Injury & rehab
@@ -30,7 +30,7 @@ whoFor:
     - Strength for life
 formats:
   eyebrow: Where we train
-  title: Online, *wherever you are*.
+  title: Online, *wherever you are*
   items:
     - title: Live online
       text: Private video sessions in real time, with feedback and corrections as you move.
@@ -40,7 +40,7 @@ formats:
       text: From home, the office or a hotel room. Clients train with me from the UK, Europe and the US.
 steps:
   eyebrow: How it works
-  title: From first session to *real progress*.
+  title: From first session to *real progress*
   items:
     - title: Book your intro pack
       text: Choose a time that suits you and pay securely online.
@@ -52,7 +52,7 @@ steps:
       text: Continue weekly or twice weekly. Start within 14 days of your intro pack and save €40 on your first month.
 investment:
   eyebrow: My services
-  title: How we work *together*.
+  title: How we work *together*
 proof:
   title: What clients *notice*
 faq:

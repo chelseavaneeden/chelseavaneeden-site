@@ -22,20 +22,20 @@ availability:
 # From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
-  title: Book your *intro pack*.
+  title: Book your *intro pack*
   points:
     - Pay securely online.
     - Pick your session times from my calendar.
     - Meet me online for your first session and assessment.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
 monthlyPlans:
-  title: Continue with *me*.
+  title: Continue with *me*
   intro: For clients continuing after their intro pack. Choose 1 or 2 private sessions a week, at a regular time that suits you.
   # Add the ID of a second pricing table with the monthly plans.
   stripePricingTableId:
   noTableText: To continue, message me and I'll set up your monthly plan.
 welcome:
-  title: Thank you, *let's begin*.
+  title: Thank you, *let's begin*
   intro: Your intro pack is booked. Two quick steps and we're ready for your first session.
   bookingTitle: 1. Pick your session times
   bookingText: Choose times that suit your week. Use your 4 sessions within 2 months.
@@ -58,7 +58,7 @@ enquiry:
   turnstileSiteKey:
   forms:
     question:
-      title: Ask me a *question*.
+      title: Ask me a *question*
       intro: Not sure the intro pack is right for you? Ask me anything.
       fields:
         - name: message
@@ -68,7 +68,7 @@ enquiry:
           placeholder: e.g. I have lower back pain. Is the intro pack right for me?
       button: Send my question
     proposal:
-      title: Request a *proposal*.
+      title: Request a *proposal*
       questions:
         - label: I'm planning
           short: Planning
@@ -106,7 +106,7 @@ enquiry:
           placeholder: Dates, venue, ideas…
       button: Request my proposal
     intake:
-      title: Tell me about *you*.
+      title: Tell me about *you*
       questions:
         - label: Mat or Reformer?
           short: Equipment

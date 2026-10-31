@@ -118,6 +118,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 ## Copy rules (from Chelsea)
 
 - Never use an em dash anywhere in the site copy.
+- Headings never end with a full stop (commas and ellipses are fine). An ellipsis goes inside the
+  emphasis, so it takes the same amber: Perfect for *those who…*
 - Chelsea is **South African, living in Lisbon**. Never write "from Lisbon". On the 1-on-1 page, location
   is left out (online, worldwide); the organiser page says "Based in Lisbon, available across Europe and South Africa".
 - She is a **BASI Comprehensive** Pilates instructor; positioning is movement for mental health.

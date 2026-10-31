@@ -29,7 +29,7 @@ whoFor:
     - Want guests feeling grounded, energised and cared for after the session
     - Prefer a class that blends Pilates strength with somatic techniques
 steps:
-  title: How it *works*.
+  title: How it *works*
   items:
     - title: Tell me about your event
       text: Dates, location, group size and the feel you're after.
@@ -40,7 +40,7 @@ steps:
     - title: I teach
       text: A bespoke, feel-good Pilates session that will elevate your event and guest experience.
 proof:
-  title: What hosts *say*.
+  title: What hosts *say*
 faq:
   title: Good to *know*
   items:
@@ -53,5 +53,5 @@ faq:
     - question: How far ahead should I get in touch?
       answer: As early as you can, especially for peak retreat and festival season.
 enquiry:
-  title: Request a *proposal*.
+  title: Request a *proposal*
   intro: Tell me about your retreat or event, and I'll reply with a tailored proposal within 48 hours.
