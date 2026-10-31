@@ -20,7 +20,7 @@ hero:
     poster: /media/chelsea-teaching-poster.jpg
     speed: 0.8
 perfectFor:
-  title: Perfect for *those who*…
+  title: Perfect for *those who…*
   items:
     - Worry about chronic pain, injury and proper form
     - Own a Reformer Pilates machine, gathering dust
@@ -29,10 +29,10 @@ perfectFor:
     - Are rebuilding strength after pregnancy or surgery
     - Feel stressed or anxious, and want movement that feels calming
 investment:
-  title: Start with your *intro pack*.
+  title: Start with your *intro pack*
   note: After your intro pack, continue with a monthly package, from €260 a month.
 about:
-  title: Hi, I’m *Chelsea*.
+  title: Hi, I’m *Chelsea*
   paragraphs:
     - My teaching style is calm, caring and collaborative. Blending Pilates and somatic techniques to help you release tension, move better and feel more energised.
     - As a BASI Comprehensive Pilates Instructor, I continue learning about the connections between stress, movement and chronic pain. Specialising in movement for mental health.
@@ -49,7 +49,7 @@ logos:
     - name: Elf
       image: ../../assets/media/logos/elf.png
 ctaBand:
-  title: Ready when *you* are.
+  title: Ready when *you* are
   text: Start your intro pack, to feel the benefits of movement for your mental health.
   primary:
     label: Book your intro pack

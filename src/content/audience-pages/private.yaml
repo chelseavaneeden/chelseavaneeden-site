@@ -56,7 +56,7 @@ investment:
 proof:
   title: What clients *notice*
 faq:
-  title: Good to *know*.
+  title: Good to *know*
   items:
     - question: I have an injury or chronic pain. Is this right for me?
       answer: Often, yes. I guide clients through rehab and chronic pain, and I’m happy to work alongside your physiotherapist, osteopath or doctor.
@@ -76,7 +76,7 @@ faq:
     label: Ask me a question
     href: /enquire
 ctaBand:
-  title: Ready when *you* are.
+  title: Ready when *you* are
   text: Start with an intro pack, or send me a question first. I reply personally within two working days.
   primary:
     label: Book your intro pack

@@ -22,7 +22,7 @@ hero:
     speed: 1
   layout: split
 whoFor:
-  title: Perfect for *retreats that*…
+  title: Perfect for *retreats that…*
   items:
     - Want feel-good, mixed-level Pilates for all ages and stages
     - Value a calm, caring and collaborative instructor
@@ -42,7 +42,7 @@ steps:
 proof:
   title: What hosts *say*.
 faq:
-  title: Good to *know*.
+  title: Good to *know*
   items:
     - question: Where can you teach?
       answer: I'm based in Lisbon and travel across Europe and South Africa.
