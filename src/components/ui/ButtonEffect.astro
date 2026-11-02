@@ -1,0 +1,69 @@
+---
+// What appears around a button on hover: a soft glow of sun rays and fine contour lines. CSS in
+// global.css shows one of them, chosen by Site settings → Button hover effect. Decorative, so hidden
+// from screen readers. The contour lines depend on the button's size, so the script below draws them
+// the first time a pointer or the keyboard reaches a button.
+---
+
+<span class="button-glow" aria-hidden="true"></span>
+<svg class="button-ripple" aria-hidden="true"></svg>
+
+<script>
+  // Distances from the button's edge, in pixels, for each contour line.
+  const distances = [6, 13, 21, 30];
+
+  // One closed line around a pill shape, wobbling gently like the contours of a map.
+  const contour = (width: number, height: number, distance: number, line: number) => {
+    const radius = height / 2 + distance;
+    const straight = Math.max(0, width - height);
+    const curve = Math.PI * radius;
+    const around = 2 * straight + 2 * curve;
+    const waves = Math.max(3, Math.round(around / 95));
+    const points: string[] = [];
+    const steps = Math.ceil(around / 5);
+    for (let i = 0; i < steps; i++) {
+      const along = (i / steps) * around;
+      const turn = (along / around) * Math.PI * 2;
+      const wobble = (1 + line * 0.75) * (Math.sin(waves * turn + line * 1.4) + 0.55 * Math.sin((waves * 2 + 1) * turn - line * 0.9));
+      const r = radius + wobble;
+      let x: number;
+      let y: number;
+      if (along < straight) {
+        x = height / 2 + along;
+        y = height / 2 - r;
+      } else if (along < straight + curve) {
+        const a = -Math.PI / 2 + ((along - straight) / curve) * Math.PI;
+        x = width - height / 2 + Math.cos(a) * r;
+        y = height / 2 + Math.sin(a) * r;
+      } else if (along < 2 * straight + curve) {
+        x = width - height / 2 - (along - straight - curve);
+        y = height / 2 + r;
+      } else {
+        const a = Math.PI / 2 + ((along - 2 * straight - curve) / curve) * Math.PI;
+        x = height / 2 + Math.cos(a) * r;
+        y = height / 2 + Math.sin(a) * r;
+      }
+      points.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
+    }
+    return `M${points.join(' L')}Z`;
+  };
+
+  const draw = (button: HTMLElement) => {
+    const svg = button.querySelector<SVGSVGElement>(':scope > .button-ripple');
+    if (!svg) return;
+    const size = `${button.offsetWidth}x${button.offsetHeight}`;
+    if (svg.dataset.size === size) return;
+    svg.dataset.size = size;
+    svg.innerHTML = distances
+      .map((distance, line) => `<path d="${contour(button.offsetWidth, button.offsetHeight, distance, line)}"></path>`)
+      .join('');
+  };
+
+  const onReach = (event: Event) => {
+    const button = (event.target as Element).closest?.<HTMLElement>('.button-pop');
+    if (button) draw(button);
+  };
+
+  document.addEventListener('pointerover', onReach);
+  document.addEventListener('focusin', onReach);
+</script>

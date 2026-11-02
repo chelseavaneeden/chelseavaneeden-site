@@ -82,8 +82,8 @@ const settings = defineCollection({
       }),
     ),
     bookCta: link,
-    /** The small marks that bloom around a button on hover. */
-    buttonSparkle: z.enum(['burst', 'rays', 'leaves', 'none']).default('burst'),
+    /** What happens around a button on hover, as well as its gentle lift. */
+    buttonEffect: z.enum(['ripple', 'glow', 'none']).default('ripple'),
     availability: z
       .object({
         open: z.boolean().default(true),

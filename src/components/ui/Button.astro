@@ -1,5 +1,5 @@
 ---
-import ButtonSparks from './ButtonSparks.astro';
+import ButtonEffect from './ButtonEffect.astro';
 import Icon, { type IconName } from './Icon.astro';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
@@ -53,7 +53,7 @@ const sizes: Record<ButtonSize, string> = {
   l: 'type-button px-6 py-4.5 sm:px-9',
 };
 
-// Main and outlined buttons lift, tilt and sparkle on hover (see global.css).
+// Main and outlined buttons lift and tilt on hover, with a touch of light or contour lines (see global.css).
 const pops = variant === 'primary' || variant === 'secondary';
 
 const classes = [
@@ -78,7 +78,7 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
     >
-      {pops && <ButtonSparks />}
+      {pops && <ButtonEffect />}
       <span data-button-label><slot /></span>
       {trailingIcon && (
         <Icon name={trailingIcon} class="transition-transform duration-(--duration-base) ease-soft group-hover/button:translate-x-0.5" />
@@ -86,7 +86,7 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
     </a>
   ) : (
     <button type={type} class:list={classes} data-track={event} data-still={still || undefined} disabled={disabled}>
-      {pops && <ButtonSparks />}
+      {pops && <ButtonEffect />}
       <span data-button-label><slot /></span>
       {trailingIcon && <Icon name={trailingIcon} />}
     </button>
