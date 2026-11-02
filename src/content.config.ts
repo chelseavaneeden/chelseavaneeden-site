@@ -275,13 +275,8 @@ const audiencePages = defineCollection({
       }),
       /** The enquiry form near the bottom of the page (organisers: the proposal form). */
       enquiry: optionalBlock(z.object(sectionHead)),
-      /** Proof shown under the enquiry heading: headline facts, then short lines. */
-      credentials: z
-        .object({
-          stats: list(z.object({ value: z.string(), label: z.string() })),
-          points: list(z.string()),
-        })
-        .nullish(),
+      /** Credentials as bubbles across the page, under the About section. */
+      credentials: z.object({ stats: list(z.object({ value: z.string(), label: z.string() })) }).nullish(),
       ctaBand: optionalBlock(ctaBand),
     }),
 });

@@ -1,0 +1,42 @@
+---
+// "Hi, I'm Chelsea": the same section on the home page and Retreats & events, with one set of words
+// and photos (editor: Home → Meet Chelsea). The greeting sits above the words in one moss green; the
+// words are larger so they balance the photos. As the section scrolls in, the greeting starts
+// stretched across the screen and shrinks into its place above the words, then the words and photos
+// fade in (see ScrollGrow).
+import Eyebrow from '../ui/Eyebrow.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Text from '../ui/Text.astro';
+import PhotoCollage from './PhotoCollage.astro';
+import teachingOnline from '../../assets/media/chelsea-teaching-online.jpg';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  about: CollectionEntry<'pages'>['data']['about'];
+}
+
+const { about } = Astro.props;
+---
+
+<Section space="l" tone="light" id="about" data-grow-section>
+  <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+    <div class="flex flex-col gap-6 lg:col-span-6">
+      {about.eyebrow && <Eyebrow>{about.eyebrow}</Eyebrow>}
+      <div data-grow-heading class="w-fit">
+        <Heading variant="display-l" tone="brand" text={about.title} class="em-plain" />
+      </div>
+      <div data-grow-follow class="flex flex-col gap-6">
+        {about.paragraphs.map((p) => <Text variant="lede-l" tone="muted" text={p} />)}
+      </div>
+    </div>
+    <div data-grow-follow class="mx-auto w-full max-w-xl lg:col-span-5 lg:col-start-8">
+      <PhotoCollage
+        photos={[
+          { src: about.image, alt: about.imageAlt },
+          { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
+        ]}
+      />
+    </div>
+  </div>
+</Section>

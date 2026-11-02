@@ -7,10 +7,8 @@
 // Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
-import Eyebrow from '../components/ui/Eyebrow.astro';
-import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
-import Text from '../components/ui/Text.astro';
+import AboutSection from '../components/patterns/AboutSection.astro';
 import Checklist from '../components/patterns/Checklist.astro';
 import LogoStrip from '../components/patterns/LogoStrip.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
@@ -19,11 +17,9 @@ import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
-import PhotoCollage from '../components/patterns/PhotoCollage.astro';
 import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
 import TrustLine from '../components/patterns/TrustLine.astro';
-import teachingOnline from '../assets/media/chelsea-teaching-online.jpg';
 import { getAudiencePage, getOffers, getPage, getSite, getTestimonials, resolveHeroLinks } from '../lib/content';
 
 const site = await getSite();
@@ -88,30 +84,7 @@ const testimonials = await getTestimonials('private');
       )
     }
 
-    <Section space="l" tone="light" id="about" data-grow-section>
-      {/* The greeting sits above the words in one moss green; the words are larger so they balance the
-          photos. As the section scrolls in, the greeting starts stretched across the screen and shrinks
-          into its place above the words, then the words and photos fade in (see ScrollGrow). */}
-      <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
-        <div class="flex flex-col gap-6 lg:col-span-6">
-          {page.about.eyebrow && <Eyebrow>{page.about.eyebrow}</Eyebrow>}
-          <div data-grow-heading class="w-fit">
-            <Heading variant="display-l" tone="brand" text={page.about.title} class="em-plain" />
-          </div>
-          <div data-grow-follow class="flex flex-col gap-6">
-            {page.about.paragraphs.map((p) => <Text variant="lede-l" tone="muted" text={p} />)}
-          </div>
-        </div>
-        <div data-grow-follow class="mx-auto w-full max-w-xl lg:col-span-5 lg:col-start-8">
-          <PhotoCollage
-            photos={[
-              { src: page.about.image, alt: page.about.imageAlt },
-              { src: teachingOnline, alt: 'Chelsea guiding a client through a live online Reformer session' },
-            ]}
-          />
-        </div>
-      </div>
-    </Section>
+    <AboutSection about={page.about} />
 
     {
       page.logos && (

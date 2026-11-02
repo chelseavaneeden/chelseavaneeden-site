@@ -102,8 +102,9 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
   No links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
 - **Line breaks**: pressing Enter in an editor text field starts a new line on the page (e.g. the closing
   band always breaks after "first.").
-- **Credentials**: on Retreats & events, under Request a proposal (`Credentials` pattern, editor: page → Credentials).
-  The logo banner below the form is the same list as the home page (editor: Home → Logo banner).
+- **About on both pages**: `AboutSection` is shared (words and photos: Home → Meet Chelsea), and the About menu
+  link stays on the current page. On Retreats & events it is followed by credential bubbles (`CredentialBubbles`,
+  editor: page → Credentials) and the logo banner (same list as Home → Logo banner).
 - **Legal**: `/privacy` (draft, see below) and `/terms` (sections now numbered 1–14).
 
 ## Design system additions on this branch

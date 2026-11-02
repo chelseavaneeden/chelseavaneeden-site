@@ -13,7 +13,8 @@ import Base from './Base.astro';
 import LeafShadow from '../components/ui/LeafShadow.astro';
 import Section from '../components/ui/Section.astro';
 import Checklist from '../components/patterns/Checklist.astro';
-import Credentials from '../components/patterns/Credentials.astro';
+import AboutSection from '../components/patterns/AboutSection.astro';
+import CredentialBubbles from '../components/patterns/CredentialBubbles.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import FeatureGrid from '../components/patterns/FeatureGrid.astro';
@@ -39,12 +40,12 @@ const offers = await getOffers(audience);
 const testimonials = await getTestimonials(audience);
 const hero = resolveHeroLinks(page.hero, site);
 const sage = page.sectionColour === 'sage';
-// The logo banner is shared with the home page, so it is edited in one place.
-const { logos } = await getPage('home');
+// The About section and logo banner are shared with the home page, so they are edited in one place.
+const { about, logos } = await getPage('home');
 ---
 
 <Base title={page.seo.title} description={page.seo.description} mood={page.sectionColour}>
-  <Header nav={site.nav} cta={page.hero.primary} sections={[testimonials.length > 0 && 'reviews', page.faq && 'faq'].filter((s): s is string => !!s)} />
+  <Header nav={site.nav} cta={page.hero.primary} sections={[testimonials.length > 0 && 'reviews', 'about', page.faq && 'faq'].filter((s): s is string => !!s)} />
 
   <main id="main">
     <Hero layout="split" {...hero} light={page.headerLight === 'sage' ? 'meadow' : 'sunrise'}>
@@ -75,15 +76,13 @@ const { logos } = await getPage('home');
       )
     }
 
-    {/* The proposal form comes after "How it works", so organisers know what happens before they ask.
-        Credentials sit beside the form, and the logo banner follows it, to back up the ask. */}
+    {/* The proposal form comes after "How it works", so organisers know what happens before they ask. */}
     {
       page.enquiry && (
         <Section space="m" id="enquire">
           <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div class="flex flex-col gap-8 lg:col-span-5">
+            <div class="lg:col-span-5">
               <SectionHeader {...page.enquiry} />
-              {page.credentials && <Credentials stats={page.credentials.stats} points={page.credentials.points} />}
             </div>
             <div class="lg:col-span-7">
               <slot name="enquiry" />
@@ -93,8 +92,19 @@ const { logos } = await getPage('home');
       )
     }
 
+    {/* Who she is, then her credentials, then the companies she has worked with. */}
+    <AboutSection about={about} />
+
     {
-      page.enquiry && logos && (
+      page.credentials && page.credentials.stats.length > 0 && (
+        <Section space="s" class="pt-0">
+          <CredentialBubbles stats={page.credentials.stats} />
+        </Section>
+      )
+    }
+
+    {
+      logos && (
         <Section space="s" bare class="pt-0">
           <LogoStrip {...logos} />
         </Section>
