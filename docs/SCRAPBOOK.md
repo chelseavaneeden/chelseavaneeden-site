@@ -136,7 +136,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; turn off Adaptive Pricing
    (so checkout stays in euros); tidy the intro subtitle ("1 or 2 private sessions weekly…" describes the
    monthly plans); make a second pricing table with the monthly plans and paste its ID in Site settings;
-   deactivate the old €300 intro Payment Link. Optional: match the table's button colour to the site.
+   deactivate the old €300 intro Payment Link. On that table set the button colour to Wild Honey `#E2B866` and the background to the page's linen `#F4EEE3` (it still has the old `#F1EF83` and `#FAF4E9`), and remove the Intro Package description, which now sits under the page heading.
 2. **Booking link** for clients to pick times: Site settings → Welcome page.
 3. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the preview address,
    later the real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.

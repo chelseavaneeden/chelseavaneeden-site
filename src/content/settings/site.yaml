@@ -23,6 +23,7 @@ availability:
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
   title: Book your *intro pack*
+  intro: 1 or 2 private sessions weekly, at a regular time that suits you.
   points:
     - Pay securely online.
     - Pick your session times from my calendar.
