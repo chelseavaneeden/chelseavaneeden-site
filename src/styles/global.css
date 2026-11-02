@@ -103,6 +103,11 @@
     mask-image: var(--fade-y-mask);
   }
 
+  /* The credentials band: a whisper of sage-grey in its corners. */
+  [data-tone='band'] {
+    background-image: var(--band-wash);
+  }
+
   /* The intro card's sand wall (light and leaf shadows are added by WallLight). */
   [data-tone='wall'] {
     background-image: var(--wall-base);

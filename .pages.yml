@@ -326,11 +326,11 @@ content:
           - name: look
             label: Look
             type: select
-            default: lines
+            default: band
             options:
               values:
+                - { value: band, label: Soft linen band }
                 - { value: lines, label: Fine lines }
-                - { value: wall, label: Sand wall }
                 - { value: contours, label: Contour lines }
           - name: stats
             label: Facts

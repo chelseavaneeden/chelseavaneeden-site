@@ -2,12 +2,12 @@
 // Credentials in a row across the page, each fact with its own small section. Words and look come from
 // the editor (audience page → Credentials). Two to a row on phones, four from large screens up.
 //   lines:    fine lines above, below and between the facts, on the page itself.
-//   wall:     the same layout on the intro card's sand wall, with its light and soft leaf shadow.
+//   band:     the same layout on a soft linen band, close to the page's own colour, with a little sage in
+//             two corners; dark words and larger labels, so it reads clearly.
 //   contours: no lines or box; each fact sits on its own small patch of map contours.
 import Topography from '../ui/Topography.astro';
-import WallLight from '../ui/WallLight.astro';
 
-export type ProofStripLook = 'lines' | 'wall' | 'contours';
+export type ProofStripLook = 'lines' | 'band' | 'contours';
 
 interface Props {
   stats: { value: string; label: string }[];
@@ -16,13 +16,13 @@ interface Props {
 
 const { stats, look = 'lines' } = Astro.props;
 const contours = look === 'contours';
+const band = look === 'band';
 ---
 
 <div
-  data-tone={look === 'wall' ? 'wall' : undefined}
-  class:list={[look === 'wall' && 'relative isolate overflow-hidden rounded-card px-6 shadow-raised md:px-10']}
+  data-tone={band ? 'band' : undefined}
+  class:list={[band && 'relative isolate overflow-hidden rounded-card px-6 shadow-raised md:px-10']}
 >
-  {look === 'wall' && <WallLight />}
   <dl class:list={['grid grid-cols-2 lg:grid-cols-4', look === 'lines' && 'border-y border-line']}>
     {
       stats.map((s, i) => (
@@ -37,7 +37,7 @@ const contours = look === 'contours';
           ]}
         >
           {contours && <Topography corner="center" seed={i + 1} class="-z-10" />}
-          <dt class="type-body-s order-2 text-balance text-ink-muted">{s.label}</dt>
+          <dt class:list={['order-2 text-balance text-ink-muted', band ? 'type-body' : 'type-body-s']}>{s.label}</dt>
           <dd class="type-stat order-1 text-heading">{s.value}</dd>
         </div>
       ))

@@ -104,7 +104,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
   band always breaks after "first.").
 - **About on both pages**: `AboutSection` is shared (words and photos: Home → Meet Chelsea), and the About menu
   link stays on the current page. On Retreats & events it is followed by the credentials row (`ProofStrip`, with
-  three looks; editor: page → Credentials) and the logo banner (same list as Home → Logo banner).
+  looks to choose from; editor: page → Credentials) and the logo banner (same list as Home → Logo banner).
 - **Legal**: `/privacy` (draft, see below) and `/terms` (sections now numbered 1–14).
 
 ## Design system additions on this branch

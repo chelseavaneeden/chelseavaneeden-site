@@ -115,6 +115,10 @@
     radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
     radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.32) 0%, rgb(201 128 47 / 0) 62%),
     linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
+  /* The credentials band: a whisper of sage-grey in two corners, on the band's pale linen. */
+  --band-wash:
+    radial-gradient(55% 130% at 100% 100%, rgb(167 173 140 / 0.3) 0%, rgb(167 173 140 / 0) 72%),
+    radial-gradient(40% 110% at 0% 0%, rgb(220 222 201 / 0.55) 0%, rgb(220 222 201 / 0) 72%);
   /* Limewash plaster: soft, cloudy patches of lighter and darker, like a hand-finished wall. */
   --plaster-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1000'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.011' numOctaves='5' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.84 0 0 0 1.5 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
   --plaster-size: cover;
@@ -205,6 +209,18 @@
   --surface-alt: var(--sage-leaf-100);
   --line: var(--sage-leaf-200);
   --wash: var(--wash-sage-soft);
+}
+
+/* The credentials band: pale linen, close to the page's own colour, with Coffee Bean words throughout
+   so they read clearly. */
+[data-tone='band'] {
+  --surface: var(--linen-50);
+  --surface-alt: var(--linen-100);
+  --surface-raised: var(--linen-50);
+  --ink: var(--coffee-900);
+  --ink-muted: var(--coffee-900);
+  --heading: var(--coffee-900);
+  --line: var(--linen-300);
 }
 
 /* The intro card: a sand wall in morning sun. Coffee words, moss headings and ticks. */

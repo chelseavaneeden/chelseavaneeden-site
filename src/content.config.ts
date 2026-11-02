@@ -278,7 +278,7 @@ const audiencePages = defineCollection({
       /** Credentials in a row across the page, under the About section. */
       credentials: z
         .object({
-          look: z.enum(['lines', 'wall', 'contours']).default('lines'),
+          look: z.enum(['lines', 'band', 'contours']).default('band'),
           stats: list(z.object({ value: z.string(), label: z.string() })),
         })
         .nullish(),
