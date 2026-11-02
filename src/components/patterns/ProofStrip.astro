@@ -1,24 +1,46 @@
 ---
+// Credentials in a row across the page, each fact with its own small section. Words and look come from
+// the editor (audience page → Credentials). Two to a row on phones, four from large screens up.
+//   lines:    fine lines above, below and between the facts, on the page itself.
+//   wall:     the same layout on the intro card's sand wall, with its light and soft leaf shadow.
+//   contours: no lines or box; each fact sits on its own small patch of map contours.
+import Topography from '../ui/Topography.astro';
+import WallLight from '../ui/WallLight.astro';
+
+export type ProofStripLook = 'lines' | 'wall' | 'contours';
+
 interface Props {
   stats: { value: string; label: string }[];
+  look?: ProofStripLook;
 }
 
-const { stats } = Astro.props;
+const { stats, look = 'lines' } = Astro.props;
+const contours = look === 'contours';
 ---
 
-<dl class="grid grid-cols-2 border-t border-line lg:grid-cols-4">
-  {
-    stats.map((s, i) => (
-      <div
-        class:list={[
-          'flex flex-col gap-2 border-b border-line py-8 pr-4 lg:border-b-0 lg:py-10',
-          i % 2 === 1 && 'border-l pl-5 lg:pl-8',
-          i % 2 === 0 && i > 0 && 'lg:border-l lg:pl-8',
-        ]}
-      >
-        <dt class="type-body-s order-2 text-ink-muted">{s.label}</dt>
-        <dd class="type-stat order-1 text-ink">{s.value}</dd>
-      </div>
-    ))
-  }
-</dl>
+<div
+  data-tone={look === 'wall' ? 'wall' : undefined}
+  class:list={[look === 'wall' && 'relative isolate overflow-hidden rounded-card px-6 shadow-raised md:px-10']}
+>
+  {look === 'wall' && <WallLight />}
+  <dl class:list={['grid grid-cols-2 lg:grid-cols-4', look === 'lines' && 'border-y border-line']}>
+    {
+      stats.map((s, i) => (
+        <div
+          data-reveal
+          class:list={[
+            'relative isolate flex flex-col gap-2',
+            contours ? 'items-center px-3 py-12 text-center lg:py-16' : 'py-8 pr-4 lg:py-10',
+            !contours && i % 2 === 1 && 'border-l border-line pl-5 lg:pl-8',
+            !contours && i % 2 === 0 && i > 0 && 'lg:border-l lg:border-line lg:pl-8',
+            !contours && i < 2 && 'border-b border-line lg:border-b-0',
+          ]}
+        >
+          {contours && <Topography corner="center" seed={i + 1} class="-z-10" />}
+          <dt class="type-body-s order-2 text-balance text-ink-muted">{s.label}</dt>
+          <dd class="type-stat order-1 text-heading">{s.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>

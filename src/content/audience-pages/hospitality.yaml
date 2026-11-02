@@ -56,6 +56,7 @@ enquiry:
   title: Request a *proposal*
   intro: Tell me about your retreat or event, and I'll reply with a tailored proposal within 48 hours.
 credentials:
+  look: contours
   stats:
     - value: BASI
       label: Comprehensive Pilates Instructor

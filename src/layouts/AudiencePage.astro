@@ -14,7 +14,6 @@ import LeafShadow from '../components/ui/LeafShadow.astro';
 import Section from '../components/ui/Section.astro';
 import Checklist from '../components/patterns/Checklist.astro';
 import AboutSection from '../components/patterns/AboutSection.astro';
-import CredentialBubbles from '../components/patterns/CredentialBubbles.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import FeatureGrid from '../components/patterns/FeatureGrid.astro';
@@ -23,6 +22,7 @@ import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
 import LogoStrip from '../components/patterns/LogoStrip.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
+import ProofStrip from '../components/patterns/ProofStrip.astro';
 import SectionHeader from '../components/patterns/SectionHeader.astro';
 import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
@@ -97,8 +97,8 @@ const { about, logos } = await getPage('home');
 
     {
       page.credentials && page.credentials.stats.length > 0 && (
-        <Section space="s" class="pt-0">
-          <CredentialBubbles stats={page.credentials.stats} />
+        <Section space="s" class="overflow-x-clip pt-0">
+          <ProofStrip stats={page.credentials.stats} look={page.credentials.look} />
         </Section>
       )
     }

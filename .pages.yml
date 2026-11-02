@@ -321,13 +321,22 @@ content:
       - name: credentials
         label: Credentials
         type: object
-        description: 'Bubbles across the page, under the Hi, I’m Chelsea section. Only list what you can back up. Leave empty to hide.'
+        description: 'A row across the page, under the Hi, I’m Chelsea section. Only list what you can back up. Leave empty to hide.'
         fields:
+          - name: look
+            label: Look
+            type: select
+            default: lines
+            options:
+              values:
+                - { value: lines, label: Fine lines }
+                - { value: wall, label: Sand wall }
+                - { value: contours, label: Contour lines }
           - name: stats
-            label: Bubbles
+            label: Facts
             type: object
             list: true
-            description: 'Four works best. Keep the small text short so it fits in the circle.'
+            description: 'Four works best.'
             fields:
               - { name: value, label: Big text, type: string, required: true, description: 'e.g. 5,000+' }
               - { name: label, label: Small text underneath, type: string, required: true, description: 'e.g. Teaching hours' }

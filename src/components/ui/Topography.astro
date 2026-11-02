@@ -1,28 +1,30 @@
 ---
-// Fine contour lines tucked into a corner, like a topographic map (from the mood board): rings of
-// gently uneven circles that slowly breathe in and out. Subtle and out of the way of the words.
-// Put it inside an element with `relative overflow-hidden`; `corner` picks where it sits. Hidden from
-// screen readers, and still for people who prefer reduced motion (data-ambient, see global.css).
+// Fine contour lines, like a topographic map (from the mood board): rings of gently uneven circles
+// that slowly breathe in and out. Subtle and out of the way of the words. Put it inside an element with
+// `relative`; `corner` picks where it sits (a corner, or the centre for a small patch behind a fact).
+// `seed` gives each patch its own shape and timing. Hidden from screen readers, and still for people
+// who prefer reduced motion (data-ambient, see global.css).
 interface Props {
-  corner?: 'bottom-left' | 'top-right';
+  corner?: 'bottom-left' | 'top-right' | 'center';
+  seed?: number;
   class?: string;
 }
 
-const { corner = 'bottom-left', class: className } = Astro.props;
+const { corner = 'bottom-left', seed = 0, class: className } = Astro.props;
 
 // Each ring wobbles a little differently, like the contours around a hill.
 const rings = Array.from({ length: 11 }, (_, i) => {
   const base = 46 + i * 36;
   const points = Array.from({ length: 96 }, (_, j) => {
     const a = (j / 96) * Math.PI * 2;
-    const r = base * (1 + 0.07 * Math.sin(3 * a + i * 0.6) + 0.04 * Math.sin(5 * a - i * 0.45) + 0.025 * Math.sin(8 * a + i));
+    const r = base * (1 + 0.07 * Math.sin(3 * a + i * 0.6 + seed * 1.7) + 0.04 * Math.sin(5 * a - i * 0.45 + seed * 2.3) + 0.025 * Math.sin(8 * a + i + seed));
     return `${(Math.cos(a) * r).toFixed(1)} ${(Math.sin(a) * r).toFixed(1)}`;
   });
   return `M${points.join(' L')}Z`;
 });
 ---
 
-<div class:list={['topography pointer-events-none absolute', `topography-${corner}`, className]} aria-hidden="true">
+<div class:list={['topography pointer-events-none absolute', `topography-${corner}`, `topography-beat-${seed % 4}`, className]} aria-hidden="true">
   <svg viewBox="-500 -500 1000 1000" fill="none" data-ambient>
     {rings.map((d) => <path d={d} />)}
   </svg>
@@ -48,10 +50,29 @@ const rings = Array.from({ length: 11 }, (_, i) => {
     translate: 48% -42%;
   }
 
+  .topography-center {
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: clamp(13rem, 19vw, 19rem);
+  }
+
   .topography svg {
     width: 100%;
     height: 100%;
     animation: contour-breathe var(--duration-contour) var(--ease-in-out-soft) infinite;
+  }
+
+  .topography-beat-1 svg {
+    animation-delay: -3.5s;
+  }
+
+  .topography-beat-2 svg {
+    animation-delay: -7s;
+  }
+
+  .topography-beat-3 svg {
+    animation-delay: -10.5s;
   }
 
   .topography path {

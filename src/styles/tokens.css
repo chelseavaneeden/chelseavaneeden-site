@@ -115,13 +115,6 @@
     radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
     radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.32) 0%, rgb(201 128 47 / 0) 62%),
     linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
-  /* Credential bubbles: pale linen with a soft sheen from the top left and a hint of honey at the rim. */
-  --bubble-surface: radial-gradient(
-    circle at 32% 24%,
-    rgb(255 252 244 / 0.95) 0%,
-    rgb(250 246 238 / 0.8) 55%,
-    rgb(239 217 160 / 0.28) 100%
-  );
   /* Limewash plaster: soft, cloudy patches of lighter and darker, like a hand-finished wall. */
   --plaster-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1000'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.011' numOctaves='5' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.84 0 0 0 1.5 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
   --plaster-size: cover;
@@ -312,7 +305,6 @@
 
   --shadow-raised: var(--shadow-raised-value);
   --shadow-glow: var(--shadow-glow-value);
-  --shadow-bubble: var(--shadow-bubble-value);
 
   /* Layout widths (max-w-content, max-w-prose…) */
   --container-prose: 40rem;
@@ -420,8 +412,6 @@
   --radius-control-value: 0.75rem;
   --radius-media-value: 1.75rem;
   --shadow-raised-value: 0 30px 60px -32px rgb(59 42 30 / 0.4);
-  --shadow-bubble-value: 0 18px 40px -26px rgb(59 42 30 / 0.4), inset 0 0 0 1px rgb(226 184 102 / 0.3);
-  --bubble-size: clamp(12.5rem, 16vw, 14.75rem);
   /* A gentle, warm glow around a button on hover, soft like morning light. */
   --shadow-glow-value: 0 4px 18px -6px rgb(226 184 102 / 0.6);
   --hero-overlay-height: min(88svh, 56rem);
