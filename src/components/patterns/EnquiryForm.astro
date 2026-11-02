@@ -4,7 +4,6 @@
 // Tap-to-choose questions, name and email, extra fields, an optional required tick box, a hidden
 // spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
 // opens WhatsApp directly.
-import Button from '../ui/Button.astro';
 import Heading from '../ui/Heading.astro';
 import Text from '../ui/Text.astro';
 import WhatsAppLink from '../ui/WhatsAppLink.astro';
@@ -119,7 +118,13 @@ const id = (name: string) => `${idPrefix}-${name}`;
     {enquiry.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={enquiry.turnstileSiteKey} data-size="flexible" data-theme="light" />}
 
     <div class="flex flex-col gap-3 pt-1">
-      <Button type="submit" size="l" full still disabled>{form.button}</Button>
+      <button
+        type="submit"
+        disabled
+        class="type-button w-full rounded-pill bg-cta px-7 py-4 text-cta-ink transition duration-(--duration-base) ease-soft hover:bg-cta-hover hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-cta disabled:hover:shadow-none"
+      >
+        {form.button}
+      </button>
       <p class="type-caption text-center text-ink-muted" data-enquiry-status role="status" aria-live="polite">
         {enquiry.replyPromise}
         {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
@@ -154,9 +159,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
     const error = form.querySelector<HTMLElement>('[data-enquiry-error]');
     const done = wrap?.querySelector<HTMLElement>('[data-enquiry-done]');
     if (!send || !error || !done) return;
-    const sendLabel = send.querySelector<HTMLElement>('[data-button-label]');
-    if (!sendLabel) return;
-    const label = sendLabel.textContent;
+    const label = send.textContent;
 
     const update = () => {
       send.disabled = !form.checkValidity();
@@ -179,7 +182,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
       });
 
       send.disabled = true;
-      sendLabel.textContent = 'Sending…';
+      send.textContent = 'Sending…';
       error.classList.add('hidden');
       try {
         const response = await fetch('/api/enquire', {
@@ -205,7 +208,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
         error.classList.remove('hidden');
         (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);
       } finally {
-        sendLabel.textContent = label;
+        send.textContent = label;
         update();
       }
     });

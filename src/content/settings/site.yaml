@@ -5,7 +5,7 @@ nav:
     href: /#about
   - label: FAQ
     href: /#faq
-  - label: Retreats & events
+  - label: Retreats & collabs
     href: /retreats-events
     onItsPage:
       label: Private sessions
@@ -13,7 +13,6 @@ nav:
 bookCta:
   label: Book your intro pack
   href: /intro-pack
-buttonEffect: ripple
 availability:
   open: true
   openLabel: Accepting new clients

@@ -1,5 +1,4 @@
 ---
-import ButtonEffect from './ButtonEffect.astro';
 import Icon, { type IconName } from './Icon.astro';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
@@ -13,9 +12,6 @@ interface Props {
   icon?: IconName;
   external?: boolean;
   full?: boolean;
-  /** Pops on hover without the tilt, for wide buttons such as the form's send button. */
-  still?: boolean;
-  disabled?: boolean;
   /** Where this button is, for analytics, e.g. "hero". What it does is worked out from the link (see Base). */
   event?: string;
   class?: string;
@@ -29,8 +25,6 @@ const {
   icon,
   external = false,
   full = false,
-  still = false,
-  disabled = false,
   event,
   class: className,
 } = Astro.props;
@@ -39,8 +33,7 @@ const base =
   'group/button inline-flex items-center justify-center gap-2 whitespace-nowrap transition duration-(--duration-base) ease-soft';
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    'rounded-pill bg-cta text-cta-ink hover:bg-cta-hover hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-cta disabled:hover:shadow-none',
+  primary: 'rounded-pill bg-cta text-cta-ink hover:bg-cta-hover hover:shadow-glow',
   secondary: 'rounded-pill border border-current text-ink hover:bg-ink hover:text-surface hover:border-ink',
   ghost: 'rounded-pill text-ink hover:bg-surface-alt',
   link: 'text-ink underline decoration-1 underline-offset-4 hover:decoration-2',
@@ -53,12 +46,8 @@ const sizes: Record<ButtonSize, string> = {
   l: 'type-button px-6 py-4.5 sm:px-9',
 };
 
-// Main and outlined buttons lift and tilt on hover, with a touch of light or contour lines (see global.css).
-const pops = variant === 'primary' || variant === 'secondary';
-
 const classes = [
   base,
-  pops && 'button-pop',
   variants[variant],
   variant === 'link' ? 'type-label' : sizes[size],
   full && 'w-full',
@@ -74,20 +63,17 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
       href={href}
       class:list={classes}
       data-track={event}
-      data-still={still || undefined}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
     >
-      {pops && <ButtonEffect />}
-      <span data-button-label><slot /></span>
+      <slot />
       {trailingIcon && (
         <Icon name={trailingIcon} class="transition-transform duration-(--duration-base) ease-soft group-hover/button:translate-x-0.5" />
       )}
     </a>
   ) : (
-    <button type={type} class:list={classes} data-track={event} data-still={still || undefined} disabled={disabled}>
-      {pops && <ButtonEffect />}
-      <span data-button-label><slot /></span>
+    <button type={type} class:list={classes} data-track={event}>
+      <slot />
       {trailingIcon && <Icon name={trailingIcon} />}
     </button>
   )

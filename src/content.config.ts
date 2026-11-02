@@ -82,8 +82,6 @@ const settings = defineCollection({
       }),
     ),
     bookCta: link,
-    /** What happens around a button on hover, as well as its gentle lift. */
-    buttonEffect: z.enum(['ripple', 'glow', 'none']).default('ripple'),
     availability: z
       .object({
         open: z.boolean().default(true),

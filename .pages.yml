@@ -530,16 +530,6 @@ content:
             fields:
               - { name: label, label: Menu text, type: string, required: true }
               - { name: href, label: Link, type: string, required: true }
-      - name: buttonEffect
-        label: Button hover effect
-        type: select
-        default: ripple
-        description: 'What happens around a button when you hover over it, as well as its gentle lift.'
-        options:
-          values:
-            - { value: ripple, label: Contour line ripple }
-            - { value: glow, label: Soft sun glow }
-            - { value: none, label: Just the lift }
       - name: availability
         label: Availability badge
         type: object
