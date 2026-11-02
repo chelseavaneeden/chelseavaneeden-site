@@ -85,7 +85,7 @@ content:
       - name: logos
         label: Logo banner
         type: object
-        description: 'Shown under Meet Chelsea, all in one colour. Upload transparent PNG or SVG files (no white box behind the logo). Only add places you have worked with, with their OK. Leave the list empty to hide.'
+        description: 'Shown under Meet Chelsea and under Request a proposal on Retreats & events, all in one colour. Upload transparent PNG or SVG files (no white box behind the logo). Only add places you have worked with, with their OK. Leave the list empty to hide.'
         fields:
           - { name: label, label: Small line above the logos, type: string, description: 'e.g. Trained & worked with. Leave empty to hide.' }
           - name: items
@@ -318,6 +318,20 @@ content:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
+      - name: credentials
+        label: Credentials
+        type: object
+        description: 'Shown under the enquiry heading. Only list what you can back up. Leave both lists empty to hide.'
+        fields:
+          - name: stats
+            label: Headline facts
+            type: object
+            list: true
+            description: 'Shown two to a row. Four works best.'
+            fields:
+              - { name: value, label: Big text, type: string, required: true, description: 'e.g. 5,000+' }
+              - { name: label, label: Small text underneath, type: string, required: true, description: 'e.g. Sessions taught' }
+          - { name: points, label: Short lines, type: string, list: true, description: 'One short line each, marked with the ✺.' }
       - name: ctaBand
         label: Dark band at the bottom (optional)
         type: object

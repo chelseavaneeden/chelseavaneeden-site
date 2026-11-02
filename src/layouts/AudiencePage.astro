@@ -13,18 +13,20 @@ import Base from './Base.astro';
 import LeafShadow from '../components/ui/LeafShadow.astro';
 import Section from '../components/ui/Section.astro';
 import Checklist from '../components/patterns/Checklist.astro';
+import Credentials from '../components/patterns/Credentials.astro';
 import CtaBand from '../components/patterns/CtaBand.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
 import FeatureGrid from '../components/patterns/FeatureGrid.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import Hero from '../components/patterns/Hero.astro';
+import LogoStrip from '../components/patterns/LogoStrip.astro';
 import OfferGrid from '../components/patterns/OfferGrid.astro';
 import SectionHeader from '../components/patterns/SectionHeader.astro';
 import StepList from '../components/patterns/StepList.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
 import TrustLine from '../components/patterns/TrustLine.astro';
-import { getAudiencePage, getOffers, getSite, getTestimonials, resolveHeroLinks, type Audience } from '../lib/content';
+import { getAudiencePage, getOffers, getPage, getSite, getTestimonials, resolveHeroLinks, type Audience } from '../lib/content';
 
 interface Props {
   audience: Audience;
@@ -37,6 +39,8 @@ const offers = await getOffers(audience);
 const testimonials = await getTestimonials(audience);
 const hero = resolveHeroLinks(page.hero, site);
 const sage = page.sectionColour === 'sage';
+// The logo banner is shared with the home page, so it is edited in one place.
+const { logos } = await getPage('home');
 ---
 
 <Base title={page.seo.title} description={page.seo.description} mood={page.sectionColour}>
@@ -71,18 +75,28 @@ const sage = page.sectionColour === 'sage';
       )
     }
 
-    {/* The proposal form comes after "How it works", so organisers know what happens before they ask. */}
+    {/* The proposal form comes after "How it works", so organisers know what happens before they ask.
+        Credentials sit beside the form, and the logo banner follows it, to back up the ask. */}
     {
       page.enquiry && (
         <Section space="m" id="enquire">
           <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div class="lg:col-span-5">
+            <div class="flex flex-col gap-8 lg:col-span-5">
               <SectionHeader {...page.enquiry} />
+              {page.credentials && <Credentials stats={page.credentials.stats} points={page.credentials.points} />}
             </div>
             <div class="lg:col-span-7">
               <slot name="enquiry" />
             </div>
           </div>
+        </Section>
+      )
+    }
+
+    {
+      page.enquiry && logos && (
+        <Section space="s" bare class="pt-0">
+          <LogoStrip {...logos} />
         </Section>
       )
     }

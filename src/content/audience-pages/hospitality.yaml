@@ -55,3 +55,17 @@ faq:
 enquiry:
   title: Request a *proposal*
   intro: Tell me about your retreat or event, and I'll reply with a tailored proposal within 48 hours.
+credentials:
+  stats:
+    - value: BASI
+      label: Comprehensive Pilates Instructor
+    - value: 5,000+
+      label: Sessions taught
+    - value: 5+
+      label: Years teaching
+    - value: 9.4K
+      label: YouTube subscribers
+  points:
+    - Nervous-system-informed teaching that blends Pilates with somatic techniques, breathwork and myofascial release
+    - My 2021 paper, Stress, Cortisol & the Power of Movement, shapes how I teach
+    - Teaching private clients across the UK, US and Europe
