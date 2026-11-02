@@ -22,7 +22,7 @@ const { title, description, lang = 'en', noindex = false, pageEvent, mood = 'gol
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev preview out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
-const { contact, enquiry, analytics, bookCta } = await getSite();
+const { contact, enquiry, analytics, bookCta, buttonSparkle } = await getSite();
 ---
 
 <!doctype html>
@@ -53,6 +53,7 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     data-whatsapp-href={contact.whatsappHref}
     data-page-event={pageEvent}
     data-mood={mood}
+    data-sparks={buttonSparkle}
   >
     <a
       href="#main"

@@ -13,6 +13,7 @@ nav:
 bookCta:
   label: Book your intro pack
   href: /intro-pack
+buttonSparkle: rays
 availability:
   open: true
   openLabel: Accepting new clients

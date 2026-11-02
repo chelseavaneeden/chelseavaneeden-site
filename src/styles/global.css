@@ -306,3 +306,177 @@
 @utility sun-in {
   animation: sun-in calc(var(--duration-rise) * 1.4) var(--ease-soft) calc(var(--rise-step) * 1) both;
 }
+
+/* Buttons --------------------------------------------------------------- */
+
+/* On hover or keyboard focus a button lifts, grows a little and tilts on a soft spring, and small marks
+   from the brand bloom around it once (Site settings → Button sparkle). data-still buttons, such as the
+   wide send button, pop without the tilt. Screens without a mouse get the gentle press only, and people
+   who prefer reduced motion keep just the colour change. */
+.button-pop {
+  position: relative;
+  transition:
+    translate var(--duration-pop) var(--ease-spring),
+    scale var(--duration-pop) var(--ease-spring),
+    rotate var(--duration-pop) var(--ease-spring),
+    background-color var(--duration-base) var(--ease-soft),
+    border-color var(--duration-base) var(--ease-soft),
+    color var(--duration-base) var(--ease-soft),
+    box-shadow var(--duration-base) var(--ease-soft),
+    opacity var(--duration-base) var(--ease-soft);
+}
+
+.sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.spark {
+  position: absolute;
+  left: var(--at-x);
+  top: var(--at-y);
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  opacity: 0;
+  background-color: var(--spark);
+  -webkit-mask: var(--spark-shape) center / contain no-repeat;
+  mask: var(--spark-shape) center / contain no-repeat;
+}
+
+/* Little sunbursts, scattered all around the button. */
+[data-sparks='burst'] .spark {
+  --spark-shape: var(--spark-burst);
+}
+[data-sparks='burst'] .spark:nth-child(1) { --at-x: 8%; --at-y: 5%; --to-x: -0.8rem; --to-y: -1rem; --size: 0.95rem; --turn: -40deg; --wait: 0ms; }
+[data-sparks='burst'] .spark:nth-child(2) { --at-x: 30%; --at-y: 0%; --to-x: -0.2rem; --to-y: -1.35rem; --size: 0.6rem; --turn: 30deg; --wait: 60ms; }
+[data-sparks='burst'] .spark:nth-child(3) { --at-x: 58%; --at-y: 0%; --to-x: 0.25rem; --to-y: -1.15rem; --size: 0.8rem; --turn: -30deg; --wait: 20ms; }
+[data-sparks='burst'] .spark:nth-child(4) { --at-x: 90%; --at-y: 6%; --to-x: 0.85rem; --to-y: -1rem; --size: 1.05rem; --turn: 45deg; --wait: 40ms; }
+[data-sparks='burst'] .spark:nth-child(5) { --at-x: 100%; --at-y: 60%; --to-x: 1.05rem; --to-y: 0.15rem; --size: 0.6rem; --turn: -25deg; --wait: 90ms; }
+[data-sparks='burst'] .spark:nth-child(6) { --at-x: 72%; --at-y: 100%; --to-x: 0.3rem; --to-y: 1rem; --size: 0.7rem; --turn: 35deg; --wait: 70ms; }
+[data-sparks='burst'] .spark:nth-child(7) { --at-x: 18%; --at-y: 100%; --to-x: -0.5rem; --to-y: 0.95rem; --size: 0.65rem; --turn: -35deg; --wait: 30ms; }
+
+/* Sun rays, fanning out from the top of the button like a sunrise, the middle one first. */
+[data-sparks='rays'] .spark {
+  width: var(--ray-width);
+  top: calc(var(--at-y) - var(--size) - 3px);
+  margin: 0 0 0 calc(var(--ray-width) / -2);
+  border-radius: var(--radius-pill);
+  rotate: var(--turn);
+  transform-origin: 50% 100%;
+  -webkit-mask: none;
+  mask: none;
+}
+[data-sparks='rays'] .spark:nth-child(1) { --at-x: 2%; --at-y: 35%; --to-x: -0.6rem; --to-y: -0.25rem; --size: 0.7rem; --turn: -68deg; --wait: 150ms; }
+[data-sparks='rays'] .spark:nth-child(2) { --at-x: 15%; --at-y: 4%; --to-x: -0.45rem; --to-y: -0.55rem; --size: 1rem; --turn: -38deg; --wait: 100ms; }
+[data-sparks='rays'] .spark:nth-child(3) { --at-x: 33%; --at-y: 0%; --to-x: -0.2rem; --to-y: -0.65rem; --size: 0.8rem; --turn: -16deg; --wait: 50ms; }
+[data-sparks='rays'] .spark:nth-child(4) { --at-x: 50%; --at-y: 0%; --to-x: 0rem; --to-y: -0.7rem; --size: 1.05rem; --turn: 0deg; --wait: 0ms; }
+[data-sparks='rays'] .spark:nth-child(5) { --at-x: 67%; --at-y: 0%; --to-x: 0.2rem; --to-y: -0.65rem; --size: 0.8rem; --turn: 16deg; --wait: 50ms; }
+[data-sparks='rays'] .spark:nth-child(6) { --at-x: 85%; --at-y: 4%; --to-x: 0.45rem; --to-y: -0.55rem; --size: 1rem; --turn: 38deg; --wait: 100ms; }
+[data-sparks='rays'] .spark:nth-child(7) { --at-x: 98%; --at-y: 35%; --to-x: 0.6rem; --to-y: -0.25rem; --size: 0.7rem; --turn: 68deg; --wait: 150ms; }
+
+/* Small leaves, lifting off the top of the button and drifting away. */
+[data-sparks='leaves'] .spark {
+  --spark-shape: var(--spark-leaf);
+}
+[data-sparks='leaves'] .spark:nth-child(1) { --at-x: 12%; --at-y: 10%; --to-x: -0.9rem; --to-y: -1.5rem; --size: 0.8rem; --turn: -65deg; --wait: 0ms; }
+[data-sparks='leaves'] .spark:nth-child(2) { --at-x: 30%; --at-y: 0%; --to-x: -0.2rem; --to-y: -1.9rem; --size: 0.65rem; --turn: 35deg; --wait: 90ms; }
+[data-sparks='leaves'] .spark:nth-child(3) { --at-x: 50%; --at-y: 0%; --to-x: 0.35rem; --to-y: -1.6rem; --size: 0.75rem; --turn: -20deg; --wait: 40ms; }
+[data-sparks='leaves'] .spark:nth-child(4) { --at-x: 68%; --at-y: 0%; --to-x: -0.15rem; --to-y: -2rem; --size: 0.6rem; --turn: 55deg; --wait: 130ms; }
+[data-sparks='leaves'] .spark:nth-child(5) { --at-x: 88%; --at-y: 10%; --to-x: 0.9rem; --to-y: -1.45rem; --size: 0.85rem; --turn: 70deg; --wait: 60ms; }
+[data-sparks='leaves'] .spark:nth-child(6) { --at-x: 97%; --at-y: 55%; --to-x: 1rem; --to-y: -0.35rem; --size: 0.55rem; --turn: 40deg; --wait: 160ms; }
+[data-sparks='leaves'] .spark:nth-child(7) { --at-x: 3%; --at-y: 55%; --to-x: -1rem; --to-y: -0.3rem; --size: 0.55rem; --turn: -40deg; --wait: 110ms; }
+
+@keyframes spark-bloom {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 0.2;
+    rotate: 0deg;
+  }
+  35% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: var(--to-x) var(--to-y);
+    scale: 0.75;
+    rotate: var(--turn);
+  }
+}
+
+@keyframes spark-ray {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 1 0.1;
+  }
+  40% {
+    opacity: 1;
+    scale: 1 1;
+  }
+  100% {
+    opacity: 0;
+    translate: var(--to-x) var(--to-y);
+    scale: 1 0.5;
+  }
+}
+
+/* Leaves sway a little on the way up. */
+@keyframes spark-drift {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 0.4;
+    rotate: 0deg;
+  }
+  30% {
+    opacity: 1;
+    scale: 1;
+  }
+  65% {
+    translate: calc(var(--to-x) * 0.4 + 0.2rem) calc(var(--to-y) * 0.65);
+  }
+  100% {
+    opacity: 0;
+    translate: var(--to-x) var(--to-y);
+    scale: 0.85;
+    rotate: var(--turn);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .button-pop:is(:hover, :focus-visible):not(:disabled) {
+    translate: 0 var(--button-lift);
+    scale: var(--button-grow);
+    rotate: var(--button-tilt);
+  }
+
+  .button-pop[data-still]:is(:hover, :focus-visible):not(:disabled) {
+    scale: var(--button-grow-wide);
+    rotate: 0deg;
+  }
+
+  [data-sparks='burst'] .button-pop:is(:hover, :focus-visible):not(:disabled) .spark {
+    animation: spark-bloom var(--duration-spark) var(--ease-soft) var(--wait) both;
+  }
+
+  [data-sparks='rays'] .button-pop:is(:hover, :focus-visible):not(:disabled) .spark {
+    animation: spark-ray var(--duration-spark) var(--ease-soft) var(--wait) both;
+  }
+
+  [data-sparks='leaves'] .button-pop:is(:hover, :focus-visible):not(:disabled) .spark {
+    animation: spark-drift var(--duration-spark-drift) var(--ease-soft) var(--wait) both;
+  }
+}
+
+/* A gentle press, on every screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .button-pop:active:not(:disabled) {
+    translate: 0 0;
+    scale: 0.97;
+    rotate: 0deg;
+  }
+}

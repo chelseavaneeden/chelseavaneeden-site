@@ -4,6 +4,7 @@
 // Tap-to-choose questions, name and email, extra fields, an optional required tick box, a hidden
 // spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
 // opens WhatsApp directly.
+import Button from '../ui/Button.astro';
 import Heading from '../ui/Heading.astro';
 import Text from '../ui/Text.astro';
 import WhatsAppLink from '../ui/WhatsAppLink.astro';
@@ -44,7 +45,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
           <legend class="type-label mb-2.5 text-ink">{q.label}</legend>
           <div class="flex flex-wrap gap-2">
             {q.options.map((option) => (
-              <label class="type-body-s cursor-pointer rounded-pill border border-line bg-surface-raised px-4 py-2 text-ink transition-colors hover:border-ink has-checked:border-ink has-checked:bg-ink has-checked:text-surface has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+              <label class="type-body-s cursor-pointer rounded-pill border border-line bg-surface-raised px-4 py-2 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
                 <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
                 {option}
               </label>
@@ -118,13 +119,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
     {enquiry.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={enquiry.turnstileSiteKey} data-size="flexible" data-theme="light" />}
 
     <div class="flex flex-col gap-3 pt-1">
-      <button
-        type="submit"
-        disabled
-        class="type-button w-full rounded-pill bg-cta px-7 py-4 text-cta-ink transition duration-(--duration-base) ease-soft hover:bg-cta-hover hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-cta disabled:hover:shadow-none"
-      >
-        {form.button}
-      </button>
+      <Button type="submit" size="l" full still disabled>{form.button}</Button>
       <p class="type-caption text-center text-ink-muted" data-enquiry-status role="status" aria-live="polite">
         {enquiry.replyPromise}
         {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
@@ -159,7 +154,9 @@ const id = (name: string) => `${idPrefix}-${name}`;
     const error = form.querySelector<HTMLElement>('[data-enquiry-error]');
     const done = wrap?.querySelector<HTMLElement>('[data-enquiry-done]');
     if (!send || !error || !done) return;
-    const label = send.textContent;
+    const sendLabel = send.querySelector<HTMLElement>('[data-button-label]');
+    if (!sendLabel) return;
+    const label = sendLabel.textContent;
 
     const update = () => {
       send.disabled = !form.checkValidity();
@@ -182,7 +179,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
       });
 
       send.disabled = true;
-      send.textContent = 'Sending…';
+      sendLabel.textContent = 'Sending…';
       error.classList.add('hidden');
       try {
         const response = await fetch('/api/enquire', {
@@ -208,7 +205,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
         error.classList.remove('hidden');
         (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);
       } finally {
-        send.textContent = label;
+        sendLabel.textContent = label;
         update();
       }
     });

@@ -530,6 +530,17 @@ content:
             fields:
               - { name: label, label: Menu text, type: string, required: true }
               - { name: href, label: Link, type: string, required: true }
+      - name: buttonSparkle
+        label: Button sparkle
+        type: select
+        default: burst
+        description: 'The small marks that bloom around a button when you hover over it.'
+        options:
+          values:
+            - { value: burst, label: Little sunbursts }
+            - { value: rays, label: Sun rays }
+            - { value: leaves, label: Drifting leaves }
+            - { value: none, label: None }
       - name: availability
         label: Availability badge
         type: object

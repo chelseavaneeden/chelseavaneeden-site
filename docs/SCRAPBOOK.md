@@ -97,6 +97,10 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 - **About**: "Hi, I'm Chelsea." is one forest green line stretched across the page (`type-display-stretch`),
   above the words and photos. Each page's "Section colour"
   is Soft oat (default) or Soft mustard; both pages use oat.
+- **Button hover**: main and outlined buttons lift, grow 4% and tilt 1.5° on a soft spring, and small marks bloom
+  around them once (Site settings → Button sparkle: little sunbursts, sun rays, drifting leaves or none). The
+  form's send button pops without the tilt (`still`) and only reacts once the form is complete. Phones get a
+  gentle press, and reduced motion keeps just the colour change. Styles at the end of `global.css`.
 - **Footer**: two rows of links, Book your intro pack and Ask a question (the form pop-up), then WhatsApp and
   Instagram (both open a new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.
   No links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
