@@ -145,6 +145,10 @@
   /* Contour lines in a corner (Topography): fine amber lines that fade out away from the corner. */
   --contour-line: rgb(201 128 47 / 0.38);
   --topography-fade: radial-gradient(circle at 50% 50%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0.8) 35%, rgb(0 0 0 / 0) 68%);
+  /* SAMPLE: the hand-drawn topography behind the header's button, in the same faded amber. */
+  --topography-drawing: url('/media/topography-drawing.png');
+  --topography-drawing-line: rgb(201 128 47 / 0.3);
+  --topography-drawing-fade: radial-gradient(75% 80% at 42% 50%, rgb(0 0 0 / 1) 25%, rgb(0 0 0 / 0.75) 55%, rgb(0 0 0 / 0) 100%);
 }
 
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */

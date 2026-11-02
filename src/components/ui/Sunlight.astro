@@ -26,7 +26,7 @@ const { variant = 'sunrise', class: className } = Astro.props;
   {variant === 'dusk' && <div class="sunlight-plaster absolute inset-0" />}
   {variant === 'meadow' && <LeafShadow placement="hero" />}
   {variant === 'dusk' && <LeafShadow placement="panel" />}
-  <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />
+  {variant === 'sunrise' ? <div class="sunlight-drawing absolute"><div class="sunlight-drawing-art h-full w-full" data-ambient></div></div> : <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />}
 </div>
 
 <style>
@@ -65,6 +65,32 @@ const { variant = 'sunrise', class: className } = Astro.props;
     background-size: var(--plaster-size);
     opacity: var(--plaster-opacity);
     mix-blend-mode: soft-light;
+  }
+
+  /* SAMPLE: a friend's hand-drawn topography, in the same faded amber as the contour lines. */
+  .sunlight-drawing {
+    left: -1%;
+    bottom: -7%;
+    width: clamp(21rem, 35vw, 34rem);
+    aspect-ratio: 1268 / 966;
+    -webkit-mask-image: var(--topography-drawing-fade);
+    mask-image: var(--topography-drawing-fade);
+  }
+
+  /* On phones and tablets the video fills the bottom of the header, so the drawing sits higher, behind
+     the button. */
+  @media (max-width: 1023px) {
+    .sunlight-drawing {
+      top: 22rem;
+      bottom: auto;
+    }
+  }
+
+  .sunlight-drawing-art {
+    background-color: var(--topography-drawing-line);
+    -webkit-mask: var(--topography-drawing) center / contain no-repeat;
+    mask: var(--topography-drawing) center / contain no-repeat;
+    animation: contour-breathe var(--duration-contour) var(--ease-in-out-soft) infinite;
   }
 
   /* Woven linen, like a cloth laid out in the sun. */
