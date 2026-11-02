@@ -136,7 +136,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; turn off Adaptive Pricing
    (so checkout stays in euros); tidy the intro subtitle ("1 or 2 private sessions weekly…" describes the
    monthly plans); make a second pricing table with the monthly plans and paste its ID in Site settings;
-   deactivate the old €300 intro Payment Link. On that table set the button colour to Wild Honey `#E2B866` and the background to the page's linen `#F4EEE3` (it still has the old `#F1EF83` and `#FAF4E9`), and remove the Intro Package description, which now sits under the page heading.
+   deactivate the old €300 intro Payment Link. On that table set the button colour to Wild Honey `#E2B866` and the background to the page's linen `#F4EEE3` (it still has the old `#F1EF83` and `#FAF4E9`), remove the Intro Package description, which now sits under the page heading, and change "A recurring appointment" in its feature list to "A regular appointment", since the pack is one payment.
 2. **Booking link** for clients to pick times: Site settings → Welcome page.
 3. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the preview address,
    later the real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.
@@ -153,6 +153,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 ## Open decisions (ask Chelsea)
 
 1. **Rollover**: the terms (clause 2.3) say one unused session rolls over; the FAQ says up to 2.
+   Also, clause 2.2 says packages are billed monthly and last one calendar month, but the intro pack is one
+   payment, valid for 2 months (confirmed by Chelsea, 2 Nov): add a line for it.
 2. **Draft copy to approve**: home intro line, two new "Perfect for" ticks (pregnancy, stress), the About
    rewrite and its one personal line, How it works, the whole organiser page, the forms, Privacy.
 3. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 48 hours.
