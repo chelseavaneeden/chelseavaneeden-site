@@ -30,18 +30,18 @@ introPack:
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
 monthlyPlans:
   title: Continue with *me*
-  intro: For clients continuing after their intro pack. Choose 1 or 2 private sessions a week, at a regular time that suits you.
+  intro: For clients continuing after their intro session. Choose 1 or 2 private sessions a week, at a regular time that suits you.
   # Add the ID of a second pricing table with the monthly plans.
   stripePricingTableId:
   noTableText: To continue, message me and I'll set up your monthly plan.
 welcome:
   title: Thank you, *let's begin*
-  intro: Your intro pack is booked. Two quick steps and we're ready for your first session.
-  bookingTitle: 1. Pick your session times
-  bookingText: Choose times that suit your week. Use your 4 sessions within 2 months.
+  intro: Your intro session is booked. Two quick steps and we're ready for your first session.
+  bookingTitle: 1. Pick your session time
+  bookingText: Choose a time that suits your week.
   bookingHref:
-  bookingLabel: Choose your times
-  bookingFallback: I'll email you within one working day to arrange your times.
+  bookingLabel: Choose your time
+  bookingFallback: I'll email you within one working day to arrange your time.
   intakeTitle: 2. Tell me about you
   intakeText: A few questions so I can plan your first session around your body.
 contact:
@@ -59,13 +59,13 @@ enquiry:
   forms:
     question:
       title: Ask me a *question*
-      intro: Not sure the intro pack is right for you? Ask me anything.
+      intro: Not sure the intro session is right for you? Ask me anything.
       fields:
         - name: message
           label: Your question
           type: textarea
           required: true
-          placeholder: e.g. I have lower back pain. Is the intro pack right for me?
+          placeholder: e.g. I have lower back pain. Is the intro session right for me?
       button: Send my question
     proposal:
       title: Request a *proposal*

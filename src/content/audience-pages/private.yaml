@@ -2,7 +2,7 @@ title: Private sessions
 audience: private
 seo:
   title: Private online Pilates · Chelsea van Eeden
-  description: One-to-one Pilates with a BASI-certified specialist, live online wherever you are. Rehab, chronic pain, pre & post-natal and posture. Start with an intro pack.
+  description: One-to-one Pilates with a BASI-certified specialist, live online wherever you are. Rehab, chronic pain, pre & post-natal and posture. Start with an intro session.
 hero:
   eyebrow: Private sessions · Online, worldwide
   title: One-to-one Pilates, *built around you*
@@ -49,7 +49,7 @@ steps:
     - title: Your plan
       text: I build a programme around your body, your goals and your schedule.
     - title: Keep going
-      text: Continue weekly or twice weekly. Start within 14 days of your intro pack and save €40 on your first month.
+      text: Continue weekly or twice weekly. Start within 14 days of your intro session and save €40 on your first month.
 investment:
   eyebrow: My services
   title: How we work *together*
@@ -70,14 +70,14 @@ faq:
       answer: Yes, with the right adaptations. I’ve taught clients throughout their pregnancy and post-natal recovery. Please check with your midwife or doctor before you start.
     - question: Can I cancel or reschedule?
       answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
-    - question: What happens after my intro pack?
+    - question: What happens after my intro session?
       answer: You can start a monthly package and choose between weekly or twice weekly sessions, from €260 a month.
   link:
     label: Ask me a question
     href: /enquire
 ctaBand:
   title: Ready when *you* are
-  text: Start with an intro pack, or send me a question first. I reply personally within two working days.
+  text: Start with an intro session, or send me a question first. I reply personally within two working days.
   primary:
     label: Book your Session
     href: '#investment'

@@ -1,19 +1,19 @@
-title: Intro pack
+title: Intro session
 showTitle: false
 audience: private
 image: ../../assets/media/mat-detail.jpg
 imageAlt: A client kneeling on a mat, folding forward into a stretch
 imageFocus: top-left
 priceDisplay: exact
-price: 260
+price: 55
 currency: EUR
-unit: pack
+unit: session
 priceVisibility: web
 includes:
-  - 4 x Live 1-to-1 Sessions, online
-  - Improve your energy and mental health
-  - Rebuild strength after injury or surgery
-  - Ease chronic back pain and improve your mobility
+  - 1-on-1 Pilates Session, Online
+  - Assess your movement, pain points and goals
+  - We create a plan around your goals and work schedule
+  - Experience my teaching, before committing
   - Suitable for beginners, Mat or Reformer
 cta:
   label: SHALL WE BEGIN?

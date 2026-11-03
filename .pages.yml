@@ -104,18 +104,18 @@ content:
               - { name: name, label: Company name, type: string, required: true, description: 'Read out by screen readers.' }
               - { name: image, label: Logo file, type: image, required: true }
       - name: investment
-        label: Intro pack section
+        label: Intro session section
         type: object
-        description: The intro pack card itself is edited under "Offers & prices".
+        description: The intro session card itself is edited under "Offers & prices".
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
-          - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro pack. Leave empty to hide.' }
+          - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro session. Leave empty to hide.' }
       - name: steps
         label: How it works
         type: object
-        description: 'Numbered steps under the intro pack. Leave the list empty to hide this section.'
+        description: 'Numbered steps under the intro session. Leave the list empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
@@ -553,10 +553,10 @@ content:
         type: object
         fields:
           - { name: label, label: Button text, type: string, required: true }
-          - { name: href, label: Link, type: string, required: true, description: '/intro-pack is the intro pack page.' }
+          - { name: href, label: Link, type: string, required: true, description: '/intro-pack is the intro session page.' }
       - { name: stripePublishableKey, label: Stripe publishable key, type: string, required: true, description: 'Starts with pk_. Never paste a secret key (sk_).' }
       - name: introPack
-        label: Intro pack page (/intro-pack)
+        label: Intro session page (/intro-pack)
         type: object
         description: 'Where every "Book your Session" button leads: a few lines, then your intro-only Stripe pricing table.'
         fields:

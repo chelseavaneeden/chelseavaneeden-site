@@ -1,5 +1,5 @@
 ---
-// Thank-you page after paying for the intro pack. Stripe sends people here (set on the pricing table
+// Thank-you page after paying for the intro session. Stripe sends people here (set on the pricing table
 // in Stripe: "after payment, redirect to your website"). Hidden from search engines.
 // Step 1: pick session times from the booking link. Step 2: the intake form.
 // Words and the booking link: Site settings → Welcome page.
@@ -19,7 +19,7 @@ const site = await getSite();
 const w = site.welcome;
 ---
 
-<Base title="Welcome · Chelsea van Eeden" description="Your intro pack is booked: pick your times and tell me about you." noindex pageEvent="intro_purchase">
+<Base title="Welcome · Chelsea van Eeden" description="Your intro session is booked: pick your time and tell me about you." noindex pageEvent="intro_purchase">
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="m">

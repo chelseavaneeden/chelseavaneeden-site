@@ -1,6 +1,6 @@
 seo:
   title: Chelsea van Eeden · Specialist online Pilates
-  description: Specialised 1-to-1 Pilates sessions online with a BASI Comprehensive instructor. For pain, injury, pregnancy, posture and stress. Start with an intro pack.
+  description: Specialised 1-to-1 Pilates sessions online with a BASI Comprehensive instructor. For pain, injury, pregnancy, posture and stress. Start with an intro session.
 hero:
   title: Mat & Reformer Pilates, ==online==
   lede: |-
@@ -29,8 +29,8 @@ perfectFor:
     - Have a busy schedule and need accountability/consistency
     - Want Online Reformer Pilates Classes
 investment:
-  title: Start with your *intro pack*
-  note: After your intro pack, continue with a monthly package, from €260 a month.
+  title: Start with your *intro session*
+  note: After your intro session, continue with a monthly package, from €260 a month.
 about:
   title: Hi, I’m *Chelsea*
   paragraphs:
@@ -57,7 +57,7 @@ logos:
       image: ../../assets/media/logos/elf.png
 ctaBand:
   title: Ready when *you* are
-  text: Start your intro pack, to feel the benefits of movement for your mental health.
+  text: Start your intro session, to feel the benefits of movement for your mental health.
   primary:
     label: Book your Session
     href: /intro-pack

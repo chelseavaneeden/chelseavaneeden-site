@@ -29,7 +29,7 @@ Two audiences, two pages, so neither reads the other's offer:
 
 - **`/` is for 1-on-1 clients only.** One action: Book your Session.
 - **`/retreats-events` is for organisers, teams and brands.** One action: Request a proposal. This is
-  the link for outreach emails. Its header button is its own (Request a proposal), not the intro pack.
+  the link for outreach emails. Its header button is its own (Request a proposal), not the intro session.
 
 ### Home page (1-on-1)
 
@@ -37,7 +37,7 @@ Two audiences, two pages, so neither reads the other's offer:
 |---|---|---|
 | 1 | Top: availability badge, headline, intro, **Book your Session**, "Questions first? Ask me", trust line (Google rating when set, BASI, YouTube), teaching video | Home page → Top of the page (`home.yaml` → `hero`); trust line: Site settings → Trust line |
 | 2 | You're in the right place *if you*… | Home page → You're in the right place if you… |
-| 3 | Start with your *intro pack*: one card (€260, 4 sessions, button: SHALL WE BEGIN?) and a line on the ongoing price | Home page → Intro pack section; the card: Offers & prices → Intro pack |
+| 3 | Start with your *intro session*: one card (one session, €55, button: SHALL WE BEGIN?) and a line on the ongoing price | Home page → Intro session section; the card: Offers & prices → Intro session |
 | 4 | How it *works*: four steps | Home page → How it works |
 | 5 | What clients *notice* (with Google rating when set) and All reviews on Google | Heading: Service pages → Private sessions → Testimonials heading. Quotes: Testimonials |
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
@@ -52,13 +52,13 @@ Menu: Reviews · About · FAQ · Retreats & events, plus the Book button. `/priv
 Uses `AudiencePage` with `src/content/audience-pages/hospitality.yaml`: top of the page (portrait for now;
 swap for a group or outdoor photo), who I work with, how it works, questions, and the proposal form.
 
-### The intro pack path
+### The intro session path
 
-**Open (3 Nov):** the Stripe table now shows a single **Intro Session at €55**, while the home card, its note and
-`/welcome` still describe the 4-session pack at €260. Waiting on Chelsea to say which is right.
+Since 3 Nov the first step is a single **Intro Session at €55**. Chelsea changed the Stripe table and asked for the
+site to match; it replaces the 4-session pack at €260. The page's address is still `/intro-pack`.
 
 1. Every **Book your Session** goes to **`/intro-pack`**: the **intro-only** Stripe table, then three short steps in a row (stacked on phones).
-   Words and table ID: Site settings → Intro pack page.
+   Words and table ID: Site settings → Intro session page.
 2. After paying, Stripe should send people to **`/welcome`** (set in Stripe on the pricing table). It shows
    the booking link (Site settings → Welcome page → booking link; a fallback line until it's set) and the intake form.
 3. **`/monthly-plans`** is for existing clients only: noindex, linked from nowhere. It needs a **second**
@@ -138,9 +138,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 ## Chelsea's to-do list (needed before launch)
 
 1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; turn off Adaptive Pricing
-   (so checkout stays in euros); tidy the intro subtitle ("1 or 2 private sessions weekly…" describes the
-   monthly plans); make a second pricing table with the monthly plans and paste its ID in Site settings;
-   deactivate the old €300 intro Payment Link. On that table set the button colour to Wild Honey `#E2B866` and the background to the page's linen `#F4EEE3` (it still has the old `#F1EF83` and `#FAF4E9`), remove the Intro Package description, which now sits under the page heading, and change "A recurring appointment" in its feature list to "A regular appointment", since the pack is one payment.
+   (so checkout stays in euros); fix two typos in the intro list ("Asses", "around to your goals"); make a second pricing table with the monthly plans and paste its ID in Site settings;
+   deactivate the old €300 intro Payment Link.
 2. **Booking link** for clients to pick times: Site settings → Welcome page.
 3. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the preview address,
    later the real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.
@@ -157,8 +156,8 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 ## Open decisions (ask Chelsea)
 
 1. **Rollover**: the terms (clause 2.3) say one unused session rolls over; the FAQ says up to 2.
-   Also, clause 2.2 says packages are billed monthly and last one calendar month, but the intro pack is one
-   payment, valid for 2 months (confirmed by Chelsea, 2 Nov): add a line for it.
+   Also, clause 2.2 says packages are billed monthly and last one calendar month, which does not describe the
+   single intro session (one payment): add a line for it.
 2. **Draft copy to approve**: home intro line, two new "Perfect for" ticks (pregnancy, stress), the About
    rewrite and its one personal line, How it works, the whole organiser page, the forms, Privacy.
 3. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 48 hours.

@@ -99,7 +99,7 @@ const settings = defineCollection({
       }),
     /** Stripe's publishable key (starts with pk_). It is designed to be public; never paste a secret key here. */
     stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
-    /** The intro pack page (/intro-pack): every "Book your Session" button leads here. */
+    /** The intro session page (/intro-pack): every "Book your Session" button leads here. */
     introPack: z.object({
       eyebrow: optionalText,
       title: z.string(),
@@ -110,7 +110,7 @@ const settings = defineCollection({
       stripePricingTableId: z.string().startsWith('prctbl_', 'Paste the pricing table ID, starting with prctbl_.'),
     }),
     /**
-     * The monthly plans page (/monthly-plans) for clients continuing after their intro pack.
+     * The monthly plans page (/monthly-plans) for clients continuing after their intro session.
      * It is linked from nowhere on the site: send the link to clients yourself.
      */
     monthlyPlans: z.object({
@@ -121,7 +121,7 @@ const settings = defineCollection({
       stripePricingTableId: z.preprocess(blankToUndefined, z.string().startsWith('prctbl_').optional()),
       noTableText: z.string(),
     }),
-    /** The thank-you page Stripe sends people to after they pay for the intro pack (/welcome). */
+    /** The thank-you page Stripe sends people to after they pay for the intro session (/welcome). */
     welcome: z.object({
       title: z.string(),
       intro: optionalText,
@@ -215,7 +215,7 @@ const pages = defineCollection({
       }),
       /** Logo banner under "Meet Chelsea": places she trained or worked with. Empty list hides it. */
       logos: optionalSection({ label: optionalText, items: list(z.object({ name: z.string(), image: image() })) }),
-      /** The intro pack section: heading above the offer card, note under it (e.g. the ongoing price). */
+      /** The intro session section: heading above the offer card, note under it (e.g. the ongoing price). */
       investment: z.object({
         eyebrow: optionalText,
         title: z.string(),
