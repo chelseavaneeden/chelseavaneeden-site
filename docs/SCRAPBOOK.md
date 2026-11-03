@@ -43,7 +43,7 @@ Two audiences, two pages, so neither reads the other's offer:
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
 | 7 | What you can expect *from me* (home page only) | Home page → What you can expect from me |
 | 8 | Good to *know* (questions) | Service pages → Private sessions → Questions |
-| 9 | Closing band on a sand wall in morning light: Book your Session / Ask a question | Home page → Closing band |
+| 9 | Closing band on the page's colour with the header's sunrise glow: Book your Session / Ask a question | Home page → Closing band |
 
 Menu: Reviews · About · FAQ · Retreats & events, plus the Book button. `/private-sessions` redirects to `/`.
 

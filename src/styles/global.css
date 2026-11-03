@@ -108,7 +108,7 @@
     background-image: var(--band-wash);
   }
 
-  /* The closing band's sand wall (light and leaf shadows are added by WallLight). */
+  /* A sand wall (light and leaf shadows are added by WallLight). */
   [data-tone='wall'] {
     background-image: var(--wall-base);
   }

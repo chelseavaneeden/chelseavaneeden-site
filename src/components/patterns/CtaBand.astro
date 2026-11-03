@@ -3,8 +3,8 @@ import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Heading from '../ui/Heading.astro';
 import Section from '../ui/Section.astro';
+import Sunlight from '../ui/Sunlight.astro';
 import Text from '../ui/Text.astro';
-import WallLight from '../ui/WallLight.astro';
 
 interface Link {
   label: string;
@@ -21,10 +21,10 @@ interface Props {
 const { title, text, primary, secondary } = Astro.props;
 ---
 
-<!-- A sand wall in morning light that floats on the page (rather than a full-width block). -->
+<!-- The page's own colour with the header's sunrise glow, floating on the page (rather than a full-width block). -->
 <Section space="s" width="wide">
-  <Card variant="wall" padding="none" class="px-(--gutter) py-(--space-section-m)">
-    <WallLight />
+  <Card variant="sunrise" padding="none" class="px-(--gutter) py-(--space-section-m)">
+    <Sunlight variant="sunrise" contours={false} />
     <div data-reveal class="mx-auto grid w-full max-w-content grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
       <Heading variant="display-l" text={title} class="lg:col-span-7" />
       <div class="flex flex-col gap-6 lg:col-span-5">
