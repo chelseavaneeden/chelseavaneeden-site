@@ -151,6 +151,9 @@ glows, dark bands or tilting on hover.
 3. **Draft copy to approve**: the About rewrite, How it works, the whole organiser page, the forms, Privacy.
 4. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 48 hours.
 5. **Credentials**: "5+ years" vs 6; permission for the logos in the banner.
+   The BASI logo is their official artwork with the Graduate badge traced from Chelsea's old PNG (BASI may have its own
+   Graduate file). Insight Timer is their official SVG. Datchet and Elf are tracings of her old PNGs: an official file for
+   Elf needs its website, and the Datchet logo says "Osteopath" while the clinic's site says "Osteopathic".
 6. **Web address**: the payment page is still `/intro-pack`.
 
 ## At launch (only on Chelsea's go-ahead)

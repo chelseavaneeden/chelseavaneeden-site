@@ -56,13 +56,13 @@ expect:
 logos:
   items:
     - name: BASI Pilates Graduate
-      image: ../../assets/media/logos/basi-pilates-graduate.png
+      image: ../../assets/media/logos/basi-pilates-graduate.svg
     - name: Insight Timer
-      image: ../../assets/media/logos/insight-timer.png
+      image: ../../assets/media/logos/insight-timer.svg
     - name: Datchet Osteopath Clinic
-      image: ../../assets/media/logos/datchet-osteopath-clinic.png
+      image: ../../assets/media/logos/datchet-osteopath-clinic.svg
     - name: Elf
-      image: ../../assets/media/logos/elf.png
+      image: ../../assets/media/logos/elf.svg
 faq:
   title: Good to *know*
   items:
