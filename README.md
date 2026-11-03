@@ -5,8 +5,8 @@ Chelsea van Eeden's website, built with Astro and hosted on Cloudflare. There is
 **Edit:** https://app.pagescms.org/chelseavaneeden/chelseavaneeden-site/main/file/home
 **See it:** https://chelseavaneeden-site.chelseavaneeden-site.workers.dev/
 
-Each **Save** in the editor goes to GitHub, and Cloudflare publishes it by itself, usually within 2 minutes. If a save isn't
-valid, the site keeps its last good version.
+Each **Save** in the editor goes to GitHub, and Cloudflare publishes it by itself, usually within a few minutes. If a save
+doesn't reach the site, it keeps its last good version and GitHub emails Chelsea.
 
 **The live site is still the Framer site at chelseavaneeden.com.** Nothing here touches that domain until Chelsea decides to
 launch; until then this address stays out of Google.

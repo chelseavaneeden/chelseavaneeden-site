@@ -1,0 +1,63 @@
+# After every save (from the CMS or from code), this checks the change really reached the website.
+# If it hasn't after 20 minutes, it opens an issue assigned to Chelsea, so GitHub emails her and a failed
+# publish can't go unnoticed. (20, not less: Cloudflare's queue can take over 10 on a bad day.)
+# At launch, change SITE_URL to https://www.chelseavaneeden.com.
+name: Check the website updated
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      expected:
+        description: Test only. A version the website won't show, to try the alert.
+        required: false
+
+# A newer save replaces the check for the one before it.
+concurrency:
+  group: check-website-updated
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: https://chelseavaneeden-site.chelseavaneeden-site.workers.dev
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      EXPECTED: ${{ inputs.expected || github.sha }}
+      ATTEMPTS: ${{ inputs.expected && 2 || 80 }}
+    steps:
+      - name: Wait for the website to show this version
+        run: |
+          for attempt in $(seq 1 "$ATTEMPTS"); do
+            live="$(curl -fsS "$SITE_URL/version.txt?check=$attempt" || true)"
+            if [ "$live" = "$EXPECTED" ]; then
+              echo "The website is showing $EXPECTED."
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "The website is showing $live, not $EXPECTED."
+          exit 1
+
+      - name: Tell Chelsea
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --assignee "$GITHUB_REPOSITORY_OWNER" \
+            --title "Your last save hasn't reached the website" \
+            --body "Your last save is stored safely, but the website hasn't updated to show it after 20 minutes, so visitors still see the version before it. Nothing is broken.
+
+          Usually this means something in the save wasn't valid, or Cloudflare is having a problem (https://www.cloudflarestatus.com). To find out, open Claude and say \"my last save didn't publish\".
+
+          The save: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$EXPECTED
+          Cloudflare's reason is under Details there, next to the red cross."
