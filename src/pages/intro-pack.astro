@@ -29,7 +29,7 @@ const intro = site.introPack;
         <div class="w-full">
           <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
         </div>
-        {intro.points.length > 0 && <NumberedList items={intro.points} class="w-full" />}
+        {intro.points.length > 0 && <NumberedList items={intro.points} />}
         <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-ink-muted">
           Questions first?
           <Button href="/enquire" variant="link" event="intro_page">Ask me</Button>

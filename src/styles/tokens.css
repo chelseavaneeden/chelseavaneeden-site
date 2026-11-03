@@ -29,6 +29,7 @@
   --sage-leaf-100: #e7e8d9;
   --sage-leaf-50: #eeeee3;
   --linen-50: #faf6ee;
+  --linen-75: #f8f3ea;
   --linen-100: #f4eee3;
   --linen-200: #e9e2d3; /* Raw Linen */
   --linen-300: #ddd4c1;
@@ -150,7 +151,7 @@
 /* 2. SEMANTIC COLOURS (light tone = default) ----------------------------- */
 :root,
 [data-tone='light'] {
-  --surface: var(--linen-100);
+  --surface: var(--linen-75);
   --surface-alt: var(--linen-200);
   --surface-raised: var(--linen-50);
   /* Coffee Bean for words; emphasised words in headings turn amber. */

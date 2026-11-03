@@ -37,7 +37,7 @@ Two audiences, two pages, so neither reads the other's offer:
 |---|---|---|
 | 1 | Top: availability badge, headline, intro, **Book your Session**, "Questions first? Ask me", trust line (Google rating when set, BASI, YouTube), teaching video | Home page → Top of the page (`home.yaml` → `hero`); trust line: Site settings → Trust line |
 | 2 | You're in the right place *if you*… | Home page → You're in the right place if you… |
-| 3 | Start with your *intro session*: one card (one session, €55, button: SHALL WE BEGIN?) and a line on the ongoing price | Home page → Intro session section; the card: Offers & prices → Intro session |
+| 3 | Shall we *begin?*: one card (one session, €55, button: Book your Session) and a line on the ongoing price | Home page → Intro session section; the card: Offers & prices → Intro session |
 | 4 | How it *works*: four steps | Home page → How it works |
 | 5 | What clients *notice* (with Google rating when set) and All reviews on Google | Heading: Service pages → Private sessions → Testimonials heading. Quotes: Testimonials |
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
@@ -57,7 +57,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 Since 3 Nov the first step is a single **Intro Session at €55**. Chelsea changed the Stripe table and asked for the
 site to match; it replaces the 4-session pack at €260. The page's address is still `/intro-pack`.
 
-1. Every **Book your Session** goes to **`/intro-pack`**: the **intro-only** Stripe table, then three short steps in a row (stacked on phones).
+1. Every **Book your Session** goes to **`/intro-pack`**: the **intro-only** Stripe table, then three short numbered steps.
    Words and table ID: Site settings → Intro session page.
 2. After paying, Stripe should send people to **`/welcome`** (set in Stripe on the pricing table). It shows
    the booking link (Site settings → Welcome page → booking link; a fallback line until it's set) and the intake form.
@@ -137,7 +137,7 @@ site to match; it replaces the 4-session pack at €260. The page's address is s
 
 ## Chelsea's to-do list (needed before launch)
 
-1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; turn off Adaptive Pricing
+1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; set its background to the page colour `#F8F3EA` (the page was lightened on 3 Nov; the table is still `#F4EEE3`, so it shows as a box); turn off Adaptive Pricing
    (so checkout stays in euros); make a second pricing table with the monthly plans and paste its ID in Site settings;
    deactivate the old €300 intro Payment Link.
 2. **Booking link** for clients to pick times: Site settings → Welcome page.

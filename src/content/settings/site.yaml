@@ -22,7 +22,7 @@ availability:
 # From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
-  title: Book your *Session*
+  title: Book your Session
   points:
     - Pay securely online
     - Choose a time from my calendar

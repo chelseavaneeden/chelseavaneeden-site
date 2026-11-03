@@ -1,6 +1,5 @@
 ---
-// A short numbered row of one-line steps, e.g. what happens after paying. The steps sit side by side
-// from tablets up and stack on phones, where three columns would be too narrow to read.
+// A short numbered list of one-line steps, e.g. what happens after paying.
 interface Props {
   items: string[];
   class?: string;
@@ -9,7 +8,7 @@ interface Props {
 const { items, class: className } = Astro.props;
 ---
 
-<ol class:list={['grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-8', className]}>
+<ol class:list={['flex flex-col gap-3', className]}>
   {
     items.map((item, i) => (
       <li class="flex items-center gap-4">
