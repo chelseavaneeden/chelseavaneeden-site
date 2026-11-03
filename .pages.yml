@@ -66,7 +66,7 @@ content:
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
       - name: perfectFor
-        label: Perfect for those who…
+        label: You're in the right place if you…
         type: object
         description: 'Ticked list under the top of the page. Leave the list empty to hide this section.'
         fields:
@@ -82,6 +82,14 @@ content:
           - { name: paragraphs, label: Paragraphs, type: text, list: true }
           - { name: image, label: Photo, type: image, required: true }
           - { name: imageAlt, label: Photo description, type: string, required: true }
+      - name: expect
+        label: What you can expect from me
+        type: object
+        description: 'List under Meet Chelsea on the home page. Leave the list empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
+          - { name: items, label: Points, type: string, list: true }
       - name: logos
         label: Logo banner
         type: object
@@ -541,7 +549,7 @@ content:
           - { name: href, label: Link when open, type: string, default: /intro-pack }
           - { name: closedHref, label: Link when fully booked, type: string, default: /enquire }
       - name: bookCta
-        label: Book button (menu and every "Book your intro pack")
+        label: Book button (menu and every "Book your Session")
         type: object
         fields:
           - { name: label, label: Button text, type: string, required: true }
@@ -550,7 +558,7 @@ content:
       - name: introPack
         label: Intro pack page (/intro-pack)
         type: object
-        description: 'Where every "Book your intro pack" button leads: a few lines, then your intro-only Stripe pricing table.'
+        description: 'Where every "Book your Session" button leads: a few lines, then your intro-only Stripe pricing table.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }

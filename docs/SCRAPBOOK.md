@@ -27,7 +27,7 @@ Never merge into `main`, and never add routes or custom domains, until Chelsea s
 
 Two audiences, two pages, so neither reads the other's offer:
 
-- **`/` is for 1-on-1 clients only.** One action: Book your intro pack.
+- **`/` is for 1-on-1 clients only.** One action: Book your Session.
 - **`/retreats-events` is for organisers, teams and brands.** One action: Request a proposal. This is
   the link for outreach emails. Its header button is its own (Request a proposal), not the intro pack.
 
@@ -35,14 +35,15 @@ Two audiences, two pages, so neither reads the other's offer:
 
 | Order | Section | Where the words live (editor → file) |
 |---|---|---|
-| 1 | Top: availability badge, headline, intro, **Book your intro pack**, "Questions first? Ask me", trust line (Google rating when set, BASI, YouTube), teaching video | Home page → Top of the page (`home.yaml` → `hero`); trust line: Site settings → Trust line |
-| 2 | Perfect for *those who*… | Home page → Perfect for those who… |
-| 3 | Start with your *intro pack*: one card (€260, 4 sessions, use within 2 months) and a line on the ongoing price | Home page → Intro pack section; the card: Offers & prices → Intro pack |
+| 1 | Top: availability badge, headline, intro, **Book your Session**, "Questions first? Ask me", trust line (Google rating when set, BASI, YouTube), teaching video | Home page → Top of the page (`home.yaml` → `hero`); trust line: Site settings → Trust line |
+| 2 | You're in the right place *if you*… | Home page → You're in the right place if you… |
+| 3 | Start with your *intro pack*: one card (€260, 4 sessions, button: SHALL WE BEGIN?) and a line on the ongoing price | Home page → Intro pack section; the card: Offers & prices → Intro pack |
 | 4 | How it *works*: four steps | Home page → How it works |
 | 5 | What clients *notice* (with Google rating when set) and All reviews on Google | Heading: Service pages → Private sessions → Testimonials heading. Quotes: Testimonials |
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
-| 7 | Good to *know* (questions) | Service pages → Private sessions → Questions |
-| 8 | Closing band: Book your intro pack / Ask a question | Home page → Closing band |
+| 7 | What you can expect *from me* (home page only) | Home page → What you can expect from me |
+| 8 | Good to *know* (questions) | Service pages → Private sessions → Questions |
+| 9 | Closing band: Book your Session / Ask a question | Home page → Closing band |
 
 Menu: Reviews · About · FAQ · Retreats & events, plus the Book button. `/private-sessions` redirects to `/`.
 
@@ -53,8 +54,11 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 
 ### The intro pack path
 
-1. Every **Book your intro pack** goes to **`/intro-pack`**: three short steps and the **intro-only** Stripe
-   pricing table (Site settings → Intro pack page).
+**Open (3 Nov):** the Stripe table now shows a single **Intro Session at €55**, while the home card, its note and
+`/welcome` still describe the 4-session pack at €260. Waiting on Chelsea to say which is right.
+
+1. Every **Book your Session** goes to **`/intro-pack`**: the **intro-only** Stripe table, then three short steps in a row (stacked on phones).
+   Words and table ID: Site settings → Intro pack page.
 2. After paying, Stripe should send people to **`/welcome`** (set in Stripe on the pricing table). It shows
    the booking link (Site settings → Welcome page → booking link; a fallback line until it's set) and the intake form.
 3. **`/monthly-plans`** is for existing clients only: noindex, linked from nowhere. It needs a **second**
@@ -99,7 +103,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
   is Soft oat (default) or Soft mustard; both pages use oat.
 - **Button hover**: just the colour change and a gentle glow. Chelsea tried a lift and tilt, little icons, a contour
   ripple and a sun glow around buttons (2 Nov) and preferred to stay with this.
-- **Footer**: two rows of links, Book your intro pack and Ask a question (the form pop-up), then WhatsApp and
+- **Footer**: two rows of links, Book your Session and Ask a question (the form pop-up), then WhatsApp and
   Instagram (both open a new tab), then Privacy, Terms, Cancellation policy, Livro de Reclamações and the current year.
   No links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
 - **Line breaks**: pressing Enter in an editor text field starts a new line on the page (e.g. the closing

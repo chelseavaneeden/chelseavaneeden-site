@@ -1,5 +1,5 @@
 ---
-// The intro pack page: every "Book your intro pack" button leads here. It shows only the intro-only
+// The intro pack page: every "Book your Session" button leads here. It shows only the intro-only
 // Stripe pricing table, so a new client has one choice and one Pay button, then what happens next.
 // Words and the table ID: Site settings → Intro pack page. After paying, Stripe sends people to /welcome
 // (set in Stripe on the pricing table).
@@ -18,7 +18,7 @@ const intro = site.introPack;
 ---
 
 <Base
-  title="Book your intro pack · Chelsea van Eeden"
+  title="Book your Session · Chelsea van Eeden"
   description="Four live 1-to-1 Pilates sessions online with Chelsea van Eeden. Pay securely, then pick your times."
 >
   <Header nav={site.nav} cta={site.bookCta} />
@@ -29,7 +29,7 @@ const intro = site.introPack;
         <div class="w-full">
           <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
         </div>
-        {intro.points.length > 0 && <NumberedList items={intro.points} />}
+        {intro.points.length > 0 && <NumberedList items={intro.points} class="w-full" />}
         <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-ink-muted">
           Questions first?
           <Button href="/enquire" variant="link" event="intro_page">Ask me</Button>

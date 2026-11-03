@@ -99,7 +99,7 @@ const settings = defineCollection({
       }),
     /** Stripe's publishable key (starts with pk_). It is designed to be public; never paste a secret key here. */
     stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
-    /** The intro pack page (/intro-pack): every "Book your intro pack" button leads here. */
+    /** The intro pack page (/intro-pack): every "Book your Session" button leads here. */
     introPack: z.object({
       eyebrow: optionalText,
       title: z.string(),
@@ -222,8 +222,10 @@ const pages = defineCollection({
         intro: optionalText,
         note: optionalText,
       }),
-      /** "Perfect for those who…": a ticked list under the top of the page. Empty list hides it. */
+      /** "You're in the right place if you…": a ticked list under the top of the page. Empty list hides it. */
       perfectFor: optionalSection({ ...sectionHead, items: list(z.string()) }),
+      /** "What you can expect from me": a ticked list under "Hi, I'm Chelsea". Empty list hides it. */
+      expect: optionalSection({ ...sectionHead, items: list(z.string()) }),
       /** "How it works": numbered steps. Empty list hides it. */
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** The closing band at the bottom of the page. */
@@ -260,7 +262,7 @@ const audiencePages = defineCollection({
         layout: z.enum(['split', 'overlay']).default('split'),
         textPosition: z.enum(['center', 'left']).default('left'),
       }),
-      /** One-line ticked points, the same look as "Perfect for those who…" on the home page. */
+      /** One-line ticked points, the same look as "You're in the right place if you…" on the home page. */
       whoFor: z.object({ ...sectionHead, items: list(z.string()) }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),
       steps: optionalSection({ ...sectionHead, items: titledItems }),

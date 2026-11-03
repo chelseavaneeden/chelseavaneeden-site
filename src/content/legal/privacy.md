@@ -22,7 +22,7 @@ To ask a question about your information or use any of your rights, send me a me
 
 **During our sessions.** Notes on your progress, your programme and anything you tell me that affects how we work together. Legal basis: performing our agreement and, for health information, your explicit consent.
 
-**When you visit the website.** I use Umami, a privacy-friendly analytics tool, to count visits and clicks on buttons such as "Book your intro pack". It sets no cookies, does not build a profile of you and does not track you across other websites. I only see totals, such as how many people visited a page. Legal basis: my legitimate interest in understanding how the website is used. You can switch it off for this browser below.
+**When you visit the website.** I use Umami, a privacy-friendly analytics tool, to count visits and clicks on buttons such as "Book your Session". It sets no cookies, does not build a profile of you and does not track you across other websites. I only see totals, such as how many people visited a page. Legal basis: my legitimate interest in understanding how the website is used. You can switch it off for this browser below.
 
 **If you message me on WhatsApp.** WhatsApp is run by Meta. Using it is your choice; the website also lets you contact me by email.
 

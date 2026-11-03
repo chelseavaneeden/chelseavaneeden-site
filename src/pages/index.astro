@@ -3,7 +3,7 @@
 // (src/content/pages/home.yaml, offers/, testimonials/ and settings/site.yaml). The testimonials
 // heading and the questions are shared with src/content/audience-pages/private.yaml, so they are
 // edited in one place. Section ids (investment, reviews, about, faq) are the menu links in Site settings.
-// Order: header, who it's for, intro pack, how it works, reviews, Meet Chelsea, questions, closing band.
+// Order: header, who it's for, intro pack, how it works, reviews, Meet Chelsea, what to expect, questions, closing band.
 // Retreats, events and brands have their own page: /retreats-events.
 import Base from '../layouts/Base.astro';
 import AvailabilityBadge from '../components/ui/AvailabilityBadge.astro';
@@ -85,6 +85,14 @@ const testimonials = await getTestimonials('private');
     }
 
     <AboutSection about={page.about} />
+
+    {
+      page.expect && (
+        <Section space="m" class="pt-0">
+          <Checklist {...page.expect} />
+        </Section>
+      )
+    }
 
     {
       page.logos && (

@@ -11,7 +11,7 @@ nav:
       label: Private sessions
       href: /
 bookCta:
-  label: Book your intro pack
+  label: Book your Session
   href: /intro-pack
 availability:
   open: true
@@ -22,13 +22,11 @@ availability:
 # From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
-  title: Book your *intro pack*
-  intro: |-
-    4 Private Sessions, Online (valid: 2 months) to support you in feeling your best on the day!
+  title: Book your *Session*
   points:
-    - Pay securely online.
-    - Pick your session times from my calendar.
-    - Meet me online for your first session and assessment.
+    - Pay securely online
+    - Choose a time from my calendar
+    - Meet me online for your first session
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
 monthlyPlans:
   title: Continue with *me*
@@ -145,7 +143,7 @@ trust:
   items: []
 # Shown two to a row, in this order.
 footerLinks:
-  - label: Book your intro pack
+  - label: Book your Session
     href: /intro-pack
   # /enquire opens the email form as a pop-up, so people stay on the site.
   - label: Ask a question
