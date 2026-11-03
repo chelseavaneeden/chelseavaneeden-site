@@ -13,7 +13,7 @@
  *
  * Direction: "Golden light, deep in the forest". Warm linen with grain, soft honey light and sun rays,
  * sections that melt into each other instead of hard blocks, slow flowing movement.
- * Cormorant Garamond Italic headings, Jost for labels and body.
+ * Libre Baskerville headings (upright, with italic for the amber words), Jost for labels and body.
  */
 
 /* 1. BRAND PALETTE ------------------------------------------------------- */
@@ -238,10 +238,12 @@
   --step-1-5: clamp(1.3rem, 1.14rem + 0.65vw, 1.68rem);
   --step-2: clamp(1.44rem, 1.27rem + 0.8vw, 1.9rem);
   --step-3: clamp(1.73rem, 1.42rem + 1.45vw, 2.6rem);
-  --step-4: clamp(2.07rem, 1.55rem + 2.5vw, 3.6rem);
-  --step-5: clamp(2.49rem, 1.6rem + 4.2vw, 5rem);
+  /* Steps 4 to 6 have higher minimums so that, after --display-scale, titles stay clearly bigger than the
+     intro text on phones. Desktop sizes aren't affected. */
+  --step-4: clamp(2.5rem, 1.55rem + 2.5vw, 3.6rem);
+  --step-5: clamp(3rem, 1.6rem + 4.2vw, 5rem);
   /* Page headlines: about 10% smaller than the original scale (Chelsea, 28 Oct). */
-  --step-6: clamp(2.7rem, 1.45rem + 5.85vw, 6.3rem);
+  --step-6: clamp(3.4rem, 1.45rem + 5.85vw, 6.3rem);
   /* One line that stretches across the page (Hi, I'm Chelsea): grows with the screen, stops at the widest layout. */
   --step-stretch: min(15.8vw, 15.4rem);
 
@@ -285,15 +287,15 @@
   --z-banner: 90;
 
   /* Type families and character */
-  --font-display-family: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-display-family: var(--font-libre-baskerville), Georgia, 'Times New Roman', serif;
   --font-body-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
   --font-label-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
-  /* Cormorant runs small, so headings are drawn a little larger than the steps. */
-  --display-scale: 0.98;
-  --display-weight: 500;
-  --display-style: italic;
-  --display-leading: 1.02;
-  --display-tracking: -0.01em;
+  /* Libre Baskerville has wide letters and tall lowercase, so headings are drawn smaller than the steps. */
+  --display-scale: 0.66;
+  --display-weight: 450;
+  --display-style: normal;
+  --display-leading: 1.16;
+  --display-tracking: -0.012em;
   --display-case: none;
   --heading-weight: 500;
   --eyebrow-weight: 500;

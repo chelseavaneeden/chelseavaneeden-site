@@ -102,7 +102,10 @@ From Chelsea's Forest & Amber mood board: "sunrise in a forest sipping coffee". 
 sections that melt into each other, slow and quiet movement. Never clinical, blocky or digital. No orbs, bubbles, strong
 glows, dark bands or tilting on hover.
 
-- **Fonts:** Cormorant Garamond Italic for headings, Jost for labels and body.
+- **Fonts:** Libre Baskerville at weight 450 for headings, upright with italic only for the amber words, and Jost for
+  labels and body. Chelsea chose it on 3 Nov for legibility: the old Cormorant Garamond Italic had short lowercase letters
+  and an "&" that read like an E. Don't set whole headings in its italic, because that "&" is ornate and harder to read.
+  It's a variable font, so the weight can be changed in `tokens.css` (`--display-weight`, 400 to 700).
 - **Colours:** page Linen `#F8F3EA`, words Coffee Bean `#3B2A1E`, emphasised heading words Amber `#9A5A1C`, buttons Wild
   Honey `#E2B866` (Coffee Bean with Butter words in the header), highlighted words Butter `#EFD9A0`, moss green words on
   tinted sections. All of them live in `src/styles/tokens.css`.

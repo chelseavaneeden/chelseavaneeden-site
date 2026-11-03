@@ -12,8 +12,8 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   fonts: [
-    // Cormorant Garamond Italic for headings, Jost for labels and body.
-    { name: 'Cormorant Garamond', cssVariable: '--font-cormorant', provider: fontProviders.google(), weights: ['400', '500', '600'], styles: ['normal', 'italic'] },
+    // Libre Baskerville for headings, Jost for labels and body.
+    { name: 'Libre Baskerville', cssVariable: '--font-libre-baskerville', provider: fontProviders.google(), weights: ['400 700'], styles: ['normal', 'italic'] },
     { name: 'Jost', cssVariable: '--font-jost', provider: fontProviders.google(), weights: ['300 600'], styles: ['normal', 'italic'] },
   ],
   vite: {
