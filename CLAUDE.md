@@ -20,6 +20,14 @@ This is the rule Chelsea asked for after the CMS and her preview link showed two
 - **New content:** add it to `src/content.config.ts` and `.pages.yml` together. The build stops if they disagree. Wording on the
   site belongs in the CMS, not in a page's code, so she can always change it herself.
 
+## Design skills
+
+General design skills are switched on for this project only, by links in `.claude/skills` to `../skills` (on this Mac, not
+in the public code). They're someone else's general guidance, so they never override this project. When they disagree,
+follow in this order: Chelsea's own words, this file and `docs/SITE.md`, the design system (`src/styles/tokens.css`), then
+the skill. Never let a skill change her fonts, colours, layout or copy unless she asks. Left off on purpose:
+`client-update` (carries another studio's branding), `framer-marketplace` and `design-to-react` (don't apply to this site).
+
 ## Don't touch without her go-ahead
 
 - chelseavaneeden.com, its DNS, or Framer. `wrangler.jsonc` has no routes on purpose.
