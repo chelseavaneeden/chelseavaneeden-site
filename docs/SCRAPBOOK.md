@@ -37,13 +37,13 @@ Two audiences, two pages, so neither reads the other's offer:
 |---|---|---|
 | 1 | Top: availability badge, headline, intro, **Book your Session**, "Questions first? Ask me", trust line (Google rating when set, BASI, YouTube), teaching video | Home page → Top of the page (`home.yaml` → `hero`); trust line: Site settings → Trust line |
 | 2 | You're in the right place *if you*… | Home page → You're in the right place if you… |
-| 3 | Shall we *begin?*: one card (one session, €55, button: Book your Session) and a line on the ongoing price | Home page → Intro session section; the card: Offers & prices → Intro session |
+| 3 | Shall we *begin?*: one card on the page's colour with the header's sunrise glow (one session, €55, button: Book your Session) and a line on the ongoing price | Home page → Intro session section; the card: Offers & prices → Intro session |
 | 4 | How it *works*: four steps | Home page → How it works |
 | 5 | What clients *notice* (with Google rating when set) and All reviews on Google | Heading: Service pages → Private sessions → Testimonials heading. Quotes: Testimonials |
 | 6 | Hi, I'm *Chelsea*: teaching first, polaroids (no sticky note or tape) | Home page → Meet Chelsea |
 | 7 | What you can expect *from me* (home page only) | Home page → What you can expect from me |
 | 8 | Good to *know* (questions) | Service pages → Private sessions → Questions |
-| 9 | Closing band: Book your Session / Ask a question | Home page → Closing band |
+| 9 | Closing band on a sand wall in morning light: Book your Session / Ask a question | Home page → Closing band |
 
 Menu: Reviews · About · FAQ · Retreats & events, plus the Book button. `/private-sessions` redirects to `/`.
 

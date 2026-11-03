@@ -108,7 +108,7 @@
     background-image: var(--band-wash);
   }
 
-  /* The intro card's sand wall (light and leaf shadows are added by WallLight). */
+  /* The closing band's sand wall (light and leaf shadows are added by WallLight). */
   [data-tone='wall'] {
     background-image: var(--wall-base);
   }

@@ -1,5 +1,5 @@
 ---
-export type CardVariant = 'raised' | 'outline' | 'plain' | 'inverse' | 'wall';
+export type CardVariant = 'raised' | 'outline' | 'plain' | 'inverse' | 'wall' | 'sunrise';
 export type CardPadding = 'none' | 's' | 'm' | 'l';
 
 interface Props {
@@ -21,6 +21,8 @@ const variants: Record<CardVariant, string> = {
   inverse: '',
   // A sand wall in morning light; put a <WallLight /> inside for the light and shadows.
   wall: 'relative isolate overflow-hidden shadow-raised',
+  // The page's own colour; put a <Sunlight contours={false} /> inside for the header's sunrise glow.
+  sunrise: 'relative isolate overflow-hidden bg-surface shadow-raised',
 };
 const paddings: Record<CardPadding, string> = { none: '', s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
 ---

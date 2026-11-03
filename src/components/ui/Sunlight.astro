@@ -13,10 +13,12 @@ import Topography from './Topography.astro';
 
 interface Props {
   variant?: 'sunrise' | 'meadow' | 'dusk';
+  /** Leave out the contour lines, e.g. for just the glow inside a card. */
+  contours?: boolean;
   class?: string;
 }
 
-const { variant = 'sunrise', class: className } = Astro.props;
+const { variant = 'sunrise', contours = true, class: className } = Astro.props;
 ---
 
 <div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
@@ -26,7 +28,7 @@ const { variant = 'sunrise', class: className } = Astro.props;
   {variant === 'dusk' && <div class="sunlight-plaster absolute inset-0" />}
   {variant === 'meadow' && <LeafShadow placement="hero" />}
   {variant === 'dusk' && <LeafShadow placement="panel" />}
-  <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />
+  {contours && <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />}
 </div>
 
 <style>
