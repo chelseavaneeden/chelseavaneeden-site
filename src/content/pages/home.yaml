@@ -1,8 +1,10 @@
 seo:
   title: Chelsea van Eeden · Specialist online Pilates
-  description: Specialised 1-to-1 Pilates sessions online with a BASI Comprehensive instructor. For pain, injury, pregnancy, posture and stress. Start with an intro session.
+  description: Specialised 1-to-1 Pilates sessions online with a BASI
+    Comprehensive instructor. For pain, injury, pregnancy, posture and stress.
+    Start with an intro session.
 hero:
-  title: Mat & Reformer Pilates, ==online==
+  title: Mat & Reformer Pilates, ==online test==
   lede: |-
     Specialised 1-to-1 Pilates sessions, personalised to you.
     For busy professionals, new parents and people with chronic pain.
@@ -36,8 +38,12 @@ proof:
 about:
   title: Hi, I’m *Chelsea*
   paragraphs:
-    - My teaching style is calm, caring and collaborative. Blending Pilates and somatic techniques to help you release tension, move better and feel more energised.
-    - As a BASI Comprehensive Pilates Instructor, I continue learning about the connections between stress, movement and chronic pain. Specialising in movement for mental health.
+    - My teaching style is calm, caring and collaborative. Blending Pilates and
+      somatic techniques to help you release tension, move better and feel more
+      energised.
+    - As a BASI Comprehensive Pilates Instructor, I continue learning about the
+      connections between stress, movement and chronic pain. Specialising in
+      movement for mental health.
   image: ../../assets/media/chelsea-portrait.jpg
   imageAlt: Chelsea van Eeden smiling and waving during an online session
 expect:
@@ -61,25 +67,33 @@ faq:
   title: Good to *know*
   items:
     - question: I have an injury or chronic pain. Is this right for me?
-      answer: Often, yes. I guide clients through rehab and chronic pain, and I’m happy to work alongside your physiotherapist, osteopath or doctor.
+      answer: Often, yes. I guide clients through rehab and chronic pain, and I’m
+        happy to work alongside your physiotherapist, osteopath or doctor.
     - question: How long are sessions and how do I book?
-      answer: You can choose between 45 and 55 minutes. Let me know what works best for your schedule.
+      answer: You can choose between 45 and 55 minutes. Let me know what works best
+        for your schedule.
     - question: I’m a beginner, do I need experience?
       answer: No experience needed. Online private sessions are perfect for beginners.
     - question: Do I need a Reformer?
-      answer: No. All you need is a Pilates mat and a laptop/phone with a camera. If you have a Reformer, let me know.
+      answer: No. All you need is a Pilates mat and a laptop/phone with a camera. If
+        you have a Reformer, let me know.
     - question: Is it safe during pregnancy?
-      answer: Yes, with the right adaptations. I’ve taught clients throughout their pregnancy and post-natal recovery. Please check with your midwife or doctor before you start.
+      answer: Yes, with the right adaptations. I’ve taught clients throughout their
+        pregnancy and post-natal recovery. Please check with your midwife or
+        doctor before you start.
     - question: Can I cancel or reschedule?
-      answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
+      answer: Yes, with at least 24 hours’ notice. Late cancellations and missed
+        sessions are charged in full.
     - question: What happens after my intro session?
-      answer: You can start a monthly package and choose between weekly or twice weekly sessions, from €260 a month.
+      answer: You can start a monthly package and choose between weekly or twice
+        weekly sessions, from €260 a month.
   link:
     label: Ask me a question
     href: /enquire
 ctaBand:
   title: Ready when *you* are
-  text: Start your intro session, to feel the benefits of movement for your mental health.
+  text: Start your intro session, to feel the benefits of movement for your mental
+    health.
   primary:
     label: Book your Session
     href: /intro-pack
