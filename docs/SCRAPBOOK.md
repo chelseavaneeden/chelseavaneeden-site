@@ -138,7 +138,7 @@ site to match; it replaces the 4-session pack at €260. The page's address is s
 ## Chelsea's to-do list (needed before launch)
 
 1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; turn off Adaptive Pricing
-   (so checkout stays in euros); fix two typos in the intro list ("Asses", "around to your goals"); make a second pricing table with the monthly plans and paste its ID in Site settings;
+   (so checkout stays in euros); make a second pricing table with the monthly plans and paste its ID in Site settings;
    deactivate the old €300 intro Payment Link.
 2. **Booking link** for clients to pick times: Site settings → Welcome page.
 3. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the preview address,
