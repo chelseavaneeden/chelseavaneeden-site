@@ -10,13 +10,12 @@ interface Props {
   nav: NavItem[];
   /** The button on the right: Book your Session, or the page's own main action. */
   cta: { label: string; href: string };
-  tone?: 'light' | 'dark';
   lang?: Lang;
   /** Section ids on this page (e.g. faq). A menu link to /#faq then jumps to this page's own FAQ. */
   sections?: string[];
 }
 
-const { nav: allNav, cta, tone = 'light', lang = 'en', sections = [] } = Astro.props;
+const { nav: allNav, cta, lang = 'en', sections = [] } = Astro.props;
 const local = (href: string) => {
   const id = /^\/#(.+)$/.exec(href)?.[1];
   return id && sections.includes(id) ? `#${id}` : href;
@@ -35,7 +34,7 @@ const nav = allNav.map((item) => {
 });
 ---
 
-<header data-tone={tone} data-site-header data-cta="header" class="group/header sticky top-0 z-(--z-header) bg-transparent">
+<header data-tone="light" data-site-header data-cta="header" class="group/header sticky top-0 z-(--z-header) bg-transparent">
   <!-- At the top of the page the header floats on the morning light. Once you scroll, frosted linen
        fades in behind it. A separate layer, because a blur on the header itself would trap the phone
        menu (fixed) inside the header's box. -->
@@ -44,7 +43,7 @@ const nav = allNav.map((item) => {
     aria-hidden="true"
   ></span>
   <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
-    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo variant="signature" size="m" label="Chelsea van Eeden" /></a>
+    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo size="m" /></a>
 
     <nav aria-label="Main" data-track="menu" class="hidden items-center gap-8 lg:flex">
       <ul class="flex items-center gap-7">
@@ -98,7 +97,7 @@ const nav = allNav.map((item) => {
         <Icon name="menu" class="group-open/mobile:hidden" />
         <Icon name="close" class="hidden group-open/mobile:block" />
       </summary>
-      <div data-tone={tone} class="fixed inset-x-0 top-16 bottom-0 z-(--z-overlay) overflow-y-auto px-(--gutter) py-8">
+      <div data-tone="light" class="fixed inset-x-0 top-16 bottom-0 z-(--z-overlay) overflow-y-auto px-(--gutter) py-8">
         <ul class="flex flex-col gap-1">
           {
             nav.map((item) => (

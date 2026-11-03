@@ -1,7 +1,3 @@
-title: Retreats & events
-audience: hospitality
-sectionColour: golden
-headerLight: golden
 seo:
   title: Pilates for retreats, events & teams · Chelsea van Eeden
   description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events, teams and brands, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
@@ -20,7 +16,6 @@ hero:
     src: /media/retreats-teaching.mp4
     poster: /media/retreats-teaching-poster.jpg
     speed: 1
-  layout: split
 whoFor:
   title: Perfect for *retreats that…*
   items:

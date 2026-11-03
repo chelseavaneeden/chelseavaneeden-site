@@ -1,6 +1,7 @@
 # Pages CMS: the editor Chelsea uses at https://app.pagescms.org
 # Each section below is a menu item in the editor. Fields mirror src/content.config.ts;
-# if you add a field there, add it here too.
+# if you add a field there, add it here too. Pages CMS deletes anything from a file that isn't listed
+# here when it saves that file, so scripts/check-cms.mjs stops the build if something is missing.
 
 media:
   input: src/assets/media
@@ -28,14 +29,14 @@ content:
         type: object
         fields:
           - { name: eyebrow, label: Small line above the headline, type: string, description: 'Optional. Leave empty to hide.' }
-          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, e.g. Quietly *powerful* Pilates. Wrap words in ==double equals== to highlight them in yellow. No full stop at the end (commas and … are fine).' }
+          - { name: title, label: Headline, type: string, required: true, description: 'Wrap a word in *asterisks* to make it italic, or in ==double equals== to highlight it in yellow, e.g. Mat & Reformer Pilates, ==online==. No full stop at the end (commas and … are fine).' }
           - { name: lede, label: Intro sentence, type: text, required: true }
           - name: primary
             label: Main button
             type: object
             fields:
               - { name: label, label: Button text, type: string, required: true }
-              - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /book, or a full https:// address.' }
+              - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /intro-pack, or a full https:// address.' }
           - name: extra
             label: Second button (optional)
             type: object
@@ -65,6 +66,14 @@ content:
                 - { value: center, label: Centre }
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
+          - name: video
+            label: Header video (optional)
+            type: object
+            description: 'Plays instead of the photo. The video files live in public/media, so ask Claude to add a new one (they need compressing first). Clear the video file to show the photo instead.'
+            fields:
+              - { name: src, label: Video file, type: string, description: 'e.g. /media/chelsea-teaching.mp4' }
+              - { name: poster, label: Still image shown while it loads, type: string, description: 'e.g. /media/chelsea-teaching-poster.jpg' }
+              - { name: speed, label: Playback speed, type: number, description: '1 is as filmed, 0.8 is slightly slower.' }
       - name: perfectFor
         label: You're in the right place if you…
         type: object
@@ -73,6 +82,36 @@ content:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: items, label: Ticks, type: string, list: true }
+      - name: investment
+        label: Intro session section
+        type: object
+        description: The intro session card itself is edited under "Offers & prices".
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
+          - { name: intro, label: Intro text, type: text }
+          - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro session. Leave empty to hide.' }
+      - name: steps
+        label: How it works
+        type: object
+        description: 'Numbered steps under the intro session. Leave the list empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
+          - name: items
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Step, type: string, required: true }
+              - { name: text, label: Text, type: text, required: true }
+      - name: proof
+        label: Reviews heading
+        type: object
+        description: 'Heading above the reviews. The reviews themselves are under "Testimonials".'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
       - name: about
         label: Meet Chelsea
         type: object
@@ -103,33 +142,31 @@ content:
             fields:
               - { name: name, label: Company name, type: string, required: true, description: 'Read out by screen readers.' }
               - { name: image, label: Logo file, type: image, required: true }
-      - name: investment
-        label: Intro session section
+      - name: faq
+        label: Questions
         type: object
-        description: The intro session card itself is edited under "Offers & prices".
+        description: 'Leave the questions empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
+          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
-          - { name: note, label: Line under the card, type: string, description: 'e.g. the ongoing price after the intro session. Leave empty to hide.' }
-      - name: steps
-        label: How it works
-        type: object
-        description: 'Numbered steps under the intro session. Leave the list empty to hide this section.'
-        fields:
-          - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - name: items
-            label: Steps
+            label: Questions
             type: object
             list: true
             fields:
-              - { name: title, label: Step, type: string, required: true }
-              - { name: text, label: Text, type: text, required: true }
+              - { name: question, label: Question, type: string, required: true }
+              - { name: answer, label: Answer, type: text, required: true, description: 'Leave a blank line to start a new paragraph.' }
+          - name: link
+            label: Button under the questions (optional)
+            type: object
+            fields:
+              - { name: label, label: Button text, type: string, description: 'e.g. Ask me a question' }
+              - { name: href, label: Link, type: string, description: '/enquire opens the Ask me a question pop-up.' }
       - name: ctaBand
         label: Closing band
         type: object
-        description: The dark band at the bottom of the page.
+        description: The card with the sunrise glow at the bottom of the page.
         fields:
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: text, label: Text, type: text }
@@ -146,48 +183,13 @@ content:
               - { name: label, label: Button text, type: string }
               - { name: href, label: Link, type: string, description: '/enquire opens the Ask me a question pop-up.' }
 
-  # ── SERVICE PAGES (private sessions, retreats & events, brands, studios & clinics, companies) ─
-  - name: audiencePages
-    label: Service pages
-    type: collection
-    path: src/content/audience-pages
+  # ── RETREATS & EVENTS PAGE ─────────────────────────────────────────────────
+  - name: retreats
+    label: Retreats & events page
+    type: file
+    path: src/content/audience-pages/hospitality.yaml
     format: yaml
-    filename: '{fields.audience}.yaml'
-    description: 'One page per audience. Prices come from "Offers & prices" and quotes from "Testimonials" for the same audience.'
-    view:
-      primary: title
-      fields: [title, audience]
     fields:
-      - { name: title, label: Page name (only shown in the editor), type: string, required: true }
-      - name: audience
-        label: Audience
-        type: select
-        required: true
-        options:
-          values:
-            - { value: private, label: Private clients }
-            - { value: companies, label: Companies }
-            - { value: hospitality, label: Retreats & Events }
-            - { value: studios, label: Studios & Clinics }
-            - { value: brands, label: Brands }
-      - name: sectionColour
-        label: Page mood
-        type: select
-        default: golden
-        description: 'The feel of the page: Golden (warm honey light) or Sage (light green light, linen and leaf shadows).'
-        options:
-          values:
-            - { value: golden, label: Golden }
-            - { value: sage, label: Sage }
-      - name: headerLight
-        label: Header light
-        type: select
-        default: golden
-        description: 'The light behind the header: Golden (warm sunrise) or Sage (light green, linen and a leaf shadow).'
-        options:
-          values:
-            - { value: golden, label: Golden }
-            - { value: sage, label: Sage }
       - name: seo
         label: Google listing
         type: object
@@ -206,7 +208,7 @@ content:
             type: object
             fields:
               - { name: label, label: Button text, type: string, required: true }
-              - { name: href, label: Link, type: string, required: true, description: '#investment jumps to the prices on this page.' }
+              - { name: href, label: Link, type: string, required: true, description: '#enquire jumps to the proposal form on this page.' }
           - name: secondary
             label: Second button (optional)
             type: object
@@ -227,22 +229,14 @@ content:
                 - { value: center, label: Centre }
                 - { value: lower, label: Lower third }
                 - { value: bottom, label: Bottom }
-          - name: layout
-            label: Top section style
-            type: select
-            default: split
-            options:
-              values:
-                - { value: split, label: Text beside the photo }
-                - { value: overlay, label: Full-width photo with a frosted text card }
-          - name: textPosition
-            label: Text card position (frosted style)
-            type: select
-            default: left
-            options:
-              values:
-                - { value: left, label: Left }
-                - { value: center, label: Centre }
+          - name: video
+            label: Header video (optional)
+            type: object
+            description: 'Plays instead of the photo. The video files live in public/media, so ask Claude to add a new one (they need compressing first). Clear the video file to show the photo instead.'
+            fields:
+              - { name: src, label: Video file, type: string, description: 'e.g. /media/retreats-teaching.mp4' }
+              - { name: poster, label: Still image shown while it loads, type: string, description: 'e.g. /media/retreats-teaching-poster.jpg' }
+              - { name: speed, label: Playback speed, type: number, description: '1 is as filmed, 0.8 is slightly slower.' }
       - name: whoFor
         label: Who it's for
         type: object
@@ -284,7 +278,7 @@ content:
       - name: investment
         label: Prices section
         type: object
-        description: 'Only shown when this audience has published offers under "Offers & prices". Leave the title empty to hide.'
+        description: 'Only shown when an offer for Retreats & Events is published under "Offers & prices". Leave the title empty to hide.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string }
@@ -293,14 +287,14 @@ content:
       - name: proof
         label: Testimonials heading
         type: object
-        description: 'Shows the testimonials tagged for this audience that have permission ticked. The Private sessions version also appears on the home page.'
+        description: 'Only shown when a testimonial is tagged for Retreats & Events, with permission ticked.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true }
       - name: faq
         label: Questions
         type: object
-        description: 'Leave the questions empty to hide this section. The Private sessions questions also appear on the home page.'
+        description: 'Leave the questions empty to hide this section.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string }
@@ -349,9 +343,9 @@ content:
               - { name: value, label: Big text, type: string, required: true, description: 'e.g. 5,000+' }
               - { name: label, label: Small text underneath, type: string, required: true, description: 'e.g. Teaching hours' }
       - name: ctaBand
-        label: Dark band at the bottom (optional)
+        label: Closing band (optional)
         type: object
-        description: Leave the title empty to hide.
+        description: The card with the sunrise glow at the bottom of the page. Leave the title empty to hide.
         fields:
           - { name: title, label: Title, type: string }
           - { name: text, label: Text, type: text }
@@ -389,10 +383,7 @@ content:
         options:
           values:
             - { value: private, label: Private clients }
-            - { value: companies, label: Companies }
             - { value: hospitality, label: Retreats & Events }
-            - { value: studios, label: Studios & Clinics }
-            - { value: brands, label: Brands }
       - { name: eyebrow, label: Small label above the name, type: string, description: 'e.g. Start here' }
       - { name: summary, label: One-line summary, type: text, description: 'Optional. Leave empty to show just the ticks.' }
       - name: priceDisplay
@@ -457,7 +448,7 @@ content:
         fields:
           - { name: label, label: Button text, type: string, required: true }
           - { name: href, label: Link, type: string, required: true, description: 'Type whatsapp to use your WhatsApp link from Site settings.' }
-      - { name: featured, label: Highlight this offer, type: boolean, description: 'Shown in the dark card.' }
+      - { name: featured, label: Highlight this offer, type: boolean, description: 'Shown on a card with the sunrise glow.' }
       - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }
       - { name: published, label: Show on the website, type: boolean, default: true }
 
@@ -501,10 +492,7 @@ content:
           multiple: true
           values:
             - { value: private, label: Private clients }
-            - { value: companies, label: Companies }
             - { value: hospitality, label: Retreats & Events }
-            - { value: studios, label: Studios & Clinics }
-            - { value: brands, label: Brands }
       - { name: consent, label: I have written permission to publish this, type: boolean, description: 'Without this tick the testimonial never appears.' }
       - { name: featured, label: Feature first, type: boolean }
       - { name: order, label: Position, type: number, default: 50, description: 'Lower numbers come first.' }

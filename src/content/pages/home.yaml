@@ -31,6 +31,8 @@ perfectFor:
 investment:
   title: Shall we *begin?*
   note: After your intro session, continue with a monthly package, from €260 a month.
+proof:
+  title: What clients *notice*
 about:
   title: Hi, I’m *Chelsea*
   paragraphs:
@@ -55,6 +57,26 @@ logos:
       image: ../../assets/media/logos/datchet-osteopath-clinic.png
     - name: Elf
       image: ../../assets/media/logos/elf.png
+faq:
+  title: Good to *know*
+  items:
+    - question: I have an injury or chronic pain. Is this right for me?
+      answer: Often, yes. I guide clients through rehab and chronic pain, and I’m happy to work alongside your physiotherapist, osteopath or doctor.
+    - question: How long are sessions and how do I book?
+      answer: You can choose between 45 and 55 minutes. Let me know what works best for your schedule.
+    - question: I’m a beginner, do I need experience?
+      answer: No experience needed. Online private sessions are perfect for beginners.
+    - question: Do I need a Reformer?
+      answer: No. All you need is a Pilates mat and a laptop/phone with a camera. If you have a Reformer, let me know.
+    - question: Is it safe during pregnancy?
+      answer: Yes, with the right adaptations. I’ve taught clients throughout their pregnancy and post-natal recovery. Please check with your midwife or doctor before you start.
+    - question: Can I cancel or reschedule?
+      answer: Yes, with at least 24 hours’ notice. Late cancellations and missed sessions are charged in full.
+    - question: What happens after my intro session?
+      answer: You can start a monthly package and choose between weekly or twice weekly sessions, from €260 a month.
+  link:
+    label: Ask me a question
+    href: /enquire
 ctaBand:
   title: Ready when *you* are
   text: Start your intro session, to feel the benefits of movement for your mental health.

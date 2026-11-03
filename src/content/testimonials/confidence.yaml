@@ -3,7 +3,6 @@ name: Private client
 context: Online sessions
 audiences:
   - private
-  - companies
 consent: true
 featured: false
 order: 30

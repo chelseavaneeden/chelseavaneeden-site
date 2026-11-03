@@ -19,12 +19,10 @@
 /* 1. BRAND PALETTE ------------------------------------------------------- */
 /* Mood board swatches are marked; the rest are shades made from them. */
 :root {
-  --moss-900: #3a4124;
   --moss-800: #4a522c;
   --moss-700: #5a6338; /* Moss */
   --olive-600: #7b7d4e; /* Olive Grove */
   --sage-leaf-400: #a7ad8c; /* Sage Leaf */
-  --sage-leaf-300: #cdd0b6;
   --sage-leaf-200: #dcdec9;
   --sage-leaf-100: #e7e8d9;
   --sage-leaf-50: #eeeee3;
@@ -37,25 +35,12 @@
   --butter-100: #f5e9c8;
   --butter-200: #efd9a0; /* Butter */
   --honey-400: #e2b866; /* Wild Honey: buttons */
-  --honey-500: #d6a64f; /* deeper honey: button hover */
   --amber-500: #c9802f; /* Amber */
   --amber-700: #9a5a1c; /* amber deep enough for small text on linen */
   --coffee-900: #3b2a1e; /* Coffee Bean: words */
   --coffee-700: #5c4636;
-  /* A warm sand wall in morning light, for the intro card. */
-  --sand-100: #f3ecdf;
-  --sand-200: #ebe1cf;
-  --sand-300: #dccfb6;
-  --linen-0: #ffffff;
-  /* Earlier greens, still compared on /fonts */
-  --sage-200: #d8dac0;
-  --sage-cool-200: #ccd3c4;
-  --pistachio-200: #dfe5c6;
-  --oat-200: #e8dccb;
   --rust-600: #a23e2c;
   --green-500: #3f9a5c;
-  /* WhatsApp's official brand green, only for the WhatsApp button. */
-  --whatsapp-500: #25d366;
 
   /* Light, texture and washes (see global.css). Colours here are the swatches above with transparency. */
   /* Sunrise: butter and honey light from the top right, a little sage shade at the bottom left. */
@@ -64,18 +49,6 @@
     radial-gradient(42% 55% at 100% 0%, rgb(226 184 102 / 0.7) 0%, rgb(226 184 102 / 0) 70%),
     radial-gradient(60% 70% at 18% 0%, rgb(239 217 160 / 0.55) 0%, rgb(239 217 160 / 0) 72%),
     radial-gradient(50% 60% at 0% 100%, rgb(226 184 102 / 0.28) 0%, rgb(226 184 102 / 0) 70%);
-  /* Meadow (the retreats page): light sage morning light with a small warm sun in it, never dark. */
-  --glow-meadow:
-    radial-gradient(70% 85% at 86% 4%, rgb(220 222 201 / 1) 0%, rgb(220 222 201 / 0) 74%),
-    radial-gradient(42% 55% at 100% 0%, rgb(167 173 140 / 0.55) 0%, rgb(167 173 140 / 0) 70%),
-    radial-gradient(26% 34% at 74% 16%, rgb(239 217 160 / 0.45) 0%, rgb(239 217 160 / 0) 70%),
-    radial-gradient(55% 65% at 0% 100%, rgb(167 173 140 / 0.35) 0%, rgb(167 173 140 / 0) 70%);
-  /* Woven linen: fine fibres running both ways, like cloth in sunlight. */
-  --linen-weave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.035' numOctaves='2' seed='3' result='h'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035 0.9' numOctaves='2' seed='8' result='v'/%3E%3CfeBlend in='h' in2='v' mode='multiply'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.36 0 0 0 0 0.24 0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
-  --linen-weave-size: 180px;
-  --linen-weave-opacity: 0.35;
-  /* Textures on tinted sections fade out at the top and bottom, like the sections themselves. */
-  --fade-y-mask: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 22%, rgb(0 0 0 / 1) 78%, rgb(0 0 0 / 0) 100%);
   /* Sun rays falling through trees: soft diagonal bands, faded out away from the sun. */
   --sun-rays: repeating-linear-gradient(
     116deg,
@@ -86,10 +59,8 @@
     rgb(226 184 102 / 0) 9.5rem 12rem
   );
   --sun-rays-mask: radial-gradient(75% 85% at 92% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 75%);
-  --sun-rays-mask-dusk: radial-gradient(70% 90% at 5% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 70%);
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
-  /* Light dappling: blurred circles of honey, butter and sage that drift slowly. */
   /* Tinted sections are soft clouds of colour that spill a little above and below their section, so
      neighbouring sections flow into each other (see global.css). Each wash ends with a broad cloud of
      the section's tint; the mask fades the cloud out at the top and bottom. */
@@ -101,44 +72,17 @@
     radial-gradient(55% 60% at 82% 38%, rgb(226 184 102 / 0.22) 0%, rgb(226 184 102 / 0) 70%),
     radial-gradient(55% 55% at 18% 62%, rgb(239 217 160 / 0.42) 0%, rgb(239 217 160 / 0) 70%),
     radial-gradient(85% 65% at 50% 50%, rgb(248 240 220 / 0.85) 0%, rgb(248 240 220 / 0) 78%);
-  --wash-meadow:
-    radial-gradient(60% 55% at 12% 30%, rgb(220 222 201 / 0.9) 0%, rgb(220 222 201 / 0) 70%),
-    radial-gradient(55% 50% at 90% 70%, rgb(167 173 140 / 0.45) 0%, rgb(167 173 140 / 0) 70%),
-    radial-gradient(30% 30% at 70% 15%, rgb(239 217 160 / 0.35) 0%, rgb(239 217 160 / 0) 70%),
-    radial-gradient(85% 65% at 50% 50%, rgb(231 232 217 / 0.95) 0%, rgb(231 232 217 / 0) 78%);
-  /* A single sage section on a golden page: just a whisper of green. */
+  /* A single sage section (and the footer): just a whisper of green. */
   --wash-sage-soft:
     radial-gradient(60% 55% at 15% 40%, rgb(220 222 201 / 0.5) 0%, rgb(220 222 201 / 0) 70%),
     radial-gradient(50% 45% at 88% 65%, rgb(167 173 140 / 0.16) 0%, rgb(167 173 140 / 0) 70%),
     radial-gradient(85% 65% at 50% 50%, rgb(238 238 227 / 0.9) 0%, rgb(238 238 227 / 0) 78%);
-  /* Moss bands lit by low golden sun. */
-  --glow-moss:
-    radial-gradient(70% 95% at 8% 0%, rgb(226 184 102 / 0.38) 0%, rgb(226 184 102 / 0) 62%),
-    radial-gradient(55% 80% at 100% 100%, rgb(201 128 47 / 0.32) 0%, rgb(201 128 47 / 0) 62%),
-    linear-gradient(155deg, #4a522c 0%, #3a4124 100%);
   /* The credentials band: a whisper of sage-grey in two corners, on the band's pale linen. */
   --band-wash:
     radial-gradient(55% 130% at 100% 100%, rgb(167 173 140 / 0.3) 0%, rgb(167 173 140 / 0) 72%),
     radial-gradient(40% 110% at 0% 0%, rgb(220 222 201 / 0.55) 0%, rgb(220 222 201 / 0) 72%);
-  /* Limewash plaster: soft, cloudy patches of lighter and darker, like a hand-finished wall. */
-  --plaster-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1000'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.011' numOctaves='5' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.84 0 0 0 1.5 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
-  --plaster-size: cover;
-  --plaster-opacity: 0.1;
   /* A golden-hour tint laid softly over the header video. */
   --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
-  /* The intro card's wall: sand plaster lit from the top left, a beam of window light across it,
-     a warm glow, and the colour of the leaf shadows that move over it. */
-  --wall-base: linear-gradient(150deg, #f4eee2 0%, #ebe1cf 45%, #dfd1b8 100%);
-  --wall-sun: linear-gradient(
-    116deg,
-    rgb(255 248 230 / 0) 16%,
-    rgb(255 245 218 / 0.8) 32%,
-    rgb(255 242 210 / 0.65) 50%,
-    rgb(255 245 218 / 0) 66%
-  );
-  --wall-glow: radial-gradient(55% 70% at 78% 22%, rgb(239 217 160 / 0.55) 0%, rgb(239 217 160 / 0) 70%);
-  --wall-shadow: rgb(74 56 38 / 0.6);
-  --wall-grain-opacity: 0.4;
   /* Film grain over the whole page: fractal noise, tinted coffee. */
   --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain-opacity: 0.16;
@@ -180,11 +124,7 @@
   --logo-mark: var(--moss-700);
 }
 
-/* Tinted sections and the footer: a sage haze with butter light, and the words turn moss green. */
-/* Tinted sections and the footer. Each page has a mood (Site colour in the editor):
-   golden (the private page): a warm butter haze with honey light;
-   sage (the retreats page): a light sage haze with linen and leaf-shadow textures.
-   On both, the words in tinted sections are moss green. */
+/* Tinted sections: a warm butter haze with honey light, and the words turn moss green. */
 [data-tone='alt'] {
   --surface: var(--butter-50);
   --surface-alt: var(--butter-100);
@@ -197,14 +137,7 @@
   --wash: var(--wash-golden);
 }
 
-[data-mood='sage'] [data-tone='alt'] {
-  --surface: var(--sage-leaf-100);
-  --surface-alt: var(--sage-leaf-200);
-  --line: var(--sage-leaf-300);
-  --wash: var(--wash-meadow);
-}
-
-/* A single tinted section can be a light, faded sage on a golden page: <Section tone="alt" tint="sage">. */
+/* A single tinted section can be a light, faded sage: <Section tone="alt" tint="sage">. */
 [data-tone='alt'][data-tint='sage'] {
   --surface: var(--sage-leaf-50);
   --surface-alt: var(--sage-leaf-100);
@@ -224,50 +157,12 @@
   --line: var(--linen-300);
 }
 
-/* The intro card: a sand wall in morning sun. Coffee words, moss headings and ticks. */
-[data-tone='wall'] {
-  --surface: var(--sand-200);
-  --surface-alt: var(--sand-300);
-  --surface-raised: var(--sand-100);
-  --ink: var(--coffee-900);
-  --ink-muted: var(--coffee-700);
-  --heading: var(--moss-800);
-  --heading-em: var(--amber-700);
-  --accent: var(--moss-800);
-  --accent-ink: var(--linen-50);
-  --line: var(--sand-300);
-}
-
 /* The header (menu bar and the page's opening section): Coffee Bean buttons with Butter words (9.9:1),
    grounded against the golden light; a softer coffee on hover. */
 [data-cta='header'] {
   --cta: var(--coffee-900);
   --cta-ink: var(--butter-200);
   --cta-hover: var(--coffee-700);
-}
-
-[data-tone='dark'] {
-  --surface: var(--moss-800);
-  --surface-alt: var(--moss-900);
-  --surface-raised: var(--moss-900);
-  --ink: var(--linen-100);
-  --ink-muted: var(--linen-200);
-  --heading: var(--linen-50);
-  --heading-em: var(--honey-400);
-  --accent: var(--honey-400);
-  --accent-ink: var(--coffee-900);
-  --cta: var(--honey-400);
-  --cta-ink: var(--coffee-900);
-  --cta-hover: var(--butter-200);
-  --note: var(--honey-400);
-  --note-ink: var(--coffee-900);
-  --quote-mark: var(--honey-400);
-  --list-mark: var(--honey-400);
-  --line: var(--olive-600);
-  --focus: var(--honey-400);
-  --logo-mark: var(--honey-400);
-  /* Honey contour lines on moss. */
-  --contour-line: rgb(239 217 160 / 0.3);
 }
 
 /* 3. TAILWIND MAPPING ----------------------------------------------------- */
@@ -304,8 +199,6 @@
   --color-status-open: var(--status-open);
   --color-status-closed: var(--status-closed);
   --color-logo-mark: var(--logo-mark);
-  --color-whatsapp: var(--whatsapp-500);
-  --color-whatsapp-ink: var(--linen-0);
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -379,8 +272,7 @@
   --reveal-distance: 1.5rem;
   --reveal-blur: 6px;
 
-  /* Slow ambient movement: the header rising in on load, sun rays breathing, light drifting,
-     linen lines swaying. */
+  /* Slow ambient movement: the header rising in on load, sun rays and contour lines breathing. */
   --duration-rise: 1600ms;
   --rise-step: 180ms;
   --duration-breathe: 11s;
@@ -403,10 +295,6 @@
   --display-leading: 1.02;
   --display-tracking: -0.01em;
   --display-case: none;
-  /* Optical size match for the headline candidates on /fonts */
-  --display-scale-playfair: 0.72;
-  --display-scale-garamond: 0.8;
-  --display-scale-cormorant: 0.86;
   --heading-weight: 500;
   --eyebrow-weight: 500;
   --eyebrow-tracking: 0.24em;
@@ -431,7 +319,6 @@
   --shadow-raised-value: 0 30px 60px -32px rgb(59 42 30 / 0.4);
   /* A gentle, warm glow around a button on hover, soft like morning light. */
   --shadow-glow-value: 0 4px 18px -6px rgb(226 184 102 / 0.6);
-  --hero-overlay-height: min(88svh, 56rem);
 
   /* Photo focus points for cropped images (object-position) */
   --focus-upper: 50% 22%;
@@ -444,14 +331,6 @@
   --logo-height-s: 1.75rem;
   --logo-height-m: 2.25rem;
   --logo-height-l: 3rem;
-
-  /* Debossed logo: the swoosh is pressed into the surface it sits on. It is a shade darker
-     than its background (surface-alt), with a thin shadow along its top edge and light
-     catching its bottom edge, like a letterpress print. */
-  --logo-deboss-s: 2.25rem;
-  --logo-deboss-m: 2.75rem;
-  --logo-deboss-l: 3.5rem;
-  --deboss-filter: drop-shadow(0 -0.75px 0 rgb(59 38 32 / 0.3)) drop-shadow(0 1px 0 rgb(255 255 255 / 0.95));
 }
 
 @media (prefers-reduced-motion: reduce) {

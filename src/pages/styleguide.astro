@@ -4,7 +4,6 @@
  * It reads tokens.css directly, so it can never drift from the real design system.
  */
 import Base from '../layouts/Base.astro';
-import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import Container from '../components/ui/Container.astro';
@@ -15,6 +14,7 @@ import Icon, { type IconName } from '../components/ui/Icon.astro';
 import Logo from '../components/ui/Logo.astro';
 import Price from '../components/ui/Price.astro';
 import Section from '../components/ui/Section.astro';
+import Sunlight from '../components/ui/Sunlight.astro';
 import Text from '../components/ui/Text.astro';
 import OfferCard from '../components/patterns/OfferCard.astro';
 import FAQAccordion from '../components/patterns/FAQAccordion.astro';
@@ -67,10 +67,10 @@ const contrastPairs = [
 ];
 
 const textStyles = [
-  { cls: 'type-display-xl', name: 'display-xl', use: 'Hero headlines', sample: 'Quietly *powerful* Pilates.' },
-  { cls: 'type-display-l', name: 'display-l', use: 'Section statements, CTA bands', sample: 'Strength *with* ease.' },
-  { cls: 'type-h1', name: 'h1', use: 'Section titles', sample: 'Begin with an *intro session*.' },
-  { cls: 'type-h2', name: 'h2', use: 'Sub-sections, door titles', sample: 'Retreats & Events' },
+  { cls: 'type-display-xl', name: 'display-xl', use: 'Hero headlines', sample: 'Mat & Reformer *Pilates*, online' },
+  { cls: 'type-display-l', name: 'display-l', use: 'Section statements, CTA bands', sample: 'Ready when *you are*' },
+  { cls: 'type-h1', name: 'h1', use: 'Section titles', sample: 'Shall we *begin?*' },
+  { cls: 'type-h2', name: 'h2', use: 'Sub-sections', sample: 'Retreats & Events' },
   { cls: 'type-h3', name: 'h3', use: 'Card titles', sample: 'Monthly plans' },
   { cls: 'type-h4', name: 'h4', use: 'Small headings', sample: 'What’s included' },
   { cls: 'type-eyebrow', name: 'eyebrow', use: 'Labels above headings', sample: 'Work with me' },
@@ -83,12 +83,10 @@ const textStyles = [
   },
   { cls: 'type-body-s', name: 'body-s', use: 'Card text, lists', sample: 'Three private sessions, online or in Lisbon.' },
   { cls: 'type-caption', name: 'caption', use: 'Notes, legal, meta', sample: 'Sample prices for layout only.' },
-  { cls: 'type-note', name: 'note', use: 'Sticky note on phones', sample: 'Strong, calm & cared for.' },
   { cls: 'type-quote', name: 'quote', use: 'Testimonials', sample: 'I feel more confident and have less anxiety.' },
   { cls: 'type-price', name: 'price', use: 'Prices', sample: '€270' },
   { cls: 'type-stat', name: 'stat', use: 'Proof numbers', sample: '5,000+' },
-  { cls: 'type-label', name: 'label', use: 'Buttons, nav, form labels', sample: 'Book your Session' },
-  { cls: 'type-wordmark', name: 'wordmark', use: 'Logo text', sample: 'Chelsea van Eeden' },
+  { cls: 'type-label', name: 'label', use: 'Nav, form labels', sample: 'Book your Session' },
 ];
 
 const spacing = [
@@ -113,14 +111,14 @@ const sizes = ['s', 'm', 'l'] as const;
       <div class="flex max-w-narrow flex-col gap-5">
         <Logo size="l" />
         <Eyebrow rule>Design system</Eyebrow>
-        <Heading level={1} variant="display-l">Somatic Minimal</Heading>
+        <Heading level={1} variant="display-l">Golden light, deep in the forest</Heading>
         <Text variant="lede" tone="muted">
-          Calm and soft: one typeface in light weights, rounded shapes and generous space, in Chelsea’s existing brand
-          colours from the brand style guide: forest green headings, chocolate copy, cream and oat backgrounds, mustard buttons.
+          Warm linen with grain, soft honey light and sun rays, sections that melt into each other instead of hard blocks,
+          and slow, gentle movement. From Chelsea’s Forest &amp; Amber mood board.
         </Text>
         <dl class="mt-2 grid grid-cols-2 gap-6 border-t border-line pt-6">
-          <div><dt class="type-caption text-ink-muted">Typefaces</dt><dd class="type-body">Satoshi (300 · 400 · 500 · 700)</dd></div>
-          <div><dt class="type-caption text-ink-muted">Palette</dt><dd class="type-body">Forest green · Dark chocolate · Warm cream · Soft oat · Mustard</dd></div>
+          <div><dt class="type-caption text-ink-muted">Typefaces</dt><dd class="type-body">Cormorant Garamond Italic (headings) · Jost (labels and body)</dd></div>
+          <div><dt class="type-caption text-ink-muted">Palette</dt><dd class="type-body">Moss · Olive · Sage leaf · Raw linen · Butter · Wild honey · Amber · Coffee bean</dd></div>
         </dl>
       </div>
     </Section>
@@ -130,12 +128,12 @@ const sizes = ['s', 'm', 'l'] as const;
       <div class="flex flex-col gap-8">
         <Heading variant="h1" id="sg-logo">Logo & favicon</Heading>
         <Text variant="body-s" tone="muted" class="max-w-prose">
-          Chelsea’s signature from the existing brand. The swoosh takes the logo-mark token (ochre, lighter on dark
-          tones); the script follows the text colour. Use the Logo component, never the image files directly.
+          Chelsea’s signature from the existing brand, all in the logo-mark token (moss). Use the Logo component, never
+          the image files directly.
         </Text>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           {
-            ['light', 'alt', 'dark'].map((tone) => (
+            ['light', 'alt'].map((tone) => (
               <div data-tone={tone} class="flex flex-col gap-6 rounded-card border border-line p-8">
                 <code class="type-caption text-ink-muted">tone="{tone}"</code>
                 <div class="flex flex-wrap items-end gap-6">
@@ -165,8 +163,7 @@ const sizes = ['s', 'm', 'l'] as const;
         <div class="flex flex-col gap-5">
           <Heading level={3} variant="h3">Semantic tokens</Heading>
           <Text variant="body-s" tone="muted" class="max-w-prose">
-            Components only ever use these names. Each section tone (light, alt, dark) decides which brand colour they
-            point to.
+            Components only ever use these names. Each section tone (light, alt) decides which brand colour they point to.
           </Text>
           <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {
@@ -209,7 +206,7 @@ const sizes = ['s', 'm', 'l'] as const;
             Calculated live from the tokens. AA needs 4.5:1 for body text and 3:1 for large text.
           </Text>
           {
-            ['light', 'alt', 'dark'].map((tone) => (
+            ['light', 'alt'].map((tone) => (
               <div data-tone={tone} class="rounded-card p-5">
                 <p class="type-eyebrow mb-3 text-ink-muted">{tone} tone</p>
                 <ul class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -257,7 +254,7 @@ const sizes = ['s', 'm', 'l'] as const;
       <div class="flex flex-col gap-8">
         <Heading variant="h1" id="sg-buttons">Buttons</Heading>
         {
-          ['light', 'dark'].map((tone) => (
+          ['light', 'alt'].map((tone) => (
             <div data-tone={tone} class="flex flex-col gap-6 rounded-card p-6 md:p-8">
               <p class="type-eyebrow text-ink-muted">{tone} tone</p>
               {variants.map((v) => (
@@ -286,9 +283,9 @@ const sizes = ['s', 'm', 'l'] as const;
     <Section space="s" tone="alt" labelledby="sg-cards">
       <div class="flex flex-col gap-8">
         <Heading variant="h1" id="sg-cards">Section tones & cards</Heading>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           {
-            ['light', 'alt', 'dark'].map((tone) => (
+            ['light', 'alt'].map((tone) => (
               <div data-tone={tone} class="flex flex-col gap-3 rounded-card border border-line p-6">
                 <code class="type-label">tone="{tone}"</code>
                 <Heading level={3} variant="h2">Strength *with* ease.</Heading>
@@ -304,8 +301,9 @@ const sizes = ['s', 'm', 'l'] as const;
         </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {
-            (['raised', 'outline', 'plain', 'inverse'] as const).map((v) => (
+            (['raised', 'outline', 'plain', 'sunrise'] as const).map((v) => (
               <Card variant={v} class="gap-2">
+                {v === 'sunrise' && <Sunlight contours={false} />}
                 <code class="type-label">variant="{v}"</code>
                 <Text variant="body-s" tone="muted">
                   Card surface, radius and padding come from tokens.
@@ -378,14 +376,9 @@ const sizes = ['s', 'm', 'l'] as const;
         <Heading variant="h1" id="sg-parts">Small parts</Heading>
         <div class="grid grid-cols-1 gap-10 md:grid-cols-2">
           <div class="flex flex-col gap-4">
-            <Heading level={3} variant="h3">Eyebrows & badges</Heading>
+            <Heading level={3} variant="h3">Eyebrows</Heading>
             <Eyebrow>Plain eyebrow</Eyebrow>
             <Eyebrow rule>Eyebrow with rule</Eyebrow>
-            <div class="flex flex-wrap gap-2">
-              <Badge>Online</Badge>
-              <Badge>Lisbon</Badge>
-              <Badge variant="solid">Limited availability</Badge>
-            </div>
           </div>
           <div class="flex flex-col gap-4">
             <Heading level={3} variant="h3">Icons</Heading>

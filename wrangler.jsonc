@@ -1,7 +1,7 @@
-// Cloudflare deploy settings.
-// PREVIEW ONLY: there are deliberately no `routes` or custom domains here, so deploys go to
-// https://chelseavaneeden-site.<account>.workers.dev and never touch chelseavaneeden.com
-// (the live Framer site). Add the domain only at launch, on Chelsea's go-ahead.
+// Cloudflare deploy settings. Cloudflare builds and publishes the site itself on every save to `main`.
+// UNTIL LAUNCH: there are deliberately no `routes` or custom domains here, so the site is at
+// https://chelseavaneeden-site.chelseavaneeden-site.workers.dev and never touches chelseavaneeden.com
+// (the live Framer site). Add the domain only at launch, on Chelsea's go-ahead (see docs/SITE.md).
 //
 // The site is static files, plus one small script (worker/index.ts) that only runs for /api/*:
 // the enquiry forms post there and it emails the answers. Its keys are Cloudflare secrets, never

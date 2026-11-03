@@ -124,16 +124,6 @@
   letter-spacing: 0.02em;
 }
 
-@utility type-note {
-  font-family: var(--font-display-family);
-  font-style: var(--display-style);
-  font-size: calc(var(--step-1) * var(--display-scale) * 1.1);
-  font-weight: var(--display-weight);
-  line-height: 1.15;
-  letter-spacing: var(--display-tracking);
-  text-wrap: balance;
-}
-
 @utility type-quote {
   font-family: var(--font-display-family);
   font-style: var(--display-style);
@@ -181,15 +171,6 @@
   line-height: 1.2;
   letter-spacing: var(--label-tracking);
   text-transform: var(--label-case);
-}
-
-@utility type-wordmark {
-  font-family: var(--font-display-family);
-  font-style: var(--display-style);
-  font-size: var(--step-1);
-  font-weight: var(--display-weight);
-  line-height: 1;
-  letter-spacing: var(--display-tracking);
 }
 
 /* Long-form text written in Markdown (legal pages): styles the headings, paragraphs and lists inside. */

@@ -1,49 +1,33 @@
 ---
-// Decorative light for a section. Put it inside an element with `relative isolate overflow-hidden`;
-// it sits behind the content and is hidden from screen readers. The movement stops for people who
-// prefer reduced motion (data-ambient, see global.css).
-//   sunrise: golden morning light from the top right, soft sun rays that slowly brighten and shift,
-//            and fine contour lines breathing in the bottom left corner (the private page).
-//   meadow:  light sage morning light, the shadow of a leafy branch swaying in the top right, a linen
-//            weave texture and the contour lines (the retreats & events page).
-//   dusk:    honey light and sun rays on the moss panels, with a limewash plaster texture, the soft
-//            shadow of a leafy branch in the top left and honey contour lines in the top right.
-import LeafShadow from './LeafShadow.astro';
+// Decorative light for a section: golden morning light from the top right, soft sun rays that slowly
+// brighten and shift, and fine contour lines breathing in the bottom left corner. Put it inside an
+// element with `relative isolate overflow-hidden`; it sits behind the content and is hidden from screen
+// readers. The movement stops for people who prefer reduced motion (data-ambient, see global.css).
 import Topography from './Topography.astro';
 
 interface Props {
-  variant?: 'sunrise' | 'meadow' | 'dusk';
   /** Leave out the contour lines, e.g. for just the glow inside a card. */
   contours?: boolean;
   class?: string;
 }
 
-const { variant = 'sunrise', contours = true, class: className } = Astro.props;
+const { contours = true, class: className } = Astro.props;
 ---
 
-<div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', `sunlight-${variant}`, className]} aria-hidden="true">
+<div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', className]} aria-hidden="true">
   <div class="sunlight-glow absolute inset-0"></div>
-  {variant !== 'meadow' && <div class="sunlight-rays absolute" data-ambient></div>}
-  {variant === 'meadow' && <div class="sunlight-weave absolute inset-0" />}
-  {variant === 'dusk' && <div class="sunlight-plaster absolute inset-0" />}
-  {variant === 'meadow' && <LeafShadow placement="hero" />}
-  {variant === 'dusk' && <LeafShadow placement="panel" />}
-  {contours && <Topography corner={variant === 'dusk' ? 'top-right' : 'bottom-left'} />}
+  <div class="sunlight-rays absolute" data-ambient></div>
+  {contours && <Topography />}
 </div>
 
 <style>
-  .sunlight-sunrise,
-  .sunlight-meadow {
+  .sunlight {
     -webkit-mask-image: var(--fade-bottom-mask);
     mask-image: var(--fade-bottom-mask);
   }
 
-  .sunlight-sunrise .sunlight-glow {
+  .sunlight-glow {
     background-image: var(--glow-sunrise);
-  }
-
-  .sunlight-meadow .sunlight-glow {
-    background-image: var(--glow-meadow);
   }
 
   .sunlight-rays {
@@ -53,27 +37,5 @@ const { variant = 'sunrise', contours = true, class: className } = Astro.props;
     mask-image: var(--sun-rays-mask);
     filter: blur(5px);
     animation: breathe var(--duration-breathe) var(--ease-in-out-soft) infinite;
-  }
-
-  .sunlight-dusk .sunlight-rays {
-    -webkit-mask-image: var(--sun-rays-mask-dusk);
-    mask-image: var(--sun-rays-mask-dusk);
-    opacity: 0.6;
-  }
-
-  /* Limewash plaster: cloudy patches of lighter colour, like a hand-finished wall. */
-  .sunlight-plaster {
-    background-image: var(--plaster-image);
-    background-size: var(--plaster-size);
-    opacity: var(--plaster-opacity);
-    mix-blend-mode: soft-light;
-  }
-
-  /* Woven linen, like a cloth laid out in the sun. */
-  .sunlight-weave {
-    background-image: var(--linen-weave);
-    background-size: var(--linen-weave-size);
-    opacity: var(--linen-weave-opacity);
-    mix-blend-mode: multiply;
   }
 </style>

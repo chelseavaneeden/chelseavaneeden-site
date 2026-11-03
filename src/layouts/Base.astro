@@ -13,14 +13,12 @@ interface Props {
   noindex?: boolean;
   /** An analytics event to record when this page opens, e.g. "intro_purchase" on /welcome. */
   pageEvent?: string;
-  /** The page's mood: golden (warm honey light, the default) or sage (light green, linen and leaf shadows). */
-  mood?: 'golden' | 'sage';
 }
 
-const { title, description, lang = 'en', noindex = false, pageEvent, mood = 'golden' } = Astro.props;
+const { title, description, lang = 'en', noindex = false, pageEvent } = Astro.props;
 
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
-// This keeps the workers.dev preview out of Google while the live Framer site carries on.
+// This keeps the workers.dev address out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
 const { contact, enquiry, analytics, bookCta } = await getSite();
 ---
@@ -38,10 +36,6 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Font cssVariable="--font-cormorant" preload={[{ weight: '500', style: 'italic' }]} />
     <Font cssVariable="--font-jost" preload={[{ style: 'normal' }]} />
-    <Font cssVariable="--font-playfair" />
-    <Font cssVariable="--font-eb-garamond" />
-    <Font cssVariable="--font-host-grotesk" />
-    <Font cssVariable="--font-martian-mono" />
     {
       analytics.umamiWebsiteId && (
         <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id={analytics.umamiWebsiteId} data-do-not-track="true" />
@@ -52,7 +46,6 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     data-book-href={bookCta.href}
     data-whatsapp-href={contact.whatsappHref}
     data-page-event={pageEvent}
-    data-mood={mood}
   >
     <a
       href="#main"

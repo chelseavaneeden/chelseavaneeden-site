@@ -1,56 +1,34 @@
 ---
 /*
- * Chelsea's logo, from the existing brand artwork (public/brand/).
- *
- * deboss (default): the swoosh alone, pressed into the section it sits on. It is a shade darker
- * than that background and shows through light and shadow, so it adapts to every background.
- * signature: the full signature, swoosh plus the "helsea" script.
- *
- * The artwork is used as masks, so its colours come from tokens: the signature's swoosh uses
- * --logo-mark (forest green, mustard on dark tones) and so does the script, so the whole signature is one colour.
+ * Chelsea's logo, from the existing brand artwork (public/brand/): the full signature, swoosh plus the
+ * "helsea" script. The artwork is used as masks, so its colour comes from the --logo-mark token.
  */
 export type LogoSize = 's' | 'm' | 'l';
-export type LogoVariant = 'deboss' | 'signature';
 
 interface Props {
-  variant?: LogoVariant;
   size?: LogoSize;
   /** Accessible name; the artwork itself reads "Chelsea". */
   label?: string;
   class?: string;
 }
 
-const { variant = 'deboss', size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
+const { size = 'm', label = 'Chelsea van Eeden', class: className } = Astro.props;
 
 const heights: Record<LogoSize, string> = {
   s: 'h-(--logo-height-s)',
   m: 'h-(--logo-height-m)',
   l: 'h-(--logo-height-l)',
 };
-const debossSizes: Record<LogoSize, string> = {
-  s: 'size-(--logo-deboss-s)',
-  m: 'size-(--logo-deboss-m)',
-  l: 'size-(--logo-deboss-l)',
-};
 ---
 
-{
-  variant === 'deboss' ? (
-    <span role="img" aria-label={label} class:list={['logo-deboss relative inline-block shrink-0', debossSizes[size], className]}>
-      <span class="logo-swoosh absolute inset-0 bg-surface-alt" aria-hidden="true" />
-    </span>
-  ) : (
-    <span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-logo-mark', heights[size], className]}>
-      <span class="logo-mark absolute inset-0 bg-logo-mark" aria-hidden="true" />
-      <span class="logo-word absolute inset-0 bg-current" aria-hidden="true" />
-    </span>
-  )
-}
+<span role="img" aria-label={label} class:list={['logo relative inline-block aspect-82/36 text-logo-mark', heights[size], className]}>
+  <span class="logo-mark absolute inset-0 bg-logo-mark" aria-hidden="true"></span>
+  <span class="logo-word absolute inset-0 bg-current" aria-hidden="true"></span>
+</span>
 
 <style>
   .logo-mark,
-  .logo-word,
-  .logo-swoosh {
+  .logo-word {
     mask-repeat: no-repeat;
     mask-size: contain;
     mask-position: left center;
@@ -60,14 +38,5 @@ const debossSizes: Record<LogoSize, string> = {
   }
   .logo-word {
     mask-image: url('/brand/logo-word.svg');
-  }
-  .logo-swoosh {
-    mask-image: url('/brand/logo-mark-square.svg');
-    mask-position: center;
-  }
-  /* The light and shadow sit on the outer element because a filter on the masked element
-     itself would be masked away. */
-  .logo-deboss {
-    filter: var(--deboss-filter);
   }
 </style>

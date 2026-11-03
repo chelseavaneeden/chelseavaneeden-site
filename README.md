@@ -1,25 +1,18 @@
-# chelseavaneeden.com (new site, in progress)
+# chelseavaneeden.com
 
-Astro rebuild of Chelsea van Eeden's website. **The live site is still the Framer site at chelseavaneeden.com.
-Nothing here touches that domain until Chelsea decides to launch.**
+Chelsea van Eeden's website, built with Astro and hosted on Cloudflare. There is one site, one version (`main`) and one link:
 
-> **On the `concept-scrapbook` branch (Chelsea's chosen design):** start with [docs/SCRAPBOOK.md](docs/SCRAPBOOK.md).
-> It covers how to publish the preview, where every section's words live, the copy rules and the open decisions.
+**Edit:** https://app.pagescms.org/chelseavaneeden/chelseavaneeden-site/main/file/home
+**See it:** https://chelseavaneeden-site.chelseavaneeden-site.workers.dev/
 
-## Preview only (for now)
+Each **Save** in the editor goes to GitHub, and Cloudflare publishes it by itself, usually within 2 minutes. If a save isn't
+valid, the site keeps its last good version and GitHub emails Chelsea.
 
-- Deploys go to a Cloudflare preview address: `https://chelseavaneeden-site.<account>.workers.dev`
-- `wrangler.jsonc` deliberately has **no custom domain or routes**.
-- Every page is marked `noindex` and `robots.txt` blocks crawlers, so the preview stays out of Google.
-  At launch, set `PUBLIC_INDEXABLE=true` to switch that off.
+**The live site is still the Framer site at chelseavaneeden.com.** Nothing here touches that domain until Chelsea decides to
+launch; until then this address stays out of Google.
 
-## Editing content (no code needed)
-
-- Editor: **https://app.pagescms.org**. Sign in with GitHub and open `chelseavaneeden/chelseavaneeden-site`.
-- Sections: Home page, Service pages, Offers & prices, Testimonials, Site settings.
-- Each **Save** is stored on GitHub, and Cloudflare rebuilds the preview automatically (about 1–2 minutes).
-- If an edit is invalid (e.g. a "From" price with no number), the build stops and the preview keeps the last good version.
-- Content files live in `src/content/`; the editor's fields are configured in `.pages.yml`.
+Everything else (where each section's words live, the safeguards, the copy rules, the to-do list, launch steps) is in
+[docs/SITE.md](docs/SITE.md).
 
 ## Commands
 
@@ -27,8 +20,7 @@ Nothing here touches that domain until Chelsea decides to launch.**
 |---|---|
 | `npm install` | Install dependencies (first time only) |
 | `npm run dev` | Local preview at http://localhost:4321 |
-| `npm run build` | Check the design system, then build to `dist/` |
-| `npm run deploy:preview` | Build and publish to the preview by hand (normally automatic on every push to `main`) |
+| `npm run build` | Check the design system and the CMS, then build to `dist/` |
 | `npm run brand:favicons` | Regenerate favicons from the logo swoosh and brand tokens |
 
 ## Design system
@@ -37,4 +29,3 @@ Nothing here touches that domain until Chelsea decides to launch.**
 - `src/styles/typography.css` holds the named text styles (`type-display-xl`, `type-body`, …).
 - `src/components/ui/` holds the building blocks; `src/components/patterns/` holds the page sections.
 - `/styleguide` shows every token and component.
-- The build fails if a raw colour or size appears outside the token files (`scripts/check-tokens.mjs`).

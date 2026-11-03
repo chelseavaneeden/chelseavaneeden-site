@@ -1,5 +1,5 @@
 ---
-export type CardVariant = 'raised' | 'outline' | 'plain' | 'inverse' | 'wall' | 'sunrise';
+export type CardVariant = 'raised' | 'outline' | 'plain' | 'sunrise';
 export type CardPadding = 'none' | 's' | 'm' | 'l';
 
 interface Props {
@@ -17,20 +17,12 @@ const variants: Record<CardVariant, string> = {
   raised: 'bg-surface-raised shadow-raised',
   outline: 'border border-line',
   plain: '',
-  // Flips to the dark tone of the active theme.
-  inverse: '',
-  // A sand wall in morning light; put a <WallLight /> inside for the light and shadows.
-  wall: 'relative isolate overflow-hidden shadow-raised',
   // The page's own colour; put a <Sunlight contours={false} /> inside for the header's sunrise glow.
   sunrise: 'relative isolate overflow-hidden bg-surface shadow-raised',
 };
 const paddings: Record<CardPadding, string> = { none: '', s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
 ---
 
-<Tag
-  href={href}
-  data-tone={variant === 'inverse' ? 'dark' : variant === 'wall' ? 'wall' : undefined}
-  class:list={['rounded-card flex flex-col', variants[variant], paddings[padding], className]}
->
+<Tag href={href} class:list={['rounded-card flex flex-col', variants[variant], paddings[padding], className]}>
   <slot />
 </Tag>

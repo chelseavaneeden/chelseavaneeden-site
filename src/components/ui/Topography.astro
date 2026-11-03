@@ -5,7 +5,7 @@
 // `seed` gives each patch its own shape and timing. Hidden from screen readers, and still for people
 // who prefer reduced motion (data-ambient, see global.css).
 interface Props {
-  corner?: 'bottom-left' | 'top-right' | 'center';
+  corner?: 'bottom-left' | 'center';
   seed?: number;
   class?: string;
 }
@@ -42,12 +42,6 @@ const rings = Array.from({ length: 11 }, (_, i) => {
     left: 0;
     bottom: 0;
     translate: -48% 42%;
-  }
-
-  .topography-top-right {
-    right: 0;
-    top: 0;
-    translate: 48% -42%;
   }
 
   .topography-center {

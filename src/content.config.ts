@@ -1,9 +1,9 @@
 /*
  * CONTENT SCHEMAS: what each editable piece of content must look like.
  *
- * Chelsea edits these files through Pages CMS (.pages.yml mirrors these fields).
- * If an edit doesn't match the schema, the build fails and the preview keeps the last
- * good version, so a typo can never break the live page.
+ * Chelsea edits these files through Pages CMS (.pages.yml mirrors these fields, and
+ * scripts/check-cms.mjs makes sure it stays that way). If an edit doesn't match the schema,
+ * the build fails and the site keeps the last good version, so a typo can never break a page.
  */
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
@@ -21,7 +21,13 @@ const optionalLink = z.preprocess(
   link.optional(),
 );
 
-export const audiences = ['private', 'companies', 'hospitality', 'studios', 'brands'] as const;
+export const audiences = ['private', 'hospitality'] as const;
+
+// A looping header video. Without a video file it is treated as not set, and the photo shows instead.
+const heroVideo = z.preprocess(
+  (v) => (v && typeof v === 'object' && (v as { src?: unknown }).src ? v : undefined),
+  z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
+);
 
 // Shared building blocks for page sections.
 const sectionHead = { eyebrow: optionalText, title: z.string(), intro: optionalText };
@@ -65,6 +71,15 @@ const optionalBlock = <T extends z.ZodType>(schema: T) =>
     (v) => (v && typeof v === 'object' && (v as { title?: unknown }).title ? v : undefined),
     schema.optional(),
   );
+
+// The reviews heading and the questions, on the home page and on Retreats & events.
+const proof = z.object({ eyebrow: optionalText, title: z.string() });
+const faq = optionalSection({
+  ...sectionHead,
+  items: list(z.object({ question: z.string(), answer: z.string() })),
+  /** Link under the questions, e.g. Another question? Ask me (/enquire opens the pop-up). */
+  link: optionalLink,
+});
 
 const yamlIn = (dir: string) => glob({ pattern: '*.{yaml,yml}', base: `./src/content/${dir}` });
 
@@ -200,10 +215,7 @@ const pages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
-        video: z.preprocess(
-          blankToUndefined,
-          z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
-        ),
+        video: heroVideo,
       }),
       about: z.object({
         eyebrow: optionalText,
@@ -228,23 +240,18 @@ const pages = defineCollection({
       expect: optionalSection({ ...sectionHead, items: list(z.string()) }),
       /** "How it works": numbered steps. Empty list hides it. */
       steps: optionalSection({ ...sectionHead, items: titledItems }),
+      proof,
+      faq,
       /** The closing band at the bottom of the page. */
       ctaBand: optionalBlock(ctaBand),
     }),
 });
 
-// The five audience pages (private sessions, companies, hospitality, studios, brands)
-// all share one layout: src/layouts/AudiencePage.astro.
+// The Retreats & events page, laid out by src/layouts/AudiencePage.astro.
 const audiencePages = defineCollection({
   loader: yamlIn('audience-pages'),
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
-      audience: z.enum(audiences),
-      /** The page's mood: colour of the tinted sections and footer (golden or sage with linen and leaves). */
-      sectionColour: z.enum(['golden', 'sage']).default('golden'),
-      /** The light behind the header: golden sunrise, or sage with linen and a leaf shadow. */
-      headerLight: z.enum(['golden', 'sage']).default('golden'),
       seo: z.object({ title: z.string(), description: z.string() }),
       hero: z.object({
         eyebrow: optionalText,
@@ -255,12 +262,7 @@ const audiencePages = defineCollection({
         image: image(),
         imageAlt: z.string(),
         imageFocus: z.enum(['center', 'top', 'upper', 'lower', 'bottom', 'left', 'right']).default('center'),
-        video: z.preprocess(
-          blankToUndefined,
-          z.object({ src: z.string(), poster: z.string(), speed: z.number().min(0.25).max(2).default(1) }).optional(),
-        ),
-        layout: z.enum(['split', 'overlay']).default('split'),
-        textPosition: z.enum(['center', 'left']).default('left'),
+        video: heroVideo,
       }),
       /** One-line ticked points, the same look as "You're in the right place if you…" on the home page. */
       whoFor: z.object({ ...sectionHead, items: list(z.string()) }),
@@ -268,13 +270,8 @@ const audiencePages = defineCollection({
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** Heading above the offer cards; only shown when this audience has published offers. */
       investment: optionalBlock(z.object({ ...sectionHead, note: optionalText })),
-      proof: z.object({ eyebrow: optionalText, title: z.string() }),
-      faq: optionalSection({
-        ...sectionHead,
-        items: list(z.object({ question: z.string(), answer: z.string() })),
-        /** Link under the questions, e.g. Another question? Ask me (/enquire opens the pop-up). */
-        link: optionalLink,
-      }),
+      proof,
+      faq,
       /** The enquiry form near the bottom of the page (organisers: the proposal form). */
       enquiry: optionalBlock(z.object(sectionHead)),
       /** Credentials in a row across the page, under the About section. */

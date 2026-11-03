@@ -1,16 +1,13 @@
 ---
 /*
- * One layout for every audience page (retreats & events, and later brands, studios & clinics,
- * companies). Content comes from src/content/audience-pages/<audience>.yaml, plus the offers and
- * testimonials tagged for that audience. Sections the editor leaves empty are skipped.
- * Private clients have the home page instead; private.yaml only holds the shared reviews heading
- * and questions.
+ * The layout for an audience page (retreats & events). Content comes from
+ * src/content/audience-pages/<audience>.yaml, plus the offers and testimonials tagged for that
+ * audience. Sections the editor leaves empty are skipped. Private clients have the home page instead.
  *
  * The header button is the page's own main action (e.g. Request a proposal), so organisers never see
  * the intro session button. Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
  */
 import Base from './Base.astro';
-import LeafShadow from '../components/ui/LeafShadow.astro';
 import Section from '../components/ui/Section.astro';
 import Checklist from '../components/patterns/Checklist.astro';
 import AboutSection from '../components/patterns/AboutSection.astro';
@@ -39,22 +36,20 @@ const page = await getAudiencePage(audience);
 const offers = await getOffers(audience);
 const testimonials = await getTestimonials(audience);
 const hero = resolveHeroLinks(page.hero, site);
-const sage = page.sectionColour === 'sage';
 // The About section and logo banner are shared with the home page, so they are edited in one place.
 const { about, logos } = await getPage('home');
 ---
 
-<Base title={page.seo.title} description={page.seo.description} mood={page.sectionColour}>
+<Base title={page.seo.title} description={page.seo.description}>
   <Header nav={site.nav} cta={page.hero.primary} sections={[testimonials.length > 0 && 'reviews', 'about', page.faq && 'faq'].filter((s): s is string => !!s)} />
 
   <main id="main">
-    <Hero layout="split" {...hero} light={page.headerLight === 'sage' ? 'meadow' : 'sunrise'}>
+    <Hero {...hero}>
       <TrustLine slot="trust" trust={{ items: site.trust.items }} />
     </Hero>
 
     {/* "Perfect for" is a light, faded sage, like on the private page. */}
     <Section space="m" tone="alt" tint="sage">
-      {sage && <LeafShadow placement="section" />}
       <Checklist {...page.whoFor} />
     </Section>
 
@@ -70,7 +65,6 @@ const { about, logos } = await getPage('home');
     {
       page.steps && (
         <Section space="m" tone="alt">
-          {sage && <LeafShadow placement="section" />}
           <StepList {...page.steps} />
         </Section>
       )

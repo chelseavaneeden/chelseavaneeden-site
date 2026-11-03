@@ -83,39 +83,9 @@
     mask-image: var(--wash-mask-top);
   }
 
-  /* On sage pages (retreats), tinted sections have woven linen texture, faded at the top and bottom. */
-  [data-mood='sage'] :is(section, footer)[data-tone='alt'] {
-    position: relative;
-    isolation: isolate;
-  }
-
-  [data-mood='sage'] :is(section, footer)[data-tone='alt']::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: var(--linen-weave);
-    background-size: var(--linen-weave-size);
-    opacity: var(--linen-weave-opacity);
-    mix-blend-mode: multiply;
-    -webkit-mask-image: var(--fade-y-mask);
-    mask-image: var(--fade-y-mask);
-  }
-
   /* The credentials band: a whisper of sage-grey in its corners. */
   [data-tone='band'] {
     background-image: var(--band-wash);
-  }
-
-  /* A sand wall (light and leaf shadows are added by WallLight). */
-  [data-tone='wall'] {
-    background-image: var(--wall-base);
-  }
-
-  /* Moss bands and cards: lit by low golden sun. */
-  [data-tone='dark'] {
-    background-image: var(--glow-moss);
   }
 
   /* Emphasised words in headings (*words* in the editor) turn amber. */
@@ -200,11 +170,11 @@
     translate: 0 calc((1 - var(--grow-follow)) * var(--reveal-distance));
   }
 
-  /* Slow, always-on movement (sun rays, drifting light, swaying linen) stops for people who prefer
-     reduced motion. */
+  /* Slow, always-on movement (sun rays, contour lines) stops for people who prefer reduced motion.
+     Important because the animations are set in their components' own styles, which outrank this layer. */
   @media (prefers-reduced-motion: reduce) {
     [data-ambient] {
-      animation: none;
+      animation: none !important;
     }
   }
 }
@@ -248,23 +218,6 @@
   50% {
     opacity: 1;
     translate: -3% 1.5%;
-  }
-}
-
-/* Leaf shadows on a wall, moving in a morning breeze. */
-@keyframes leaf-sway {
-  0%,
-  100% {
-    rotate: 0deg;
-    translate: 0 0;
-  }
-  35% {
-    rotate: 2.5deg;
-    translate: -1% 1%;
-  }
-  70% {
-    rotate: -1.5deg;
-    translate: 1% -0.5%;
   }
 }
 
