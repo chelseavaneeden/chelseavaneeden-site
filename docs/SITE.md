@@ -24,7 +24,6 @@ by itself, usually within 2 minutes. There is nothing to upload by hand.
 | `scripts/check-cms.mjs` (runs in every build) | Everything in `src/content` must be listed in `.pages.yml`. Pages CMS deletes anything it doesn't list when it saves a file, so a missing field stops the build instead of quietly losing content. It also catches required fields left empty and choices the editor doesn't offer. |
 | `src/content.config.ts` (runs in every build) | If a save isn't valid, the build stops and the site keeps its last good version. |
 | `/version.txt` | Shows which save the website is showing. |
-| `.github/workflows/check-website-updated.yml` | After every save, checks `/version.txt` matches. If it doesn't after 10 minutes, it opens an issue assigned to Chelsea, so GitHub emails her instead of a failed publish going unnoticed. |
 
 If you add a field to `src/content.config.ts`, add it to `.pages.yml` too (the build tells you if you forget).
 
@@ -159,9 +158,8 @@ The pipeline stays exactly the same; only the address at the end changes.
 
 1. Add the domain to `wrangler.jsonc` and move the domain's DNS from Framer to Cloudflare.
 2. Set `PUBLIC_INDEXABLE=true` in Cloudflare's build variables, so Google can see the site.
-3. Change `SITE_URL` in `.github/workflows/check-website-updated.yml`.
-4. Point Stripe's redirect, Turnstile's hostname and Resend's sending domain at the real domain.
-5. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
+3. Point Stripe's redirect, Turnstile's hostname and Resend's sending domain at the real domain.
+4. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
 
 ## Older versions
 
