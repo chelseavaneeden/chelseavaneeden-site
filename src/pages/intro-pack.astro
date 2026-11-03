@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Button from '../components/ui/Button.astro';
 import Section from '../components/ui/Section.astro';
+import Sunlight from '../components/ui/Sunlight.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import NumberedList from '../components/patterns/NumberedList.astro';
@@ -23,10 +24,14 @@ const intro = site.introPack;
 >
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
-    <Section space="m">
+    {/* The home page header's sunrise glow, running up behind the menu. */}
+    <Section space="none" class="relative isolate -mt-(--header-h) overflow-hidden bg-surface pt-(--hero-pad) pb-(--space-section-m) md:-mt-(--header-h-md) md:pt-(--hero-pad-md)">
+      <Sunlight variant="sunrise" />
       <div class="flex flex-col items-center gap-10">
         <SectionHeader eyebrow={intro.eyebrow} title={intro.title} intro={intro.intro} layout="centered" />
-        <div class="w-full">
+        {/* Stripe paints its own background. Darken lets the glow show through it, so there is no box around the
+            table, as long as Stripe's background colour (Stripe → Pricing tables) is as light as the page's. */}
+        <div class="w-full mix-blend-darken">
           <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
         </div>
         {intro.points.length > 0 && <NumberedList items={intro.points} />}

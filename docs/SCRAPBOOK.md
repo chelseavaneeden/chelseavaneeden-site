@@ -57,7 +57,7 @@ swap for a group or outdoor photo), who I work with, how it works, questions, an
 Since 3 Nov the first step is a single **Intro Session at €55**. Chelsea changed the Stripe table and asked for the
 site to match; it replaces the 4-session pack at €260. The page's address is still `/intro-pack`.
 
-1. Every **Book your Session** goes to **`/intro-pack`**: the **intro-only** Stripe table, then three short numbered steps.
+1. Every **Book your Session** goes to **`/intro-pack`**, on the home header's sunrise glow: the **intro-only** Stripe table, then three short numbered steps.
    Words and table ID: Site settings → Intro session page.
 2. After paying, Stripe should send people to **`/welcome`** (set in Stripe on the pricing table). It shows
    the booking link (Site settings → Welcome page → booking link; a fallback line until it's set) and the intake form.
