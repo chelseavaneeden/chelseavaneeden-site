@@ -2,6 +2,7 @@
 // UNTIL LAUNCH: there are deliberately no `routes` or custom domains here, so the site is at
 // https://chelseavaneeden-site.chelseavaneeden-site.workers.dev and never touches chelseavaneeden.com
 // (the live Framer site). Add the domain only at launch, on Chelsea's go-ahead (see docs/SITE.md).
+// `preview_urls` stays off: there is one site and one link, so old versions can't be mistaken for it.
 //
 // The site is static files, plus one small script (worker/index.ts) that only runs for /api/*:
 // the enquiry forms post there and it emails the answers. Its keys are Cloudflare secrets, never
@@ -12,7 +13,7 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
-  "preview_urls": true,
+  "preview_urls": false,
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

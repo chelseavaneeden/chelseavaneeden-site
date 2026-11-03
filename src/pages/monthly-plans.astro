@@ -27,7 +27,7 @@ const plans = site.monthlyPlans;
   <main id="main">
     <Section space="m">
       <div class="flex flex-col items-center gap-10">
-        <SectionHeader eyebrow={plans.eyebrow} title={plans.title} intro={plans.intro} layout="centered" />
+        <SectionHeader level={1} eyebrow={plans.eyebrow} title={plans.title} intro={plans.intro} layout="centered" />
         {
           plans.stripePricingTableId ? (
             <div class="w-full">

@@ -13,7 +13,7 @@ This is the rule Chelsea asked for after the CMS and her preview link showed two
 - **Publishing is pushing to `main`.** Cloudflare does the rest. Commit and push once the change is checked. Confirm it with
   `curl <link>/version.txt`, which should show the commit you pushed.
 - **Never publish by hand and never create preview links:** no `wrangler deploy`, no `wrangler versions upload`, no
-  `--preview-alias`. A second link is how the mismatch started.
+  `--preview-alias`, and `preview_urls` stays `false` in `wrangler.jsonc`. A second link is how the mismatch started.
 - **Don't keep work on other branches.** A short-lived branch is fine for a risky change as long as it's merged or deleted the
   same day, and Chelsea knows the CMS doesn't edit it.
 - **New design ideas:** PNG mock-ups or the dev server in the browser pane, not a second version of the site.

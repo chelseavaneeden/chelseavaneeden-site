@@ -20,7 +20,7 @@ by itself, usually within a few minutes (longer when Cloudflare is busy). There 
 
 | Safeguard | What it does |
 |---|---|
-| One branch | `main` is the only working version, and it's the one in the CMS link above. |
+| One branch, one link | `main` is the only branch, so the CMS can't open the wrong version. Preview links are switched off (`preview_urls: false` in `wrangler.jsonc`), so no old version can be mistaken for the site. |
 | `scripts/check-cms.mjs` (runs in every build) | Everything in `src/content` must be listed in `.pages.yml`. Pages CMS deletes anything it doesn't list when it saves a file, so a missing field stops the build instead of quietly losing content. It also catches required fields left empty and choices the editor doesn't offer. |
 | `src/content.config.ts` (runs in every build) | If a save isn't valid, the build stops and the site keeps its last good version. |
 | `/version.txt` | Shows which save the website is showing. |
@@ -165,7 +165,17 @@ The pipeline stays exactly the same; only the address at the end changes.
 
 ## Older versions
 
-Earlier designs are kept as tags in git (`archive/…`), so nothing is lost: `git tag --list 'archive/*'`.
+Earlier designs are kept as tags in git, so nothing is lost. The CMS doesn't list them and they have no links.
+
+| Tag | What it is |
+|---|---|
+| `archive/scrapbook` | The Scrapbook design |
+| `archive/studio` | The Studio design |
+| `archive/old-main-20-oct` | The site's main version before Forest (direction B, 20 Oct) |
+| `archive/forest-exploration` | The Forest branch at the moment it became `main` |
+| `archive/topography-sample` | A friend's hand-drawn topography behind the header (not chosen) |
+
+To look at one again, ask Claude to run it on the dev server in the browser pane: it changes nothing on the site.
 
 ## Testing tips
 

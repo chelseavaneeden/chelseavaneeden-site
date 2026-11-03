@@ -12,9 +12,11 @@ interface Props {
   id?: string;
   /** Stacked only: the title grows across the screen and settles as the section scrolls in (ScrollGrow). */
   grow?: boolean;
+  /** Use 1 when this is the page's main heading. The look stays the same. */
+  level?: 1 | 2;
 }
 
-const { eyebrow, title, intro, layout = 'stacked', id, grow = false } = Astro.props;
+const { eyebrow, title, intro, layout = 'stacked', id, grow = false, level = 2 } = Astro.props;
 ---
 
 {
@@ -34,7 +36,7 @@ const { eyebrow, title, intro, layout = 'stacked', id, grow = false } = Astro.pr
           <Heading variant="h1" text={title} id={id} />
         </div>
       ) : (
-        <Heading variant="h1" text={title} id={id} />
+        <Heading level={level} variant="h1" text={title} id={id} />
       )}
       {intro && (grow ? <div data-grow-follow><Text tone="muted" class="max-w-prose" text={intro} /></div> : <Text tone="muted" class="max-w-prose" text={intro} />)}
     </div>
