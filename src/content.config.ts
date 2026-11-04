@@ -50,7 +50,7 @@ const optionalSection = <T extends z.ZodRawShape>(shape: T) =>
 const enquiryForm = z.object({
   title: z.string(),
   intro: optionalText,
-  questions: list(z.object({ label: z.string(), short: z.string(), options: list(z.string()) })),
+  questions: list(z.object({ label: z.string(), short: z.string(), required: z.boolean().default(true), options: list(z.string()) })),
   fields: list(
     z.object({
       name: z.string().regex(/^[a-z][a-z0-9-]*$/, 'Lower-case letters, numbers and dashes only, e.g. message.'),
@@ -311,7 +311,7 @@ const offers = defineCollection({
         currency: z.enum(['EUR', 'GBP', 'USD']).default('EUR'),
         unit: z.preprocess(
           blankToUndefined,
-          z.enum(['session', 'pack', 'month', 'programme', 'workshop', 'day', 'person']).optional(),
+          z.enum(['session', 'intro-session', 'pack', 'month', 'programme', 'workshop', 'day', 'person']).optional(),
         ),
         priceVisibility: z.enum(['web', 'media-kit', 'hidden']).default('web'),
         priceNote: optionalText,

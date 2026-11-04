@@ -177,6 +177,11 @@
       animation: none !important;
     }
   }
+
+  /* The visitor pressed pause (MotionToggle.astro): looping movement holds still. One-off fade-ins still finish. */
+  html[data-motion='paused'] [data-ambient] {
+    animation-play-state: paused !important;
+  }
 }
 
 /* Movement ---------------------------------------------------------------- */

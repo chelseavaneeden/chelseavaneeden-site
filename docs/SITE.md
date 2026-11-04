@@ -82,6 +82,8 @@ The first step is a single **Intro Session at €55** (since 3 Nov). The page's 
   page), **proposal** (Retreats & events) and **intake** (`/welcome`, with a consent tick for health information).
 - The send button is always active. If something is missing it says so beside the button ("Still needed: Email · …"),
   turns those questions brick red and moves to the first one. Never go back to a disabled button with no explanation.
+- A tap-to-choose question can be optional ("Must be answered" in the CMS). "When?" and "Group size" on the proposal form
+  are, so organisers who don't know yet can still send. Unanswered ones are left out of the email.
 - They post to **`/api/enquire`**, handled by `worker/index.ts` (the only server code). It checks the site, a hidden spam
   trap and Turnstile (when set), then emails the answers through **Resend** with reply-to set to the sender.
 - Keys are Cloudflare **secrets**, never in this public repo: `npx wrangler secret put RESEND_API_KEY`, `ENQUIRY_TO` (the
@@ -118,6 +120,9 @@ glows, dark bands or tilting on hover.
 - **Legibility floor (audit, 4 Nov):** no text under 14px; form field and choice outlines use `--line-control` (about
   4:1, the guideline is 3:1); phone tap targets reach 44px, using the invisible `tap-area` utility where the look must stay
   the same. Tap areas on the footer links apply on phones only. Inline links in running text are exempt.
+- **Pausing motion:** `MotionToggle.astro`, a small button on the hero video and the logo band. Either one pauses the video,
+  the logos and the sun rays, and the choice carries across pages in that browser. It's hidden when the device asks for
+  reduced motion, since nothing moves then. New looping animations need `data-ambient` so the button stops them too.
 - **Link previews:** `Base.astro` adds them to every page. The picture is Site settings → Picture for shared links, cropped
   to 1200×630.
 - **Videos:** keep hero videos around 2 Mbit/s and 720p, about 1 to 1.5 MB. Visitors with data saver on get the poster only.

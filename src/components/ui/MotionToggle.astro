@@ -1,0 +1,80 @@
+---
+// A small, quiet pause button for what keeps moving on a page: the header video, the logo band and the
+// slow sun rays. Pressing any of these buttons pauses all of them, and the choice is remembered on the
+// visitor's next pages. Hidden when the device already asks for reduced motion, as nothing moves then.
+// The parent places it. It's 44px to tap, with a smaller visible disc.
+import Icon from './Icon.astro';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const pause = t('en', 'motion.pause');
+const play = t('en', 'motion.play');
+---
+
+<button
+  type="button"
+  class:list={['group/motion flex size-11 items-center justify-center rounded-pill motion-reduce:hidden', className]}
+  aria-label={pause}
+  title={pause}
+  data-motion-toggle
+  data-label-pause={pause}
+  data-label-play={play}
+>
+  <span class="flex size-8 items-center justify-center rounded-pill bg-surface/85 text-ink transition-colors group-hover/motion:bg-surface">
+    <span class="motion-icon-pause flex"><Icon name="pause" class="text-base" /></span>
+    <span class="motion-icon-resume flex"><Icon name="resume" class="text-base" /></span>
+  </span>
+</button>
+
+<style>
+  .motion-icon-resume {
+    display: none;
+  }
+
+  :global(html[data-motion='paused']) .motion-icon-pause {
+    display: none;
+  }
+
+  :global(html[data-motion='paused']) .motion-icon-resume {
+    display: flex;
+  }
+</style>
+
+<script>
+  // Base.astro sets data-motion on the page before it paints, so a remembered pause shows from the start.
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-motion-toggle]');
+
+  const showState = () => {
+    const paused = root.dataset.motion === 'paused';
+    buttons.forEach((button) => {
+      const label = (paused ? button.dataset.labelPlay : button.dataset.labelPause) ?? '';
+      button.setAttribute('aria-label', label);
+      button.title = label;
+    });
+  };
+  showState();
+
+  buttons.forEach((button) =>
+    button.addEventListener('click', () => {
+      const paused = root.dataset.motion !== 'paused';
+      if (paused) root.dataset.motion = 'paused';
+      else delete root.dataset.motion;
+      try {
+        if (paused) localStorage.setItem('motion', 'paused');
+        else localStorage.removeItem('motion');
+      } catch {
+        // Storage can be blocked: the pause still works on this page.
+      }
+      document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((video) => {
+        if (paused) video.pause();
+        else video.play().catch(() => {});
+      });
+      showState();
+    }),
+  );
+</script>

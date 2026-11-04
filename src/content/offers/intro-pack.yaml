@@ -7,7 +7,7 @@ imageFocus: upper
 priceDisplay: exact
 price: 55
 currency: EUR
-unit: session
+unit: intro-session
 priceVisibility: web
 includes:
   - 1-on-1 Pilates Session, Online

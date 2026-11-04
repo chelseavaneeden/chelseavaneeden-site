@@ -41,12 +41,14 @@ const id = (name: string) => `${idPrefix}-${name}`;
   <form class="flex flex-col gap-5" data-enquiry={type} novalidate>
     {
       form.questions.map((q, i) => (
-        <fieldset class="group/field" data-short={q.short} data-field={`q${i}`} data-required-label={q.label}>
-          <legend class:list={[question, 'mb-2.5']}>{q.label}</legend>
+        <fieldset class="group/field" data-short={q.short} data-field={`q${i}`} data-required-label={q.required ? q.label : undefined}>
+          <legend class:list={[question, 'mb-2.5']}>
+            {q.label} {!q.required && <span class="font-normal text-ink-muted">(optional)</span>}
+          </legend>
           <div class="flex flex-wrap gap-2">
             {q.options.map((option) => (
               <label class="type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-raised px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
-                <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
+                <input type="radio" name={`q${i}`} value={option} required={q.required} class="sr-only" />
                 {option}
               </label>
             ))}

@@ -8,6 +8,7 @@ export const ui = {
     'price.from': 'From',
     'price.tailored': 'Tailored proposal',
     'unit.session': 'session',
+    'unit.intro-session': 'intro session',
     'unit.pack': 'pack',
     'unit.month': 'month',
     'unit.programme': 'programme',
@@ -19,6 +20,8 @@ export const ui = {
     'nav.partnerships': 'Partnerships',
     'a11y.skip': 'Skip to content',
     'a11y.external': 'opens in a new tab',
+    'motion.pause': 'Pause motion',
+    'motion.play': 'Play motion',
     'footer.rights': 'All rights reserved.',
   },
 } as const;

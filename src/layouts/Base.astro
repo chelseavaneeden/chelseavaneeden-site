@@ -36,6 +36,12 @@ const shareImageUrl = new URL(share.src, Astro.site).href;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {(noindex || !indexable) && <meta name="robots" content="noindex, nofollow" />}
+    <script is:inline>
+      // Someone who pressed pause earlier (MotionToggle.astro) stays paused from the first paint.
+      try {
+        if (localStorage.getItem('motion') === 'paused') document.documentElement.dataset.motion = 'paused';
+      } catch (e) {}
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Chelsea van Eeden" />
     <meta property="og:title" content={title} />

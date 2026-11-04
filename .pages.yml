@@ -409,6 +409,7 @@ content:
         options:
           values:
             - { value: session, label: session }
+            - { value: intro-session, label: intro session }
             - { value: pack, label: pack }
             - { value: month, label: month }
             - { value: programme, label: programme }
@@ -612,10 +613,11 @@ content:
                     label: Tap-to-choose questions
                     type: object
                     list: true
-                    description: 'Each option shows as a button. All are required.'
+                    description: 'Each option shows as a button.'
                     fields:
                       - { name: label, label: Question, type: string, required: true }
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
                   - name: fields
                     label: Extra fields
@@ -646,10 +648,11 @@ content:
                     label: Tap-to-choose questions
                     type: object
                     list: true
-                    description: 'Each option shows as a button. All are required.'
+                    description: 'Each option shows as a button.'
                     fields:
                       - { name: label, label: Question, type: string, required: true }
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
                   - name: fields
                     label: Extra fields
@@ -680,10 +683,11 @@ content:
                     label: Tap-to-choose questions
                     type: object
                     list: true
-                    description: 'Each option shows as a button. All are required.'
+                    description: 'Each option shows as a button.'
                     fields:
                       - { name: label, label: Question, type: string, required: true }
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
                   - name: fields
                     label: Extra fields

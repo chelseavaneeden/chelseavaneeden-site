@@ -33,19 +33,12 @@ const { src, poster, speed = 1, focus = 'center', class: className } = Astro.pro
 
 <script>
   // Videos play at their chosen speed, and stay still (showing their poster frame) for visitors who
-  // prefer reduced motion. Visitors saving mobile data don't download the video at all.
+  // prefer reduced motion or pressed pause earlier. Visitors saving mobile data don't download the
+  // video at all, so its pause button goes too.
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+  const paused = document.documentElement.dataset.motion === 'paused';
   document.querySelectorAll<HTMLVideoElement>('video[data-bg-video]').forEach((v) => {
-    if (reduceMotion || saveData) {
-      v.removeAttribute('autoplay');
-      v.pause();
-      if (saveData) {
-        v.querySelector('source')?.remove();
-        v.load();
-      }
-      return;
-    }
     const speed = Number(v.dataset.speed) || 1;
     const apply = () => {
       v.defaultPlaybackRate = speed;
@@ -53,5 +46,14 @@ const { src, poster, speed = 1, focus = 'center', class: className } = Astro.pro
     };
     apply();
     v.addEventListener('loadedmetadata', apply);
+    if (reduceMotion || saveData || paused) {
+      v.removeAttribute('autoplay');
+      v.pause();
+    }
+    if (saveData) {
+      v.querySelector('source')?.remove();
+      v.load();
+      v.parentElement?.querySelector('[data-motion-toggle]')?.setAttribute('hidden', '');
+    }
   });
 </script>

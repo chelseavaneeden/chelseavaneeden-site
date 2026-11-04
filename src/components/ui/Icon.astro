@@ -11,7 +11,9 @@ export type IconName =
   | 'chevron-down'
   | 'message'
   | 'star'
-  | 'play';
+  | 'play'
+  | 'pause'
+  | 'resume';
 
 interface Props {
   name: IconName;
@@ -35,6 +37,8 @@ const paths: Record<IconName, string> = {
   message: 'M20.5 11.5a8.5 8.5 0 0 1-12.3 7.6L3.5 20.5l1.4-4.5a8.5 8.5 0 1 1 15.6-4.5Z',
   star: 'm12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9Z',
   play: 'M3.5 8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-11a3 3 0 0 1-3-3ZM10 9.2l4.8 2.8-4.8 2.8Z',
+  pause: 'M9 6v12M15 6v12',
+  resume: 'M8.5 6v12l9.5-6Z',
 };
 ---
 
