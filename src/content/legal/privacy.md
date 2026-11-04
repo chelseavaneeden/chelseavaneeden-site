@@ -41,17 +41,17 @@ I never sell your information or share it for advertising.
 
 ## 4. Transfers outside the EU
 
-Some of these services may process information in the United States or elsewhere outside the European Economic Area. Where they do, they rely on safeguards recognised under the GDPR, such as the EU-US Data Privacy Framework or the European Commission's standard contractual clauses.
+Some of these services may process information in the United States or elsewhere outside the European Economic Area. Where they do, they rely on safeguards recognised under the GDPR, such as the EU-US Data Privacy Framework or the European Commission’s standard contractual clauses.
 
 ## 5. How long I keep it
 
-- Enquiries that don't lead to working together: up to 2 years after our last contact.
+- Enquiries that don’t lead to working together: up to 2 years after our last contact.
 - Client records, including session notes and health information: while we work together and up to 2 years after our last session, unless you ask me to delete them sooner.
 - Payment and invoice records: for as long as Portuguese tax and accounting law requires.
 
 ## 6. Cookies
 
-The website uses no advertising or tracking cookies. The payment page loads Stripe, and the forms may load Cloudflare's spam check. Both can set cookies that are strictly necessary for secure payments and spam protection.
+The website uses no advertising or tracking cookies. The payment page loads Stripe, and the forms may load Cloudflare’s spam check. Both can set cookies that are strictly necessary for secure payments and spam protection.
 
 ## 7. Your rights
 
@@ -62,7 +62,7 @@ You can ask me to:
 - delete your information;
 - limit or object to how I use it;
 - send your information to you or another provider in a portable format;
-- stop using information I hold based on your consent (this doesn't affect anything I did before you withdrew it).
+- stop using information I hold based on your consent (this doesn’t affect anything I did before you withdrew it).
 
 I will reply within one month. If you are unhappy with how I handle your information, you can complain to the Portuguese data protection authority, the Comissão Nacional de Proteção de Dados (CNPD), at [cnpd.pt](https://www.cnpd.pt), or to the authority where you live.
 

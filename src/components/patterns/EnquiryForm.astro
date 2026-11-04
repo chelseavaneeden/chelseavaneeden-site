@@ -23,7 +23,8 @@ interface Props {
 
 const { type, enquiry, contact, showTitle = false, idPrefix = type } = Astro.props;
 const form = enquiry.forms[type];
-const field = 'type-body w-full rounded-control border border-line bg-surface-raised px-4 py-3 text-ink placeholder:text-ink-muted';
+const field = 'type-body w-full rounded-control border border-line-control bg-surface-raised px-4 py-3 text-ink placeholder:text-ink-muted aria-invalid:border-error';
+const question = 'type-field text-ink group-data-missing/field:text-error';
 const id = (name: string) => `${idPrefix}-${name}`;
 ---
 
@@ -40,11 +41,11 @@ const id = (name: string) => `${idPrefix}-${name}`;
   <form class="flex flex-col gap-5" data-enquiry={type} novalidate>
     {
       form.questions.map((q, i) => (
-        <fieldset data-short={q.short} data-field={`q${i}`}>
-          <legend class="type-label mb-2.5 text-ink">{q.label}</legend>
+        <fieldset class="group/field" data-short={q.short} data-field={`q${i}`} data-required-label={q.label}>
+          <legend class:list={[question, 'mb-2.5']}>{q.label}</legend>
           <div class="flex flex-wrap gap-2">
             {q.options.map((option) => (
-              <label class="type-body-s cursor-pointer rounded-pill border border-line bg-surface-raised px-4 py-2 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+              <label class="type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-raised px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
                 <input type="radio" name={`q${i}`} value={option} required class="sr-only" />
                 {option}
               </label>
@@ -55,21 +56,21 @@ const id = (name: string) => `${idPrefix}-${name}`;
     }
 
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-      <label class="flex flex-col gap-2" for={id('name')}>
-        <span class="type-label text-ink">{enquiry.nameLabel}</span>
+      <label class="group/field flex flex-col gap-2" for={id('name')} data-required-label={enquiry.nameLabel}>
+        <span class={question}>{enquiry.nameLabel}</span>
         <input id={id('name')} type="text" name="name" required maxlength="100" autocomplete="name" class={field} />
       </label>
-      <label class="flex flex-col gap-2" for={id('email')}>
-        <span class="type-label text-ink">{enquiry.emailLabel}</span>
+      <label class="group/field flex flex-col gap-2" for={id('email')} data-required-label={enquiry.emailLabel}>
+        <span class={question}>{enquiry.emailLabel}</span>
         <input id={id('email')} type="email" name="email" required maxlength="200" autocomplete="email" class={field} />
       </label>
     </div>
 
     {
       form.fields.map((f) => (
-        <label class="flex flex-col gap-2" for={id(f.name)}>
-          <span class="type-label text-ink">
-            {f.label} {!f.required && <span class="text-ink-muted">(optional)</span>}
+        <label class="group/field flex flex-col gap-2" for={id(f.name)} data-required-label={f.required ? f.label : undefined}>
+          <span class={question}>
+            {f.label} {!f.required && <span class="font-normal text-ink-muted">(optional)</span>}
           </span>
           {f.type === 'textarea' ? (
             <textarea
@@ -100,9 +101,9 @@ const id = (name: string) => `${idPrefix}-${name}`;
 
     {
       form.consent && (
-        <label class="type-body-s flex items-start gap-3 text-ink" for={id('consent')}>
-          <input id={id('consent')} type="checkbox" name="consent" required class="mt-1 size-4 shrink-0 accent-ink" />
-          <span>
+        <label class="group/field type-body-s flex items-start gap-3 text-ink" for={id('consent')} data-required-label={enquiry.missingTick}>
+          <input id={id('consent')} type="checkbox" name="consent" required class="size-6 shrink-0 accent-ink" />
+          <span class="group-data-missing/field:text-error">
             {form.consent}{' '}
             <a href="/privacy" class="underline underline-offset-4">Privacy policy</a>
           </span>
@@ -120,11 +121,11 @@ const id = (name: string) => `${idPrefix}-${name}`;
     <div class="flex flex-col gap-3 pt-1">
       <button
         type="submit"
-        disabled
         class="type-button w-full rounded-pill bg-cta px-7 py-4 text-cta-ink transition duration-(--duration-base) ease-soft hover:bg-cta-hover hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-cta disabled:hover:shadow-none"
       >
         {form.button}
       </button>
+      <p class="type-body-s hidden text-center text-error" data-enquiry-missing data-lead={enquiry.missingLead} role="alert"></p>
       <p class="type-caption text-center text-ink-muted" data-enquiry-status role="status" aria-live="polite">
         {enquiry.replyPromise}
         {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
@@ -158,19 +159,42 @@ const id = (name: string) => `${idPrefix}-${name}`;
     const send = form.querySelector<HTMLButtonElement>('[type=submit]');
     const error = form.querySelector<HTMLElement>('[data-enquiry-error]');
     const done = wrap?.querySelector<HTMLElement>('[data-enquiry-done]');
-    if (!send || !error || !done) return;
+    const missing = form.querySelector<HTMLElement>('[data-enquiry-missing]');
+    if (!send || !error || !done || !missing) return;
     const label = send.textContent;
 
-    const update = () => {
-      send.disabled = !form.checkValidity();
+    const required = [...form.querySelectorAll<HTMLElement>('[data-required-label]')];
+    const controlsOf = (el: HTMLElement) => [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')];
+
+    // The button is always active. If something is missing, this marks it and names it next to the button,
+    // so nobody is left looking at a dead button. Returns the first one.
+    const flagMissing = () => {
+      const unfinished = required.filter((el) => controlsOf(el).some((control) => !control.validity.valid));
+      required.forEach((el) => {
+        const isMissing = unfinished.includes(el);
+        el.toggleAttribute('data-missing', isMissing);
+        controlsOf(el).forEach((control) => (isMissing ? control.setAttribute('aria-invalid', 'true') : control.removeAttribute('aria-invalid')));
+      });
+      missing.textContent = unfinished.length ? `${missing.dataset.lead} ${unfinished.map((el) => el.dataset.requiredLabel).join(' · ')}` : '';
+      missing.classList.toggle('hidden', unfinished.length === 0);
+      return unfinished[0];
     };
-    form.addEventListener('input', update);
-    form.addEventListener('change', update);
-    update();
+
+    // Once the message is showing, it updates as each answer is filled in.
+    const refresh = () => {
+      if (!missing.classList.contains('hidden')) flagMissing();
+    };
+    form.addEventListener('input', refresh);
+    form.addEventListener('change', refresh);
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (!form.checkValidity()) return;
+      const first = flagMissing();
+      if (first) {
+        first.scrollIntoView({ block: 'center' });
+        controlsOf(first)[0]?.focus({ preventScroll: true });
+        return;
+      }
       const data = new FormData(form);
       const answers: Answer[] = [];
       form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-short]').forEach((set) => {
@@ -209,7 +233,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
         (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);
       } finally {
         send.textContent = label;
-        update();
+        send.disabled = false;
       }
     });
   });

@@ -43,7 +43,7 @@ const nav = allNav.map((item) => {
     aria-hidden="true"
   ></span>
   <Container width="wide" class="flex h-16 items-center justify-between gap-6 md:h-20">
-    <a href="/" class="flex items-center" aria-label="Chelsea van Eeden, home"><Logo size="m" /></a>
+    <a href="/" class="tap-area flex items-center" aria-label="Chelsea van Eeden, home"><Logo size="m" /></a>
 
     <nav aria-label="Main" data-track="menu" class="hidden items-center gap-8 lg:flex">
       <ul class="flex items-center gap-7">
@@ -101,14 +101,14 @@ const nav = allNav.map((item) => {
         <ul class="flex flex-col gap-1">
           {
             nav.map((item) => (
-              <li class="border-b border-line py-3">
+              <li class="border-b border-line py-1.5">
                 {item.children.length > 0 ? (
                   <>
                     <p class="type-eyebrow mb-2 text-ink-muted">{item.label}</p>
                     <ul class="flex flex-col gap-1">
                       {item.children.map((child) => (
                         <li>
-                          <a href={child.href} class="type-h3 block py-1 text-ink">
+                          <a href={child.href} class="type-h3 block py-2.5 text-ink">
                             {child.label}
                           </a>
                         </li>
@@ -116,7 +116,7 @@ const nav = allNav.map((item) => {
                     </ul>
                   </>
                 ) : (
-                  <a href={item.href} class="type-h3 block py-1 text-ink" target={item.external ? '_blank' : undefined}>
+                  <a href={item.href} class="type-h3 block py-2.5 text-ink" target={item.external ? '_blank' : undefined}>
                     {item.label}
                   </a>
                 )}

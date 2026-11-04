@@ -85,7 +85,7 @@ const yamlIn = (dir: string) => glob({ pattern: '*.{yaml,yml}', base: `./src/con
 
 const settings = defineCollection({
   loader: yamlIn('settings'),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     nav: list(
       z.object({
         label: z.string(),
@@ -164,6 +164,10 @@ const settings = defineCollection({
     enquiry: z.object({
       nameLabel: z.string().default('Name'),
       emailLabel: z.string().default('Email'),
+      /** Shown by the send button when something is missing, followed by what: "Still needed: Email". */
+      missingLead: z.string().default('Still needed:'),
+      /** How that message names an unticked consent box. */
+      missingTick: z.string().default('The tick box'),
       /** Shown under every send button, e.g. "I reply personally within one working day." */
       replyPromise: optionalText,
       /** Short line next to the privacy policy link under the send button. */
@@ -177,6 +181,8 @@ const settings = defineCollection({
     /** Umami Cloud website ID (cookieless analytics). Empty: no analytics. */
     analytics: z.object({ umamiWebsiteId: optionalText }).default({}),
     tagline: z.string(),
+    /** The picture shown when someone shares a link to the site. A wide photo works best. */
+    shareImage: image(),
     /** Optional extra after the copyright line, e.g. a city. */
     location: optionalText,
     /** Year shown in the footer copyright line. Empty shows the current year. */

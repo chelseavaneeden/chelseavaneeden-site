@@ -34,7 +34,7 @@ const year = copyrightYear ?? new Date().getFullYear();
         <Text variant="body-s" tone="muted" class="max-w-xs">{tagline}</Text>
       </div>
       <nav aria-label="Footer" class="md:col-span-4">
-        <ul class="grid grid-cols-2 gap-x-6 gap-y-2.5">
+        <ul class="grid grid-cols-2 gap-x-6 md:gap-y-2.5">
           {
             links.map((l) => (
               <li>
@@ -42,7 +42,7 @@ const year = copyrightYear ?? new Date().getFullYear();
                   href={l.href}
                   target={/^https?:\/\//.test(l.href) ? '_blank' : undefined}
                   rel={/^https?:\/\//.test(l.href) ? 'noopener' : undefined}
-                  class="type-body-s text-ink transition-colors hover:text-ink-muted"
+                  class="type-body-s inline-flex min-h-11 items-center text-ink transition-colors hover:text-ink-muted md:min-h-0"
                 >
                   {l.label}
                 </a>
@@ -53,7 +53,7 @@ const year = copyrightYear ?? new Date().getFullYear();
       </nav>
       {
         socials.length > 0 && (
-          <ul class="flex flex-col gap-2.5 md:col-span-3">
+          <ul class="flex flex-col md:col-span-3 md:gap-2.5">
             {
               socials.map((s) => (
                 <li>
@@ -61,7 +61,7 @@ const year = copyrightYear ?? new Date().getFullYear();
                     href={s.href}
                     target="_blank"
                     rel="noopener"
-                    class="type-body-s inline-flex items-center gap-1.5 text-ink transition-colors hover:text-ink-muted"
+                    class="type-body-s inline-flex min-h-11 items-center gap-1.5 text-ink transition-colors hover:text-ink-muted md:min-h-0"
                   >
                     {s.label}
                     <Icon name="arrow-up-right" label={t(lang, 'a11y.external')} />
@@ -75,7 +75,7 @@ const year = copyrightYear ?? new Date().getFullYear();
     </div>
     <div class="flex flex-col gap-3 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
       <Text variant="caption" tone="muted">© {year} Chelsea van Eeden{location && ` · ${location}`}</Text>
-      <ul class="flex flex-wrap gap-5">
+      <ul class="flex flex-wrap gap-x-5 md:gap-5">
         {
           legal.map((l) => (
             <li>
@@ -83,7 +83,7 @@ const year = copyrightYear ?? new Date().getFullYear();
                 href={l.href}
                 target={/^https?:\/\//.test(l.href) ? '_blank' : undefined}
                 rel={/^https?:\/\//.test(l.href) ? 'noopener' : undefined}
-                class="type-caption text-ink-muted transition-colors hover:text-ink"
+                class="type-caption inline-flex min-h-11 items-center text-ink-muted transition-colors hover:text-ink md:min-h-0"
               >
                 {l.label}
               </a>

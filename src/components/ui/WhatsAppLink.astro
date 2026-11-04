@@ -18,7 +18,7 @@ const { href, label, size = 's', class: className } = Astro.props;
   rel="noopener"
   data-track="whatsapp_link"
   class:list={[
-    'inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2',
+    'tap-area inline-flex items-center gap-1.5 text-ink underline decoration-1 underline-offset-4 transition-colors hover:decoration-2',
     size === 'm' ? 'type-body' : 'type-body-s',
     className,
   ]}

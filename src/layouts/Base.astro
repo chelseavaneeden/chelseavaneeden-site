@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { Font } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import EnquiryDialog from '../components/patterns/EnquiryDialog.astro';
 import ScrollGrow from '../components/ui/ScrollGrow.astro';
 import { t, type Lang } from '../i18n/ui';
@@ -20,7 +20,12 @@ const { title, description, lang = 'en', noindex = false, pageEvent } = Astro.pr
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev address out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
-const { contact, enquiry, analytics, bookCta } = await getSite();
+const { contact, enquiry, analytics, bookCta, shareImage } = await getSite();
+
+// What WhatsApp, email and social apps show when someone shares a link to this page.
+const share = await getImage({ src: shareImage, width: 1200, height: 630, fit: 'cover', format: 'jpeg' });
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const shareImageUrl = new URL(share.src, Astro.site).href;
 ---
 
 <!doctype html>
@@ -31,6 +36,15 @@ const { contact, enquiry, analytics, bookCta } = await getSite();
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {(noindex || !indexable) && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Chelsea van Eeden" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={shareImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

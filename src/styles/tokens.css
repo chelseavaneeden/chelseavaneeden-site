@@ -116,6 +116,8 @@
   --quote-mark: var(--honey-400);
   --list-mark: var(--amber-500);
   --line: var(--linen-300);
+  /* Outlines of form fields and choices: dark enough to find (3.9:1, the guideline is 3:1). */
+  --line-control: var(--olive-600);
   --focus: var(--amber-700);
   --success: var(--moss-700);
   --error: var(--rust-600);
@@ -193,6 +195,7 @@
   --color-note: var(--note);
   --color-note-ink: var(--note-ink);
   --color-line: var(--line);
+  --color-line-control: var(--line-control);
   --color-focus: var(--focus);
   --color-success: var(--success);
   --color-error: var(--error);
@@ -230,8 +233,11 @@
 /* 4. SHARED SCALES -------------------------------------------------------- */
 :root {
   /* Fluid type steps (≈ 1.2 → 1.333 scale from 360px to 1440px viewports). */
-  --step--2: clamp(0.72rem, 0.7rem + 0.1vw, 0.78rem);
-  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  /* Nothing on the site is smaller than 14px, for legibility. */
+  --step--2: 0.875rem;
+  --step--1: clamp(0.875rem, 0.8rem + 0.15vw, 0.9rem);
+  /* Form questions: a little larger than the small steps, in normal capitalisation. */
+  --step-field: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
   --step-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.42rem);
   /* Between step-1 and step-2: large reading text, like the About section. */
@@ -280,6 +286,9 @@
   --duration-breathe: 11s;
   --duration-contour: 14s;
 
+  /* The height a small link's tap area reaches on a phone (the tap-area utility, see global.css). */
+  --tap-target: 2.75rem;
+
   /* Layers */
   --z-grain: 70;
   --z-header: 50;
@@ -303,7 +312,7 @@
   --eyebrow-case: uppercase;
   /* Labels and buttons: small Jost capitals, widely spaced, as on the mood board. */
   --label-weight: 500;
-  --label-tracking: 0.16em;
+  --label-tracking: 0.12em;
   --label-case: uppercase;
   --body-weight: 400;
   --body-leading: 1.7;

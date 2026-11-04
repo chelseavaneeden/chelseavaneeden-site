@@ -234,6 +234,21 @@
   }
 }
 
+/* A bigger tap area with no change to the look: an invisible layer centred on a small link. */
+@utility tap-area {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: var(--tap-target);
+    translate: 0 -50%;
+  }
+}
+
 /* Emphasised words keep the heading's own colour (one-colour headings). */
 @utility em-plain {
   & em {

@@ -163,6 +163,14 @@
   text-transform: var(--label-case);
 }
 
+/* Form questions and field names: normal capitalisation, because they're sentences people have to read. */
+@utility type-field {
+  font-family: var(--font-body-family);
+  font-size: var(--step-field);
+  font-weight: var(--label-weight);
+  line-height: 1.35;
+}
+
 /* Button labels: Jost capitals, widely spaced, a little larger than type-label. */
 @utility type-button {
   font-family: var(--font-label-family);

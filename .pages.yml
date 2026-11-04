@@ -591,6 +591,8 @@ content:
         fields:
           - { name: nameLabel, label: Name field label, type: string, default: Name }
           - { name: emailLabel, label: Email field label, type: string, default: Email }
+          - { name: missingLead, label: Message when something is missing, type: string, default: 'Still needed:', description: 'Shown by the send button, followed by what is missing.' }
+          - { name: missingTick, label: Name for the tick box in that message, type: string, default: The tick box }
           - { name: replyPromise, label: Reply promise under the send button, type: string, description: 'Only promise what you can keep, e.g. I reply personally within one working day.' }
           - { name: privacyNote, label: Privacy line, type: string, description: 'Shown before the Privacy policy link under the send button.' }
           - { name: success, label: Message after sending, type: text, required: true }
@@ -708,6 +710,7 @@ content:
         fields:
           - { name: umamiWebsiteId, label: Umami website ID, type: string, description: 'From Umami Cloud → Websites → Edit. Leave empty for no analytics.' }
       - { name: tagline, label: Footer line under the logo, type: text, required: true }
+      - { name: shareImage, label: Picture for shared links, type: image, required: true, description: 'Shown when someone shares your link in WhatsApp, email or social media. A wide photo works best.' }
       - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'Leave empty to show the current year.' }
       - { name: location, label: Extra after the copyright, type: string, description: 'Optional, e.g. a city. Leave empty to show just the copyright.' }
       - name: trust

@@ -80,6 +80,8 @@ The first step is a single **Intro Session at €55** (since 3 Nov). The page's 
 
 - Three forms, words in Site settings → Enquiry forms: **question** (pop-up from every `/enquire` link, and the `/enquire`
   page), **proposal** (Retreats & events) and **intake** (`/welcome`, with a consent tick for health information).
+- The send button is always active. If something is missing it says so beside the button ("Still needed: Email · …"),
+  turns those questions brick red and moves to the first one. Never go back to a disabled button with no explanation.
 - They post to **`/api/enquire`**, handled by `worker/index.ts` (the only server code). It checks the site, a hidden spam
   trap and Turnstile (when set), then emails the answers through **Resend** with reply-to set to the sender.
 - Keys are Cloudflare **secrets**, never in this public repo: `npx wrangler secret put RESEND_API_KEY`, `ENQUIRY_TO` (the
@@ -113,6 +115,12 @@ glows, dark bands or tilting on hover.
 - **Button hover:** just the colour change and a gentle glow.
 - **Footer:** no links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
 - **Line breaks:** pressing Enter in a CMS text field starts a new line on the page.
+- **Legibility floor (audit, 4 Nov):** no text under 14px; form field and choice outlines use `--line-control` (about
+  4:1, the guideline is 3:1); phone tap targets reach 44px, using the invisible `tap-area` utility where the look must stay
+  the same. Tap areas on the footer links apply on phones only. Inline links in running text are exempt.
+- **Link previews:** `Base.astro` adds them to every page. The picture is Site settings → Picture for shared links, cropped
+  to 1200×630.
+- **Videos:** keep hero videos around 2 Mbit/s and 720p, about 1 to 1.5 MB. Visitors with data saver on get the poster only.
 - **Design system:** `/styleguide` shows every token and component. The build fails if a raw colour or size appears outside
   the token files (`scripts/check-tokens.mjs`).
 
@@ -166,8 +174,9 @@ The pipeline stays exactly the same; only the address at the end changes.
 1. Add the domain to `wrangler.jsonc` and move the domain's DNS from Framer to Cloudflare.
 2. Set `PUBLIC_INDEXABLE=true` in Cloudflare's build variables, so Google can see the site.
 3. Change `SITE_URL` in `.github/workflows/check-website-updated.yml`.
-4. Point Stripe's redirect, Turnstile's hostname and Resend's sending domain at the real domain.
-5. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
+4. Change `site` in `astro.config.mjs` to the real domain, so link previews use it.
+5. Point Stripe's redirect, Turnstile's hostname and Resend's sending domain at the real domain.
+6. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
 
 ## Older versions
 

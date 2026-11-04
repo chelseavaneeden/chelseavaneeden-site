@@ -27,7 +27,7 @@ steps:
   title: How it *works*
   items:
     - title: Tell me about your event
-      text: Dates, location, group size and the feel you're after.
+      text: Dates, location, group size and the feel you’re after.
     - title: Your proposal
       text: I reply with a tailored proposal within 48 hours.
     - title: We plan it together
@@ -40,7 +40,7 @@ faq:
   title: Good to *know*
   items:
     - question: Where can you teach?
-      answer: I'm based in Lisbon and travel across Europe and South Africa.
+      answer: I’m based in Lisbon and travel across Europe and South Africa.
     - question: Is it suitable for beginners?
       answer: Yes. Sessions are mixed-level and beginner-friendly, with options to make every exercise easier or harder.
     - question: How much does it cost?
@@ -49,7 +49,7 @@ faq:
       answer: As early as you can, especially for peak retreat and festival season.
 enquiry:
   title: Request a *proposal*
-  intro: Tell me about your retreat or event, and I'll reply with a tailored proposal within 48 hours.
+  intro: Tell me about your retreat or event, and I’ll reply with a tailored proposal within 48 hours.
 credentials:
   look: band
   stats:
