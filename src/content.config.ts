@@ -45,23 +45,33 @@ const optionalSection = <T extends z.ZodRawShape>(shape: T) =>
     z.object(shape).optional(),
   );
 
-// One enquiry form: tap-to-choose questions, extra fields and an optional required tick box.
-// Name and email are always asked.
+// One enquiry form: tap-to-choose questions (above name and email), then name and email, then the extra
+// fields in their order, then the required tick boxes.
 const enquiryForm = z.object({
   title: z.string(),
   intro: optionalText,
   questions: list(z.object({ label: z.string(), short: z.string(), required: z.boolean().default(true), options: list(z.string()) })),
+  /** A short line under the email field, e.g. "Use the email you booked with". */
+  emailHint: optionalText,
   fields: list(
     z.object({
       name: z.string().regex(/^[a-z][a-z0-9-]*$/, 'Lower-case letters, numbers and dashes only, e.g. message.'),
       label: z.string(),
-      type: z.enum(['text', 'textarea']).default('textarea'),
+      /** One line, several lines, a date, a phone number, or tap-to-choose buttons (choice, with options). */
+      type: z.enum(['text', 'textarea', 'date', 'tel', 'choice']).default('textarea'),
       required: z.boolean().default(false),
       placeholder: optionalText,
+      /** For choice: the buttons. */
+      options: list(z.string()),
+      /** For choice: people can tap more than one. */
+      multiple: z.boolean().default(false),
     }),
   ),
-  /** A tick box people must tick before sending, e.g. consent to use health information. */
-  consent: optionalText,
+  /**
+   * Tick boxes people must tick before sending. A link can sit in the text as [Terms](/terms).
+   * short names the box in the "Still needed:" message.
+   */
+  agreements: list(z.object({ text: z.string(), short: optionalText })),
   button: z.string(),
 });
 
@@ -119,11 +129,22 @@ const settings = defineCollection({
       eyebrow: optionalText,
       title: z.string(),
       intro: optionalText,
-      /** Short numbered lines on what happens after paying. */
+      /** Short numbered lines on how booking works. */
       points: list(z.string()),
-      /** Stripe → Pricing tables → the intro-only table's ID (prctbl_…). */
-      stripePricingTableId: z.string().startsWith('prctbl_', 'Paste the pricing table ID, starting with prctbl_.'),
-    }),
+      /**
+       * Google Calendar appointment schedule (Booking page → Share → Website embed → Inline booking page: the
+       * address inside src="…"). Clients pick a time and pay there. A calendar.app.google link also works, but
+       * then the button opens Google's page in a new tab instead of showing it on the page.
+       */
+      bookingPageUrl: z.preprocess(blankToUndefined, z.string().url('Paste the whole address, starting with https://').optional()),
+      bookingButton: z.string().default('See available times'),
+      /** Shown under the button, e.g. the reschedule rule. */
+      bookingNote: optionalText,
+      /** Shown under the button: the notice that paying clients get your private-client emails. */
+      emailNote: optionalText,
+      /** Stripe → Pricing tables → the intro-only table's ID (prctbl_…). Only used while there's no booking page. */
+      stripePricingTableId: z.preprocess(blankToUndefined, z.string().startsWith('prctbl_', 'Paste the pricing table ID, starting with prctbl_.').optional()),
+    }).refine((v) => v.bookingPageUrl || v.stripePricingTableId, 'Add a booking page link (or a Stripe pricing table ID).'),
     /**
      * The monthly plans page (/monthly-plans) for clients continuing after their intro session.
      * It is linked from nowhere on the site: send the link to clients yourself.
@@ -136,16 +157,10 @@ const settings = defineCollection({
       stripePricingTableId: z.preprocess(blankToUndefined, z.string().startsWith('prctbl_').optional()),
       noTableText: z.string(),
     }),
-    /** The thank-you page Stripe sends people to after they pay for the intro session (/welcome). */
+    /** The intake page (/welcome): the email sent after booking links here. */
     welcome: z.object({
       title: z.string(),
       intro: optionalText,
-      bookingTitle: z.string(),
-      bookingText: optionalText,
-      /** Your booking link (Google Calendar booking page, Calendly…). Empty shows bookingFallback instead. */
-      bookingHref: optionalText,
-      bookingLabel: z.string(),
-      bookingFallback: z.string(),
       intakeTitle: z.string(),
       intakeText: optionalText,
     }),

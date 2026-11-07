@@ -222,6 +222,8 @@
   /* Layout widths (max-w-content, max-w-prose…) */
   --container-prose: 40rem;
   --container-narrow: 56rem;
+  /* The Google booking calendar on the intro page: tall enough for the days and times without much inner scrolling. */
+  --booking-frame-h: clamp(36rem, 85svh, 48rem);
   --container-content: 76rem;
   --container-wide: 92rem;
 

@@ -24,9 +24,15 @@ stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxg
 introPack:
   title: Book your Session
   points:
-    - Pay securely online
-    - Choose a time from my calendar
+    - Choose a time that suits you
+    - Pay securely to confirm it
     - Meet me online for your first session
+  # Google Calendar → the Intro session booking page → Share → Website embed → Inline booking page: the address in src="…".
+  bookingPageUrl:
+  bookingButton: See available times
+  bookingNote: Need a different time? You can reschedule up to 24 hours before.
+  emailNote: After booking you’ll get a short form to fill in, and my occasional emails for private clients. Unsubscribe any time.
+  # Only shown while there is no booking page link above.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
 monthlyPlans:
   title: Continue with *me*
@@ -35,15 +41,9 @@ monthlyPlans:
   stripePricingTableId:
   noTableText: To continue, message me and I’ll set up your monthly plan.
 welcome:
-  title: Thank you, *let’s begin*
-  intro: Your payment has gone through. Two quick steps and we’re ready for your first session.
-  bookingTitle: 1. Pick your session time
-  bookingText: Choose a time that suits your week.
-  bookingHref:
-  bookingLabel: Choose your time
-  bookingFallback: I’ll email you within one working day to arrange your time.
-  intakeTitle: 2. Tell me about you
-  intakeText: A few questions so I can plan your first session around your body.
+  title: Thank you, *you’re booked*
+  intro: One quick step before we meet. Tell me a little about you, so I can plan your first session around your body. It takes about 3 minutes.
+  intakeTitle: Tell me about you
 contact:
   whatsappHref: https://wa.link/ccq3ib
   whatsappLabel: Message me on WhatsApp
@@ -111,28 +111,87 @@ enquiry:
       button: Request my proposal
     intake:
       title: Tell me about *you*
-      questions:
-        - label: Mat or Reformer?
-          short: Equipment
-          options:
-            - Mat
-            - Reformer at home
-            - Not sure yet
+      emailHint: Use the email you booked with.
+      # The field ids (name) also set where each answer goes in Notion.
       fields:
+        - name: birthday
+          label: Date of birth
+          type: date
+          required: true
+        - name: phone
+          label: Phone
+          type: tel
+          required: false
         - name: location
           label: Where are you, and what’s your time zone?
           type: text
           required: true
           placeholder: e.g. London, UK time
-        - name: goals
-          label: What would you like to work on?
+        - name: emergency
+          label: Emergency contact, name and number
+          type: text
+          required: true
+          placeholder: e.g. Sam Smith, +44 7700 900000
+        - name: pain
+          label: Any pain or discomfort? Tap all that apply
+          type: choice
+          multiple: true
+          required: true
+          options:
+            - None
+            - Neck
+            - Shoulders
+            - Upper back
+            - Lower back
+            - Hips
+            - Knees
+            - Ankles & feet
+            - Wrists & hands
+            - Elbows
+            - Other
+        - name: health
+          label: Injuries, surgeries, health conditions or pregnancy, old and recent
           type: textarea
           required: true
-        - name: health
-          label: Any injuries, pain, pregnancy or health conditions I should know about?
+          placeholder: e.g. knee surgery in 2021, or none
+        - name: medication
+          label: Medication or treatment
+          type: text
+          required: true
+          placeholder: e.g. none
+        - name: movement
+          label: What movement do you do now?
+          type: text
+          required: true
+          placeholder: e.g. walking, yoga once a week
+        - name: goals
+          label: Your goals, tap 1 or more
+          type: choice
+          multiple: true
+          required: true
+          options:
+            - Strength
+            - Flexibility & mobility
+            - Rehabilitation
+            - Pre/postnatal
+            - Other
+        - name: equipment
+          label: Mat or Reformer?
+          type: choice
+          required: true
+          options:
+            - Mat
+            - Reformer at home
+            - Not sure yet
+        - name: notes
+          label: Anything else I should know?
           type: textarea
           required: false
-      consent: I agree that Chelsea can use this health information to plan my sessions.
+      agreements:
+        - text: I’ve read and agree to the [Terms](/terms), including the health and liability sections.
+          short: Terms
+        - text: I agree that Chelsea can use this health information to plan my sessions. [Privacy policy](/privacy)
+          short: Health consent
       button: Send to Chelsea
 analytics:
   # From Umami Cloud → Websites → your site → Edit → Website ID. Empty: no analytics.

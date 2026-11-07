@@ -20,6 +20,7 @@ export const ui = {
     'nav.partnerships': 'Partnerships',
     'a11y.skip': 'Skip to content',
     'a11y.external': 'opens in a new tab',
+    'booking.frameTitle': 'Available times for an intro session',
     'motion.pause': 'Pause motion',
     'motion.play': 'Play motion',
     'footer.rights': 'All rights reserved.',

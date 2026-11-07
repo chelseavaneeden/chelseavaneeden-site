@@ -1,0 +1,61 @@
+---
+// Chelsea's Google booking calendar (an appointment schedule), where clients pick a time and pay. It loads
+// only when someone presses the button, so nothing from Google is on the page until it's asked for, and
+// the page stays fast. Without JavaScript, or with a calendar.app.google link, the button opens Google's
+// own booking page instead.
+import Button from '../ui/Button.astro';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  /** The booking page address from Site settings → Intro session page. */
+  url: string;
+  label: string;
+}
+
+const { url, label } = Astro.props;
+
+// The inline view needs Google's embed address with gv=true.
+const embed = (() => {
+  try {
+    const u = new URL(url);
+    if (u.hostname !== 'calendar.google.com' || !u.pathname.includes('/appointments/schedules/')) return undefined;
+    u.searchParams.set('gv', 'true');
+    return u.toString();
+  } catch {
+    return undefined;
+  }
+})();
+---
+
+<div class="flex w-full flex-col items-center gap-6" data-booking data-embed={embed} data-title={t('en', 'booking.frameTitle')}>
+  <div data-booking-open>
+    <Button href={url} size="l" external={!embed} event="booking_calendar">{label}</Button>
+  </div>
+  <div class="hidden h-(--booking-frame-h) w-full overflow-hidden rounded-media border border-line bg-surface-raised" data-booking-frame></div>
+</div>
+
+<script>
+  type Umami = { track: (name: string, data?: Record<string, string>) => void };
+
+  document.querySelectorAll<HTMLElement>('[data-booking]').forEach((box) => {
+    const opener = box.querySelector<HTMLElement>('[data-booking-open]');
+    const frame = box.querySelector<HTMLElement>('[data-booking-frame]');
+    opener?.querySelector('a')?.addEventListener('click', (event) => {
+      (window as unknown as { umami?: Umami }).umami?.track('see_times', { page: location.pathname });
+      const src = box.dataset.embed;
+      if (!src || !frame) return; // No embed address: Google's page opens in a new tab.
+      event.preventDefault();
+      if (!frame.firstElementChild) {
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.title = box.dataset.title ?? '';
+        iframe.className = 'size-full border-0';
+        frame.append(iframe);
+      }
+      frame.classList.remove('hidden');
+      opener.classList.add('hidden');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      frame.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+</script>

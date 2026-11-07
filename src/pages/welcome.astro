@@ -1,10 +1,8 @@
 ---
-// Thank-you page after paying for the intro session. Stripe sends people here (set on the pricing table
-// in Stripe: "after payment, redirect to your website"). Hidden from search engines.
-// Step 1: pick session times from the booking link. Step 2: the intake form.
-// Words and the booking link: Site settings → Welcome page.
+// The intake page. Clients book and pay in Google Calendar on /intro-pack; the email MailerLite sends them
+// straight after links here (/welcome#intake). The form is saved in Notion (worker/). Hidden from search engines.
+// Words: Site settings → Intake page; the questions: Site settings → Enquiry forms → intake.
 import Base from '../layouts/Base.astro';
-import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import Heading from '../components/ui/Heading.astro';
 import Section from '../components/ui/Section.astro';
@@ -19,30 +17,20 @@ const site = await getSite();
 const w = site.welcome;
 ---
 
-<Base title="Welcome · Chelsea van Eeden" description="Your intro session is booked: pick your time and tell me about you." noindex pageEvent="intro_purchase">
+<Base title="Tell me about you · Chelsea van Eeden" description="One quick step before your first session: tell me about you." noindex pageEvent="intake_open">
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="m">
       <div class="mx-auto flex max-w-narrow flex-col gap-10">
         <SectionHeader level={1} title={w.title} intro={w.intro} />
 
-        <Card variant="raised" padding="m" class="flex flex-col items-start gap-4">
-          <Heading level={2} variant="h3" text={w.bookingTitle} />
-          {w.bookingText && <Text tone="muted" text={w.bookingText} />}
-          {
-            w.bookingHref ? (
-              <Button href={w.bookingHref} external event="welcome_booking">{w.bookingLabel}</Button>
-            ) : (
-              <Text text={w.bookingFallback} />
-            )
-          }
-        </Card>
-
-        <Card variant="raised" padding="m" class="flex flex-col gap-4">
-          <Heading level={2} variant="h3" text={w.intakeTitle} />
-          {w.intakeText && <Text tone="muted" text={w.intakeText} />}
-          <EnquiryForm type="intake" enquiry={site.enquiry} contact={site.contact} />
-        </Card>
+        <div id="intake" class="scroll-mt-(--header-h)">
+          <Card variant="raised" padding="m" class="flex flex-col gap-4">
+            <Heading level={2} variant="h3" text={w.intakeTitle} />
+            {w.intakeText && <Text tone="muted" text={w.intakeText} />}
+            <EnquiryForm type="intake" enquiry={site.enquiry} contact={site.contact} />
+          </Card>
+        </div>
       </div>
     </Section>
   </main>

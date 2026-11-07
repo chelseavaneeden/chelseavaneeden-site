@@ -1,40 +1,79 @@
 ---
-// The intro session page: every "Book your Session" button leads here. It shows only the intro-only
-// Stripe pricing table, so a new client has one choice and one Pay button, then what happens next.
-// Words and the table ID: Site settings → Intro session page. After paying, Stripe sends people to /welcome
-// (set in Stripe on the pricing table).
+// The intro session page: every "Book your Session" button leads here. It shows what's included and the
+// price, then Chelsea's Google booking calendar, where clients pick a time and pay in one step (Stripe,
+// inside Google). After paying, MailerLite emails them the intake form (see worker/ and docs/SITE.md).
+// Words and the booking page link: Site settings → Intro session page. While no booking page link is set,
+// the old intro-only Stripe pricing table shows instead.
 import Base from '../layouts/Base.astro';
 import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Icon from '../components/ui/Icon.astro';
+import Price from '../components/ui/Price.astro';
 import Section from '../components/ui/Section.astro';
 import Sunlight from '../components/ui/Sunlight.astro';
+import BookingCalendar from '../components/patterns/BookingCalendar.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import NumberedList from '../components/patterns/NumberedList.astro';
 import SectionHeader from '../components/patterns/SectionHeader.astro';
 import StripePricingTable from '../components/patterns/StripePricingTable.astro';
-import { getSite } from '../lib/content';
+import TrustLine from '../components/patterns/TrustLine.astro';
+import { getOffers, getSite } from '../lib/content';
 
 const site = await getSite();
 const intro = site.introPack;
+const offers = await getOffers('private');
+const offer = offers.find((o) => o.featured) ?? offers[0];
 ---
 
 <Base
   title="Book your Session · Chelsea van Eeden"
-  description="A live 1-to-1 Pilates intro session online with Chelsea van Eeden. Pay securely, then pick your time."
+  description="A live 1-to-1 Pilates intro session online with Chelsea van Eeden. Choose a time that suits you and pay securely to confirm it."
 >
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     {/* The home page header's sunrise glow, running up behind the menu. */}
     <Section space="none" class="relative isolate -mt-(--header-h) overflow-hidden bg-surface pt-(--hero-pad) pb-(--space-section-m) md:-mt-(--header-h-md) md:pt-(--hero-pad-md)">
       <Sunlight />
-      <div class="flex flex-col items-center gap-10">
+      <div class="mx-auto flex max-w-narrow flex-col items-center gap-10">
         <SectionHeader level={1} eyebrow={intro.eyebrow} title={intro.title} intro={intro.intro} layout="centered" />
-        {/* Stripe paints its own background. Darken lets the glow show through it, so there is no box around the
-            table, as long as Stripe's background colour (Stripe → Pricing tables) is as light as the page's. */}
-        <div class="w-full mix-blend-darken">
-          <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
-        </div>
-        {intro.points.length > 0 && <NumberedList items={intro.points} />}
+        {
+          intro.bookingPageUrl ? (
+            <>
+              {offer && (
+                <Card variant="raised" padding="m" class="flex w-full max-w-prose flex-col gap-6">
+                  <Price offer={offer} />
+                  <ul class="flex flex-col gap-2.5">
+                    {offer.includes.map((item) => (
+                      <li class="type-body flex items-start gap-3 text-ink">
+                        <Icon name="check" class="mt-1 shrink-0 text-accent" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+              {intro.points.length > 0 && <NumberedList items={intro.points} />}
+              <TrustLine trust={site.trust} class="justify-center" />
+              <div class="flex w-full flex-col items-center gap-4">
+                <BookingCalendar url={intro.bookingPageUrl} label={intro.bookingButton} />
+                {intro.bookingNote && <p class="type-body-s text-center text-ink-muted">{intro.bookingNote}</p>}
+                {intro.emailNote && <p class="type-caption max-w-prose text-center text-ink-muted">{intro.emailNote}</p>}
+              </div>
+            </>
+          ) : (
+            intro.stripePricingTableId && (
+              <>
+                {/* Stripe paints its own background. Darken lets the glow show through it, so there is no box
+                    around the table, as long as Stripe's background colour is as light as the page's. */}
+                <div class="w-full mix-blend-darken">
+                  <StripePricingTable pricingTableId={intro.stripePricingTableId} publishableKey={site.stripePublishableKey} />
+                </div>
+                {intro.points.length > 0 && <NumberedList items={intro.points} />}
+              </>
+            )
+          )
+        }
         <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-ink-muted">
           Questions first?
           <Button href="/enquire" variant="link" event="intro_page">Ask me</Button>

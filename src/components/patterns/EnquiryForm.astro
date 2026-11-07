@@ -1,7 +1,8 @@
 ---
-// An enquiry form whose answers arrive in Chelsea's inbox by email (via /api/enquire, worker/index.ts).
+// An enquiry form, sent to /api/enquire (worker/). question and proposal arrive in Chelsea's inbox by email;
+// intake is saved in Notion and she gets a short email.
 // Words come from Site settings → Enquiry forms; `type` picks the form: question, proposal or intake.
-// Tap-to-choose questions, name and email, extra fields, an optional required tick box, a hidden
+// Tap-to-choose questions, name and email, fields in order (text, date, phone, tap-to-choose), required tick boxes, a hidden
 // spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
 // opens WhatsApp directly.
 import Heading from '../ui/Heading.astro';
@@ -25,7 +26,18 @@ const { type, enquiry, contact, showTitle = false, idPrefix = type } = Astro.pro
 const form = enquiry.forms[type];
 const field = 'type-body w-full rounded-control border border-line-control bg-surface-raised px-4 py-3 text-ink placeholder:text-ink-muted aria-invalid:border-error';
 const question = 'type-field text-ink group-data-missing/field:text-error';
+const chip =
+  'type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-raised px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus';
 const id = (name: string) => `${idPrefix}-${name}`;
+const inputType = { text: 'text', date: 'date', tel: 'tel' } as const;
+const autocompleteFor = (f: { name: string; type: string }) => (f.type === 'tel' ? 'tel' : f.name === 'birthday' ? 'bday' : undefined);
+
+// Tick-box text can hold one or more links written as [Terms](/terms).
+const withLinks = (text: string) =>
+  text.split(/(\[[^\]]+\]\([^)\s]+\))/).filter(Boolean).map((part) => {
+    const m = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+    return m ? { text: m[1], href: m[2] } : { text: part, href: undefined };
+  });
 ---
 
 <div class="flex flex-col gap-5" data-enquiry-wrap>
@@ -47,7 +59,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
           </legend>
           <div class="flex flex-wrap gap-2">
             {q.options.map((option) => (
-              <label class="type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-raised px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus">
+              <label class={chip}>
                 <input type="radio" name={`q${i}`} value={option} required={q.required} class="sr-only" />
                 {option}
               </label>
@@ -64,53 +76,87 @@ const id = (name: string) => `${idPrefix}-${name}`;
       </label>
       <label class="group/field flex flex-col gap-2" for={id('email')} data-required-label={enquiry.emailLabel}>
         <span class={question}>{enquiry.emailLabel}</span>
-        <input id={id('email')} type="email" name="email" required maxlength="200" autocomplete="email" class={field} />
+        {form.emailHint && <span class="type-body-s text-ink-muted" id={id('email-hint')}>{form.emailHint}</span>}
+        <input
+          id={id('email')}
+          type="email"
+          name="email"
+          required
+          maxlength="200"
+          autocomplete="email"
+          aria-describedby={form.emailHint ? id('email-hint') : undefined}
+          class={field}
+        />
       </label>
     </div>
 
     {
-      form.fields.map((f) => (
-        <label class="group/field flex flex-col gap-2" for={id(f.name)} data-required-label={f.required ? f.label : undefined}>
-          <span class={question}>
-            {f.label} {!f.required && <span class="font-normal text-ink-muted">(optional)</span>}
-          </span>
-          {f.type === 'textarea' ? (
-            <textarea
-              id={id(f.name)}
-              name={f.name}
-              rows="3"
-              maxlength="3000"
-              required={f.required}
-              placeholder={f.placeholder}
-              data-answer={f.label}
-              class={`${field} resize-y`}
-            />
-          ) : (
-            <input
-              id={id(f.name)}
-              type="text"
-              name={f.name}
-              maxlength="200"
-              required={f.required}
-              placeholder={f.placeholder}
-              data-answer={f.label}
-              class={field}
-            />
-          )}
-        </label>
-      ))
+      form.fields.map((f) =>
+        f.type === 'choice' ? (
+          <fieldset
+            class="group/field"
+            data-answer-key={f.name}
+            data-answer-label={f.label}
+            data-required-label={f.required ? f.label : undefined}
+            data-multiple={f.multiple ? '' : undefined}
+          >
+            <legend class:list={[question, 'mb-2.5']}>
+              {f.label} {!f.required && <span class="font-normal text-ink-muted">(optional)</span>}
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {f.options.map((option) => (
+                <label class={chip}>
+                  <input type={f.multiple ? 'checkbox' : 'radio'} name={f.name} value={option} required={f.required && !f.multiple} class="sr-only" />
+                  {option}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : (
+          <label class="group/field flex flex-col gap-2" for={id(f.name)} data-required-label={f.required ? f.label : undefined}>
+            <span class={question}>
+              {f.label} {!f.required && <span class="font-normal text-ink-muted">(optional)</span>}
+            </span>
+            {f.type === 'textarea' ? (
+              <textarea
+                id={id(f.name)}
+                name={f.name}
+                rows="3"
+                maxlength="3000"
+                required={f.required}
+                placeholder={f.placeholder}
+                data-answer-key={f.name}
+                data-answer-label={f.label}
+                class={`${field} resize-y`}
+              />
+            ) : (
+              <input
+                id={id(f.name)}
+                type={inputType[f.type]}
+                name={f.name}
+                maxlength={f.type === 'date' ? undefined : '200'}
+                required={f.required}
+                placeholder={f.placeholder}
+                autocomplete={autocompleteFor(f)}
+                data-answer-key={f.name}
+                data-answer-label={f.label}
+                class={field}
+              />
+            )}
+          </label>
+        ),
+      )
     }
 
     {
-      form.consent && (
-        <label class="group/field type-body-s flex items-start gap-3 text-ink" for={id('consent')} data-required-label={enquiry.missingTick}>
-          <input id={id('consent')} type="checkbox" name="consent" required class="size-6 shrink-0 accent-ink" />
+      form.agreements.map((a, i) => (
+        <label class="group/field type-body-s flex items-start gap-3 text-ink" for={id(`agree-${i}`)} data-required-label={a.short ?? enquiry.missingTick}>
+          <input id={id(`agree-${i}`)} type="checkbox" name={`agree-${i}`} required data-agreement={a.short ?? a.text} class="size-6 shrink-0 accent-ink" />
           <span class="group-data-missing/field:text-error">
-            {form.consent}{' '}
-            <a href="/privacy" class="underline underline-offset-4">Privacy policy</a>
+            {withLinks(a.text).map((part) => (part.href ? <a href={part.href} class="underline underline-offset-4">{part.text}</a> : part.text))}
           </span>
         </label>
-      )
+      ))
     }
 
     {/* Spam trap: hidden from people, often filled in by bots. */}
@@ -152,7 +198,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
 {enquiry.turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
 <script>
-  type Answer = { label: string; value: string };
+  type Answer = { key: string; label: string; value: string };
   type Umami = { track: (name: string, data?: Record<string, string>) => void };
   type Turnstile = { reset: (el?: Element) => void };
 
@@ -170,8 +216,13 @@ const id = (name: string) => `${idPrefix}-${name}`;
 
     // The button is always active. If something is missing, this marks it and names it next to the button,
     // so nobody is left looking at a dead button. Returns the first one.
+    // A tap-more-than-one question is answered once anything is ticked; everything else uses the browser's own checks.
+    const isUnfinished = (el: HTMLElement) =>
+      el.hasAttribute('data-multiple')
+        ? !controlsOf(el).some((control) => (control as HTMLInputElement).checked)
+        : controlsOf(el).some((control) => !control.validity.valid);
     const flagMissing = () => {
-      const unfinished = required.filter((el) => controlsOf(el).some((control) => !control.validity.valid));
+      const unfinished = required.filter(isUnfinished);
       required.forEach((el) => {
         const isMissing = unfinished.includes(el);
         el.toggleAttribute('data-missing', isMissing);
@@ -200,12 +251,17 @@ const id = (name: string) => `${idPrefix}-${name}`;
       const data = new FormData(form);
       const answers: Answer[] = [];
       form.querySelectorAll<HTMLFieldSetElement>('fieldset[data-short]').forEach((set) => {
-        answers.push({ label: set.dataset.short ?? '', value: String(data.get(set.dataset.field ?? '') ?? '') });
+        const short = set.dataset.short ?? '';
+        answers.push({ key: short, label: short, value: String(data.get(set.dataset.field ?? '') ?? '') });
       });
-      form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-answer]').forEach((el) => {
-        const value = el.value.trim();
-        if (value) answers.push({ label: el.dataset.answer ?? el.name, value });
+      // The fields in their order: tap-to-choose answers are joined with commas.
+      form.querySelectorAll<HTMLElement>('[data-answer-key]').forEach((el) => {
+        const key = el.dataset.answerKey ?? '';
+        const value =
+          el instanceof HTMLFieldSetElement ? data.getAll(key).map(String).join(', ') : (el as HTMLInputElement).value.trim();
+        if (value) answers.push({ key, label: el.dataset.answerLabel ?? key, value });
       });
+      const ticks = [...form.querySelectorAll<HTMLInputElement>('input[data-agreement]')];
 
       send.disabled = true;
       send.textContent = 'Sending…';
@@ -219,7 +275,8 @@ const id = (name: string) => `${idPrefix}-${name}`;
             name: String(data.get('name') ?? '').trim(),
             email: String(data.get('email') ?? '').trim(),
             answers,
-            consent: data.get('consent') === 'on',
+            consent: ticks.length > 0 && ticks.every((tick) => tick.checked),
+            agreed: ticks.filter((tick) => tick.checked).map((tick) => tick.dataset.agreement ?? ''),
             page: location.pathname,
             website: String(data.get('website') ?? ''),
             token: String(data.get('cf-turnstile-response') ?? ''),

@@ -547,13 +547,17 @@ content:
       - name: introPack
         label: Intro session page (/intro-pack)
         type: object
-        description: 'Where every "Book your Session" button leads: a few lines, then your intro-only Stripe pricing table.'
+        description: 'Where every "Book your Session" button leads: what is included, then your Google booking calendar, where clients pick a time and pay.'
         fields:
           - { name: eyebrow, label: Small line above the title, type: string }
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
-          - { name: points, label: Numbered steps, type: string, list: true, description: 'What happens after paying, one short line each.' }
-          - { name: stripePricingTableId, label: Stripe pricing table ID (intro only), type: string, required: true, description: 'Starts with prctbl_ (Stripe → Pricing tables → Copy code).' }
+          - { name: points, label: Numbered steps, type: string, list: true, description: 'How booking works, one short line each.' }
+          - { name: bookingPageUrl, label: Google booking page link, type: string, description: 'In Google Calendar, open the Intro session booking page → Share → Website embed → Inline booking page, and paste the address inside src="…". A calendar.app.google link also works, but then the button opens Google''s page in a new tab.' }
+          - { name: bookingButton, label: Button text, type: string, default: See available times }
+          - { name: bookingNote, label: Line under the button, type: string, description: 'e.g. your reschedule rule.' }
+          - { name: emailNote, label: Email notice under the button, type: text, description: 'Tells clients they will get your private-client emails. Keep it while they are added to the Private Pilates group.' }
+          - { name: stripePricingTableId, label: Stripe pricing table ID (only without a booking page), type: string, description: 'Starts with prctbl_. Shown instead of the calendar only while there is no booking page link.' }
       - name: monthlyPlans
         label: Monthly plans page (/monthly-plans, for existing clients)
         type: object
@@ -565,19 +569,14 @@ content:
           - { name: stripePricingTableId, label: Stripe pricing table ID (monthly plans), type: string, description: 'A second table with the monthly plans. Starts with prctbl_. Leave empty to show the message below instead.' }
           - { name: noTableText, label: Message when there is no table, type: text, required: true }
       - name: welcome
-        label: Welcome page (/welcome, after paying)
+        label: Intake page (/welcome, linked from the email after booking)
         type: object
-        description: 'Set this page in Stripe as where people go after paying (pricing table → after payment → redirect to your website).'
+        description: 'Hidden from Google. The email clients get after booking and paying links here.'
         fields:
           - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
           - { name: intro, label: Intro text, type: text }
-          - { name: bookingTitle, label: Booking step title, type: string, required: true }
-          - { name: bookingText, label: Booking step text, type: text }
-          - { name: bookingHref, label: Your booking link, type: string, description: 'Google Calendar booking page, Calendly… Opens in a new tab. Leave empty to show the line below instead.' }
-          - { name: bookingLabel, label: Booking button text, type: string, required: true }
-          - { name: bookingFallback, label: Line when there is no booking link, type: text, required: true }
-          - { name: intakeTitle, label: Intake step title, type: string, required: true }
-          - { name: intakeText, label: Intake step text, type: text }
+          - { name: intakeTitle, label: Form title, type: string, required: true }
+          - { name: intakeText, label: Form intro, type: text }
       - name: contact
         label: WhatsApp link
         type: object
@@ -588,7 +587,7 @@ content:
       - name: enquiry
         label: Enquiry forms
         type: object
-        description: 'Answers arrive in your inbox by email. question: the Ask me pop-up and /enquire. proposal: the Retreats & events page. intake: the welcome page after paying.'
+        description: 'question: the Ask me pop-up and /enquire. proposal: the Retreats & events page. Both arrive in your inbox by email. intake: the /welcome page after booking; it is saved in Notion and you get a short email.'
         fields:
           - { name: nameLabel, label: Name field label, type: string, default: Name }
           - { name: emailLabel, label: Email field label, type: string, default: Email }
@@ -619,8 +618,9 @@ content:
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
                       - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
+                  - { name: emailHint, label: Line under the email field, type: string, description: 'e.g. Use the email you booked with.' }
                   - name: fields
-                    label: Extra fields
+                    label: Fields (after name and email, in this order)
                     type: object
                     list: true
                     fields:
@@ -634,9 +634,21 @@ content:
                           values:
                             - { value: text, label: One line }
                             - { value: textarea, label: Several lines }
+                            - { value: date, label: Date }
+                            - { value: tel, label: Phone number }
+                            - { value: choice, label: Tap-to-choose buttons }
                       - { name: required, label: Required, type: boolean }
                       - { name: placeholder, label: Hint inside the field, type: string }
-                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                      - { name: options, label: Buttons (tap-to-choose only), type: string, list: true }
+                      - { name: multiple, label: Can tap more than one (tap-to-choose only), type: boolean }
+                  - name: agreements
+                    label: Required tick boxes
+                    type: object
+                    list: true
+                    description: 'Each must be ticked before sending. Put a link in the text like this: [Terms](/terms).'
+                    fields:
+                      - { name: text, label: Text, type: text, required: true }
+                      - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
               - name: proposal
                 label: Proposal form (Retreats & events)
@@ -654,8 +666,9 @@ content:
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
                       - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
+                  - { name: emailHint, label: Line under the email field, type: string, description: 'e.g. Use the email you booked with.' }
                   - name: fields
-                    label: Extra fields
+                    label: Fields (after name and email, in this order)
                     type: object
                     list: true
                     fields:
@@ -669,9 +682,21 @@ content:
                           values:
                             - { value: text, label: One line }
                             - { value: textarea, label: Several lines }
+                            - { value: date, label: Date }
+                            - { value: tel, label: Phone number }
+                            - { value: choice, label: Tap-to-choose buttons }
                       - { name: required, label: Required, type: boolean }
                       - { name: placeholder, label: Hint inside the field, type: string }
-                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                      - { name: options, label: Buttons (tap-to-choose only), type: string, list: true }
+                      - { name: multiple, label: Can tap more than one (tap-to-choose only), type: boolean }
+                  - name: agreements
+                    label: Required tick boxes
+                    type: object
+                    list: true
+                    description: 'Each must be ticked before sending. Put a link in the text like this: [Terms](/terms).'
+                    fields:
+                      - { name: text, label: Text, type: text, required: true }
+                      - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
               - name: intake
                 label: Intake form (welcome page)
@@ -689,8 +714,9 @@ content:
                       - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
                       - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
                       - { name: options, label: Options, type: string, list: true }
+                  - { name: emailHint, label: Line under the email field, type: string, description: 'e.g. Use the email you booked with.' }
                   - name: fields
-                    label: Extra fields
+                    label: Fields (after name and email, in this order)
                     type: object
                     list: true
                     fields:
@@ -704,9 +730,21 @@ content:
                           values:
                             - { value: text, label: One line }
                             - { value: textarea, label: Several lines }
+                            - { value: date, label: Date }
+                            - { value: tel, label: Phone number }
+                            - { value: choice, label: Tap-to-choose buttons }
                       - { name: required, label: Required, type: boolean }
                       - { name: placeholder, label: Hint inside the field, type: string }
-                  - { name: consent, label: Required tick box, type: text, description: 'e.g. consent to use health information. Leave empty for none.' }
+                      - { name: options, label: Buttons (tap-to-choose only), type: string, list: true }
+                      - { name: multiple, label: Can tap more than one (tap-to-choose only), type: boolean }
+                  - name: agreements
+                    label: Required tick boxes
+                    type: object
+                    list: true
+                    description: 'Each must be ticked before sending. Put a link in the text like this: [Terms](/terms).'
+                    fields:
+                      - { name: text, label: Text, type: text, required: true }
+                      - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
       - name: analytics
         label: Analytics
