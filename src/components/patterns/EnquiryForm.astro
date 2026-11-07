@@ -24,10 +24,10 @@ interface Props {
 
 const { type, enquiry, contact, showTitle = false, idPrefix = type } = Astro.props;
 const form = enquiry.forms[type];
-const field = 'type-body w-full rounded-control border border-line-control bg-surface-raised px-4 py-3 text-ink placeholder:text-ink-muted aria-invalid:border-error';
+const field = 'type-body w-full rounded-control border border-line-control bg-surface-paper px-4 py-3 text-ink placeholder:text-ink-muted aria-invalid:border-error';
 const question = 'type-field text-ink group-data-missing/field:text-error';
 const chip =
-  'type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-raised px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus';
+  'type-body-s inline-flex min-h-11 cursor-pointer items-center rounded-pill border border-line-control bg-surface-paper px-4 text-ink transition-colors hover:border-ink has-checked:border-cta has-checked:bg-cta has-checked:text-cta-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-focus';
 const id = (name: string) => `${idPrefix}-${name}`;
 const inputType = { text: 'text', date: 'date', tel: 'tel' } as const;
 const autocompleteFor = (f: { name: string; type: string }) => (f.type === 'tel' ? 'tel' : f.name === 'birthday' ? 'bday' : undefined);

@@ -1,5 +1,5 @@
 ---
-export type CardVariant = 'raised' | 'outline' | 'plain' | 'sunrise';
+export type CardVariant = 'raised' | 'outline' | 'plain' | 'sunrise' | 'paper';
 export type CardPadding = 'none' | 's' | 'm' | 'l';
 
 interface Props {
@@ -19,6 +19,9 @@ const variants: Record<CardVariant, string> = {
   plain: '',
   // The page's own colour; put a <Sunlight contours={false} /> inside for the header's sunrise glow.
   sunrise: 'relative isolate overflow-hidden bg-surface shadow-raised',
+  // For forms: clean warm paper lifted above the page's film grain, so the words read crisply.
+  // It only clears the grain where no parent makes its own layer (no isolate, transform or opacity around it).
+  paper: 'relative z-(--z-paper) bg-surface-paper shadow-raised',
 };
 const paddings: Record<CardPadding, string> = { none: '', s: 'p-5', m: 'p-7 md:p-8', l: 'p-8 md:p-12' };
 ---

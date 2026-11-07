@@ -25,7 +25,7 @@ const w = site.welcome;
         <SectionHeader level={1} title={w.title} intro={w.intro} />
 
         <div id="intake" class="scroll-mt-(--header-h)">
-          <Card variant="raised" padding="m" class="flex flex-col gap-4">
+          <Card variant="paper" padding="m" class="flex flex-col gap-4">
             <Heading level={2} variant="h3" text={w.intakeTitle} />
             {w.intakeText && <Text tone="muted" text={w.intakeText} />}
             <EnquiryForm type="intake" enquiry={site.enquiry} contact={site.contact} />

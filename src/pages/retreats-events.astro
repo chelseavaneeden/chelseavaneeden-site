@@ -3,6 +3,7 @@
 // outreach emails. Content is edited in the editor under "Retreats & events page"; the proposal form's
 // questions under Site settings → Enquiry forms → proposal.
 import AudiencePage from '../layouts/AudiencePage.astro';
+import Card from '../components/ui/Card.astro';
 import EnquiryForm from '../components/patterns/EnquiryForm.astro';
 import { getSite } from '../lib/content';
 
@@ -10,5 +11,7 @@ const site = await getSite();
 ---
 
 <AudiencePage audience="hospitality">
-  <EnquiryForm slot="enquiry" type="proposal" enquiry={site.enquiry} contact={site.contact} />
+  <Card slot="enquiry" variant="paper" padding="m">
+    <EnquiryForm type="proposal" enquiry={site.enquiry} contact={site.contact} />
+  </Card>
 </AudiencePage>

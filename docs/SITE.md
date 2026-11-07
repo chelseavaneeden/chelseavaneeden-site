@@ -147,6 +147,9 @@ glows, dark bands or tilting on hover.
 - **Legibility floor (audit, 4 Nov):** no text under 14px; form field and choice outlines use `--line-control` (about
   4:1, the guideline is 3:1); phone tap targets reach 44px, using the invisible `tap-area` utility where the look must stay
   the same. Tap areas on the footer links apply on phones only. Inline links in running text are exempt.
+- **Forms on paper:** every form sits on `Card variant="paper"`: warm paper `#FFFDF9` (`--surface-paper`) lifted above the
+  film grain (`--z-paper`), with the header above it (`--z-header`), so the words read crisply (Chelsea, 7 Nov). Fields
+  and chips use the same paper. A paper card only clears the grain if nothing around it makes its own layer.
 - **Pausing motion:** `MotionToggle.astro`, a small button on the hero video and the logo band. Either one pauses the video,
   the logos and the sun rays, and the choice carries across pages in that browser. It's hidden when the device asks for
   reduced motion, since nothing moves then. New looping animations need `data-ambient` so the button stops them too.

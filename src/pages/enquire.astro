@@ -3,6 +3,7 @@
 // for links from outside the site and for browsers without JavaScript.
 // Words: Site settings → Enquiry forms → question.
 import Base from '../layouts/Base.astro';
+import Card from '../components/ui/Card.astro';
 import Section from '../components/ui/Section.astro';
 import EnquiryForm from '../components/patterns/EnquiryForm.astro';
 import Footer from '../components/patterns/Footer.astro';
@@ -20,7 +21,9 @@ const form = site.enquiry.forms.question;
     <Section space="m">
       <div class="mx-auto flex max-w-2xl flex-col gap-10">
         <SectionHeader level={1} title={form.title} intro={form.intro} />
-        <EnquiryForm type="question" enquiry={site.enquiry} contact={site.contact} idPrefix="page-question" />
+        <Card variant="paper" padding="m">
+          <EnquiryForm type="question" enquiry={site.enquiry} contact={site.contact} idPrefix="page-question" />
+        </Card>
       </div>
     </Section>
   </main>

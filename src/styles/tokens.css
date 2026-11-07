@@ -26,6 +26,8 @@
   --sage-leaf-200: #dcdec9;
   --sage-leaf-100: #e7e8d9;
   --sage-leaf-50: #eeeee3;
+  /* Warm paper, lighter than any linen: forms, where people read and type. */
+  --paper: #fffdf9;
   --linen-50: #faf6ee;
   --linen-75: #f8f3ea;
   --linen-100: #f4eee3;
@@ -98,6 +100,8 @@
   --surface: var(--linen-75);
   --surface-alt: var(--linen-200);
   --surface-raised: var(--linen-50);
+  /* Forms and their fields: clean paper, so the words read crisply (Card variant="paper"). */
+  --surface-paper: var(--paper);
   /* Coffee Bean for words; emphasised words in headings turn amber. */
   --ink: var(--coffee-900);
   --ink-muted: var(--coffee-700);
@@ -182,6 +186,7 @@
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
   --color-surface-raised: var(--surface-raised);
+  --color-surface-paper: var(--surface-paper);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-heading: var(--heading);
@@ -291,9 +296,11 @@
   /* The height a small link's tap area reaches on a phone (the tap-area utility, see global.css). */
   --tap-target: 2.75rem;
 
-  /* Layers */
+  /* Layers. The film grain lies over the page; paper (forms) and the header sit above it so their words
+     stay crisp, and the header stays above paper when it scrolls past. */
   --z-grain: 70;
-  --z-header: 50;
+  --z-paper: 72;
+  --z-header: 75;
   --z-overlay: 80;
   --z-banner: 90;
 
