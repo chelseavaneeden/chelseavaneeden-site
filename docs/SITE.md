@@ -109,8 +109,11 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
 - **None are set yet (checked 7 Nov), so forms can't send.** They show their "didn't send" message with the WhatsApp link.
 - The server code has tests with stand-in replies (signature check, paid and ignored payments, intake to Notion, fallbacks):
   `npm run test:worker` after any change to `worker/`.
-- **MailerLite only sends from an authenticated domain** (checked 7 Nov: the account's sender is a Gmail address, so the
-  two intro automations can't send yet). Authenticating chelseavaneeden.com in MailerLite needs DNS records: her go-ahead.
+- **MailerLite only sends from an authenticated domain.** The account's default sender is a Gmail address (sender name
+  "The Good Mood Club", domain thegoodmood.club is authenticated for her other emails). chelseavaneeden.com was added as a
+  second sending domain on 7 Nov; the intro emails send from chelsea@chelseavaneeden.com once it shows "Authenticated".
+- **Only one SPF line** on chelseavaneeden.com (`v=spf1 include:_spf.mlsend.com include:dc-aa8e722993._spfm… ~all`). Never
+  add a second one: edit that line. The `dc-aa8e722993._spfm` record holds Google's part; keep it.
 - Until a sending domain is verified in Resend, its test sender only delivers to the Resend account's own email address.
   Verifying `send.chelseavaneeden.com` needs DNS records: wait for Chelsea's go-ahead.
 
@@ -166,14 +169,17 @@ glows, dark bands or tilting on hover.
 
 ## Chelsea's to-do list (needed before launch)
 
-1. **Google Calendar**: an "Intro session" appointment schedule with booking payments (Stripe, €55), Google Meet, at least
-   24 hours' notice, the cancellation policy, a description that mentions the form by email. Paste its embed address in
-   Site settings → Intro session page → Google booking page link.
-2. **Stripe**: Apple Pay and Google Pay on; Adaptive Pricing off (checkout stays in euros); "email customers about successful payments" on; a webhook endpoint
-   `<site>/api/stripe-webhook` with the event `checkout.session.completed`, its signing secret into Cloudflare. A second
-   pricing table with the monthly plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
-3. **MailerLite**: authenticate chelseavaneeden.com and verify chelsea@chelseavaneeden.com as the sender (DNS records),
-   an API token into Cloudflare, then review and switch on "Intro session: next steps" and "Intro session: all set".
+1. ~~**Google Calendar** intro booking page~~: done 7 Nov ("Intro 1-on-1 Session", 55 min, €55, Meet); its link is in
+   Site settings → Intro session page.
+2. **Stripe**: intro bookings are paid into a **separate Stripe account Google created** ("Chelsea van Eeden · Google
+   Calendar"), not her main one. ~~Webhook~~ done 7 Nov in that account (events `checkout.session.completed` and
+   `charge.succeeded`, secret in Cloudflare). Still in that account: receipts for successful payments on, branding (logo,
+   colours) so receipts look like hers, Adaptive Pricing off. In the main account: a second pricing table with the monthly
+   plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
+3. **MailerLite**: chelseavaneeden.com DNS records added 7 Nov (DKIM CNAME `litesrv._domainkey`, MailerLite added to the
+   one SPF line, verification TXT); waiting for "Authenticated". Then: add chelsea@chelseavaneeden.com as a sender, Claude
+   sets it (name "Chelsea van Eeden") on the four intro emails and sends test copies, an API token into Cloudflare
+   (`MAILERLITE_API_KEY`), then she switches on "Intro session: next steps" and "Intro session: all set".
 4. **Notion**: an internal integration ("Website intake"), its token into Cloudflare, and connect the Private clients page
    to it.
 5. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
@@ -205,13 +211,14 @@ glows, dark bands or tilting on hover.
 
 The pipeline stays exactly the same; only the address at the end changes.
 
-1. Add the domain to `wrangler.jsonc` and move the domain's DNS from Framer to Cloudflare.
+1. Add the domain to `wrangler.jsonc`. The domain's DNS is already in Cloudflare (same account); its root and www records
+   point to Framer and are DNS only. Leave the email records (MX, SPF, DKIM, MailerLite) as they are.
 2. Set `PUBLIC_INDEXABLE=true` in Cloudflare's build variables, so Google can see the site.
 3. Change `SITE_URL` in `.github/workflows/check-website-updated.yml`.
 4. Change `site` in `astro.config.mjs` to the real domain, so link previews use it.
 5. Point the Stripe webhook, Turnstile's hostname and Resend's sending domain at the real domain, and change the button
    links in the two MailerLite automations from the workers.dev address to the real one.
-6. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
+6. The domain is registered with Cloudflare (checked 7 Nov), renewal date last noted as 17 Dec 2026: check it won't lapse.
 
 ## Older versions
 
