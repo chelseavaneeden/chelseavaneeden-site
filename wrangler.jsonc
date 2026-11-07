@@ -14,6 +14,11 @@
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
   "preview_urls": false,
+  // Not secret: which MailerLite group and Notion database the website writes to (worker/lib.ts).
+  "vars": {
+    "MAILERLITE_GROUP_ID": "203474769523246451",
+    "NOTION_DATA_SOURCE_ID": "ae092e7d-5b46-49ee-a153-41de959f0e32"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

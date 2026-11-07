@@ -16,9 +16,11 @@ To ask a question about your information or use any of your rights, send me a me
 
 **When you send an enquiry or request a proposal.** Your name, email address and your answers. I use them to reply to you and, for organisers, to prepare a proposal. Legal basis: taking steps at your request before an agreement, and my legitimate interest in answering enquiries.
 
-**When you book and pay.** Payments are handled by Stripe. I receive your name, email address, what you bought and whether the payment went through. I never see or store your full card details. Legal basis: performing our agreement, and my legal obligation to keep accounting records.
+**When you book and pay.** You choose a time in my Google Calendar booking page and pay there through Stripe. I receive your name, email address, the time you chose, what you bought and whether the payment went through. I never see or store your full card details. The booking calendar only loads on the website when you press "See available times". Legal basis: performing our agreement, and my legal obligation to keep accounting records.
 
-**When you fill in the intake form after booking.** Where you are and your time zone, your goals, the equipment you have and, if you choose to share it, information about injuries, pain, pregnancy or other health conditions. I use this only to plan safe sessions for you. Health information is a special category of data, so I only collect it with your explicit consent, which you give with the tick box on the form and can withdraw at any time.
+**Emails about your session, and for private clients.** When you book, I add your name and email address to my email service, MailerLite, in a group for private clients. It sends you the next steps for your first session (a short form, and how to get ready), and occasional emails I write for private clients. Every email has an unsubscribe link, and you can also reply to ask me to stop. Legal basis: performing our agreement for the session emails, and my legitimate interest in keeping in touch with clients about similar services, which you can opt out of at any time. MailerLite never receives your health information.
+
+**When you fill in the intake form after booking.** Your date of birth, phone number if you give it, where you are and your time zone, an emergency contact, your goals, the equipment you have and information about injuries, pain, surgery, pregnancy, health conditions and medication. I use this only to plan safe sessions for you. It is saved in my private client records in Notion, and I get a short email saying a form has arrived, without your answers. Health information is a special category of data, so I only collect it with your explicit consent, which you give with the tick box on the form and can withdraw at any time.
 
 **During our sessions.** Notes on your progress, your programme and anything you tell me that affects how we work together. Legal basis: performing our agreement and, for health information, your explicit consent.
 
@@ -30,10 +32,12 @@ To ask a question about your information or use any of your rights, send me a me
 
 I use a small number of trusted services to run my business. They only process your information on my instructions or under their own privacy policies:
 
-- **Cloudflare**: hosts the website, sends the enquiry forms to me and runs the spam check (Turnstile) on the forms.
-- **Resend**: delivers the enquiry form emails to my inbox.
+- **Cloudflare**: hosts the website, passes the forms on and runs the spam check (Turnstile) on the forms.
+- **Resend**: delivers the enquiry form emails, and intake form notices without your answers, to my inbox.
 - **Stripe**: processes payments. For some payment data, Stripe acts as a controller under its own privacy policy.
-- **Google Workspace**: my email and calendar.
+- **Google Workspace**: my email, calendar and booking page.
+- **MailerLite**: sends the emails about your session and my emails for private clients.
+- **Notion**: stores your intake form and my client records, privately.
 - **Umami**: website analytics, as described above.
 - **My booking and video call services**: to schedule and hold our sessions.
 
@@ -51,7 +55,7 @@ Some of these services may process information in the United States or elsewhere
 
 ## 6. Cookies
 
-The website uses no advertising or tracking cookies. The payment page loads Stripe, and the forms may load Cloudflare’s spam check. Both can set cookies that are strictly necessary for secure payments and spam protection.
+The website uses no advertising or tracking cookies. When you open the booking calendar, it loads Google’s booking page and Stripe’s payment page, and the forms may load Cloudflare’s spam check. These can set cookies that are strictly necessary for booking, secure payments and spam protection.
 
 ## 7. Your rights
 

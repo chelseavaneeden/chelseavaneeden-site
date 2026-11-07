@@ -69,11 +69,23 @@ Hi, I'm Chelsea and the logo banner are shared with the home page, so they are e
 
 The first step is a single **Intro Session at €55** (since 3 Nov). The page's address is still `/intro-pack`.
 
-1. Every **Book your Session** goes to **`/intro-pack`**, on the home header's sunrise glow: the intro-only Stripe table,
-   then three short numbered steps. Words and table ID: Site settings → Intro session page.
-2. After paying, Stripe should send people to **`/welcome`** (set in Stripe on the pricing table). It shows the booking
-   link (Site settings → Welcome page; a fallback line until it's set) and the intake form.
-3. **`/monthly-plans`** is for existing clients only: noindex, linked from nowhere. It needs a second pricing table with the
+Chosen on 7 Nov after research (`reports/Pilates booking funnel conversion.md`): **pick a time first, then pay in the same
+step**, in Chelsea's Google Calendar booking page (Business Standard includes paid bookings through her Stripe).
+
+1. Every **Book your Session** goes to **`/intro-pack`**: the €55 and what's included, three short steps, the trust line,
+   then **See available times**. That loads her Google booking page on the page, only when pressed
+   (`BookingCalendar.astro`). Words and the booking page link: Site settings → Intro session page. Until the link is set,
+   the old intro-only Stripe table shows instead.
+2. The client picks a time, pays (Stripe inside Google) and gets Google's confirmation with the Meet link.
+3. Stripe tells the site (**`/api/stripe-webhook`**, `worker/stripe.ts`), which adds the client to MailerLite: group
+   **Private Pilates**, field `intro_paid` = today. That starts the automation **"Intro session: next steps"**: "You're
+   booked in" with a button to the intake form, then a reminder after 12 hours and "Can I help?" 36 hours later, each only
+   if `intake_done` is still empty.
+4. **`/welcome`** is the intake page (noindex) the email links to (`/welcome#intake`). The form is saved as a page in
+   Notion (**Private clients → Client intake**), MailerLite gets `intake_done` = today (automation **"Intro session: all
+   set"** sends the preparation email, and the reminders stop), and Chelsea gets a short email with the Notion link, never
+   the health answers. If Notion fails, that email carries the answers instead.
+5. **`/monthly-plans`** is for existing clients only: noindex, linked from nowhere. It needs a second pricing table with the
    monthly plans; until its ID is set it shows a message with ways to get in touch.
 
 ## Forms (email, not WhatsApp)
@@ -84,11 +96,21 @@ The first step is a single **Intro Session at €55** (since 3 Nov). The page's 
   turns those questions brick red and moves to the first one. Never go back to a disabled button with no explanation.
 - A tap-to-choose question can be optional ("Must be answered" in the CMS). "When?" and "Group size" on the proposal form
   are, so organisers who don't know yet can still send. Unanswered ones are left out of the email.
-- They post to **`/api/enquire`**, handled by `worker/index.ts` (the only server code). It checks the site, a hidden spam
-  trap and Turnstile (when set), then emails the answers through **Resend** with reply-to set to the sender.
-- Keys are Cloudflare **secrets**, never in this public repo: `npx wrangler secret put RESEND_API_KEY`, `ENQUIRY_TO` (the
-  inbox), optional `TURNSTILE_SECRET_KEY` and `ENQUIRY_FROM`.
-- **None are set yet (checked 3 Nov), so forms can't send.** They show their "didn't send" message with the WhatsApp link.
+- Fields come in order after name and email and can be one line, several lines, a date, a phone number or tap-to-choose
+  buttons (one answer, or several with "Can tap more than one"). Required tick boxes take a link written as [Terms](/terms).
+- The intake field ids (birthday, phone, location, emergency, pain, goals, equipment) decide which Notion column an answer
+  fills (`worker/notion.ts`). Every answer also goes in the Notion page, so new questions arrive without code changes.
+- They post to **`/api/enquire`** (`worker/enquire.ts`). It checks the site, a hidden spam trap and Turnstile (when set).
+  Question and proposal answers are emailed through **Resend** with reply-to set to the sender; intake goes to Notion.
+- Keys are Cloudflare **secrets**, never in this public repo (Cloudflare → Workers → chelseavaneeden-site → Settings →
+  Variables and secrets): `RESEND_API_KEY`, `ENQUIRY_TO` (the inbox), `MAILERLITE_API_KEY`, `STRIPE_WEBHOOK_SECRET`,
+  `NOTION_TOKEN`, optional `TURNSTILE_SECRET_KEY` and `ENQUIRY_FROM`. The MailerLite group and Notion database IDs are
+  plain `vars` in `wrangler.jsonc`.
+- **None are set yet (checked 7 Nov), so forms can't send.** They show their "didn't send" message with the WhatsApp link.
+- The server code has tests with stand-in replies (signature check, paid and ignored payments, intake to Notion, fallbacks):
+  `npm run test:worker` after any change to `worker/`.
+- **MailerLite only sends from an authenticated domain** (checked 7 Nov: the account's sender is a Gmail address, so the
+  two intro automations can't send yet). Authenticating chelseavaneeden.com in MailerLite needs DNS records: her go-ahead.
 - Until a sending domain is verified in Resend, its test sender only delivers to the Resend account's own email address.
   Verifying `send.chelseavaneeden.com` needs DNS records: wait for Chelsea's go-ahead.
 
@@ -96,8 +118,10 @@ The first step is a single **Intro Session at €55** (since 3 Nov). The page's 
 
 - Loads only when Site settings → Analytics → Umami website ID is set; respects Do Not Track.
 - One click tracker in `Base.astro` records what a click does: `book_intro`, `enquiry_open`, `organiser_page`,
-  `whatsapp_click`, `reviews_click`, each with `from`. Forms record `enquiry_submit`. `/welcome` records `intro_purchase`.
-  Funnel to watch: visit → book_intro → intro_purchase.
+  `whatsapp_click`, `reviews_click`, each with `from`. Forms record `enquiry_submit`. The booking button records
+  `see_times`; `/welcome` records `intake_open`. Paid bookings show in Stripe and MailerLite (Private Pilates).
+  Funnel to watch each month: visits → `book_intro` → `see_times` → paid → `enquiry_submit` (intake). Traffic is too
+  small for A/B tests: change one thing at a time and compare 4-week periods.
 - The Privacy page has an on/off switch for analytics in that browser.
 
 ## The look
@@ -142,21 +166,26 @@ glows, dark bands or tilting on hover.
 
 ## Chelsea's to-do list (needed before launch)
 
-1. **Stripe**: on the intro pricing table, after payment redirect to `/welcome`; set its background to the page colour
-   `#F8F3EA` (it was still `#F4EEE3` on 3 Nov, so it shows as a faint box); turn off Adaptive Pricing (so checkout stays in
-   euros); make a second pricing table with the monthly plans and paste its ID in Site settings; deactivate the old €300
-   intro Payment Link.
-2. **Booking link** for clients to pick times: Site settings → Welcome page.
-3. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
+1. **Google Calendar**: an "Intro session" appointment schedule with booking payments (Stripe, €55), Google Meet, at least
+   24 hours' notice, the cancellation policy, a description that mentions the form by email. Paste its embed address in
+   Site settings → Intro session page → Google booking page link.
+2. **Stripe**: Apple Pay and Google Pay on; Adaptive Pricing off (checkout stays in euros); "email customers about successful payments" on; a webhook endpoint
+   `<site>/api/stripe-webhook` with the event `checkout.session.completed`, its signing secret into Cloudflare. A second
+   pricing table with the monthly plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
+3. **MailerLite**: authenticate chelseavaneeden.com and verify chelsea@chelseavaneeden.com as the sender (DNS records),
+   an API token into Cloudflare, then review and switch on "Intro session: next steps" and "Intro session: all set".
+4. **Notion**: an internal integration ("Website intake"), its token into Cloudflare, and connect the Private clients page
+   to it.
+5. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
    real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.
-4. **Google**: rating and number of reviews (Site settings → Trust line), a `g.page/r/…` review link, and permission from 3–6
+6. **Google**: rating and number of reviews (Site settings → Trust line), a `g.page/r/…` review link, and permission from 3–6
    reviewers to quote them by first name.
-5. **Named client quotes** (first name + city or situation) with permission.
-6. Facts for the organiser page: insurance, what she brings (mats, props), group sizes, travel terms.
-7. Rollover (1 or 2 sessions), personal line in About, Instagram link, business details for the privacy policy, Livro de
+7. **Named client quotes** (first name + city or situation) with permission.
+8. Facts for the organiser page: insurance, what she brings (mats, props), group sizes, travel terms.
+9. Rollover (1 or 2 sessions), personal line in About, Instagram link, business details for the privacy policy, Livro de
    Reclamações registration.
-8. **Group/outdoor photos or a 30–60s teaching clip** for the organiser page.
-9. **Lawyer check** of Terms and Privacy: "non-refundable" vs the EU 14-day withdrawal right, South African governing law
+10. **Group/outdoor photos or a 30–60s teaching clip** for the organiser page.
+11. **Lawyer check** of Terms and Privacy: "non-refundable" vs the EU 14-day withdrawal right, South African governing law
    while living in Portugal, retention periods.
 
 ## Open decisions (ask Chelsea)
@@ -180,7 +209,8 @@ The pipeline stays exactly the same; only the address at the end changes.
 2. Set `PUBLIC_INDEXABLE=true` in Cloudflare's build variables, so Google can see the site.
 3. Change `SITE_URL` in `.github/workflows/check-website-updated.yml`.
 4. Change `site` in `astro.config.mjs` to the real domain, so link previews use it.
-5. Point Stripe's redirect, Turnstile's hostname and Resend's sending domain at the real domain.
+5. Point the Stripe webhook, Turnstile's hostname and Resend's sending domain at the real domain, and change the button
+   links in the two MailerLite automations from the workers.dev address to the real one.
 6. The domain's renewal date was 17 Dec 2026 when last noted (GoDaddy): check it won't lapse.
 
 ## Older versions
