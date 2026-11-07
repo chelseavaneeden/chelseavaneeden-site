@@ -76,7 +76,6 @@ const withLinks = (text: string) =>
       </label>
       <label class="group/field flex flex-col gap-2" for={id('email')} data-required-label={enquiry.emailLabel}>
         <span class={question}>{enquiry.emailLabel}</span>
-        {form.emailHint && <span class="type-body-s text-ink-muted" id={id('email-hint')}>{form.emailHint}</span>}
         <input
           id={id('email')}
           type="email"
@@ -87,6 +86,8 @@ const withLinks = (text: string) =>
           aria-describedby={form.emailHint ? id('email-hint') : undefined}
           class={field}
         />
+        {/* The hint goes under the field, so Name and Email line up side by side. */}
+        {form.emailHint && <span class="type-body-s text-ink-muted" id={id('email-hint')}>{form.emailHint}</span>}
       </label>
     </div>
 
