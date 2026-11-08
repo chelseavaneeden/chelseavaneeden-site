@@ -175,11 +175,7 @@ const withLinks = (text: string) =>
         {form.button}
       </button>
       <p class="type-body-s hidden text-center text-error" data-enquiry-missing data-lead={enquiry.missingLead} role="alert"></p>
-      <p class="type-caption text-center text-ink-muted" data-enquiry-status role="status" aria-live="polite">
-        {enquiry.replyPromise}
-        {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
-      </p>
-      <p class="type-body-s hidden text-center text-error" data-enquiry-error role="alert">{enquiry.error}</p>
+      {/* WhatsApp first, right under the button, then the reply promise and privacy line (Chelsea, 8 Nov). */}
       {
         contact.whatsappHref && (
           <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 text-center text-ink-muted">
@@ -187,6 +183,11 @@ const withLinks = (text: string) =>
           </p>
         )
       }
+      <p class="type-caption text-center text-balance text-ink-muted" data-enquiry-status role="status" aria-live="polite">
+        {enquiry.replyPromise}
+        {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
+      </p>
+      <p class="type-body-s hidden text-center text-error" data-enquiry-error role="alert">{enquiry.error}</p>
     </div>
   </form>
 

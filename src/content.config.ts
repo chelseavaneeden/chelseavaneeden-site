@@ -287,6 +287,9 @@ const audiencePages = defineCollection({
       }),
       /** One-line ticked points, the same look as "You're in the right place if you…" on the home page. */
       whoFor: z.object({ ...sectionHead, items: list(z.string()) }),
+      /** "Where I've taught": a card per studio, then an optional line and link (e.g. her Google reviews). Under
+       *  the logo banner. No cards hides it. */
+      experience: optionalSection({ ...sectionHead, items: titledItems, note: optionalText, link: optionalLink }),
       formats: optionalSection({ ...sectionHead, items: titledItems }),
       steps: optionalSection({ ...sectionHead, items: titledItems }),
       /** Heading above the offer cards; only shown when this audience has published offers. */

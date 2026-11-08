@@ -237,6 +237,28 @@ content:
               - { name: src, label: Video file, type: string, description: 'e.g. /media/retreats-teaching.mp4' }
               - { name: poster, label: Still image shown while it loads, type: string, description: 'e.g. /media/retreats-teaching-poster.jpg' }
               - { name: speed, label: Playback speed, type: number, description: '1 is as filmed, 0.8 is slightly slower.' }
+      - name: experience
+        label: Where I've taught
+        type: object
+        description: 'Under the logo banner: a card for each studio, then a short line and link (e.g. your Google reviews). Leave the cards empty to hide this section.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic. No full stop at the end.' }
+          - { name: intro, label: Intro text, type: text }
+          - name: items
+            label: Cards
+            type: object
+            list: true
+            fields:
+              - { name: title, label: 'Studio and place, e.g. ARC Pilates, Cape Town', type: string, required: true }
+              - { name: text, label: What you did there, type: text, required: true }
+          - { name: note, label: Line under the cards (optional), type: string }
+          - name: link
+            label: Link under the cards (optional)
+            type: object
+            fields:
+              - { name: label, label: Link text, type: string, description: 'e.g. Read my private client reviews on Google' }
+              - { name: href, label: Link, type: string, description: 'A full web address. It opens in a new tab.' }
       - name: whoFor
         label: Who it's for
         type: object

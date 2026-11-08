@@ -1,4 +1,5 @@
 ---
+import Button from '../ui/Button.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
 
@@ -9,9 +10,14 @@ interface Props {
   items: { title: string; text: string }[];
   /** cards: soft raised tiles. lines: open list separated by hairlines. */
   variant?: 'cards' | 'lines';
+  /** Optional short line under the grid. */
+  note?: string;
+  /** Optional link under the grid. A full web address opens in a new tab. */
+  link?: { label: string; href: string };
 }
 
-const { eyebrow, title, intro, items, variant = 'lines' } = Astro.props;
+const { eyebrow, title, intro, items, variant = 'lines', note, link } = Astro.props;
+const external = link ? /^https?:\/\//.test(link.href) : false;
 // Two columns when there are 2 or 4 items, so rows never end with a lone tile.
 const cols = items.length % 3 === 0 || items.length > 4 ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
 ---
@@ -33,4 +39,12 @@ const cols = items.length % 3 === 0 || items.length > 4 ? 'lg:grid-cols-3' : 'lg
       ))
     }
   </ul>
+  {
+    (note || link) && (
+      <p class="type-body-s -mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-ink-muted md:-mt-8">
+        {note && <span>{note}</span>}
+        {link && <Button href={link.href} variant="link" external={external} event="feature_link">{link.label}</Button>}
+      </p>
+    )
+  }
 </div>

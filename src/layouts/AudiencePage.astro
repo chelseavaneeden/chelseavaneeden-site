@@ -69,6 +69,15 @@ const { about, logos } = await getPage('home');
       )
     }
 
+    {/* Where she has taught, and a link to her private-client reviews, with the rest of her proof (8 Nov). */}
+    {
+      page.experience && (
+        <Section space="m">
+          <FeatureGrid {...page.experience} variant="cards" />
+        </Section>
+      )
+    }
+
     {/* "Perfect for" is a light, faded sage, like on the private page. */}
     <Section space="m" tone="alt" tint="sage">
       <Checklist {...page.whoFor} />

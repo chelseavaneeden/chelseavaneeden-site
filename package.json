@@ -16,7 +16,8 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.0",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "ultrahtml": "^1.7.0"
   },
   "devDependencies": {
     "wrangler": "^4.151.2",

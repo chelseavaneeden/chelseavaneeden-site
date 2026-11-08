@@ -39,7 +39,8 @@ be on a branch, delete it afterwards, and say clearly that the CMS doesn't edit 
 Two audiences, two pages, so neither reads the other's offer:
 
 - **`/` is for 1-on-1 clients only.** One action: Book your Session.
-- **`/retreats-events` is for organisers, teams and brands.** One action: Request a proposal. This is the link for
+- **`/retreats-events` is for event organisers and teams.** One action: Request a proposal. Brand rates stay private
+  for now (Chelsea, 8 Nov), so the page and its form don't mention brands. This is the link for
   outreach emails. Its header button is its own (Request a proposal), not the intro session.
 
 ### Home page (1-on-1)
@@ -63,11 +64,13 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 ### Retreats & events (`/retreats-events`)
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
-Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Perfect for retreats that, How it works,
-Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
+Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Where I've taught, Perfect for retreats
+that, How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
 proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
-next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is the studios she has
-taught at (ARC Pilates Cape Town, Hourglass) and Google reviews from private clients, labelled as such.
+next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
+(CMS: Where I've taught): ARC Pilates Cape Town (full time, 2021 to 2023) and Hourglass (cover, 2025), with a link to her
+Google reviews labelled "Reviews from my private clients". Swap in host reviews as she gets them. Rates exclude travel and
+accommodation (the organiser pays); the venue provides mats and props.
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
 ### The intro session path
@@ -160,6 +163,11 @@ glows, dark bands or tilting on hover.
 - **Forms on paper:** every form sits on `Card variant="paper"`: warm paper `#FFFDF9` (`--surface-paper`) lifted above the
   film grain (`--z-paper`), with the header above it (`--z-header`), so the words read crisply (Chelsea, 7 Nov). Fields
   and chips use the same paper. A paper card only clears the grain if nothing around it makes its own layer.
+- **No single word on its own line** (Chelsea, 8 Nov: "never, ever on the website"). `src/middleware.ts` runs
+  `src/lib/no-orphans.ts` on every page as it's built: it joins the last three words of every piece of text with
+  non-breaking spaces (two in big headings, fewer when the words are long), so CMS wording is covered too. Headings use
+  `text-wrap: balance` and body text `pretty` as well. Under every form, the WhatsApp line comes first, then the reply
+  promise and privacy line.
 - **Pausing motion:** `MotionToggle.astro`, a small button on the hero video and the logo band. Either one pauses the video,
   the logos and the sun rays, and the choice carries across pages in that browser. It's hidden when the device asks for
   reduced motion, since nothing moves then. New looping animations need `data-ambient` so the button stops them too.
@@ -215,7 +223,7 @@ glows, dark bands or tilting on hover.
    billed monthly and last one calendar month, which does not describe the single intro session: add a line for it.
 2. **Monthly price**: the site says from €260 a month.
 3. **Draft copy to approve**: the About rewrite, How it works, the whole organiser page, the forms, Privacy.
-4. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 48 hours.
+4. **Reply promises**: forms say "within one working day"; the organiser page promises a proposal within 2 working days.
 5. **Credentials**: "5+ years" vs 6; permission for the logos in the banner.
    The BASI logo is their official artwork with the Graduate badge traced from Chelsea's old PNG (BASI may have its own
    Graduate file). Insight Timer is their official SVG. Datchet and Elf are tracings of her old PNGs: an official file for

@@ -1,6 +1,6 @@
 seo:
   title: Pilates for retreats, events & teams · Chelsea van Eeden
-  description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events, teams and brands, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
+  description: Mixed-level, feel-good Pilates for wellness retreats, festivals, events and teams, with a BASI Comprehensive instructor based in Lisbon. Available across Europe and South Africa.
 hero:
   title: Feel-good Pilates for your ==retreat or event==
   lede: Bespoke mixed-level Pilates sessions for your wellness retreats and events. Based in Lisbon, available across Europe and South Africa.
@@ -16,6 +16,18 @@ hero:
     src: /media/retreats-teaching.mp4
     poster: /media/retreats-teaching-poster.jpg
     speed: 1
+# Where I've taught, plus the link to her Google reviews (from private clients). Shown under the logo banner.
+experience:
+  title: Where I’ve *taught*
+  items:
+    - title: ARC Pilates, Cape Town
+      text: Full-time Pilates instructor, 2021 to 2023.
+    - title: Hourglass
+      text: Cover instructor in 2025, teaching the owner’s group and private Reformer classes.
+  note: Reviews from my private clients
+  link:
+    label: Read on Google
+    href: https://www.google.com/search?hl=en&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
 whoFor:
   title: Perfect for *retreats that…*
   items:
@@ -29,7 +41,7 @@ steps:
     - title: Tell me about your event
       text: Dates, location, group size and the feel you’re after.
     - title: Your proposal
-      text: I reply with a tailored proposal within 48 hours.
+      text: I reply with a tailored proposal within 2 working days.
     - title: We plan it together
       text: Session lengths, levels and space, planned around your schedule.
     - title: I teach
@@ -48,12 +60,14 @@ faq:
     - question: Is it suitable for beginners?
       answer: Yes. Sessions are mixed-level and beginner-friendly, with options to make every exercise easier or harder.
     - question: How much does it cost?
-      answer: Each experience is tailored to the event and its needs. Sessions start at €150, with room to explore collaborations that feel meaningful and aligned.
+      answer: Each experience is tailored to the event and its needs. Sessions start at €150, with room to explore collaborations that feel meaningful and aligned. Rates exclude travel and accommodation, which the organiser covers.
+    - question: Do you bring mats and props?
+      answer: No, the venue or organiser arranges mats and any props. If you need them, I’m happy to recommend suppliers and put you in touch.
     - question: How far ahead should I get in touch?
       answer: As early as you can, especially for peak retreat and festival season.
 enquiry:
   title: Request a *proposal*
-  intro: Tell me about your retreat or event, and I’ll reply with a tailored proposal within 48 hours.
+  intro: Tell me about your retreat or event, and I’ll reply with a tailored proposal within 2 working days.
 credentials:
   look: band
   stats:
