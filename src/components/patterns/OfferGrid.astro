@@ -16,17 +16,23 @@ interface Props {
 
 const { eyebrow, title, intro, note, offers, cardVariant = 'raised', headingId } = Astro.props;
 // Cards with photos need more width (photo on the side), so they sit side by side only on wide screens.
-// A single offer always spans the full width. Four cards sit two by two, so none is left alone on a row.
+// A single offer with a photo spans the full width; a single offer without one sits beside the heading on wide
+// screens, so it isn't stretched thin. Four cards sit two by two, so none is left alone on a row.
 const withPhotos = offers.some((o) => o.image);
 const single = offers.length === 1;
+const beside = single && !withPhotos;
 const threeAcross = offers.length > 2 && offers.length !== 4;
 ---
 
-<div class="flex flex-col gap-12 md:gap-16">
-  <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" id={headingId} />
+<div class:list={beside ? 'grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start' : 'flex flex-col gap-12 md:gap-16'}>
+  <div class:list={beside && 'flex flex-col gap-6 lg:col-span-5'}>
+    <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout={beside ? 'stacked' : 'split'} id={headingId} />
+    {beside && note && <Text variant="caption" tone="muted" class="hidden lg:block">{note}</Text>}
+  </div>
   <ul
     class:list={[
       'grid grid-cols-1',
+      beside && 'lg:col-span-7',
       !single && (withPhotos ? 'gap-6 xl:grid-cols-2' : ['gap-4 md:grid-cols-2', threeAcross && 'xl:grid-cols-3']),
     ]}
   >
@@ -38,5 +44,5 @@ const threeAcross = offers.length > 2 && offers.length !== 4;
       ))
     }
   </ul>
-  {note && <Text variant="caption" tone="muted">{note}</Text>}
+  {note && <Text variant="caption" tone="muted" class={beside ? 'lg:hidden' : undefined}>{note}</Text>}
 </div>

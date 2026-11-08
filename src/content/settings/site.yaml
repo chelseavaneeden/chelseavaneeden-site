@@ -206,6 +206,13 @@ trust:
   googleReviewCount:
   items:
     - label: BASI Comprehensive
+# The Google reviews pop-up. Links to href open it instead of a new tab. Add reviews to switch it on.
+googleReviews:
+  href: https://www.google.com/search?hl=en&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
+  title: Client *reviews*
+  intro: From my private clients on Google, shown in full as written.
+  linkLabel: See them on Google
+  items: []
 # Shown two to a row, in this order.
 footerLinks:
   - label: Book your Session

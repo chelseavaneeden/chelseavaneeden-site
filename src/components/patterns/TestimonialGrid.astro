@@ -3,7 +3,7 @@ import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
-import type { Testimonial } from '../../lib/content';
+import { newTabRule, type Testimonial } from '../../lib/content';
 
 interface Props {
   eyebrow?: string;
@@ -20,6 +20,7 @@ interface Props {
 }
 
 const { eyebrow, title, testimonials, link, cardTone = 'raised', rating, grow = false } = Astro.props;
+const newTab = await newTabRule();
 const ratingText =
   rating?.value && rating.count ? `${rating.value.toFixed(1)} on Google from ${rating.count} review${rating.count === 1 ? '' : 's'}` : undefined;
 const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
@@ -65,7 +66,7 @@ const cols = testimonials.length === 1 ? '' : testimonials.length === 2 ? 'md:gr
   {
     link && (
       <div data-grow-follow={grow || undefined}>
-        <Button href={link.href} variant="secondary" external={/^https?:\/\//.test(link.href)} event="reviews">
+        <Button href={link.href} variant="secondary" external={newTab(link.href)} event="reviews">
           {link.label}
         </Button>
       </div>

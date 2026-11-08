@@ -3,7 +3,7 @@
 // when both numbers are filled in, then a few facts. The rating never links away from the site;
 // a fact's link opens in a new tab.
 import Icon from '../ui/Icon.astro';
-import type { Site } from '../../lib/content';
+import { newTabRule, type Site } from '../../lib/content';
 
 interface Props {
   trust: Site['trust'];
@@ -20,7 +20,7 @@ const entries = [
   ...(rating ? [{ label: rating, href: undefined, icon: 'star' as const }] : []),
   ...items.map((i) => ({ ...i, icon: i.href?.includes('youtube.com') ? ('play' as const) : undefined })),
 ];
-const external = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
+const external = await newTabRule();
 ---
 
 {

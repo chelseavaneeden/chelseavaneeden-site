@@ -65,27 +65,20 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
 Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Where I've taught, Perfect for retreats
-that, Formats & rates, How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
+that, A starting point (one price card), How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
 proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
 next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
-(CMS: Where I've taught): ARC Pilates Cape Town (full time, 2021 to 2023) and Hourglass (cover, 2025), with a link to her
-Google reviews labelled "Reviews from my private clients". Swap in host reviews as she gets them. Rates exclude travel and
-accommodation (the organiser pays); the venue provides mats and props.
+(CMS: Where I've taught): Private online Pilates, worldwide (full time, 2021 to present), Arc Movement Studio, Cape Town
+(full time, 2021 to 2023) and Hourglass Pilates, Cape Town (guest instructor, 2025), with a link to her Google reviews
+labelled "Reviews from my private clients" (it opens the reviews pop-up once reviews are added, see below). Swap in host
+reviews as she gets them. Rates exclude travel and accommodation (the organiser pays); the venue provides mats and props.
 
-**Formats & rates** (approved by Chelsea, 8 Nov): flat fees for up to 20 guests, shown as "From" cards. The cards are
-Offers & prices with Who it's for = Retreats & Events; the heading and small print are Retreats & events page → Prices
-section. Four cards sit two by two.
+**One price card only** (Chelsea, 8 Nov): "Single session, from €150 / session", 45 to 60 minutes. Events are
+personalised and rates are discussed, so a full rate card on the site would lock her in. The detailed formats and rates
+live only in her one-page PDF on her Mac, never in this public repo. The card is Offers & prices → Single session (Who
+it's for = Retreats & Events); the heading ("A starting point") and small print are Retreats & events page → Prices
+section. A single card without a photo sits beside its heading on wide screens.
 
-| Card | From | Length |
-|---|---|---|
-| Single class | €150 / session | 45 to 60 minutes |
-| Team session | €150 / session, €130 each for four or more | 45 to 60 minutes |
-| Workshop | €300 | up to 3 hours of teaching |
-| Retreat or event | €250 / teaching day | two days or more, up to two classes a day |
-
-Small print: prices exclude travel and accommodation (the organiser covers them) and IVA where it applies; the venue
-provides mats and props; groups over 20 and longer stays are quoted on request. The reasoning and anything private
-stay in a local report on her Mac, never in this public repo. Only publish the rates she has approved for the site.
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
 ### The intro session path
@@ -171,6 +164,12 @@ glows, dark bands or tilting on hover.
 - **Sunrise glow:** `Sunlight.astro`, on the page headers and on `Card variant="sunrise"`.
 - **Button hover:** just the colour change and a gentle glow.
 - **Footer:** no links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
+- **Keep people on the site (Chelsea, 8 Nov):** open things in a pop-up on the page wherever possible, never a needless new
+  tab. The question form (`EnquiryDialog.astro`, every link to /enquire) and the Google reviews (`ReviewsDialog.astro`, every
+  link to the address in Site settings → Google reviews pop-up, once at least one review is added) open as pop-ups; the
+  booking calendar opens on the intro page. Only links that have to leave the site open a new tab (WhatsApp, Instagram,
+  the complaints book), so the site stays open behind them. One rule decides this for every component: `newTabRule()` in
+  `src/lib/content.ts`. The reviews in the pop-up are pasted in by Chelsea, exactly as written on Google.
 - **Line breaks:** pressing Enter in a CMS text field starts a new line on the page.
 - **Legibility floor (audit, 4 Nov):** no text under 14px; form field and choice outlines use `--line-control` (about
   4:1, the guideline is 3:1); phone tap targets reach 44px, using the invisible `tap-area` utility where the look must stay

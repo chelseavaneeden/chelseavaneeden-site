@@ -213,6 +213,19 @@ const settings = defineCollection({
         items: list(z.object({ label: z.string(), href: optionalText })),
       })
       .default({ items: [] }),
+    /**
+     * The Google reviews pop-up. Every link on the site to `href` (her Google reviews page) opens these reviews
+     * in a pop-up instead of a new tab, so visitors stay on the site. With no reviews added, the links open Google.
+     */
+    googleReviews: z
+      .object({
+        href: optionalText,
+        title: optionalText,
+        intro: optionalText,
+        linkLabel: optionalText,
+        items: list(z.object({ name: z.string(), text: z.string(), stars: z.number().int().min(1).max(5).default(5) })),
+      })
+      .default({ items: [] }),
     /** Footer links to real pages (the menu's jump links are left out on purpose). */
     footerLinks: list(link),
     socials: list(link),

@@ -2,6 +2,7 @@
 import Button from '../ui/Button.astro';
 import Text from '../ui/Text.astro';
 import SectionHeader from './SectionHeader.astro';
+import { newTabRule } from '../../lib/content';
 
 interface Props {
   eyebrow?: string;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { eyebrow, title, intro, items, variant = 'lines', note, link } = Astro.props;
-const external = link ? /^https?:\/\//.test(link.href) : false;
+const external = link ? (await newTabRule())(link.href) : false;
 // Two columns when there are 2 or 4 items, so rows never end with a lone tile.
 const cols = items.length % 3 === 0 || items.length > 4 ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
 ---

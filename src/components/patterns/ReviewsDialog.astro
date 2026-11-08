@@ -1,0 +1,104 @@
+---
+// The Google reviews pop-up (Site settings → Google reviews pop-up). Every link on the site to her Google reviews
+// address opens it instead of a new tab, so visitors stay on the site (Chelsea, 8 Nov). With no reviews added, or
+// without JavaScript, those links simply open Google. The link at the bottom is the one way on to Google.
+import Button from '../ui/Button.astro';
+import Heading from '../ui/Heading.astro';
+import Icon from '../ui/Icon.astro';
+import Text from '../ui/Text.astro';
+import type { Site } from '../../lib/content';
+
+interface Props {
+  reviews: Site['googleReviews'];
+  /** Her Google rating from the trust line settings, shown under the title when both numbers are set. */
+  rating?: { value?: number; count?: number };
+}
+
+const { reviews, rating } = Astro.props;
+const show = Boolean(reviews.href && reviews.items.length > 0);
+const ratingText =
+  rating?.value && rating.count ? `${rating.value.toFixed(1)} on Google from ${rating.count} review${rating.count === 1 ? '' : 's'}` : undefined;
+// A review can have several paragraphs, separated by an empty line.
+const paragraphs = (text: string) => text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+---
+
+{
+  show && (
+    <dialog
+      id="reviews-dialog"
+      data-href={reviews.href}
+      aria-labelledby="reviews-dialog-title"
+      class="size-full max-h-none max-w-none overflow-y-auto bg-transparent p-(--gutter) backdrop:bg-ink/50 open:flex"
+    >
+      <div class="relative m-auto flex w-full max-w-2xl flex-col gap-8 rounded-card bg-surface-paper p-6 text-ink shadow-raised md:p-10">
+        <button
+          type="button"
+          data-close
+          aria-label="Close"
+          class="absolute top-3 right-3 flex size-11 items-center justify-center rounded-pill text-xl text-ink transition-colors hover:bg-surface-alt"
+        >
+          <Icon name="close" />
+        </button>
+        <div class="flex flex-col gap-3 pr-10">
+          <Heading level={2} variant="h2" text={reviews.title ?? 'Client *reviews*'} id="reviews-dialog-title" />
+          {ratingText && (
+            <p class="type-body inline-flex items-center gap-2 text-ink">
+              <Icon name="star" class="text-lg text-logo-mark" />
+              {ratingText}
+            </p>
+          )}
+          {reviews.intro && <Text variant="body-s" tone="muted" text={reviews.intro} />}
+        </div>
+        <ul class="flex flex-col">
+          {reviews.items.map((review) => (
+            <li class="flex flex-col gap-3 border-t border-line py-6 last:pb-0">
+              <p class="flex gap-0.5 text-logo-mark" role="img" aria-label={`${review.stars} out of 5 stars`}>
+                {Array.from({ length: review.stars }, () => (
+                  <Icon name="star" class="fill-current" />
+                ))}
+              </p>
+              <blockquote class="flex flex-col gap-3">
+                {paragraphs(review.text).map((p) => (
+                  <Text variant="body">{p}</Text>
+                ))}
+              </blockquote>
+              <p class="type-label text-ink-muted">{review.name}</p>
+            </li>
+          ))}
+        </ul>
+        {reviews.linkLabel && (
+          <div class="border-t border-line pt-6">
+            <Button href={reviews.href!} variant="link" external event="reviews_google">
+              {reviews.linkLabel}
+            </Button>
+          </div>
+        )}
+      </div>
+    </dialog>
+  )
+}
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#reviews-dialog');
+  const href = dialog?.dataset.href;
+
+  if (dialog && href) {
+    type Umami = { track: (name: string, data?: Record<string, string>) => void };
+
+    // Any link to the Google reviews address opens the pop-up instead (except the one inside it).
+    document.addEventListener('click', (event) => {
+      const link = (event.target as Element).closest?.('a[href]');
+      if (!link || link.getAttribute('href') !== href || dialog.contains(link)) return;
+      event.preventDefault();
+      dialog.showModal();
+      dialog.scrollTop = 0;
+      (window as unknown as { umami?: Umami }).umami?.track('reviews_open', { page: location.pathname });
+    });
+
+    // Close with the × or by clicking outside the panel (Esc works natively).
+    dialog.addEventListener('click', (event) => {
+      const target = event.target as Element;
+      if (target === dialog || target.closest('[data-close]')) dialog.close();
+    });
+  }
+</script>

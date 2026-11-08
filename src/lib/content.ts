@@ -14,6 +14,16 @@ export async function getSite(): Promise<Site> {
   return entry.data;
 }
 
+/**
+ * One rule for which links open a new tab: full web addresses do, so the site stays open behind them, except the
+ * Google reviews link while its pop-up has reviews (it opens on the page instead). Returns a check to use per link.
+ */
+export async function newTabRule(): Promise<(href?: string) => boolean> {
+  const { googleReviews } = await getSite();
+  const popup = googleReviews.items.length > 0 ? googleReviews.href : undefined;
+  return (href) => Boolean(href && /^https?:\/\//.test(href) && href !== popup);
+}
+
 export async function getPage(id: string): Promise<CollectionEntry<'pages'>['data']> {
   const entry = await getEntry('pages', id);
   if (!entry) throw new Error(`Missing src/content/pages/${id}.yaml`);

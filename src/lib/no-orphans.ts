@@ -69,7 +69,9 @@ export function noOrphans(html: string): string {
     if (words < 3) return;
 
     const limit = big ? MAX_TAIL_BIG : MAX_TAIL;
-    let hold = big || words === 3 ? 1 : 2;
+    // Join the last three words (two in big headings or three-word texts), but always leave at least two words
+    // before the joined end, so a short title like "Private online Pilates, worldwide" never starts with a lone word.
+    let hold = big || words <= 4 ? 1 : 2;
     while (hold > 0 && visibleLength(joined.slice(gaps[gaps.length - hold].from).trim()) > limit) hold--;
 
     for (const gap of gaps.slice(gaps.length - hold)) {

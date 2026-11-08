@@ -791,6 +791,23 @@ content:
             fields:
               - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive Instructor' }
               - { name: href, label: Link (optional), type: string }
+      - name: googleReviews
+        label: Google reviews pop-up
+        type: object
+        description: 'Links to your Google reviews open these reviews in a pop-up, so visitors stay on your site. Until you add a review, the links open Google instead.'
+        fields:
+          - { name: href, label: Your Google reviews link, type: string, description: 'The same link as "Read on Google" on the Retreats & events page. Any link to this address opens the pop-up.' }
+          - { name: title, label: Title, type: string, description: 'Use *asterisks* for italic. No full stop at the end.' }
+          - { name: intro, label: Line under the title, type: text }
+          - name: items
+            label: Reviews
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Name as shown, type: string, required: true, description: 'e.g. Lucy G.' }
+              - { name: text, label: Review, type: text, required: true, description: 'Paste it exactly as written on Google. Leave an empty line between paragraphs.' }
+              - { name: stars, label: Stars, type: number, default: 5 }
+          - { name: linkLabel, label: Link to Google at the bottom, type: string, description: 'e.g. See them on Google. This one opens Google in a new tab.' }
       - name: footerLinks
         label: Footer links
         type: object

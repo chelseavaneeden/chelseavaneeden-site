@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { Font, getImage } from 'astro:assets';
 import EnquiryDialog from '../components/patterns/EnquiryDialog.astro';
+import ReviewsDialog from '../components/patterns/ReviewsDialog.astro';
 import ScrollGrow from '../components/ui/ScrollGrow.astro';
 import { t, type Lang } from '../i18n/ui';
 import { getSite } from '../lib/content';
@@ -20,7 +21,7 @@ const { title, description, lang = 'en', noindex = false, pageEvent } = Astro.pr
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
 // This keeps the workers.dev address out of Google while the live Framer site carries on.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
-const { contact, enquiry, analytics, bookCta, shareImage } = await getSite();
+const { contact, enquiry, analytics, bookCta, shareImage, googleReviews, trust } = await getSite();
 
 // What WhatsApp, email and social apps show when someone shares a link to this page.
 const share = await getImage({ src: shareImage, width: 1200, height: 630, fit: 'cover', format: 'jpeg' });
@@ -75,6 +76,7 @@ const shareImageUrl = new URL(share.src, Astro.site).href;
     </a>
     <slot />
     <EnquiryDialog enquiry={enquiry} contact={contact} />
+    <ReviewsDialog reviews={googleReviews} rating={{ value: trust.googleRating, count: trust.googleReviewCount }} />
     <ScrollGrow />
   </body>
 </html>

@@ -4,6 +4,7 @@ import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 import Text from '../ui/Text.astro';
 import { t, type Lang } from '../../i18n/ui';
+import { newTabRule } from '../../lib/content';
 
 interface Link {
   label: string;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const { links, tagline, location, socials, legal, copyrightYear, lang = 'en' } = Astro.props;
+const newTab = await newTabRule();
 const year = copyrightYear ?? new Date().getFullYear();
 ---
 
@@ -40,8 +42,8 @@ const year = copyrightYear ?? new Date().getFullYear();
               <li>
                 <a
                   href={l.href}
-                  target={/^https?:\/\//.test(l.href) ? '_blank' : undefined}
-                  rel={/^https?:\/\//.test(l.href) ? 'noopener' : undefined}
+                  target={newTab(l.href) ? '_blank' : undefined}
+                  rel={newTab(l.href) ? 'noopener' : undefined}
                   class="type-body-s inline-flex min-h-11 items-center text-ink transition-colors hover:text-ink-muted md:min-h-0"
                 >
                   {l.label}
@@ -81,8 +83,8 @@ const year = copyrightYear ?? new Date().getFullYear();
             <li>
               <a
                 href={l.href}
-                target={/^https?:\/\//.test(l.href) ? '_blank' : undefined}
-                rel={/^https?:\/\//.test(l.href) ? 'noopener' : undefined}
+                target={newTab(l.href) ? '_blank' : undefined}
+                rel={newTab(l.href) ? 'noopener' : undefined}
                 class="type-caption inline-flex min-h-11 items-center text-ink-muted transition-colors hover:text-ink md:min-h-0"
               >
                 {l.label}

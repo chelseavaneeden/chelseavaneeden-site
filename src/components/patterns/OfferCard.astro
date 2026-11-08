@@ -9,7 +9,7 @@ import Img from '../ui/Img.astro';
 import Price from '../ui/Price.astro';
 import Sunlight from '../ui/Sunlight.astro';
 import Text from '../ui/Text.astro';
-import type { Offer } from '../../lib/content';
+import { newTabRule, type Offer } from '../../lib/content';
 
 interface Props {
   offer: Offer;
@@ -18,6 +18,7 @@ interface Props {
 }
 
 const { offer, variant = 'raised' } = Astro.props;
+const newTab = await newTabRule();
 
 // With a photo, the photo sits on top on phones and on the left from tablets up.
 const hasPhoto = Boolean(offer.image);
@@ -74,7 +75,7 @@ const hasPhoto = Boolean(offer.image);
         href={offer.cta.href}
         variant={offer.featured ? 'primary' : 'secondary'}
         size={offer.featured ? 'l' : 'm'}
-        external={/^https?:\/\//.test(offer.cta.href)}
+        external={newTab(offer.cta.href)}
         event="offer_card"
       >
         {offer.cta.label}
