@@ -15,5 +15,6 @@ includes:
 cta:
   label: Request a proposal
   href: '#enquire'
+featured: true
 order: 20
 published: true

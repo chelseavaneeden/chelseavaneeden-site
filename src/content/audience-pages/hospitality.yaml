@@ -38,11 +38,9 @@ whoFor:
     - Want guests feeling grounded, energised and cared for after the session
     - Prefer a class that blends Pilates strength with somatic techniques
 # One "From" price only (Chelsea, 8 Nov): events are personalised and rates are discussed, so the full rate card stays
-# in her PDF, not on the site. The card is under Offers & prices, for Retreats & Events.
+# in her PDF, not on the site. The card is under Offers & prices, for Retreats & Events. Same title as the home page.
 investment:
-  title: A starting *point*
-  intro: Every event is personalised, so we’ll talk through what you need and I’ll tailor a proposal to it.
-  note: Rates exclude travel and accommodation, which the organiser covers, and IVA where it applies.
+  title: Shall we *begin?*
 steps:
   title: How it *works*
   items:

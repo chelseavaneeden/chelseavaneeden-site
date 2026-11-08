@@ -69,15 +69,6 @@ const { about, logos } = await getPage('home');
       )
     }
 
-    {/* Where she has taught, and a link to her private-client reviews, with the rest of her proof (8 Nov). */}
-    {
-      page.experience && (
-        <Section space="m">
-          <FeatureGrid {...page.experience} variant="cards" />
-        </Section>
-      )
-    }
-
     {/* "Perfect for" is a light, faded sage, like on the private page. */}
     <Section space="m" tone="alt" tint="sage">
       <Checklist {...page.whoFor} />
@@ -132,6 +123,15 @@ const { about, logos } = await getPage('home');
       testimonials.length > 0 && (
         <Section space="m" id="reviews">
           <TestimonialGrid eyebrow={page.proof.eyebrow} title={page.proof.title} testimonials={testimonials} />
+        </Section>
+      )
+    }
+
+    {/* Where she has taught, and a link to her private-client reviews, just above Good to know (Chelsea, 8 Nov). */}
+    {
+      page.experience && (
+        <Section space="m" tone="alt">
+          <FeatureGrid {...page.experience} variant="cards" />
         </Section>
       )
     }

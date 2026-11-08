@@ -64,8 +64,8 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 ### Retreats & events (`/retreats-events`)
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
-Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Where I've taught, Perfect for retreats
-that, A starting point (one price card), How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
+Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Perfect for retreats that, Shall we begin?
+(one price card), How it works, Request a proposal, Where I've taught, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
 proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
 next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
 (CMS: Where I've taught): Private online Pilates, worldwide (full time, 2021 to present), Arc Movement Studio, Cape Town
@@ -76,8 +76,10 @@ reviews as she gets them. Rates exclude travel and accommodation (the organiser 
 **One price card only** (Chelsea, 8 Nov): "Single session, from €150 / session", 45 to 60 minutes. Events are
 personalised and rates are discussed, so a full rate card on the site would lock her in. The detailed formats and rates
 live only in her one-page PDF on her Mac, never in this public repo. The card is Offers & prices → Single session (Who
-it's for = Retreats & Events); the heading ("A starting point") and small print are Retreats & events page → Prices
-section. A single card without a photo sits beside its heading on wide screens.
+it's for = Retreats & Events, highlighted so it gets the sunrise glow and the yellow button); its heading is the same
+"Shall we begin?" as the home page (Retreats & events page → Prices section), with no intro or small print. A single card
+without a photo uses the wide layout on tablets and up: name and price on the left, what's included and the button on
+the right, like the intro session card with words where its photo is.
 
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
