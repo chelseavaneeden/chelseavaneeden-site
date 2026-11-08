@@ -180,8 +180,8 @@ glows, dark bands or tilting on hover.
    Site settings → Intro session page.
 2. **Stripe**: intro bookings are paid into a **separate Stripe account Google created** ("Chelsea van Eeden · Google
    Calendar"), not her main one. ~~Webhook~~ done 7 Nov in that account (events `checkout.session.completed` and
-   `charge.succeeded`, secret in Cloudflare). Still in that account: receipts for successful payments on, branding (logo,
-   colours) so receipts look like hers, Adaptive Pricing off. In the main account: a second pricing table with the monthly
+   `charge.succeeded`, secret in Cloudflare). ~~Receipts on, branding (logo-email.png, icon-square.png, brand
+   #F8F3EA, accent #E2B866), Adaptive Pricing off~~ done 8 Nov in that account. In the main account: a second pricing table with the monthly
    plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
 3. **MailerLite**: ~~domain, sender, emails, API key~~ done 7–8 Nov (chelseavaneeden.com authenticated; the four intro
    emails send as Chelsea van Eeden <chelsea@chelseavaneeden.com>, designed by Chelsea). **Still to do: she switches on
