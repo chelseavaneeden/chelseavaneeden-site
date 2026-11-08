@@ -65,12 +65,17 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
 Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Perfect for retreats that, Shall we begin?
-(one price card), How it works, Request a proposal, Where I've taught, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
-proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
-next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
-(CMS: Where I've taught): Arc Movement Studio, Cape Town (full time, 2021 to 2023), Hourglass Pilates, Cape Town (guest
-instructor, 2025) and, last, Private online Pilates, worldwide (full time, 2021 to present). No Google reviews line here (Chelsea took it off, 8 Nov), so nothing on this page opens the reviews pop-up for now. Swap in host
-reviews as she gets them. Rates exclude travel and accommodation (the organiser pays); the venue provides mats and props.
+(one price card), How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On
+phones a quiet "Request a proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and
+the footer. Research and next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet, so
+never imply she has.
+
+**Where I've taught** was taken off the page (Chelsea, 8 Nov). The section still exists in the CMS (Retreats & events
+page → Where I've taught) and shows again as soon as it has at least one card. Its last wording, if she wants it back:
+Arc Movement Studio, Cape Town (full-time Pilates instructor, 2021 to 2023); Hourglass Pilates, Cape Town (guest
+instructor in 2025, teaching the owner's group and private Reformer classes); Private online Pilates, worldwide
+(full-time Pilates instructor, 2021 to present). Rates exclude travel and accommodation (the organiser pays); the venue
+provides mats and props.
 
 **One price card only** (Chelsea, 8 Nov): no visible title (hidden title "Pilates for your event"), the line "For events,
 retreats and corporate teams.", **From €150 / session**, and "Workshops, longer days and retreats are quoted to your plan."

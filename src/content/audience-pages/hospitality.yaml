@@ -16,16 +16,6 @@ hero:
     src: /media/retreats-teaching.mp4
     poster: /media/retreats-teaching-poster.jpg
     speed: 1
-# Where I've taught, just above Good to know. The Google reviews line was removed (Chelsea, 8 Nov).
-experience:
-  title: Where I’ve *taught*
-  items:
-    - title: Arc Movement Studio, Cape Town
-      text: Full-time Pilates instructor, 2021 to 2023.
-    - title: Hourglass Pilates, Cape Town
-      text: Guest instructor in 2025, teaching the owner’s group and private Reformer classes.
-    - title: Private online Pilates, worldwide
-      text: Full-time Pilates instructor, 2021 to present.
 whoFor:
   title: Perfect for *retreats that…*
   items:
