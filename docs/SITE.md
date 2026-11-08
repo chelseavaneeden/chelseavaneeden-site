@@ -271,6 +271,11 @@ The pipeline stays exactly the same; only the address at the end changes.
 5. Point the Stripe webhook, Turnstile's hostname and Resend's sending domain at the real domain, and change the button
    links in the two MailerLite automations from the workers.dev address to the real one.
 6. The domain is registered with Cloudflare (checked 7 Nov), renewal date last noted as 17 Dec 2026: check it won't lapse.
+7. Stop Google seeing two copies of the site (audit, 8 Nov): every page needs a canonical tag pointing at the real domain
+   (none yet), and the workers.dev address should forward pages, not `/api/*`, to the real domain once it works. Keep
+   `/api/*` answering on both until the Stripe webhook and the MailerLite links have moved.
+8. Add a sitemap (none yet) and list it in `robots.txt`, then submit it in Google Search Console.
+9. Optional: make the old Framer address `/terms-and-conditions` a permanent (301) redirect; today it forwards with a page.
 
 ## Older versions
 
