@@ -20,12 +20,12 @@ hero:
 experience:
   title: Where I’ve *taught*
   items:
-    - title: Private online Pilates, worldwide
-      text: Full-time Pilates instructor, 2021 to present.
     - title: Arc Movement Studio, Cape Town
       text: Full-time Pilates instructor, 2021 to 2023.
     - title: Hourglass Pilates, Cape Town
       text: Guest instructor in 2025, teaching the owner’s group and private Reformer classes.
+    - title: Private online Pilates, worldwide
+      text: Full-time Pilates instructor, 2021 to present.
   note: Reviews from my private clients
   link:
     label: Read on Google
