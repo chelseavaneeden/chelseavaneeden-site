@@ -22,6 +22,7 @@ import OfferGrid from '../components/patterns/OfferGrid.astro';
 import ProofStrip from '../components/patterns/ProofStrip.astro';
 import SectionHeader from '../components/patterns/SectionHeader.astro';
 import StepList from '../components/patterns/StepList.astro';
+import StickyCta from '../components/patterns/StickyCta.astro';
 import TestimonialGrid from '../components/patterns/TestimonialGrid.astro';
 import TrustLine from '../components/patterns/TrustLine.astro';
 import { getAudiencePage, getOffers, getPage, getSite, getTestimonials, resolveHeroLinks, type Audience } from '../lib/content';
@@ -55,6 +56,15 @@ const { about, logos } = await getPage('home');
       page.credentials && page.credentials.stats.length > 0 && (
         <Section space="s" class="overflow-x-clip pt-0">
           <ProofStrip stats={page.credentials.stats} look={page.credentials.look} />
+        </Section>
+      )
+    }
+
+    {/* The logo banner sits with her credentials, so proof comes before the form. */}
+    {
+      logos && (
+        <Section space="s" bare class="pt-0">
+          <LogoStrip {...logos} />
         </Section>
       )
     }
@@ -97,15 +107,6 @@ const { about, logos } = await getPage('home');
       )
     }
 
-    {/* The companies she has worked with, under the form. */}
-    {
-      logos && (
-        <Section space="s" bare class="pt-0">
-          <LogoStrip {...logos} />
-        </Section>
-      )
-    }
-
     {
       offers.length > 0 && page.investment && (
         <Section space="m" tone="alt" id="investment" labelledby="investment-title">
@@ -133,6 +134,9 @@ const { about, logos } = await getPage('home');
 
     {page.ctaBand && <CtaBand {...page.ctaBand} />}
   </main>
+
+  {/* On phones the header's button folds into the menu, so the page's main action stays within reach here. */}
+  <StickyCta label={page.hero.primary.label} href={page.hero.primary.href} />
 
   <Footer links={site.footerLinks} tagline={site.tagline} location={site.location} socials={site.socials} legal={site.legal} copyrightYear={site.copyrightYear} />
 </Base>

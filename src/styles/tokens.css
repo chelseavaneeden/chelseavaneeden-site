@@ -227,6 +227,8 @@
   /* Layout widths (max-w-content, max-w-prose…) */
   --container-prose: 40rem;
   --container-narrow: 56rem;
+  /* Space under the phone-only "Request a proposal" button: clear of the iPhone's home bar. */
+  --sticky-cta-gap: max(1rem, env(safe-area-inset-bottom));
   /* The Google booking calendar on the intro page: tall enough for the days and times without much inner scrolling. */
   --booking-frame-h: clamp(36rem, 85svh, 48rem);
   --container-content: 76rem;
@@ -300,6 +302,7 @@
      stay crisp, and the header stays above paper when it scrolls past. */
   --z-grain: 70;
   --z-paper: 72;
+  --z-sticky: 74;
   --z-header: 75;
   --z-overlay: 80;
   --z-banner: 90;

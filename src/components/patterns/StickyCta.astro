@@ -1,0 +1,57 @@
+---
+// A quiet button that stays at the bottom of the screen on phones and tablets, where the header's own button
+// folds into the menu. It appears once the visitor has scrolled past the page's header section, and hides again
+// while the place it points to (e.g. the proposal form) or the footer is on screen. Large screens keep the
+// header's button instead, so this never shows there.
+import Button from '../ui/Button.astro';
+
+interface Props {
+  label: string;
+  /** Where it goes, e.g. #enquire. */
+  href: string;
+}
+
+const { label, href } = Astro.props;
+---
+
+<div
+  class="group/sticky pointer-events-none fixed inset-x-0 bottom-0 z-(--z-sticky) flex justify-center px-(--gutter) pb-(--sticky-cta-gap) lg:hidden"
+  data-sticky-cta
+  data-target={href}
+  inert
+>
+  <div
+    class="translate-y-4 opacity-0 transition duration-(--duration-base) ease-soft group-data-shown/sticky:pointer-events-auto group-data-shown/sticky:translate-y-0 group-data-shown/sticky:opacity-100 motion-reduce:transition-none"
+  >
+    <Button href={href} event="sticky" class="shadow-raised">{label}</Button>
+  </div>
+</div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-sticky-cta]');
+  const hero = document.querySelector('main > section');
+  if (bar && hero && 'IntersectionObserver' in window) {
+    const target = bar.dataset.target?.startsWith('#') ? document.querySelector(bar.dataset.target) : null;
+    const footer = document.querySelector('footer');
+    let pastHero = false;
+    const inView = new Set<Element>();
+
+    const update = () => {
+      const show = pastHero && inView.size === 0;
+      bar.toggleAttribute('data-shown', show);
+      bar.inert = !show;
+    };
+
+    new IntersectionObserver(([entry]) => {
+      pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+      update();
+    }).observe(hero);
+
+    const watch = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => (entry.isIntersecting ? inView.add(entry.target) : inView.delete(entry.target)));
+      update();
+    });
+    if (target) watch.observe(target);
+    if (footer) watch.observe(footer);
+  }
+</script>

@@ -63,6 +63,11 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 ### Retreats & events (`/retreats-events`)
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
+Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Perfect for retreats that, How it works,
+Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
+proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
+next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is the studios she has
+taught at (ARC Pilates Cape Town, Hourglass) and Google reviews from private clients, labelled as such.
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
 ### The intro session path
