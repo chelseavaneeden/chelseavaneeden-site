@@ -31,7 +31,9 @@ const embed = (() => {
   <div data-booking-open>
     <Button href={url} size="l" external={!embed} event="booking_calendar">{label}</Button>
   </div>
-  <div class="hidden h-(--booking-frame-h) w-full overflow-hidden rounded-media border border-line bg-surface-raised" data-booking-frame></div>
+  {/* Clean paper lifted above the page's film grain (like Card variant="paper"), so Google's white time slots
+      and the box around them are one even colour. Google's page is see-through, so this colour shows through it. */}
+  <div class="relative z-(--z-paper) hidden h-(--booking-frame-h) w-full overflow-hidden rounded-media bg-surface-paper shadow-raised" data-booking-frame></div>
 </div>
 
 <script>

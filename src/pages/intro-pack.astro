@@ -32,14 +32,22 @@ const offer = offers.find((o) => o.featured) ?? offers[0];
 >
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
-    {/* The home page header's sunrise glow, running up behind the menu. */}
-    <Section space="none" class="relative isolate -mt-(--header-h) overflow-hidden bg-surface pt-(--hero-pad) pb-(--space-section-m) md:-mt-(--header-h-md) md:pt-(--hero-pad-md)">
+    {/* The home page header's sunrise glow, running up behind the menu. The section is clear and doesn't make
+        its own layer (no isolate), so the booking calendar can sit above the page's film grain like the forms;
+        the linen comes from the page itself, and the glow still shows behind. */}
+    <Section space="none" class="relative -mt-(--header-h) overflow-hidden pt-(--hero-pad) pb-(--space-section-m) md:-mt-(--header-h-md) md:pt-(--hero-pad-md)">
       <Sunlight />
       <div class="mx-auto flex max-w-narrow flex-col items-center gap-10">
         <SectionHeader level={1} eyebrow={intro.eyebrow} title={intro.title} intro={intro.intro} layout="centered" />
         {
           intro.bookingPageUrl ? (
             <>
+              {/* First thing on the page: the button that opens the calendar right here. */}
+              <div class="flex w-full flex-col items-center gap-4">
+                <BookingCalendar url={intro.bookingPageUrl} label={intro.bookingButton} />
+                {intro.bookingNote && <p class="type-body-s text-center text-ink-muted">{intro.bookingNote}</p>}
+                {intro.emailNote && <p class="type-caption max-w-prose text-center text-ink-muted">{intro.emailNote}</p>}
+              </div>
               {offer && (
                 <Card variant="raised" padding="m" class="flex w-full max-w-prose flex-col gap-6">
                   <Price offer={offer} />
@@ -55,11 +63,6 @@ const offer = offers.find((o) => o.featured) ?? offers[0];
               )}
               {intro.points.length > 0 && <NumberedList items={intro.points} />}
               <TrustLine trust={site.trust} class="justify-center" />
-              <div class="flex w-full flex-col items-center gap-4">
-                <BookingCalendar url={intro.bookingPageUrl} label={intro.bookingButton} />
-                {intro.bookingNote && <p class="type-body-s text-center text-ink-muted">{intro.bookingNote}</p>}
-                {intro.emailNote && <p class="type-caption max-w-prose text-center text-ink-muted">{intro.emailNote}</p>}
-              </div>
             </>
           ) : (
             intro.stripePricingTableId && (

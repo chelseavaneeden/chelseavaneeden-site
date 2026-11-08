@@ -30,7 +30,7 @@ introPack:
   # Google Calendar → the Intro session booking page → Share → Website embed → Inline booking page: the address in src="…".
   bookingPageUrl: https://calendar.google.com/calendar/appointments/schedules/AcZssZ1GHwno7TWcl91K_w1cG4URfLcMNFg3Nv5AwXeByViGISCS-lg84nHWz4e7CSh0lxeXDIdydygL?gv=true
   bookingButton: See available times
-  bookingNote: Need a different time? You can reschedule up to 24 hours before.
+  bookingNote:
   emailNote: After booking you’ll get a short form to fill in, and my occasional emails for private clients. Unsubscribe any time.
   # Only shown while there is no booking page link above.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
