@@ -38,6 +38,10 @@ proof:
   title: What hosts *say*
 faq:
   title: Good to *know*
+  # Button under the questions: back up to the proposal form.
+  link:
+    label: Request a proposal
+    href: '#enquire'
   items:
     - question: Where can you teach?
       answer: I’m based in Lisbon and travel across Europe and South Africa.

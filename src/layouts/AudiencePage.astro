@@ -48,6 +48,17 @@ const { about, logos } = await getPage('home');
       <TrustLine slot="trust" trust={{ items: site.trust.items }} />
     </Hero>
 
+    {/* Who she is and her credentials, straight after the header: organisers want to know her first (Chelsea, 8 Nov). */}
+    <AboutSection about={about} />
+
+    {
+      page.credentials && page.credentials.stats.length > 0 && (
+        <Section space="s" class="overflow-x-clip pt-0">
+          <ProofStrip stats={page.credentials.stats} look={page.credentials.look} />
+        </Section>
+      )
+    }
+
     {/* "Perfect for" is a light, faded sage, like on the private page. */}
     <Section space="m" tone="alt" tint="sage">
       <Checklist {...page.whoFor} />
@@ -86,17 +97,7 @@ const { about, logos } = await getPage('home');
       )
     }
 
-    {/* Who she is, then her credentials, then the companies she has worked with. */}
-    <AboutSection about={about} />
-
-    {
-      page.credentials && page.credentials.stats.length > 0 && (
-        <Section space="s" class="overflow-x-clip pt-0">
-          <ProofStrip stats={page.credentials.stats} look={page.credentials.look} />
-        </Section>
-      )
-    }
-
+    {/* The companies she has worked with, under the form. */}
     {
       logos && (
         <Section space="s" bare class="pt-0">
