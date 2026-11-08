@@ -2,7 +2,7 @@ import { t, type Lang } from '../i18n/ui';
 
 export type PriceDisplay = 'exact' | 'from' | 'on-request';
 export type PriceVisibility = 'web' | 'media-kit' | 'hidden';
-export type PriceUnit = 'session' | 'pack' | 'month' | 'programme' | 'workshop' | 'day' | 'person';
+export type PriceUnit = 'session' | 'intro-session' | 'pack' | 'month' | 'programme' | 'workshop' | 'day' | 'teaching-day' | 'person';
 export type Currency = 'EUR' | 'GBP' | 'USD';
 
 export interface PriceInput {

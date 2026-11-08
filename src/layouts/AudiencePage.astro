@@ -5,7 +5,7 @@
  * audience. Sections the editor leaves empty are skipped. Private clients have the home page instead.
  *
  * The header button is the page's own main action (e.g. Request a proposal), so organisers never see
- * the intro session button. Page-specific extras can be slotted in: slot="after-formats" or slot="after-offers".
+ * the intro session button. Page-specific extras can be slotted in: slot="after-offers" or slot="after-formats".
  */
 import Base from './Base.astro';
 import Section from '../components/ui/Section.astro';
@@ -83,6 +83,17 @@ const { about, logos } = await getPage('home');
       <Checklist {...page.whoFor} />
     </Section>
 
+    {/* Formats and "from" prices sit above How it works and the form, so organisers know the cost level before
+        they ask (research, 8 Nov). The cards are the Retreats & Events offers under Offers & prices. */}
+    {
+      offers.length > 0 && page.investment && (
+        <Section space="m" id="investment" labelledby="investment-title">
+          <OfferGrid {...page.investment} offers={offers} headingId="investment-title" />
+        </Section>
+      )
+    }
+    <slot name="after-offers" />
+
     {
       page.formats && (
         <Section space="m">
@@ -116,14 +127,6 @@ const { about, logos } = await getPage('home');
       )
     }
 
-    {
-      offers.length > 0 && page.investment && (
-        <Section space="m" tone="alt" id="investment" labelledby="investment-title">
-          <OfferGrid {...page.investment} offers={offers} headingId="investment-title" />
-        </Section>
-      )
-    }
-    <slot name="after-offers" />
 
     {
       testimonials.length > 0 && (

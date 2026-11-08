@@ -329,7 +329,7 @@ const offers = defineCollection({
         currency: z.enum(['EUR', 'GBP', 'USD']).default('EUR'),
         unit: z.preprocess(
           blankToUndefined,
-          z.enum(['session', 'intro-session', 'pack', 'month', 'programme', 'workshop', 'day', 'person']).optional(),
+          z.enum(['session', 'intro-session', 'pack', 'month', 'programme', 'workshop', 'day', 'teaching-day', 'person']).optional(),
         ),
         priceVisibility: z.enum(['web', 'media-kit', 'hidden']).default('web'),
         priceNote: optionalText,

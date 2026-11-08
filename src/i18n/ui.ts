@@ -14,6 +14,7 @@ export const ui = {
     'unit.programme': 'programme',
     'unit.workshop': 'workshop',
     'unit.day': 'day',
+    'unit.teaching-day': 'teaching day',
     'unit.person': 'person',
     'nav.menu': 'Menu',
     'nav.close': 'Close',

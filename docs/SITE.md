@@ -65,12 +65,27 @@ Menu: Site settings → Menu. `/private-sessions` redirects to `/`.
 
 Uses `src/layouts/AudiencePage.astro` with `src/content/audience-pages/hospitality.yaml` (CMS: **Retreats & events page**).
 Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, Where I've taught, Perfect for retreats
-that, How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
+that, Formats & rates, How it works, Request a proposal, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
 proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
 next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
 (CMS: Where I've taught): ARC Pilates Cape Town (full time, 2021 to 2023) and Hourglass (cover, 2025), with a link to her
 Google reviews labelled "Reviews from my private clients". Swap in host reviews as she gets them. Rates exclude travel and
 accommodation (the organiser pays); the venue provides mats and props.
+
+**Formats & rates** (approved by Chelsea, 8 Nov): flat fees for up to 20 guests, shown as "From" cards. The cards are
+Offers & prices with Who it's for = Retreats & Events; the heading and small print are Retreats & events page → Prices
+section. Four cards sit two by two.
+
+| Card | From | Length |
+|---|---|---|
+| Single class | €150 / session | 45 to 60 minutes |
+| Team session | €150 / session, €130 each for four or more | 45 to 60 minutes |
+| Workshop | €300 | up to 3 hours of teaching |
+| Retreat or event | €250 / teaching day | two days or more, up to two classes a day |
+
+Small print: prices exclude travel and accommodation (the organiser covers them) and IVA where it applies; the venue
+provides mats and props; groups over 20 and longer stays are quoted on request. The reasoning and anything private
+stay in a local report on her Mac, never in this public repo. Only publish the rates she has approved for the site.
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
 ### The intro session path

@@ -267,6 +267,15 @@ content:
           - { name: title, label: Title, type: string, required: true }
           - { name: intro, label: Intro text, type: text }
           - { name: items, label: Points (one line each, shown with a tick), type: string, list: true, required: true }
+      - name: investment
+        label: Prices section
+        type: object
+        description: 'Formats and "from" prices, under "Perfect for" and above How it works. The price cards themselves are under "Offers & prices" (Who it''s for: Retreats & Events). Leave the title empty to hide.'
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro text, type: text }
+          - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
       - name: formats
         label: Formats / where we work
         type: object
@@ -297,15 +306,6 @@ content:
             fields:
               - { name: title, label: Title, type: string, required: true }
               - { name: text, label: Text, type: text, required: true }
-      - name: investment
-        label: Prices section
-        type: object
-        description: 'Only shown when an offer for Retreats & Events is published under "Offers & prices". Leave the title empty to hide.'
-        fields:
-          - { name: eyebrow, label: Small line above the title, type: string }
-          - { name: title, label: Title, type: string }
-          - { name: intro, label: Intro text, type: text }
-          - { name: note, label: Small print under the prices, type: string, description: 'Leave empty to hide.' }
       - name: proof
         label: Testimonials heading
         type: object
@@ -437,6 +437,7 @@ content:
             - { value: programme, label: programme }
             - { value: workshop, label: workshop }
             - { value: day, label: day }
+            - { value: teaching-day, label: teaching day }
             - { value: person, label: person }
       - name: priceVisibility
         label: Where the price appears

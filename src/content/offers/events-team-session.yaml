@@ -1,0 +1,20 @@
+title: Team session
+audience: hospitality
+eyebrow: 45 to 60 minutes
+summary: On site or online, for your team.
+priceDisplay: from
+price: 150
+currency: EUR
+unit: session
+priceVisibility: web
+priceNote: €130 each when you book four or more
+includes:
+  - Up to 20 people
+  - Shaped around your team, for example stress or long days at a desk
+  - Mixed-level, so everyone can join in
+  - An invoice to your company
+cta:
+  label: Request a proposal
+  href: '#enquire'
+order: 30
+published: true

@@ -1,0 +1,20 @@
+title: Retreat or event
+audience: hospitality
+eyebrow: Two days or more
+summary: Up to two classes a day, 60 to 75 minutes each.
+priceDisplay: from
+price: 250
+currency: EUR
+unit: teaching-day
+priceVisibility: web
+priceNote: Plus travel, accommodation and meals
+includes:
+  - Up to 20 guests
+  - A programme planned across the days
+  - Options for mixed levels in every class
+  - Planned around your schedule and space
+cta:
+  label: Request a proposal
+  href: '#enquire'
+order: 50
+published: true
