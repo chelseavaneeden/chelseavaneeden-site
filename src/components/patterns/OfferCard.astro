@@ -15,8 +15,8 @@ interface Props {
   offer: Offer;
   /** Card style for non-featured offers; featured offers are the page's colour with the sunrise glow. */
   variant?: 'raised' | 'outline';
-  /** Wide layout for a single card without a photo: name and price on the left, what's included and the button on
-   *  the right (stacked on phones). It mirrors the intro session card, with words where its photo would be. */
+  /** Wide layout for a single card without a photo: what's included on the left, the line, price and button on the
+   *  right (Chelsea, 8 Nov). On phones: line and price, what's included, then the button. */
   wide?: boolean;
 }
 
@@ -59,7 +59,7 @@ const wide = wideProp && !hasPhoto;
     ]}
   >
     {offer.featured && <Sunlight contours={false} />}
-    <div class:list={['flex flex-col gap-6', wide && 'md:col-start-1 md:row-start-1']}>
+    <div class:list={['flex flex-col gap-6', wide && 'md:col-start-2 md:row-start-1']}>
       <div class="flex flex-col gap-3">
         {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
         <Heading level={3} variant="h3" text={offer.title} class={offer.showTitle ? undefined : 'sr-only'} />
@@ -77,7 +77,7 @@ const wide = wideProp && !hasPhoto;
         {offer.highlight && <p class="type-label rounded-pill bg-note px-3 py-1.5 text-note-ink">{offer.highlight}</p>}
       </div>
     </div>
-    <div class:list={['flex flex-1 flex-col gap-6', wide && 'border-t border-line pt-6 md:col-start-2 md:row-span-2 md:row-start-1 md:border-t-0 md:border-l md:pt-0 md:pl-12']}>
+    <div class:list={['flex flex-1 flex-col gap-6', wide && 'border-t border-line pt-6 md:col-start-1 md:row-span-2 md:row-start-1 md:border-t-0 md:border-r md:pt-0 md:pr-12']}>
       {!wide && <Divider />}
       <ul class="flex flex-col gap-2.5">
         {
@@ -104,7 +104,7 @@ const wide = wideProp && !hasPhoto;
         phones, after what's included. */}
     {
       wide && (
-        <div class="md:col-start-1 md:row-start-2 md:self-end">
+        <div class="md:col-start-2 md:row-start-2 md:self-end">
           <Button href={offer.cta.href} variant={offer.featured ? 'primary' : 'secondary'} size={offer.featured ? 'l' : 'm'} external={newTab(offer.cta.href)} event="offer_card">
             {offer.cta.label}
           </Button>
