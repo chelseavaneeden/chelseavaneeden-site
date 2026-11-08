@@ -68,9 +68,8 @@ Order since 8 Nov (Chelsea): header, Hi I'm Chelsea, credentials, logo banner, P
 (one price card), How it works, Request a proposal, Where I've taught, Good to know (with a Request a proposal button back to the form). On phones a quiet "Request a
 proposal" button stays at the bottom of the screen (`StickyCta.astro`), hidden at the form and the footer. Research and
 next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retreat yet: proof is **Where I've taught**
-(CMS: Where I've taught): Private online Pilates, worldwide (full time, 2021 to present), Arc Movement Studio, Cape Town
-(full time, 2021 to 2023) and Hourglass Pilates, Cape Town (guest instructor, 2025), with a link to her Google reviews
-labelled "Reviews from my private clients" (it opens the reviews pop-up once reviews are added, see below). Swap in host
+(CMS: Where I've taught): Arc Movement Studio, Cape Town (full time, 2021 to 2023), Hourglass Pilates, Cape Town (guest
+instructor, 2025) and, last, Private online Pilates, worldwide (full time, 2021 to present). No Google reviews line here (Chelsea took it off, 8 Nov), so nothing on this page opens the reviews pop-up for now. Swap in host
 reviews as she gets them. Rates exclude travel and accommodation (the organiser pays); the venue provides mats and props.
 
 **One price card only** (Chelsea, 8 Nov): "Single session, from €150 / session", 45 to 60 minutes. Events are

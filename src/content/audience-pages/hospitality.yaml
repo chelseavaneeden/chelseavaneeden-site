@@ -16,7 +16,7 @@ hero:
     src: /media/retreats-teaching.mp4
     poster: /media/retreats-teaching-poster.jpg
     speed: 1
-# Where I've taught, plus the link to her Google reviews (from private clients). Shown under the logo banner.
+# Where I've taught, just above Good to know. The Google reviews line was removed (Chelsea, 8 Nov).
 experience:
   title: Where I’ve *taught*
   items:
@@ -26,10 +26,6 @@ experience:
       text: Guest instructor in 2025, teaching the owner’s group and private Reformer classes.
     - title: Private online Pilates, worldwide
       text: Full-time Pilates instructor, 2021 to present.
-  note: Reviews from my private clients
-  link:
-    label: Read on Google
-    href: https://www.google.com/search?hl=en&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
 whoFor:
   title: Perfect for *retreats that…*
   items:
