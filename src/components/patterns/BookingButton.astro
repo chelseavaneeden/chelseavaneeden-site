@@ -1,0 +1,24 @@
+---
+// The button that opens Chelsea's booking calendar (BookingCalendar.astro, matched by `target`). It can sit
+// anywhere on the page, e.g. inside the intro card. Without JavaScript, or with a calendar.app.google link,
+// it simply opens Google's own booking page.
+import Button from '../ui/Button.astro';
+import { bookingEmbedUrl } from '../../lib/booking';
+
+interface Props {
+  /** The booking page address from Site settings → Intro session page. */
+  url: string;
+  label: string;
+  /** The id of the BookingCalendar this button opens. */
+  target: string;
+  /** Stretch across its box, e.g. the full width of a card. */
+  full?: boolean;
+}
+
+const { url, label, target, full = false } = Astro.props;
+const canEmbed = Boolean(bookingEmbedUrl(url));
+---
+
+<div class:list={[full ? 'w-full' : 'inline-flex']} data-booking-open={target}>
+  <Button href={url} size="l" full={full} external={!canEmbed} event="booking_calendar">{label}</Button>
+</div>

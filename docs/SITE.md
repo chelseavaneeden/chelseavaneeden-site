@@ -72,9 +72,10 @@ The first step is a single **Intro Session at €55** (since 3 Nov). The page's 
 Chosen on 7 Nov after research (`reports/Pilates booking funnel conversion.md`): **pick a time first, then pay in the same
 step**, in Chelsea's Google Calendar booking page (Business Standard includes paid bookings through her Stripe).
 
-1. Every **Book your Session** goes to **`/intro-pack`**: the €55 and what's included, three short steps, the trust line,
-   then **See available times**. That loads her Google booking page on the page, only when pressed
-   (`BookingCalendar.astro`). Words and the booking page link: Site settings → Intro session page. Until the link is set,
+1. Every **Book your Session** goes to **`/intro-pack`**: the heading, then the €55 card with what's included and a big
+   **See available times** button inside it (`BookingButton.astro`), which opens her Google booking page just below the
+   card, only when pressed (`BookingCalendar.astro`). Then the short-form line and the three steps. No trust line on
+   this page (Chelsea, 8 Nov). Words and the booking page link: Site settings → Intro session page. Until the link is set,
    the old intro-only Stripe table shows instead.
 2. The client picks a time, pays (Stripe inside Google) and gets Google's confirmation with the Meet link.
 3. Stripe tells the site (**`/api/stripe-webhook`**, `worker/stripe.ts`), which adds the client to MailerLite: group
