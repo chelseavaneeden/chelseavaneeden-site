@@ -72,13 +72,21 @@ next steps: `reports/Retreat and brand page layout.md`. She hasn't taught a retr
 instructor, 2025) and, last, Private online Pilates, worldwide (full time, 2021 to present). No Google reviews line here (Chelsea took it off, 8 Nov), so nothing on this page opens the reviews pop-up for now. Swap in host
 reviews as she gets them. Rates exclude travel and accommodation (the organiser pays); the venue provides mats and props.
 
-**One price card only** (Chelsea, 8 Nov): "Single session, from €150 / session", 45 to 60 minutes. Events are
-personalised and rates are discussed, so a full rate card on the site would lock her in. The detailed formats and rates
-live only in her one-page PDF on her Mac, never in this public repo. The card is Offers & prices → Single session (Who
-it's for = Retreats & Events, highlighted so it gets the sunrise glow and the yellow button); its heading is the same
-"Shall we begin?" as the home page (Retreats & events page → Prices section), with no intro or small print. A single card
-without a photo uses the wide layout on tablets and up: name and price on the left, what's included and the button on
-the right, like the intro session card with words where its photo is.
+**One price card only** (Chelsea, 8 Nov): no visible title (hidden title "Pilates for your event"), the line "For events,
+retreats and corporate teams.", **From €150 / session**, and "Workshops, longer days and retreats are quoted to your plan."
+Research (8 Nov, kept on her Mac) found every comparable listing prices one class per session; "/ day" would read as a whole
+day for €150. Events are personalised and rates are discussed, so the detailed formats and rates live only in her
+one-page PDF, never in this public repo. The card is Offers & prices → Pilates for your event (Who it's for = Retreats &
+Events, highlighted so it gets the sunrise glow and the yellow button); its heading is the same "Shall we begin?" as the
+home page (Retreats & events page → Prices section). A single card without a photo uses the wide layout from tablets up:
+the line, price and button on the left, what's included on the right; on phones the button comes last.
+
+**How it works** (8 Nov): an intro line ("you'll deal with me directly") and four steps that each say what the organiser
+gets and when: Tell me about your event (a short free call if easier), Your proposal (within 2 working days, one clear
+price), Your plan for the day (a one-page plan with timings, space, mats and props, a health note, an indoor option),
+On the day, and after (arrive early, every level, take-home moves). Chelsea approved these promises; keep the reply time
+identical in the steps, the form intro and the FAQ. `StepList.astro` shows them as a calm timeline: large amber 01 to 04
+numerals on a fine line with a small amber point.
 
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 

@@ -53,24 +53,31 @@ const wide = wideProp && !hasPhoto;
       sits behind the words rather than the whole card, so the photo doesn't hide it on phones. */}
   <div
     class:list={[
-      wide ? 'grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12' : 'flex flex-1 flex-col gap-6',
+      wide ? 'grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-12 md:gap-y-8' : 'flex flex-1 flex-col gap-6',
       offer.featured && 'relative isolate',
       (hasPhoto || wide) && (offer.featured ? 'px-6 py-10 sm:px-8 md:px-12 md:py-14' : 'p-7 md:p-8'),
     ]}
   >
     {offer.featured && <Sunlight contours={false} />}
-    <div class:list={['flex flex-col gap-6', wide && 'md:justify-center']}>
+    <div class:list={['flex flex-col gap-6', wide && 'md:col-start-1 md:row-start-1']}>
       <div class="flex flex-col gap-3">
         {offer.eyebrow && <Eyebrow tone={offer.featured ? 'accent' : 'muted'}>{offer.eyebrow}</Eyebrow>}
         <Heading level={3} variant="h3" text={offer.title} class={offer.showTitle ? undefined : 'sr-only'} />
-        {offer.summary && <Text variant={offer.featured ? 'body' : 'body-s'} tone="muted" text={offer.summary} />}
+        {/* With the title hidden, the line under it leads the card, so it reads a size up and in full colour. */}
+        {offer.summary && (
+          <Text
+            variant={!offer.showTitle && wide ? 'lede' : offer.featured ? 'body' : 'body-s'}
+            tone={!offer.showTitle && wide ? 'ink' : 'muted'}
+            text={offer.summary}
+          />
+        )}
       </div>
       <div class="flex flex-col items-start gap-3">
         <Price offer={offer} />
         {offer.highlight && <p class="type-label rounded-pill bg-note px-3 py-1.5 text-note-ink">{offer.highlight}</p>}
       </div>
     </div>
-    <div class:list={['flex flex-1 flex-col gap-6', wide && 'border-t border-line pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-12']}>
+    <div class:list={['flex flex-1 flex-col gap-6', wide && 'border-t border-line pt-6 md:col-start-2 md:row-span-2 md:row-start-1 md:border-t-0 md:border-l md:pt-0 md:pl-12']}>
       {!wide && <Divider />}
       <ul class="flex flex-col gap-2.5">
         {
@@ -83,17 +90,26 @@ const wide = wideProp && !hasPhoto;
         }
       </ul>
       {/* The button is as wide as its words plus some breathing room, not the whole card. */}
-      <div class="mt-auto pt-4">
-        <Button
-          href={offer.cta.href}
-          variant={offer.featured ? 'primary' : 'secondary'}
-          size={offer.featured ? 'l' : 'm'}
-          external={newTab(offer.cta.href)}
-          event="offer_card"
-        >
-          {offer.cta.label}
-        </Button>
-      </div>
+      {
+        !wide && (
+          <div class="mt-auto pt-4">
+            <Button href={offer.cta.href} variant={offer.featured ? 'primary' : 'secondary'} size={offer.featured ? 'l' : 'm'} external={newTab(offer.cta.href)} event="offer_card">
+              {offer.cta.label}
+            </Button>
+          </div>
+        )
+      }
     </div>
+    {/* In the wide card the button sits under the price on wide screens, so the two columns balance, and comes last on
+        phones, after what's included. */}
+    {
+      wide && (
+        <div class="md:col-start-1 md:row-start-2 md:self-end">
+          <Button href={offer.cta.href} variant={offer.featured ? 'primary' : 'secondary'} size={offer.featured ? 'l' : 'm'} external={newTab(offer.cta.href)} event="offer_card">
+            {offer.cta.label}
+          </Button>
+        </div>
+      )
+    }
   </div>
 </Card>

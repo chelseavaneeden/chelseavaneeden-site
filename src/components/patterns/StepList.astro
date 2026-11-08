@@ -10,23 +10,22 @@ interface Props {
 }
 
 const { eyebrow, title, intro, items } = Astro.props;
-// Steps are a real sequence, so they're numbered by position.
+// Steps are a real sequence, so they're numbered by position (01, 02…). Each sits on a fine line with a small
+// amber point, so together they read as one calm timeline: across on wide screens, down the page on phones.
 const cols = items.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4';
 ---
 
 <div class="flex flex-col gap-10 md:gap-14">
   <SectionHeader eyebrow={eyebrow} title={title} intro={intro} layout="split" />
-  <ol class:list={['grid grid-cols-1 gap-8 sm:grid-cols-2', cols]}>
+  <ol class:list={['grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8', cols]}>
     {
       items.map((step, i) => (
-        <li class="flex flex-col gap-4" data-reveal>
-          <span
-            class="type-label inline-flex size-11 items-center justify-center rounded-pill border border-line text-ink"
-            aria-hidden="true"
-          >
-            {i + 1}
+        <li class="relative flex flex-col gap-3 border-t border-line pt-7" data-reveal>
+          <span class="absolute -top-1.25 left-0 size-2.5 rounded-pill bg-accent" aria-hidden="true" />
+          <span class="type-stat text-accent" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
           </span>
-          <h3 class="type-h3 text-heading">{step.title}</h3>
+          <h3 class="type-h3 mt-2 text-heading">{step.title}</h3>
           <Text variant="body-s" tone="muted" text={step.text} />
         </li>
       ))

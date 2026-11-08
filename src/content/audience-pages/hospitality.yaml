@@ -39,15 +39,16 @@ investment:
   title: Shall we *begin?*
 steps:
   title: How it *works*
+  intro: From your first message to the final stretch, you’ll deal with me directly, so nothing gets lost along the way.
   items:
     - title: Tell me about your event
-      text: Dates, location, group size and the feel you’re after.
+      text: Share your dates, location, group size and the feel you’d like. We can start with a short call if that’s easier, with no cost and no obligation.
     - title: Your proposal
-      text: I reply with a tailored proposal within 2 working days.
-    - title: We plan it together
-      text: Session lengths, levels and space, planned around your schedule.
-    - title: I teach
-      text: A bespoke, feel-good Pilates session that will elevate your event and guest experience.
+      text: Within 2 working days, you’ll receive a tailored proposal with class lengths, timings, what’s included and one clear price.
+    - title: Your plan for the day
+      text: Once you’re happy, I’ll send a one-page plan with timings, space, mats and props, a short health note for your guests and an indoor option for outdoor classes.
+    - title: On the day, and after
+      text: I arrive early to set up and welcome your guests, shape the class to every level in the room, and send a few simple moves they can take home.
 proof:
   title: What hosts *say*
 faq:

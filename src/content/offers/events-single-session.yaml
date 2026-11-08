@@ -1,16 +1,17 @@
-title: Single session
+title: Pilates for your event
+showTitle: false
 audience: hospitality
-eyebrow: 45 to 60 minutes
 summary: For events, retreats and corporate teams.
 priceDisplay: from
 price: 150
 currency: EUR
 unit: session
 priceVisibility: web
+priceNote: Workshops, longer days and retreats are quoted to your plan.
 includes:
-  - A group Pilates session planned for your group and team
-  - Personalised around the theme of your event
+  - A 45 to 60 minute class, personalised to your group and event
   - Mixed-level, so everyone can join in
+  - A planning call beforehand, and early arrival to set up
   - Assistance with sourcing high-quality mats and props
 cta:
   label: Request a proposal
