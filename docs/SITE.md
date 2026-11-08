@@ -106,12 +106,16 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
   Variables and secrets): `RESEND_API_KEY`, `ENQUIRY_TO` (the inbox), `MAILERLITE_API_KEY`, `STRIPE_WEBHOOK_SECRET`,
   `NOTION_TOKEN`, optional `TURNSTILE_SECRET_KEY` and `ENQUIRY_FROM`. The MailerLite group and Notion database IDs are
   plain `vars` in `wrangler.jsonc`.
-- **None are set yet (checked 7 Nov), so forms can't send.** They show their "didn't send" message with the WhatsApp link.
+- **All set (8 Nov):** `STRIPE_WEBHOOK_SECRET`, `MAILERLITE_API_KEY`, `NOTION_TOKEN`, `RESEND_API_KEY`, `ENQUIRY_TO`, all
+  as Secrets ("Value encrypted"). Never add a key as a plain Variable, and never paste one into `wrangler.jsonc` (the code
+  is public), whatever Cloudflare's yellow "update your Wrangler configuration" banner suggests.
+- **Accounts:** Resend is a separate free account under chelsea@chelseavaneeden.com (her other Resend account is The Good
+  Mood Club's). Without a verified domain, Resend only delivers to that account's own address, which is `ENQUIRY_TO`.
 - The server code has tests with stand-in replies (signature check, paid and ignored payments, intake to Notion, fallbacks):
   `npm run test:worker` after any change to `worker/`.
 - **MailerLite only sends from an authenticated domain.** The account's default sender is a Gmail address (sender name
   "The Good Mood Club", domain thegoodmood.club is authenticated for her other emails). chelseavaneeden.com was added as a
-  second sending domain on 7 Nov; the intro emails send from chelsea@chelseavaneeden.com once it shows "Authenticated".
+  second sending domain on 7 Nov and authenticated the same day; the intro emails send from chelsea@chelseavaneeden.com.
 - **Only one SPF line** on chelseavaneeden.com (`v=spf1 include:_spf.mlsend.com include:dc-aa8e722993._spfm… ~all`). Never
   add a second one: edit that line. The `dc-aa8e722993._spfm` record holds Google's part; keep it.
 - Until a sending domain is verified in Resend, its test sender only delivers to the Resend account's own email address.
@@ -179,13 +183,15 @@ glows, dark bands or tilting on hover.
    `charge.succeeded`, secret in Cloudflare). Still in that account: receipts for successful payments on, branding (logo,
    colours) so receipts look like hers, Adaptive Pricing off. In the main account: a second pricing table with the monthly
    plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
-3. **MailerLite**: chelseavaneeden.com DNS records added 7 Nov (DKIM CNAME `litesrv._domainkey`, MailerLite added to the
-   one SPF line, verification TXT); waiting for "Authenticated". Then: add chelsea@chelseavaneeden.com as a sender, Claude
-   sets it (name "Chelsea van Eeden") on the four intro emails and sends test copies, an API token into Cloudflare
-   (`MAILERLITE_API_KEY`), then she switches on "Intro session: next steps" and "Intro session: all set".
-4. **Notion**: an internal integration ("Website intake"), its token into Cloudflare, and connect the Private clients page
-   to it.
-5. **Resend** account (free) and an API key; **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
+3. **MailerLite**: ~~domain, sender, emails, API key~~ done 7–8 Nov (chelseavaneeden.com authenticated; the four intro
+   emails send as Chelsea van Eeden <chelsea@chelseavaneeden.com>, designed by Chelsea). **Still to do: she switches on
+   "Intro session: next steps" and "Intro session: all set"** (MailerLite → Automations).
+4. ~~**Notion**~~ done 8 Nov: connection "Website intake" (API token, read + insert content), token refreshed and in
+   Cloudflare as a Secret, connected to the Private clients page.
+5. ~~**Resend**~~ done 8 Nov: a separate free account under chelsea@chelseavaneeden.com (no domain needed, notices go to
+   that inbox), `RESEND_API_KEY` and `ENQUIRY_TO` in Cloudflare. The intake path was tested end to end on 8 Nov (Notion
+   page, MailerLite intake_done, notice email all arrived; test records deleted). Still to do: a real test booking (pay
+   and refund) to confirm the Stripe → MailerLite step. Also: **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
    real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.
 6. **Google**: rating and number of reviews (Site settings → Trust line), a `g.page/r/…` review link, and permission from 3–6
    reviewers to quote them by first name.
