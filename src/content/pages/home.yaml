@@ -20,7 +20,7 @@ hero:
   video:
     src: /media/chelsea-teaching.mp4
     poster: /media/chelsea-teaching-poster.jpg
-    speed: 0.4
+    speed: 0.6
 perfectFor:
   title: You’re in the right place *if you…*
   items:
