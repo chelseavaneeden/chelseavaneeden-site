@@ -234,15 +234,17 @@ glows, dark bands or tilting on hover.
    #F8F3EA, accent #E2B866), Adaptive Pricing off~~ done 8 Nov in that account. In the main account: a second pricing table with the monthly
    plans (paste its ID in Site settings); deactivate the old €300 intro Payment Link.
 3. **MailerLite**: ~~domain, sender, emails, API key~~ done 7–8 Nov (chelseavaneeden.com authenticated; the four intro
-   emails send as Chelsea van Eeden <chelsea@chelseavaneeden.com>, designed by Chelsea). **Still to do: she switches on
-   "Intro session: next steps" and "Intro session: all set"** (MailerLite → Automations).
+   emails send as Chelsea van Eeden <chelsea@chelseavaneeden.com>, designed by Chelsea). ~~Switch on "Intro session: next
+   steps" and "Intro session: all set"~~ done 10 Nov, after Chelsea fixed the email copy and button colours.
 4. ~~**Notion**~~ done 8 Nov: connection "Website intake" (API token, read + insert content), token refreshed and in
    Cloudflare as a Secret, connected to the Private clients page.
 5. ~~**Resend**~~ done 8 Nov: a separate free account under chelsea@chelseavaneeden.com (no domain needed, notices go to
    that inbox), `RESEND_API_KEY` and `ENQUIRY_TO` in Cloudflare. The intake path was tested end to end on 8 Nov (Notion
    page, MailerLite intake_done, notice email all arrived; test records deleted). Still to do: a real test booking (pay
-   and refund) to confirm the Stripe → MailerLite step. Also: **Turnstile** widget in Cloudflare (hostname: the workers.dev address, later the
-   real domain); **Umami Cloud** account (free). Then set the secrets and IDs above.
+   and refund) to confirm the Stripe → MailerLite step. Also: **Turnstile** widget in Cloudflare (hostnames: the workers.dev address and both
+   chelseavaneeden.com addresses). Order matters: the site key goes into Site settings first and is published, then
+   `TURNSTILE_SECRET_KEY` goes into Cloudflare, because with only the secret set every form would be refused.
+   ~~**Umami Cloud**~~ done 10 Nov (website ID in Site settings, visits arriving).
 6. **Google**: rating and number of reviews (Site settings → Trust line), a `g.page/r/…` review link, and permission from 3–6
    reviewers to quote them by first name.
 7. **Named client quotes** (first name + city or situation) with permission.
