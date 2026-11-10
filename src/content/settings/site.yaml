@@ -1,25 +1,28 @@
 nav:
   - label: Reviews
     href: /#reviews
+    external: false
   - label: About
     href: /#about
+    external: false
   - label: FAQ
     href: /#faq
+    external: false
   - label: Retreats & collabs
     href: /retreats-events
+    external: false
     onItsPage:
       label: Private sessions
       href: /
-bookCta:
-  label: Book your Session
-  href: /intro-pack
 availability:
   open: true
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
   href: /intro-pack
   closedHref: /enquire
-# From Stripe → Pricing tables → Copy code. The publishable key (pk_…) is designed to be public.
+bookCta:
+  label: Book your Session
+  href: /intro-pack
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
   title: Book your Session
@@ -27,22 +30,20 @@ introPack:
     - Choose a time that suits you
     - Pay securely to confirm it
     - Meet me online for your first session
-  # Google Calendar → the Intro session booking page → Share → Website embed → Inline booking page: the address in src="…".
   bookingPageUrl: https://calendar.google.com/calendar/appointments/schedules/AcZssZ1GHwno7TWcl91K_w1cG4URfLcMNFg3Nv5AwXeByViGISCS-lg84nHWz4e7CSh0lxeXDIdydygL?gv=true
   bookingButton: See available times
-  bookingNote:
-  emailNote: After booking you’ll get a short form to fill in, and my occasional emails for private clients. Unsubscribe any time.
-  # Only shown while there is no booking page link above.
+  emailNote: After booking you’ll get a short form to fill in, and my occasional
+    emails for private clients. Unsubscribe any time.
   stripePricingTableId: prctbl_1UTTWqDYbuP8YMkh2npobpyB
 monthlyPlans:
   title: Continue with *me*
-  intro: For clients continuing after their intro session. Choose 1 or 2 private sessions a week, at a regular time that suits you.
-  # Add the ID of a second pricing table with the monthly plans.
-  stripePricingTableId:
+  intro: For clients continuing after their intro session. Choose 1 or 2 private
+    sessions a week, at a regular time that suits you.
   noTableText: To continue, message me and I’ll set up your monthly plan.
 welcome:
   title: Thank you, *you’re booked*
-  intro: One quick step before we meet. Tell me a little about you, so I can plan your first session around your body. It takes about 3 minutes.
+  intro: One quick step before we meet. Tell me a little about you, so I can plan
+    your first session around your body. It takes about 3 minutes.
   intakeTitle: Tell me about you
 contact:
   whatsappHref: https://wa.link/ccq3ib
@@ -50,16 +51,14 @@ contact:
 enquiry:
   nameLabel: Name
   emailLabel: Email
-  missingLead: 'Still needed:'
+  missingLead: "Still needed:"
   missingTick: The tick box
   replyPromise: I reply personally within one working day.
   privacyNote: I only use your details to reply to you.
-  # The typing box that opens when someone taps "Other".
   otherLabel: Tell me more
   success: Thank you, your message is on its way. I’ll reply by email soon.
-  error: Sorry, that didn’t send. Please try again in a moment, or message me on WhatsApp.
-  # From Cloudflare → Turnstile. Leave empty until the widget is set up.
-  turnstileSiteKey:
+  error: Sorry, that didn’t send. Please try again in a moment, or message me on
+    WhatsApp.
   forms:
     question:
       title: Ask me a *question*
@@ -70,12 +69,14 @@ enquiry:
           type: textarea
           required: true
           placeholder: e.g. I have lower back pain. Is the intro session right for me?
+          multiple: false
       button: Send my question
     proposal:
       title: Request a *proposal*
       questions:
         - label: I’m planning
           short: Planning
+          required: true
           options:
             - Retreat
             - Event
@@ -90,6 +91,7 @@ enquiry:
             - 6+ months / flexible
         - label: Where?
           short: Where
+          required: true
           options:
             - Portugal
             - Rest of Europe
@@ -109,34 +111,37 @@ enquiry:
           type: textarea
           required: false
           placeholder: Dates, venue, ideas…
+          multiple: false
       button: Request my proposal
     intake:
       title: Tell me about *you*
       emailHint: Use the email you booked with.
-      # The field ids (name) also set where each answer goes in Notion.
       fields:
         - name: birthday
           label: Date of birth
           type: date
           required: true
+          multiple: false
         - name: phone
           label: Phone
           type: tel
           required: false
+          multiple: false
         - name: location
           label: Where are you, and what’s your time zone?
           type: text
           required: true
           placeholder: e.g. London, UK time
+          multiple: false
         - name: emergency
           label: Emergency contact, name and number
           type: text
           required: true
           placeholder: e.g. Sam Smith, +44 7700 900000
+          multiple: false
         - name: pain
           label: Any pain or discomfort? Tap all that apply
           type: choice
-          multiple: true
           required: true
           options:
             - None
@@ -150,25 +155,28 @@ enquiry:
             - Wrists & hands
             - Elbows
             - Other
+          multiple: true
         - name: health
           label: Injuries, surgeries, health conditions or pregnancy, old and recent
           type: textarea
           required: true
           placeholder: e.g. knee surgery in 2021, or none
+          multiple: false
         - name: medication
           label: Medication or treatment
           type: text
           required: true
           placeholder: e.g. none
+          multiple: false
         - name: movement
           label: What movement do you do now?
           type: text
           required: true
           placeholder: e.g. walking, yoga once a week
+          multiple: false
         - name: goals
           label: Your goals, tap 1 or more
           type: choice
-          multiple: true
           required: true
           options:
             - Strength
@@ -176,58 +184,51 @@ enquiry:
             - Rehabilitation
             - Pre/postnatal
             - Other
+          multiple: true
         - name: equipment
           label: Equipment, tap all that apply
           type: choice
-          multiple: true
           required: true
           options:
             - Mat
             - Reformer
             - Other
+          multiple: true
         - name: notes
           label: Anything else I should know?
           type: textarea
           required: false
+          multiple: false
       agreements:
-        - text: I’ve read and agree to the [Terms](/terms), including the health and liability sections.
+        - text: I’ve read and agree to the [Terms](/terms), including the health and
+            liability sections.
           short: Terms
-        - text: I agree that Chelsea can use this health information to plan my sessions. [Privacy policy](/privacy)
+        - text: I agree that Chelsea can use this health information to plan my sessions.
+            [Privacy policy](/privacy)
           short: Health consent
       button: Send to Chelsea
 analytics:
-  # From Umami Cloud → Websites → your site → Edit → Website ID. Empty: no analytics.
-  umamiWebsiteId:
+  umamiWebsiteId: <script defer src="https://cloud.umami.is/script.js"
+    data-website-id="5049d82f-3769-4886-b2ee-238c5cf1e826"></script>
 tagline: Based in Europe · Teaching worldwide
-# Shown when someone shares a link to the site in WhatsApp, email or social media.
 shareImage: ../../assets/media/chelsea-portrait.jpg
-# Empty shows the current year.
-copyrightYear:
 trust:
-  # Fill in both to show the star rating, e.g. 5.0 and 12.
-  googleRating:
-  googleReviewCount:
   items:
     - label: BASI Comprehensive
-# The Google reviews pop-up. Links to href open it instead of a new tab. Add reviews to switch it on.
 googleReviews:
   href: https://www.google.com/search?hl=en&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
   title: Client *reviews*
   intro: From my private clients on Google, shown in full as written.
   linkLabel: See them on Google
-  items: []
-# Shown two to a row, in this order.
 footerLinks:
   - label: Book your Session
     href: /intro-pack
-  # /enquire opens the email form as a pop-up, so people stay on the site.
   - label: Ask a question
     href: /enquire
   - label: WhatsApp
     href: https://wa.link/ccq3ib
   - label: Instagram
     href: https://www.instagram.com/chelseavaneeden_/
-socials: []
 legal:
   - label: Privacy
     href: /privacy
@@ -235,6 +236,5 @@ legal:
     href: /terms
   - label: Cancellation policy
     href: /terms#4-cancellation--rescheduling-policy
-  # Portugal's electronic complaints book. Keep once you're registered at livroreclamacoes.pt.
   - label: Livro de Reclamações
     href: https://www.livroreclamacoes.pt/
