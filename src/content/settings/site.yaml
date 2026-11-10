@@ -59,6 +59,7 @@ enquiry:
   success: Thank you, your message is on its way. I’ll reply by email soon.
   error: Sorry, that didn’t send. Please try again in a moment, or message me on
     WhatsApp.
+  turnstileSiteKey: 0x4AAAAAAF7Oz80MwKpd8KTF
   forms:
     question:
       title: Ask me a *question*
