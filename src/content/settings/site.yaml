@@ -208,8 +208,7 @@ enquiry:
           short: Health consent
       button: Send to Chelsea
 analytics:
-  umamiWebsiteId: <script defer src="https://cloud.umami.is/script.js"
-    data-website-id="5049d82f-3769-4886-b2ee-238c5cf1e826"></script>
+  umamiWebsiteId: 5049d82f-3769-4886-b2ee-238c5cf1e826
 tagline: Based in Europe · Teaching worldwide
 shareImage: ../../assets/media/chelsea-portrait.jpg
 trust:
@@ -236,5 +235,3 @@ legal:
     href: /terms
   - label: Cancellation policy
     href: /terms#4-cancellation--rescheduling-policy
-  - label: Livro de Reclamações
-    href: https://www.livroreclamacoes.pt/

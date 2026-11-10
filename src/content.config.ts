@@ -196,7 +196,15 @@ const settings = defineCollection({
       forms: z.object({ question: enquiryForm, proposal: enquiryForm, intake: enquiryForm }),
     }),
     /** Umami Cloud website ID (cookieless analytics). Empty: no analytics. */
-    analytics: z.object({ umamiWebsiteId: optionalText }).default({}),
+    /** Umami's website ID. If the whole tracking code is pasted in, the ID is taken out of it (Chelsea, 10 Nov). */
+    analytics: z
+      .object({
+        umamiWebsiteId: z.preprocess(
+          (v) => (typeof v === 'string' ? (v.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i)?.[0] ?? (v.trim() || undefined)) : v),
+          z.string().optional(),
+        ),
+      })
+      .default({}),
     tagline: z.string(),
     /** The picture shown when someone shares a link to the site. A wide photo works best. */
     shareImage: image(),

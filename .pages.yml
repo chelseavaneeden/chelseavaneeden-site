@@ -774,7 +774,7 @@ content:
         label: Analytics
         type: object
         fields:
-          - { name: umamiWebsiteId, label: Umami website ID, type: string, description: 'From Umami Cloud → Websites → Edit. Leave empty for no analytics.' }
+          - { name: umamiWebsiteId, label: Umami website ID, type: string, description: 'From Umami Cloud → Websites → Edit: just the Website ID, e.g. 5049d82f-…. Pasting the whole tracking code also works. Leave empty for no analytics.' }
       - { name: tagline, label: Footer line under the logo, type: text, required: true }
       - { name: shareImage, label: Picture for shared links, type: image, required: true, description: 'Shown when someone shares your link in WhatsApp, email or social media. A wide photo works best.' }
       - { name: copyrightYear, label: Copyright year (footer), type: number, description: 'Leave empty to show the current year.' }

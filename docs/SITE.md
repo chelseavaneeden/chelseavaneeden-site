@@ -248,7 +248,8 @@ glows, dark bands or tilting on hover.
 7. **Named client quotes** (first name + city or situation) with permission.
 8. Facts for the organiser page: insurance, what she brings (mats, props), group sizes, travel terms.
 9. Rollover (1 or 2 sessions), personal line in About, Instagram link, business details for the privacy policy, Livro de
-   Reclamações registration.
+   Reclamações registration (Chelsea took the footer link off on 10 Nov; add it back under Site settings → Legal links
+   once she's registered).
 10. **Group/outdoor photos or a 30–60s teaching clip** for the organiser page.
 11. **Lawyer check** of Terms and Privacy: "non-refundable" vs the EU 14-day withdrawal right, South African governing law
    while living in Portugal, retention periods.
