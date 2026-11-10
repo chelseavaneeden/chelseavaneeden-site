@@ -187,6 +187,8 @@ const settings = defineCollection({
       replyPromise: optionalText,
       /** Short line next to the privacy policy link under the send button. */
       privacyNote: optionalText,
+      /** Label of the typing box that opens when someone taps "Other" in a tap-to-choose question. */
+      otherLabel: z.string().default('Tell me more'),
       success: z.string(),
       error: z.string(),
       /** Cloudflare Turnstile site key (the spam check). Empty: forms send without it. */

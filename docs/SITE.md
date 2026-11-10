@@ -132,6 +132,13 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
   buttons (one answer, or several with "Can tap more than one"). Required tick boxes take a link written as [Terms](/terms).
 - The intake field ids (birthday, phone, location, emergency, pain, goals, equipment) decide which Notion column an answer
   fills (`worker/notion.ts`). Every answer also goes in the Notion page, so new questions arrive without code changes.
+  Equipment is "tap all that apply" (Mat, Reformer, Other) since 10 Nov; its Notion column is the multi-select
+  "Equipment" (the empty "Mat or Reformer (old)" column can be deleted by Chelsea).
+- **"Other" opens a box** (10 Nov): in a tap-to-choose question, an option called Other opens a "Tell me more" box
+  (wording: Site settings → Enquiry forms → Label for the box under Other). What they type is sent as its own answer,
+  e.g. "Your goals (other)", so it lands in the Notion page and not as a new option in the columns.
+- The intake form has no WhatsApp line and no reply-time or privacy line under its button (Chelsea, 10 Nov); the
+  question and proposal forms keep both.
 - They post to **`/api/enquire`** (`worker/enquire.ts`). It checks the site, a hidden spam trap and Turnstile (when set).
   Question and proposal answers are emailed through **Resend** with reply-to set to the sender; intake goes to Notion.
 - Keys are Cloudflare **secrets**, never in this public repo (Cloudflare → Workers → chelseavaneeden-site → Settings →

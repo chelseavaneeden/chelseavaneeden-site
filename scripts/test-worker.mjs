@@ -105,7 +105,8 @@ const intake = {
     { key: 'pain', label: 'Any pain?', value: 'Lower back, Hips' },
     { key: 'health', label: 'Injuries, surgeries…', value: 'Herniated disc 2019' },
     { key: 'goals', label: 'Your goals', value: 'Strength, Rehabilitation' },
-    { key: 'equipment', label: 'Mat or Reformer?', value: 'Mat' },
+    { key: 'equipment', label: 'Equipment, tap all that apply', value: 'Mat, Other' },
+    { key: 'equipment-other', label: 'Equipment (other)', value: 'Pilates chair' },
   ],
 };
 const form = (body, e = env) => worker.fetch(new Request(`${site}/api/enquire`, { method: 'POST', body: JSON.stringify(body), headers: { origin: site } }), e);
@@ -122,7 +123,7 @@ const form = (body, e = env) => worker.fetch(new Request(`${site}/api/enquire`, 
   assert.equal(p['Date of birth'].date.start, '1990-04-12');
   assert.deepEqual(p['Pain areas'].multi_select, [{ name: 'Lower back' }, { name: 'Hips' }]);
   assert.deepEqual(p.Goals.multi_select, [{ name: 'Strength' }, { name: 'Rehabilitation' }]);
-  assert.deepEqual(p['Mat or Reformer'].select, { name: 'Mat' });
+  assert.deepEqual(p.Equipment.multi_select, [{ name: 'Mat' }, { name: 'Other' }]);
   assert.equal(p['Health consent'].checkbox, true);
   assert.ok(JSON.stringify(notion.body.children).includes('Herniated disc 2019'));
   ok('intake → Notion page with columns and every answer in the page');

@@ -617,7 +617,8 @@ content:
           - { name: missingLead, label: Message when something is missing, type: string, default: 'Still needed:', description: 'Shown by the send button, followed by what is missing.' }
           - { name: missingTick, label: Name for the tick box in that message, type: string, default: The tick box }
           - { name: replyPromise, label: Reply promise under the send button, type: string, description: 'Only promise what you can keep, e.g. I reply personally within one working day.' }
-          - { name: privacyNote, label: Privacy line, type: string, description: 'Shown before the Privacy policy link under the send button.' }
+          - { name: privacyNote, label: Privacy line, type: string, description: 'Shown before the Privacy policy link under the send button. Not shown on the intake form.' }
+          - { name: otherLabel, label: Label for the box under Other, type: string, default: Tell me more, description: 'When someone taps an option called Other, a box with this label opens so they can type more.' }
           - { name: success, label: Message after sending, type: text, required: true }
           - { name: error, label: Message if sending fails, type: text, required: true }
           - { name: turnstileSiteKey, label: Turnstile site key (spam check), type: string, description: 'From Cloudflare → Turnstile. Leave empty until it is set up.' }

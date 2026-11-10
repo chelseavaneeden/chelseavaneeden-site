@@ -31,6 +31,13 @@ const chip =
 const id = (name: string) => `${idPrefix}-${name}`;
 const inputType = { text: 'text', date: 'date', tel: 'tel' } as const;
 const autocompleteFor = (f: { name: string; type: string }) => (f.type === 'tel' ? 'tel' : f.name === 'birthday' ? 'bday' : undefined);
+// Tapping an option called "Other" opens a box to type more (Chelsea, 10 Nov). Its answer is named after the question,
+// e.g. "Your goals (other)".
+const OTHER = 'other';
+const hasOther = (options: string[]) => options.some((o) => o.trim().toLowerCase() === OTHER);
+const otherName = (label: string) => `${label.split(/[,?]/)[0].trim()} (other)`;
+// The intake form comes after booking, so it skips the WhatsApp and reply-time lines under the button (Chelsea, 10 Nov).
+const showContactLines = type !== 'intake';
 
 // Tick-box text can hold one or more links written as [Terms](/terms).
 const withLinks = (text: string) =>
@@ -107,11 +114,33 @@ const withLinks = (text: string) =>
             <div class="flex flex-wrap gap-2">
               {f.options.map((option) => (
                 <label class={chip}>
-                  <input type={f.multiple ? 'checkbox' : 'radio'} name={f.name} value={option} required={f.required && !f.multiple} class="sr-only" />
+                  <input
+                    type={f.multiple ? 'checkbox' : 'radio'}
+                    name={f.name}
+                    value={option}
+                    required={f.required && !f.multiple}
+                    data-other-option={option.trim().toLowerCase() === OTHER ? '' : undefined}
+                    class="sr-only"
+                  />
                   {option}
                 </label>
               ))}
             </div>
+            {hasOther(f.options) && (
+              <label class="mt-3 hidden flex-col gap-2" for={id(`${f.name}-other`)} data-other-box>
+                <span class="type-body-s text-ink-muted">{enquiry.otherLabel}</span>
+                <input
+                  id={id(`${f.name}-other`)}
+                  type="text"
+                  name={`${f.name}-other`}
+                  maxlength="300"
+                  data-other
+                  data-other-key={`${f.name}-other`}
+                  data-other-label={otherName(f.label)}
+                  class={field}
+                />
+              </label>
+            )}
           </fieldset>
         ) : (
           <label class="group/field flex flex-col gap-2" for={id(f.name)} data-required-label={f.required ? f.label : undefined}>
@@ -177,16 +206,20 @@ const withLinks = (text: string) =>
       <p class="type-body-s hidden text-center text-error" data-enquiry-missing data-lead={enquiry.missingLead} role="alert"></p>
       {/* WhatsApp first, right under the button, then the reply promise and privacy line (Chelsea, 8 Nov). */}
       {
-        contact.whatsappHref && (
+        showContactLines && contact.whatsappHref && (
           <p class="type-body-s flex flex-wrap items-center justify-center gap-x-2 text-center text-ink-muted">
             Prefer WhatsApp? <WhatsAppLink href={contact.whatsappHref} label={contact.whatsappLabel} />
           </p>
         )
       }
-      <p class="type-caption text-center text-balance text-ink-muted" data-enquiry-status role="status" aria-live="polite">
-        {enquiry.replyPromise}
-        {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
-      </p>
+      {
+        showContactLines && (
+          <p class="type-caption text-center text-balance text-ink-muted" data-enquiry-status role="status" aria-live="polite">
+            {enquiry.replyPromise}
+            {enquiry.privacyNote && <> {enquiry.privacyNote} <a href="/privacy" class="underline underline-offset-4">Privacy policy</a></>}
+          </p>
+        )
+      }
       <p class="type-body-s hidden text-center text-error" data-enquiry-error role="alert">{enquiry.error}</p>
     </div>
   </form>
@@ -214,7 +247,17 @@ const withLinks = (text: string) =>
     const label = send.textContent;
 
     const required = [...form.querySelectorAll<HTMLElement>('[data-required-label]')];
-    const controlsOf = (el: HTMLElement) => [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')];
+    const controlsOf = (el: HTMLElement) => [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input:not([data-other]), textarea')];
+
+    // The box under "Other" opens while Other is ticked, and closes again when it isn't.
+    const otherBoxes = () =>
+      form.querySelectorAll<HTMLElement>('[data-other-box]').forEach((box) => {
+        const set = box.closest('fieldset');
+        const ticked = Boolean(set?.querySelector<HTMLInputElement>('input[data-other-option]')?.checked);
+        box.classList.toggle('hidden', !ticked);
+        box.classList.toggle('flex', ticked);
+      });
+    form.addEventListener('change', otherBoxes);
 
     // The button is always active. If something is missing, this marks it and names it next to the button,
     // so nobody is left looking at a dead button. Returns the first one.
@@ -262,6 +305,12 @@ const withLinks = (text: string) =>
         const value =
           el instanceof HTMLFieldSetElement ? data.getAll(key).map(String).join(', ') : (el as HTMLInputElement).value.trim();
         if (value) answers.push({ key, label: el.dataset.answerLabel ?? key, value });
+        // What they typed under "Other" follows as its own answer, only while Other is ticked.
+        const other = el.querySelector<HTMLInputElement>('input[data-other]');
+        const otherTicked = el.querySelector<HTMLInputElement>('input[data-other-option]')?.checked;
+        if (other && otherTicked && other.value.trim()) {
+          answers.push({ key: other.dataset.otherKey ?? '', label: other.dataset.otherLabel ?? '', value: other.value.trim() });
+        }
       });
       const ticks = [...form.querySelectorAll<HTMLInputElement>('input[data-agreement]')];
 
@@ -287,6 +336,7 @@ const withLinks = (text: string) =>
         if (!response.ok) throw new Error(String(response.status));
         (window as unknown as { umami?: Umami }).umami?.track('enquiry_submit', { type: form.dataset.enquiry ?? '' });
         form.reset();
+        otherBoxes();
         form.classList.add('hidden');
         done.classList.replace('hidden', 'flex');
       } catch {

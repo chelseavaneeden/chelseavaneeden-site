@@ -54,6 +54,8 @@ enquiry:
   missingTick: The tick box
   replyPromise: I reply personally within one working day.
   privacyNote: I only use your details to reply to you.
+  # The typing box that opens when someone taps "Other".
+  otherLabel: Tell me more
   success: Thank you, your message is on its way. I’ll reply by email soon.
   error: Sorry, that didn’t send. Please try again in a moment, or message me on WhatsApp.
   # From Cloudflare → Turnstile. Leave empty until the widget is set up.
@@ -175,13 +177,14 @@ enquiry:
             - Pre/postnatal
             - Other
         - name: equipment
-          label: Mat or Reformer?
+          label: Equipment, tap all that apply
           type: choice
+          multiple: true
           required: true
           options:
             - Mat
-            - Reformer at home
-            - Not sure yet
+            - Reformer
+            - Other
         - name: notes
           label: Anything else I should know?
           type: textarea

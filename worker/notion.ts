@@ -2,6 +2,8 @@
 // Key answers fill the columns; every answer is also written in the page itself, so a question added
 // later in the CMS still arrives without any change here. The columns are matched by the field ids set
 // in Site settings → Enquiry forms → intake (birthday, phone, location, emergency, pain, goals, equipment).
+// What someone types under "Other" arrives as its own answer (key ending in -other), so it lands in the page, not as a
+// new option in the columns.
 import type { Answer, Env } from './lib.ts';
 
 const NOTION_VERSION = '2025-09-03';
@@ -48,7 +50,7 @@ export function intakeProperties(name: string, email: string, answers: Answer[],
   const goals = get('goals');
   if (goals) props.Goals = { multi_select: options(goals) };
   const equipment = get('equipment');
-  if (equipment) props['Mat or Reformer'] = { select: options(equipment)[0] };
+  if (equipment) props.Equipment = { multi_select: options(equipment) };
   return props;
 }
 
