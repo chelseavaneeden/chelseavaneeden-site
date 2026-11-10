@@ -246,6 +246,24 @@ const withLinks = (text: string) =>
     if (!send || !error || !done || !missing) return;
     const label = send.textContent;
 
+    // Cloudflare's spam check is at least 300px wide. On narrow phones (and in the pop-up) the card is narrower, so the
+    // check is scaled down to fit instead of spilling over the edge. It re-fits when the pop-up opens or the screen turns.
+    const TURNSTILE_WIDTH = 300;
+    const TURNSTILE_HEIGHT = 65;
+    form.querySelectorAll<HTMLElement>('.cf-turnstile').forEach((box) => {
+      const holder = box.parentElement;
+      if (!holder) return;
+      const fit = () => {
+        const room = holder.clientWidth;
+        const scale = room > 0 && room < TURNSTILE_WIDTH ? room / TURNSTILE_WIDTH : 1;
+        box.style.width = scale < 1 ? `${TURNSTILE_WIDTH}px` : '';
+        box.style.height = scale < 1 ? `${Math.ceil(TURNSTILE_HEIGHT * scale)}px` : '';
+        box.style.transform = scale < 1 ? `scale(${scale})` : '';
+        box.style.transformOrigin = 'left top';
+      };
+      new ResizeObserver(fit).observe(holder);
+    });
+
     const required = [...form.querySelectorAll<HTMLElement>('[data-required-label]')];
     const controlsOf = (el: HTMLElement) => [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input:not([data-other]), textarea')];
 

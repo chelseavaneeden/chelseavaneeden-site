@@ -244,6 +244,8 @@ glows, dark bands or tilting on hover.
    and refund) to confirm the Stripe → MailerLite step. Also: **Turnstile** widget in Cloudflare (hostnames: the workers.dev address and both
    chelseavaneeden.com addresses). Order matters: the site key goes into Site settings first and is published, then
    `TURNSTILE_SECRET_KEY` goes into Cloudflare, because with only the secret set every form would be refused.
+   ~~Done 10 Nov~~ (widget "Website forms", Managed, three hostnames; site key in Site settings; secret in Cloudflare).
+   The check is at least 300px wide, so on narrow cards `EnquiryForm.astro` scales it down to fit.
    ~~**Umami Cloud**~~ done 10 Nov (website ID in Site settings, visits arriving).
 6. **Google**: rating and number of reviews (Site settings → Trust line), a `g.page/r/…` review link, and permission from 3–6
    reviewers to quote them by first name.
