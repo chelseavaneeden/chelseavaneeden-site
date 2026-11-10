@@ -3,8 +3,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // The address used in link previews. Change to https://www.chelseavaneeden.com at launch.
-  site: 'https://chelseavaneeden-site.chelseavaneeden-site.workers.dev',
+  // The site's address: link previews, canonical tags and the sitemap use it (live since launch, 10 Nov 2026).
+  site: 'https://www.chelseavaneeden.com',
   // The old Framer address for the terms; Private sessions is now the home page.
   redirects: { '/terms-and-conditions': '/terms', '/private-sessions': '/' },
   i18n: {

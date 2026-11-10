@@ -3,13 +3,16 @@
 There is **one site, one version and one link**:
 
 ```
-Pages CMS  →  main on GitHub  →  Cloudflare builds it  →  chelseavaneeden-site.chelseavaneeden-site.workers.dev
+Pages CMS  →  main on GitHub  →  Cloudflare builds it  →  www.chelseavaneeden.com
 ```
 
 - Edit: https://app.pagescms.org/chelseavaneeden/chelseavaneeden-site/main/file/home
-- See it: https://chelseavaneeden-site.chelseavaneeden-site.workers.dev/
-- chelseavaneeden.com is still the Framer site and stays untouched until Chelsea says launch. Until then every
-  page is `noindex` and `robots.txt` blocks crawlers, so this address stays out of Google.
+- See it: https://www.chelseavaneeden.com/ (**live since 10 Nov 2026**, Chelsea's go-ahead). The Framer site is retired.
+- chelseavaneeden.com and the old address (chelseavaneeden-site.chelseavaneeden-site.workers.dev) forward every page to
+  www for good (301, `worker/index.ts`), so old links and emails still land. `/api/*` answers on all three addresses, so the
+  Stripe webhook and the forms keep working wherever they point.
+- Google may index the site: `PUBLIC_INDEXABLE=true` in `.env.production`. Every public page has a canonical tag with its
+  www address; `/sitemap.xml` lists the public pages (add new ones in `src/pages/sitemap.xml.ts`) and `robots.txt` names it.
 
 ## How a change gets published
 
@@ -274,23 +277,20 @@ glows, dark bands or tilting on hover.
    Elf needs its website, and the Datchet logo says "Osteopath" while the clinic's site says "Osteopathic".
 6. **Web address**: the payment page is still `/intro-pack`.
 
-## At launch (only on Chelsea's go-ahead)
+## Launch (10 Nov 2026) and what's left
 
-The pipeline stays exactly the same; only the address at the end changes.
+Done: both addresses on the Worker (`wrangler.jsonc` routes, custom domains), Framer's DNS records for the root and www
+removed (email records untouched), forwarding to www, `site` in `astro.config.mjs`, `SITE_URL` in the update check,
+canonical tags, sitemap, Google allowed in. Turnstile already lists both domains.
 
-1. Add the domain to `wrangler.jsonc`. The domain's DNS is already in Cloudflare (same account); its root and www records
-   point to Framer and are DNS only. Leave the email records (MX, SPF, DKIM, MailerLite) as they are.
-2. Set `PUBLIC_INDEXABLE=true` in Cloudflare's build variables, so Google can see the site.
-3. Change `SITE_URL` in `.github/workflows/check-website-updated.yml`.
-4. Change `site` in `astro.config.mjs` to the real domain, so link previews use it.
-5. Point the Stripe webhook, Turnstile's hostname and Resend's sending domain at the real domain, and change the button
-   links in the two MailerLite automations from the workers.dev address to the real one.
-6. The domain is registered with Cloudflare (checked 7 Nov), renewal date last noted as 17 Dec 2026: check it won't lapse.
-7. Stop Google seeing two copies of the site (audit, 8 Nov): every page needs a canonical tag pointing at the real domain
-   (none yet), and the workers.dev address should forward pages, not `/api/*`, to the real domain once it works. Keep
-   `/api/*` answering on both until the Stripe webhook and the MailerLite links have moved.
-8. Add a sitemap (none yet) and list it in `robots.txt`, then submit it in Google Search Console.
-9. Optional: make the old Framer address `/terms-and-conditions` a permanent (301) redirect; today it forwards with a page.
+Left for Chelsea (none of it is urgent, old addresses keep working):
+1. Stripe (the Google Calendar account): change the webhook URL to `https://www.chelseavaneeden.com/api/stripe-webhook`
+   (the signing secret stays the same).
+2. MailerLite: the buttons in the intro emails can point to `https://www.chelseavaneeden.com/welcome#intake`.
+3. Google Search Console: add the domain, submit `https://www.chelseavaneeden.com/sitemap.xml`.
+4. Google Business Profile, Instagram, YouTube, email signature: link to the new site.
+5. Framer: remove the custom domain from the project and unpublish; cancel the plan after a week or two.
+6. Domain renewal (last noted 17 Dec 2026): check auto-renew is on.
 
 ## Older versions
 

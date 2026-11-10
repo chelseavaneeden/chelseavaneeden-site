@@ -13,6 +13,11 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
   "workers_dev": true,
+  // Live since 10 Nov 2026 (Chelsea's go-ahead): both addresses serve this site; the Worker forwards the plain one to www.
+  "routes": [
+    { "pattern": "www.chelseavaneeden.com", "custom_domain": true },
+    { "pattern": "chelseavaneeden.com", "custom_domain": true }
+  ],
   "preview_urls": false,
   // Not secret: which MailerLite group and Notion database the website writes to (worker/lib.ts).
   "vars": {
@@ -24,6 +29,6 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": true
   }
 }

@@ -19,7 +19,7 @@ interface Props {
 const { title, description, lang = 'en', noindex = false, pageEvent } = Astro.props;
 
 // Launch switch: until PUBLIC_INDEXABLE=true is set (at launch), every page tells search engines to stay away.
-// This keeps the workers.dev address out of Google while the live Framer site carries on.
+// Since launch (10 Nov 2026) it is on, set in .env.production; set it to false to hide the site again.
 const indexable = import.meta.env.PUBLIC_INDEXABLE === 'true';
 const { contact, enquiry, analytics, bookCta, shareImage, googleReviews, trust } = await getSite();
 
@@ -37,6 +37,8 @@ const shareImageUrl = new URL(share.src, Astro.site).href;
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {(noindex || !indexable) && <meta name="robots" content="noindex, nofollow" />}
+    {/* The one address Google should list for this page (the www domain), whichever address it was reached by. */}
+    {indexable && !noindex && <link rel="canonical" href={pageUrl} />}
     <script is:inline>
       // Someone who pressed pause earlier (MotionToggle.astro) stays paused from the first paint.
       try {

@@ -4,7 +4,9 @@ Read [docs/SITE.md](docs/SITE.md) first. It has where every section's words live
 
 ## One site, one version, one link
 
-CMS (Pages CMS) → `main` on GitHub → Cloudflare builds it → https://chelseavaneeden-site.chelseavaneeden-site.workers.dev/
+CMS (Pages CMS) → `main` on GitHub → Cloudflare builds it → https://www.chelseavaneeden.com/ (live since 10 Nov 2026)
+
+chelseavaneeden.com and the old workers.dev address forward pages to www (`worker/index.ts`); `/api/*` answers on all three.
 
 This is the rule Chelsea asked for after the CMS and her preview link showed two different sites (3 Nov 2026). Keep to it:
 
@@ -30,8 +32,9 @@ the skill. Never let a skill change her fonts, colours, layout or copy unless sh
 
 ## Don't touch without her go-ahead
 
-- chelseavaneeden.com, its DNS, or Framer. `wrangler.jsonc` has no routes on purpose.
-- `PUBLIC_INDEXABLE` (it lets Google in).
+- chelseavaneeden.com's DNS (never touch the email records: MX, SPF, DKIM, MailerLite), the domain routes in
+  `wrangler.jsonc`, or Framer.
+- `PUBLIC_INDEXABLE` in `.env.production` (true since launch; false hides the site from Google).
 - Her Stripe account.
 
 ## Copy

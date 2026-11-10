@@ -1,7 +1,7 @@
 # After every save (from the CMS or from code), this checks the change really reached the website.
 # If it hasn't after 20 minutes, it opens an issue assigned to Chelsea, so GitHub emails her and a failed
 # publish can't go unnoticed. (20, not less: Cloudflare's queue can take over 10 on a bad day.)
-# At launch, change SITE_URL to https://www.chelseavaneeden.com.
+# SITE_URL is the live address (www.chelseavaneeden.com since 10 Nov 2026).
 name: Check the website updated
 
 on:
@@ -23,7 +23,7 @@ permissions:
   issues: write
 
 env:
-  SITE_URL: https://chelseavaneeden-site.chelseavaneeden-site.workers.dev
+  SITE_URL: https://www.chelseavaneeden.com
 
 jobs:
   check:

@@ -30,6 +30,19 @@ const hook = (event, headers) => worker.fetch(new Request(`${site}/api/stripe-we
 const reset = () => { calls = []; replies = {}; };
 const ok = (name) => console.log('✓', name);
 
+// 0. One address: pages forward to www, /api answers everywhere
+{
+  const go = (u, init) => worker.fetch(new Request(u, init), env);
+  let r = await go('https://chelseavaneeden.com/intro-pack/?a=1');
+  assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/intro-pack/?a=1'); ok('chelseavaneeden.com forwards to www, path and query kept');
+  r = await go(`${site}/welcome/`);
+  assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/welcome/'); ok('old workers.dev pages forward to www');
+  r = await go('https://www.chelseavaneeden.com/');
+  assert.equal(await r.text(), 'asset'); ok('www serves the site');
+  r = await go(`${site}/api/stripe-webhook`, { method: 'POST', body: '{}' });
+  assert.notEqual(r.status, 301); ok('webhook still answers on workers.dev');
+}
+
 // 1. Signature check
 {
   const body = '{"a":1}';
