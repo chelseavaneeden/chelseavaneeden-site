@@ -4,7 +4,7 @@
 // Words come from Site settings → Enquiry forms; `type` picks the form: question, proposal or intake.
 // Tap-to-choose questions, name and email, fields in order (text, date, phone, tap-to-choose), required tick boxes, a hidden
 // spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
-// opens WhatsApp directly.
+// opens WhatsApp directly. After sending, only the thank-you shows: the form and its heading and intro are hidden.
 import Heading from '../ui/Heading.astro';
 import Text from '../ui/Text.astro';
 import WhatsAppLink from '../ui/WhatsAppLink.astro';
@@ -50,7 +50,7 @@ const withLinks = (text: string) =>
 <div class="flex flex-col gap-5" data-enquiry-wrap>
   {
     showTitle && (
-      <div class="flex flex-col gap-2 pr-8">
+      <div class="flex flex-col gap-2 pr-8" data-form-intro>
         <Heading level={2} variant="h3" text={form.title} id={id('title')} />
         {form.intro && <Text variant="body-s" tone="muted" text={form.intro} />}
       </div>
@@ -357,6 +357,10 @@ const withLinks = (text: string) =>
         otherBoxes();
         form.classList.add('hidden');
         done.classList.replace('hidden', 'flex');
+        // Once it's sent, only the thank-you stays: the form's heading and intro go too, wherever they sit on the page
+        // (a page marks them with data-form-intro inside its data-form-scope). The pop-up brings them back when it closes.
+        (form.closest('[data-form-scope]') ?? wrap)?.querySelectorAll<HTMLElement>('[data-form-intro]').forEach((el) => (el.hidden = true));
+        done.scrollIntoView({ block: 'nearest' });
       } catch {
         error.classList.remove('hidden');
         (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);

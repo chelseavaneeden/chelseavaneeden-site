@@ -139,6 +139,9 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
   e.g. "Your goals (other)", so it lands in the Notion page and not as a new option in the columns.
 - The intake form has no WhatsApp line and no reply-time or privacy line under its button (Chelsea, 10 Nov); the
   question and proposal forms keep both.
+- **After sending, only the thank-you shows** (Chelsea, 10 Nov): the form and its heading and intro are hidden on every
+  form. A page marks the heading block with `data-form-intro` inside a `data-form-scope`; the pop-up's own title has it
+  too, and the pop-up brings everything back when it closes.
 - They post to **`/api/enquire`** (`worker/enquire.ts`). It checks the site, a hidden spam trap and Turnstile (when set).
   Question and proposal answers are emailed through **Resend** with reply-to set to the sender; intake goes to Notion.
 - Keys are Cloudflare **secrets**, never in this public repo (Cloudflare → Workers → chelseavaneeden-site → Settings →

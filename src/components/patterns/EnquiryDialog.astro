@@ -58,6 +58,7 @@ const { enquiry, contact } = Astro.props;
       if (!done?.classList.contains('flex')) return;
       done.classList.replace('flex', 'hidden');
       dialog.querySelector('form')?.classList.remove('hidden');
+      dialog.querySelectorAll<HTMLElement>('[data-form-intro]').forEach((el) => (el.hidden = false));
     });
   }
 </script>

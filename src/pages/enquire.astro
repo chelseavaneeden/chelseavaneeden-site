@@ -19,8 +19,10 @@ const form = site.enquiry.forms.question;
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="m">
-      <div class="mx-auto flex max-w-2xl flex-col gap-10">
-        <SectionHeader level={1} title={form.title} intro={form.intro} />
+      <div class="mx-auto flex max-w-2xl flex-col gap-10" data-form-scope>
+        <div data-form-intro>
+          <SectionHeader level={1} title={form.title} intro={form.intro} />
+        </div>
         <Card variant="paper" padding="m">
           <EnquiryForm type="question" enquiry={site.enquiry} contact={site.contact} idPrefix="page-question" />
         </Card>

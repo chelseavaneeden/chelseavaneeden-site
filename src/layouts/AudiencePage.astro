@@ -106,8 +106,8 @@ const { about, logos } = await getPage('home');
     {
       page.enquiry && (
         <Section space="m" id="enquire">
-          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div class="lg:col-span-5">
+          <div class="grid grid-cols-1 gap-10 lg:grid-cols-12" data-form-scope>
+            <div class="lg:col-span-5" data-form-intro>
               <SectionHeader {...page.enquiry} />
             </div>
             <div class="lg:col-span-7">

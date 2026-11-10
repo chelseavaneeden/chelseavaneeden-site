@@ -21,13 +21,17 @@ const w = site.welcome;
   <Header nav={site.nav} cta={site.bookCta} />
   <main id="main">
     <Section space="m">
-      <div class="mx-auto flex max-w-narrow flex-col gap-10">
-        <SectionHeader level={1} title={w.title} intro={w.intro} />
+      <div class="mx-auto flex max-w-narrow flex-col gap-10" data-form-scope>
+        <div data-form-intro>
+          <SectionHeader level={1} title={w.title} intro={w.intro} />
+        </div>
 
         <div id="intake" class="scroll-mt-(--header-h)">
           <Card variant="paper" padding="m" class="flex flex-col gap-4">
-            <Heading level={2} variant="h3" text={w.intakeTitle} />
-            {w.intakeText && <Text tone="muted" text={w.intakeText} />}
+            <div class="flex flex-col gap-4" data-form-intro>
+              <Heading level={2} variant="h3" text={w.intakeTitle} />
+              {w.intakeText && <Text tone="muted" text={w.intakeText} />}
+            </div>
             <EnquiryForm type="intake" enquiry={site.enquiry} contact={site.contact} />
           </Card>
         </div>
