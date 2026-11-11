@@ -1,24 +1,27 @@
 ---
-// The button that opens Chelsea's booking calendar (BookingCalendar.astro, matched by `target`). It can sit
-// anywhere on the page, e.g. inside the intro card. Without JavaScript, or with a calendar.app.google link,
-// it simply opens Google's own booking page.
+// The button that opens Chelsea's Google booking page, where clients pick a time and pay in one go. It opens in the
+// same tab (one flow, nothing to switch between); the browser's back button returns to the site.
 import Button from '../ui/Button.astro';
-import { bookingEmbedUrl } from '../../lib/booking';
+import { bookingPageLink } from '../../lib/booking';
 
 interface Props {
   /** The booking page address from Site settings → Intro session page. */
   url: string;
   label: string;
-  /** The id of the BookingCalendar this button opens. */
-  target: string;
   /** Stretch across its box, e.g. the full width of a card. */
   full?: boolean;
 }
 
-const { url, label, target, full = false } = Astro.props;
-const canEmbed = Boolean(bookingEmbedUrl(url));
+const { url, label, full = false } = Astro.props;
 ---
 
-<div class:list={[full ? 'w-full' : 'inline-flex']} data-booking-open={target}>
-  <Button href={url} size="l" full={full} external={!canEmbed} event="booking_calendar">{label}</Button>
+<div class:list={[full ? 'w-full' : 'inline-flex']} data-booking-open>
+  <Button href={bookingPageLink(url)} size="l" full={full} external={false} event="booking_calendar">{label}</Button>
 </div>
+
+<script>
+  type Umami = { track: (name: string, data?: Record<string, string>) => void };
+  document.querySelectorAll<HTMLElement>('[data-booking-open] a').forEach((link) =>
+    link.addEventListener('click', () => (window as unknown as { umami?: Umami }).umami?.track('see_times', { page: location.pathname })),
+  );
+</script>

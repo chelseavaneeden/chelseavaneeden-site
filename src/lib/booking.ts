@@ -1,14 +1,15 @@
 /**
- * Chelsea's Google booking page (an appointment schedule). The inline view on the site needs Google's embed
- * address with gv=true; a calendar.app.google short link can't be shown on the page, so it opens in a new tab.
+ * Chelsea's Google booking page (an appointment schedule), where clients pick a time and pay. It opens as Google's own
+ * full page, not inside the site: with payments switched on, Google can't take payment inside another website, so an
+ * embedded calendar sent people to a new tab where they had to pick their time again (Chelsea, 11 Nov 2026).
+ * gv=true is Google's embed view, so it's taken off the link.
  */
-export function bookingEmbedUrl(url: string): string | undefined {
+export function bookingPageLink(url: string): string {
   try {
     const u = new URL(url);
-    if (u.hostname !== 'calendar.google.com' || !u.pathname.includes('/appointments/schedules/')) return undefined;
-    u.searchParams.set('gv', 'true');
+    u.searchParams.delete('gv');
     return u.toString();
   } catch {
-    return undefined;
+    return url;
   }
 }

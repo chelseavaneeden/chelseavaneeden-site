@@ -12,7 +12,6 @@ import Price from '../components/ui/Price.astro';
 import Section from '../components/ui/Section.astro';
 import Sunlight from '../components/ui/Sunlight.astro';
 import BookingButton from '../components/patterns/BookingButton.astro';
-import BookingCalendar from '../components/patterns/BookingCalendar.astro';
 import Footer from '../components/patterns/Footer.astro';
 import Header from '../components/patterns/Header.astro';
 import NumberedList from '../components/patterns/NumberedList.astro';
@@ -42,7 +41,7 @@ const offer = offers.find((o) => o.featured) ?? offers[0];
         {
           intro.bookingPageUrl ? (
             <>
-              {/* The €55 card with the big "See available times" button, which opens the calendar just below it. */}
+              {/* The €55 card with the big "See available times" button, which opens Google's booking page. */}
               <Card variant="raised" padding="m" class="flex w-full max-w-prose flex-col gap-6">
                 {offer && (
                   <>
@@ -58,10 +57,9 @@ const offer = offers.find((o) => o.featured) ?? offers[0];
                   </>
                 )}
                 <div class="pt-2">
-                  <BookingButton url={intro.bookingPageUrl} label={intro.bookingButton} target="intro-calendar" full />
+                  <BookingButton url={intro.bookingPageUrl} label={intro.bookingButton} full />
                 </div>
               </Card>
-              <BookingCalendar url={intro.bookingPageUrl} id="intro-calendar" />
               {(intro.bookingNote || intro.emailNote) && (
                 <div class="flex max-w-prose flex-col items-center gap-2 text-center">
                   {intro.bookingNote && <p class="type-body-s text-ink-muted">{intro.bookingNote}</p>}

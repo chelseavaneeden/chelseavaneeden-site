@@ -16,7 +16,7 @@ To ask a question about your information or use any of your rights, send me a me
 
 **When you send an enquiry or request a proposal.** Your name, email address and your answers. I use them to reply to you and, for organisers, to prepare a proposal. Legal basis: taking steps at your request before an agreement, and my legitimate interest in answering enquiries.
 
-**When you book and pay.** You choose a time in my Google Calendar booking page and pay there through Stripe. I receive your name, email address, the time you chose, what you bought and whether the payment went through. I never see or store your full card details. The booking calendar only loads on the website when you press "See available times". Legal basis: performing our agreement, and my legal obligation to keep accounting records.
+**When you book and pay.** You choose a time in my Google Calendar booking page and pay there through Stripe. I receive your name, email address, the time you chose, what you bought and whether the payment went through. I never see or store your full card details. Pressing "See available times" takes you to that booking page, which is run by Google. Legal basis: performing our agreement, and my legal obligation to keep accounting records.
 
 **Emails about your session, and for private clients.** When you book, I add your name and email address to my email service, MailerLite, in a group for private clients. It sends you the next steps for your first session (a short form, and how to get ready), and occasional emails I write for private clients. Every email has an unsubscribe link, and you can also reply to ask me to stop. Legal basis: performing our agreement for the session emails, and my legitimate interest in keeping in touch with clients about similar services, which you can opt out of at any time. MailerLite never receives your health information.
 
@@ -55,7 +55,7 @@ Some of these services may process information in the United States or elsewhere
 
 ## 6. Cookies
 
-The website uses no advertising or tracking cookies. When you open the booking calendar, it loads Google’s booking page and Stripe’s payment page, and the forms may load Cloudflare’s spam check. These can set cookies that are strictly necessary for booking, secure payments and spam protection.
+The website uses no advertising or tracking cookies. Google’s booking page and Stripe’s payment page, which you reach from the website, and Cloudflare’s spam check on the forms can set cookies that are strictly necessary for booking, secure payments and spam protection.
 
 ## 7. Your rights
 
