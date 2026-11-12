@@ -15,7 +15,8 @@ const { contours = true, class: className } = Astro.props;
 ---
 
 <div class:list={['sunlight pointer-events-none absolute inset-0 -z-10 overflow-hidden', className]} aria-hidden="true">
-  <div class="sunlight-glow absolute inset-0"></div>
+  {/* Without contours it sits inside a card: warm light only (--glow-sunrise-card). */}
+  <div class:list={['sunlight-glow absolute inset-0', !contours && 'sunlight-glow-card']}></div>
   <div class="sunlight-rays absolute" data-ambient></div>
   {contours && <Topography />}
 </div>
@@ -28,6 +29,10 @@ const { contours = true, class: className } = Astro.props;
 
   .sunlight-glow {
     background-image: var(--glow-sunrise);
+  }
+
+  .sunlight-glow-card {
+    background-image: var(--glow-sunrise-card);
   }
 
   .sunlight-rays {

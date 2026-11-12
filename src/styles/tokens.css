@@ -45,21 +45,36 @@
   --green-500: #3f9a5c;
 
   /* Light, texture and washes (see global.css). Colours here are the swatches above with transparency. */
-  /* Sunrise: butter and honey light from the top right, a little sage shade at the bottom left. */
+  /* Sunrise: butter and honey light from the top right with a warm amber heart, and sage-green shade
+     from the lower left. Made more vibrant at Chelsea's request (12 Nov): the colours had faded. */
   --glow-sunrise:
-    radial-gradient(65% 80% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 74%),
-    radial-gradient(42% 55% at 100% 0%, rgb(226 184 102 / 0.7) 0%, rgb(226 184 102 / 0) 70%),
-    radial-gradient(60% 70% at 18% 0%, rgb(239 217 160 / 0.55) 0%, rgb(239 217 160 / 0) 72%),
-    radial-gradient(50% 60% at 0% 100%, rgb(226 184 102 / 0.28) 0%, rgb(226 184 102 / 0) 70%);
+    radial-gradient(70% 85% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 76%),
+    radial-gradient(52% 64% at 100% 0%, rgb(226 184 102 / 0.95) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(30% 40% at 100% 0%, rgb(201 128 47 / 0.3) 0%, rgb(201 128 47 / 0) 70%),
+    radial-gradient(62% 72% at 18% 0%, rgb(239 217 160 / 0.8) 0%, rgb(239 217 160 / 0) 72%),
+    radial-gradient(55% 62% at 0% 74%, rgb(167 173 140 / 0.62) 0%, rgb(167 173 140 / 0) 70%),
+    radial-gradient(32% 40% at 0% 80%, rgb(123 125 78 / 0.24) 0%, rgb(123 125 78 / 0) 70%),
+    radial-gradient(120% 90% at 50% 0%, rgb(239 217 160 / 0.4) 0%, rgb(239 217 160 / 0) 80%);
+  /* The same sunrise inside a card (CtaBand, the featured offer): warm light only, since the sage shade
+     reads as a grey smudge behind a card's words. */
+  --glow-sunrise-card:
+    radial-gradient(70% 85% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 76%),
+    radial-gradient(52% 64% at 100% 0%, rgb(226 184 102 / 0.95) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(30% 40% at 100% 0%, rgb(201 128 47 / 0.3) 0%, rgb(201 128 47 / 0) 70%),
+    radial-gradient(62% 72% at 18% 0%, rgb(239 217 160 / 0.8) 0%, rgb(239 217 160 / 0) 72%),
+    radial-gradient(50% 60% at 0% 100%, rgb(226 184 102 / 0.32) 0%, rgb(226 184 102 / 0) 70%);
   /* Sun rays falling through trees: soft diagonal bands, faded out away from the sun. */
   --sun-rays: repeating-linear-gradient(
     116deg,
     rgb(239 217 160 / 0) 0 2.5rem,
-    rgb(239 217 160 / 0.7) 3.5rem 5rem,
+    rgb(239 217 160 / 0.85) 3.5rem 5rem,
     rgb(239 217 160 / 0) 6rem 7.5rem,
-    rgb(226 184 102 / 0.35) 8rem 8.75rem,
+    rgb(226 184 102 / 0.5) 8rem 8.75rem,
     rgb(226 184 102 / 0) 9.5rem 12rem
   );
+  /* Highlighted words: a see-through honey stroke with soft edges all round, like a highlighter pen.
+     A blurred rectangle, stretched to the words (so the colour lives here, inside the drawing). */
+  --highlighter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-10%25' y='-60%25' width='120%25' height='220%25'%3E%3CfeGaussianBlur stdDeviation='1.6 3'/%3E%3C/filter%3E%3Crect x='4' y='11' width='192' height='18' rx='5' fill='%23ecbc50' fill-opacity='0.66' filter='url(%23b)'/%3E%3C/svg%3E");
   --sun-rays-mask: radial-gradient(75% 85% at 92% 0%, rgb(0 0 0 / 1) 0%, rgb(0 0 0 / 0) 75%);
   /* The header's light fades out towards its bottom edge, so it melts into the next section. */
   --fade-bottom-mask: linear-gradient(180deg, rgb(0 0 0 / 1) 65%, rgb(0 0 0 / 0) 100%);
@@ -71,23 +86,23 @@
   --wash-mask: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 24%, rgb(0 0 0 / 1) 76%, rgb(0 0 0 / 0) 100%);
   --wash-mask-top: linear-gradient(180deg, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 1) 40%);
   --wash-golden:
-    radial-gradient(55% 60% at 82% 38%, rgb(226 184 102 / 0.22) 0%, rgb(226 184 102 / 0) 70%),
-    radial-gradient(55% 55% at 18% 62%, rgb(239 217 160 / 0.42) 0%, rgb(239 217 160 / 0) 70%),
-    radial-gradient(85% 65% at 50% 50%, rgb(248 240 220 / 0.85) 0%, rgb(248 240 220 / 0) 78%);
-  /* A single sage section (and the footer): just a whisper of green. */
+    radial-gradient(55% 60% at 82% 38%, rgb(226 184 102 / 0.4) 0%, rgb(226 184 102 / 0) 70%),
+    radial-gradient(55% 55% at 18% 62%, rgb(239 217 160 / 0.62) 0%, rgb(239 217 160 / 0) 70%),
+    radial-gradient(85% 65% at 50% 50%, rgb(248 240 220 / 0.9) 0%, rgb(248 240 220 / 0) 78%);
+  /* A single sage section (and the footer): soft green. */
   --wash-sage-soft:
-    radial-gradient(60% 55% at 15% 40%, rgb(220 222 201 / 0.5) 0%, rgb(220 222 201 / 0) 70%),
-    radial-gradient(50% 45% at 88% 65%, rgb(167 173 140 / 0.16) 0%, rgb(167 173 140 / 0) 70%),
+    radial-gradient(60% 55% at 15% 40%, rgb(220 222 201 / 0.75) 0%, rgb(220 222 201 / 0) 70%),
+    radial-gradient(50% 45% at 88% 65%, rgb(167 173 140 / 0.32) 0%, rgb(167 173 140 / 0) 70%),
     radial-gradient(85% 65% at 50% 50%, rgb(238 238 227 / 0.9) 0%, rgb(238 238 227 / 0) 78%);
-  /* The credentials band: a whisper of sage-grey in two corners, on the band's pale linen. */
+  /* The credentials band: sage in two corners, on the band's pale linen. */
   --band-wash:
-    radial-gradient(55% 130% at 100% 100%, rgb(167 173 140 / 0.3) 0%, rgb(167 173 140 / 0) 72%),
-    radial-gradient(40% 110% at 0% 0%, rgb(220 222 201 / 0.55) 0%, rgb(220 222 201 / 0) 72%);
+    radial-gradient(55% 130% at 100% 100%, rgb(167 173 140 / 0.42) 0%, rgb(167 173 140 / 0) 72%),
+    radial-gradient(40% 110% at 0% 0%, rgb(220 222 201 / 0.7) 0%, rgb(220 222 201 / 0) 72%);
   /* A golden-hour tint laid softly over the header video. */
   --video-warmth: linear-gradient(200deg, rgb(239 217 160 / 0.55) 0%, rgb(201 128 47 / 0.25) 55%, rgb(59 42 30 / 0.2) 100%);
   /* Film grain over the whole page: fractal noise, tinted coffee. */
   --grain-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.23 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --grain-opacity: 0.16;
+  --grain-opacity: 0.12;
   --grain-size: 240px;
   /* Contour lines in a corner (Topography): fine amber lines that fade out away from the corner. */
   --contour-line: rgb(201 128 47 / 0.38);

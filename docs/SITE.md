@@ -189,9 +189,12 @@ glows, dark bands or tilting on hover.
   and an "&" that read like an E. Don't set whole headings in its italic, because that "&" is ornate and harder to read.
   It's a variable font, so the weight can be changed in `tokens.css` (`--display-weight`, 400 to 700).
 - **Colours:** page Linen `#F8F3EA`, words Coffee Bean `#3B2A1E`, emphasised heading words Amber `#9A5A1C`, buttons Wild
-  Honey `#E2B866` (Coffee Bean with Butter words in the header), highlighted words Butter `#EFD9A0`, moss green words on
-  tinted sections. All of them live in `src/styles/tokens.css`.
-- **Sunrise glow:** `Sunlight.astro`, on the page headers and on `Card variant="sunrise"`.
+  Honey `#E2B866` (Coffee Bean with Butter words in the header), highlighted words with a see-through honey highlighter
+  stroke, soft on every edge (`--highlighter`), moss green words on tinted sections. All of them live in
+  `src/styles/tokens.css`.
+- **Sunrise glow:** `Sunlight.astro`, on the page headers (butter and honey from the top right, sage green from the lower
+  left) and, warm light only, on `Card variant="sunrise"`. Made more vibrant on 12 Nov at Chelsea's request, as were the
+  golden and sage section washes; the film grain went from 0.16 to 0.12 so the colours read cleaner.
 - **Button hover:** just the colour change and a gentle glow.
 - **Footer:** no links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.
 - **Keep people on the site (Chelsea, 8 Nov):** open things in a pop-up on the page wherever possible, never a needless new

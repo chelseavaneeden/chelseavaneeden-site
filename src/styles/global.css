@@ -107,20 +107,15 @@
     font-style: italic;
   }
 
-  /* Highlighted words (==words== in the CMS): a soft butter brushstroke under the lower half of the words. */
+  /* Highlighted words (==words== in the CMS): a see-through honey highlighter stroke over the lower half of the
+     words, faded on every edge (the stroke itself is drawn in tokens.css). */
   mark {
     font-style: italic;
     color: var(--note-ink);
     background-color: var(--color-transparent);
-    background-image: linear-gradient(
-      100deg,
-      var(--color-transparent) 0%,
-      var(--note) 5%,
-      var(--note) 95%,
-      var(--color-transparent) 100%
-    );
-    background-size: 100% 45%;
-    background-position: 0 85%;
+    background-image: var(--highlighter);
+    background-size: 100% 62%;
+    background-position: 0 95%;
     background-repeat: no-repeat;
     padding-inline: 0.1em;
     margin-inline: -0.05em;
