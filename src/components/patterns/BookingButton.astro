@@ -1,6 +1,7 @@
 ---
-// The button that opens Chelsea's Google booking page, where clients pick a time and pay in one go. It opens in the
-// same tab (one flow, nothing to switch between); the browser's back button returns to the site.
+// The button that opens Chelsea's Google booking page, where clients pick a time and pay in one go. It opens in a
+// pop-up window over the site (Chelsea, 13 Nov), so the site stays open underneath; phones show it as a new tab. If
+// the browser blocks the pop-up, or without JavaScript, the link simply opens the booking page in the same tab.
 import Button from '../ui/Button.astro';
 import { bookingPageLink } from '../../lib/booking';
 
@@ -20,8 +21,15 @@ const { url, label, full = false } = Astro.props;
 </div>
 
 <script>
+  import { openBookingWindow } from '../../lib/booking';
+
   type Umami = { track: (name: string, data?: Record<string, string>) => void };
-  document.querySelectorAll<HTMLElement>('[data-booking-open] a').forEach((link) =>
-    link.addEventListener('click', () => (window as unknown as { umami?: Umami }).umami?.track('see_times', { page: location.pathname })),
+  document.querySelectorAll<HTMLAnchorElement>('[data-booking-open] a').forEach((link) =>
+    link.addEventListener('click', (event) => {
+      (window as unknown as { umami?: Umami }).umami?.track('see_times', { page: location.pathname });
+      // A Cmd/Ctrl/Shift or middle click: let the browser open it the way the person asked.
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      if (openBookingWindow(link.href)) event.preventDefault();
+    }),
   );
 </script>

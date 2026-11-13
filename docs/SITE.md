@@ -107,9 +107,12 @@ Chosen on 7 Nov after research (`reports/Pilates booking funnel conversion.md`):
 step**, in Chelsea's Google Calendar booking page (Business Standard includes paid bookings through her Stripe).
 
 1. Every **Book your Session** goes to **`/intro-pack`**: the heading, then the €55 card with what's included and a big
-   **See available times** button inside it (`BookingButton.astro`), which opens her Google booking page as Google's
-   own full page, in the same tab (since 11 Nov: embedded on the site, Google sent paying clients to a new tab where
-   they had to pick their time again, because payment can't run inside another site). Then the short-form line and the
+   **See available times** button inside it (`BookingButton.astro`), which opens her Google booking page in a **pop-up
+   window** over the site (Chelsea's choice, 13 Nov; `openBookingWindow()` in `src/lib/booking.ts`). Picking a time and
+   paying both happen in that window, and closing it shows the site again; phones open it as a new tab with the site
+   behind. If the browser blocks the pop-up, the button opens Google's page in the same tab. It can't be embedded in
+   the page: with payments on, Google moved embedded bookings to a new tab where people had to pick their time again
+   (tested 11 Nov), and only a booking system of our own could take payment on the site itself. Then the short-form line and the
    three steps. No trust line on
    this page (Chelsea, 8 Nov). Words and the booking page link: Site settings → Intro session page. Until the link is set,
    the old intro-only Stripe table shows instead.
@@ -200,7 +203,7 @@ glows, dark bands or tilting on hover.
 - **Keep people on the site (Chelsea, 8 Nov):** open things in a pop-up on the page wherever possible, never a needless new
   tab. The question form (`EnquiryDialog.astro`, every link to /enquire) and the Google reviews (`ReviewsDialog.astro`, every
   link to the address in Site settings → Google reviews pop-up, once at least one review is added) open as pop-ups; the
-  booking page opens in the same tab (it can't sit inside the site, see the intro session path). Only links that have to leave the site open a new tab (WhatsApp, Instagram,
+  booking page opens in a pop-up window over the site (it can't sit inside the site, see the intro session path). Only links that have to leave the site open a new tab (WhatsApp, Instagram,
   the complaints book), so the site stays open behind them. One rule decides this for every component: `newTabRule()` in
   `src/lib/content.ts`. The reviews in the pop-up are pasted in by Chelsea, exactly as written on Google.
 - **Line breaks:** pressing Enter in a CMS text field starts a new line on the page.
