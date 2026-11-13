@@ -19,6 +19,7 @@ globalThis.fetch = async (url, init = {}) => {
   const r = replies[host] ?? { status: 200, body: {} };
   return new Response(JSON.stringify(r.body), { status: r.status });
 };
+const baseFetch = globalThis.fetch;
 const env = {
   ASSETS: { fetch: async () => new Response('asset') },
   RESEND_API_KEY: 're_test', ENQUIRY_TO: 'inbox@example.com',
@@ -42,6 +43,23 @@ const ok = (name) => console.log('✓', name);
   r = await go(`${site}/api/stripe-webhook`, { method: 'POST', body: '{}' });
   assert.notEqual(r.status, 301); ok('webhook still answers on workers.dev');
 }
+
+// Intake form
+const intake = {
+  type: 'intake', name: 'Ana Silva', email: 'client@example.com', consent: true, agreed: ['Terms', 'Health consent'], page: '/welcome/', website: '', token: '',
+  answers: [
+    { key: 'birthday', label: 'Date of birth', value: '1990-04-12' },
+    { key: 'phone', label: 'Phone', value: '+351 912 345 678' },
+    { key: 'location', label: 'Where are you?', value: 'Lisbon, Portugal time' },
+    { key: 'emergency', label: 'Emergency contact', value: 'Rui, +351 900 000 000' },
+    { key: 'pain', label: 'Any pain?', value: 'Lower back, Hips' },
+    { key: 'health', label: 'Injuries, surgeries…', value: 'Herniated disc 2019' },
+    { key: 'goals', label: 'Your goals', value: 'Strength, Rehabilitation' },
+    { key: 'equipment', label: 'Equipment, tap all that apply', value: 'Mat, Other' },
+    { key: 'equipment-other', label: 'Equipment (other)', value: 'Pilates chair' },
+  ],
+};
+const form = (body, e = env) => worker.fetch(new Request(`${site}/api/enquire`, { method: 'POST', body: JSON.stringify(body), headers: { origin: site } }), e);
 
 // 1. Signature check
 {
@@ -100,6 +118,43 @@ const paid = { type: 'checkout.session.completed', data: { object: { mode: 'paym
   reset(); replies['connect.mailerlite.com'] = { status: 500, body: {} };
   assert.equal((await hook(paid)).status, 502); ok('MailerLite failure returns an error so Stripe retries');
 }
+// 7b. Client already in MailerLite but unsubscribed → MailerLite 422, so Chelsea is emailed the intake link instead
+{
+  reset();
+  globalThis.fetch = (inner => async (url, init = {}) => {
+    const u = String(url);
+    if (u === 'https://connect.mailerlite.com/api/subscribers' && init.method === 'POST') {
+      calls.push({ url: u, body: JSON.parse(init.body) });
+      return new Response(JSON.stringify({ message: 'The given data was invalid.' }), { status: 422 });
+    }
+    if (u.startsWith('https://connect.mailerlite.com/api/subscribers/')) {
+      calls.push({ url: u });
+      return new Response(JSON.stringify({ data: { status: 'unsubscribed' } }), { status: 200 });
+    }
+    return inner(url, init);
+  })(globalThis.fetch);
+  const withPi = structuredClone(paid); withPi.data.object.payment_intent = 'pi_123';
+  const res = await hook(withPi);
+  assert.equal(res.status, 200);
+  assert.equal((await res.json()).notice, 'sent');
+  assert.equal(calls[1].url, 'https://connect.mailerlite.com/api/subscribers/client%40example.com');
+  const notice = calls.find((c) => c.url === 'https://api.resend.com/emails');
+  assert.equal(notice.body.reply_to, 'client@example.com');
+  assert.match(notice.body.subject, /Ana Silva the intake form/);
+  assert.ok(notice.body.text.includes('https://www.chelseavaneeden.com/welcome#intake'));
+  assert.ok(!('resubscribe' in calls[0].body) && !('status' in calls[0].body));
+  ok('unsubscribed client → never re-subscribed; Chelsea gets their details and the intake link');
+
+  reset(); replies['api.resend.com'] = { status: 500, body: {} };
+  assert.equal((await hook(withPi)).status, 502); ok('if that email to Chelsea fails, Stripe is asked to retry');
+
+  reset(); replies['api.notion.com'] = { status: 200, body: { url: 'https://www.notion.so/p' } };
+  assert.equal((await form(intake)).status, 200);
+  const intakeNotice = calls.find((c) => c.url === 'https://api.resend.com/emails');
+  assert.ok(intakeNotice.body.text.includes("won't get the \"you're all set\" email"));
+  ok("unsubscribed client's intake form → Chelsea's notice says to send the preparation details herself");
+  globalThis.fetch = baseFetch;
+}
 // 8. Not configured → 503
 {
   reset();
@@ -107,22 +162,6 @@ const paid = { type: 'checkout.session.completed', data: { object: { mode: 'paym
   assert.equal(res.status, 503); ok('no webhook secret yet → 503');
 }
 
-// Intake form
-const intake = {
-  type: 'intake', name: 'Ana Silva', email: 'client@example.com', consent: true, agreed: ['Terms', 'Health consent'], page: '/welcome/', website: '', token: '',
-  answers: [
-    { key: 'birthday', label: 'Date of birth', value: '1990-04-12' },
-    { key: 'phone', label: 'Phone', value: '+351 912 345 678' },
-    { key: 'location', label: 'Where are you?', value: 'Lisbon, Portugal time' },
-    { key: 'emergency', label: 'Emergency contact', value: 'Rui, +351 900 000 000' },
-    { key: 'pain', label: 'Any pain?', value: 'Lower back, Hips' },
-    { key: 'health', label: 'Injuries, surgeries…', value: 'Herniated disc 2019' },
-    { key: 'goals', label: 'Your goals', value: 'Strength, Rehabilitation' },
-    { key: 'equipment', label: 'Equipment, tap all that apply', value: 'Mat, Other' },
-    { key: 'equipment-other', label: 'Equipment (other)', value: 'Pilates chair' },
-  ],
-};
-const form = (body, e = env) => worker.fetch(new Request(`${site}/api/enquire`, { method: 'POST', body: JSON.stringify(body), headers: { origin: site } }), e);
 {
   reset(); replies['api.notion.com'] = { status: 200, body: { url: 'https://www.notion.so/page-1' } };
   const res = await form(intake);

@@ -7,8 +7,16 @@
 // ignored. If MailerLite fails, the answer is an error, so Stripe retries for up to 3 days. A client can
 // only go through the welcome emails once (the automation isn't repeatable), so a retry or a second event
 // for the same payment sends nothing twice.
-import { json, today, type Env } from './lib.ts';
+//
+// A client who once unsubscribed from Chelsea's MailerLite emails can't be added (see mailerlite.ts), so
+// MailerLite won't send them anything. Instead Chelsea gets an email with their name, address and the intake
+// link to send them herself; replying to it writes to the client. Stripe sends two events for one payment
+// (checkout.session.completed and charge.succeeded), so that email is sent once per payment where possible.
+import { emailChelsea, json, today, type Env } from './lib.ts';
 import { upsertClient } from './mailerlite.ts';
+
+/** The page with the intake form, as linked from the MailerLite emails. */
+export const INTAKE_LINK = 'https://www.chelseavaneeden.com/welcome#intake';
 
 const encoder = new TextEncoder();
 
@@ -89,6 +97,55 @@ export async function stripeWebhook(request: Request, env: Env): Promise<Respons
   if (!payer) return json({ ok: true, ignored: event.type ?? 'unknown' });
 
   if (!env.MAILERLITE_API_KEY) return json({ error: 'not-configured' }, 503);
-  const saved = await upsertClient(env, { email: payer.email, name: payer.name, fields: { intro_paid: today() } });
-  return saved ? json({ ok: true }) : json({ error: 'mailerlite' }, 502);
+  const result = await upsertClient(env, { email: payer.email, name: payer.name, fields: { intro_paid: today() } });
+  if (result === 'saved') return json({ ok: true });
+  if (result === 'failed') return json({ error: 'mailerlite' }, 502);
+
+  // Not subscribed in MailerLite: tell Chelsea, once per payment.
+  const payment = paymentKey(event);
+  if (payment && (await noticeSent(payment))) return json({ ok: true, mailerlite: 'not-subscribed', notice: 'already-sent' });
+  const who = payer.name ?? payer.email;
+  const sent = await emailChelsea(env, `New booking: please send ${who} the intake form`, notSubscribedNotice(payer), payer.email);
+  if (!sent) return json({ error: 'notice' }, 502);
+  if (payment) await rememberNotice(payment);
+  return json({ ok: true, mailerlite: 'not-subscribed', notice: 'sent' });
+}
+
+/** Chelsea's email when a paying client can't get the MailerLite booking emails. Name and address only. */
+export function notSubscribedNotice(payer: { email: string; name?: string }): string {
+  const who = payer.name ? `${payer.name} (${payer.email})` : payer.email;
+  const first = payer.name?.split(/\s+/)[0] ?? 'there';
+  return [
+    `${who} has booked and paid for an intro session.`,
+    '',
+    `They unsubscribed from your MailerLite emails at some point, so MailerLite can't send them the "You're booked in" email with the intake form, or the reminders. Please send them the form yourself:`,
+    '',
+    INTAKE_LINK,
+    '',
+    'Reply to this email to write to them straight away. For example:',
+    '',
+    `"Hi ${first}, thank you for booking your intro session! Before we meet, please fill in this short form (it takes about 3 minutes), so I can plan your session around you: ${INTAKE_LINK}"`,
+  ].join('\n');
+}
+
+/** The payment both of Stripe's events share (its PaymentIntent), to send Chelsea's email once. */
+function paymentKey(event: StripeEvent): string | undefined {
+  const o = event.data?.object ?? {};
+  const v = o.payment_intent ?? o.id;
+  return typeof v === 'string' && v ? v : undefined;
+}
+
+// A short memory of payments Chelsea has already been emailed about, in Cloudflare's cache (best effort: both
+// of Stripe's events arrive within seconds, at the same data centre). Without a cache (tests), always send.
+const noticeKey = (payment: string) => new Request(`https://www.chelseavaneeden.com/__notice/${encodeURIComponent(payment)}`);
+const cache = () => (globalThis as { caches?: { default?: Cache } }).caches?.default;
+
+async function noticeSent(payment: string): Promise<boolean> {
+  return Boolean(await cache()?.match(noticeKey(payment)).catch(() => undefined));
+}
+
+async function rememberNotice(payment: string): Promise<void> {
+  await cache()
+    ?.put(noticeKey(payment), new Response('sent', { headers: { 'cache-control': 'max-age=604800' } }))
+    .catch(() => undefined);
 }

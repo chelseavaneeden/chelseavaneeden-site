@@ -120,7 +120,11 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
 3. Stripe tells the site (**`/api/stripe-webhook`**, `worker/stripe.ts`), which adds the client to MailerLite: group
    **Private Pilates**, field `intro_paid` = today. That starts the automation **"Intro session: next steps"**: "You're
    booked in" with a button to the intake form, then a reminder after 12 hours and "Can I help?" 36 hours later, each only
-   if `intake_done` is still empty.
+   if `intake_done` is still empty. Existing subscribers (e.g. Good Mood Club members) go through it like anyone else.
+   **Someone who once unsubscribed** (or bounced) can't be added: MailerLite refuses without re-subscribing them, which
+   we never do, since it would send them newsletters again (Chelsea, 13 Nov). Instead Chelsea gets an email with their
+   name, address and the intake link to send herself (reply goes to the client), and her intake notice later reminds her to
+   send the preparation details too. Found with Chelsea's own test booking, whose Gmail was unsubscribed.
 4. **`/welcome`** is the intake page (noindex) the email links to (`/welcome#intake`). The form is saved as a page in
    Notion (**Private clients → Client intake**), MailerLite gets `intake_done` = today (automation **"Intro session: all
    set"** sends the preparation email, and the reminders stop), and Chelsea gets a short email with the Notion link, never

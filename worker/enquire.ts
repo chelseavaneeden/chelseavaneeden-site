@@ -70,9 +70,14 @@ export async function enquire(request: Request, env: Env): Promise<Response> {
     if (!env.NOTION_TOKEN && !(env.RESEND_API_KEY && env.ENQUIRY_TO)) return json({ error: 'not-configured' }, 503);
     const notionUrl = await saveIntake(env, { name, email, answers, consent, agreed });
     // Stops the reminders and sends "you're all set". A MailerLite hiccup doesn't fail the form.
-    await upsertClient(env, { email, name, fields: { intake_done: today() } }).catch(() => false);
+    const mailerlite = await upsertClient(env, { email, name, fields: { intake_done: today() } }).catch(() => 'failed' as const);
+    // Someone who unsubscribed from MailerLite won't get "you're all set", so Chelsea's notice says so.
+    const preparation =
+      mailerlite === 'not-subscribed'
+        ? `\n\n${name} unsubscribed from your MailerLite emails at some point, so they won't get the "you're all set" email on how to prepare. Please send them those details yourself.`
+        : '';
     const noticed = notionUrl
-      ? await emailChelsea(env, `New intake form: ${name}`, `${name} sent their intake form.\n\nOpen it in Notion: ${notionUrl}\n\nReply to this email to answer ${name}.`, email)
+      ? await emailChelsea(env, `New intake form: ${name}`, `${name} sent their intake form.\n\nOpen it in Notion: ${notionUrl}${preparation}\n\nReply to this email to answer ${name}.`, email)
       : await emailChelsea(
           env,
           `Intake form (not saved in Notion): ${name}`,
