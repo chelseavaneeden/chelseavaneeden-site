@@ -199,8 +199,8 @@ glows, dark bands or tilting on hover.
   Honey `#E2B866` (Coffee Bean with Butter words in the header), highlighted words with a see-through honey highlighter
   stroke, soft on every edge (`--highlighter`), moss green words on tinted sections. All of them live in
   `src/styles/tokens.css`.
-- **Sunrise glow:** `Sunlight.astro`, on the page headers (butter and honey from the top right, sage green from the lower
-  left) and, warm light only, on `Card variant="sunrise"`. Made more vibrant on 12 Nov at Chelsea's request, as were the
+- **Sunrise glow:** `Sunlight.astro`, on the page headers (butter and honey from the top right, a soft honey glow in the
+  lower left; no green in the headers, Chelsea 13 Nov) and on `Card variant="sunrise"`. Made more vibrant on 12 Nov at Chelsea's request, as were the
   golden and sage section washes; the film grain went from 0.16 to 0.12 so the colours read cleaner.
 - **Button hover:** just the colour change and a gentle glow.
 - **Footer:** no links to Google reviews, YouTube or LinkedIn: Chelsea doesn't want to send people away from the site.

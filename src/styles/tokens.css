@@ -45,18 +45,17 @@
   --green-500: #3f9a5c;
 
   /* Light, texture and washes (see global.css). Colours here are the swatches above with transparency. */
-  /* Sunrise: butter and honey light from the top right with a warm amber heart, and sage-green shade
-     from the lower left. Made more vibrant at Chelsea's request (12 Nov): the colours had faded. */
+  /* Sunrise: butter and honey light from the top right with a warm amber heart, and a soft honey glow in the
+     lower left. Made more vibrant at Chelsea's request (12 Nov); the sage green in the lower left came out again
+     on 13 Nov (Chelsea: no green in the headers). */
   --glow-sunrise:
     radial-gradient(70% 85% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 76%),
     radial-gradient(52% 64% at 100% 0%, rgb(226 184 102 / 0.95) 0%, rgb(226 184 102 / 0) 70%),
     radial-gradient(30% 40% at 100% 0%, rgb(201 128 47 / 0.3) 0%, rgb(201 128 47 / 0) 70%),
     radial-gradient(62% 72% at 18% 0%, rgb(239 217 160 / 0.8) 0%, rgb(239 217 160 / 0) 72%),
-    radial-gradient(55% 62% at 0% 74%, rgb(167 173 140 / 0.62) 0%, rgb(167 173 140 / 0) 70%),
-    radial-gradient(32% 40% at 0% 80%, rgb(123 125 78 / 0.24) 0%, rgb(123 125 78 / 0) 70%),
+    radial-gradient(52% 60% at 0% 82%, rgb(226 184 102 / 0.3) 0%, rgb(226 184 102 / 0) 70%),
     radial-gradient(120% 90% at 50% 0%, rgb(239 217 160 / 0.4) 0%, rgb(239 217 160 / 0) 80%);
-  /* The same sunrise inside a card (CtaBand, the featured offer): warm light only, since the sage shade
-     reads as a grey smudge behind a card's words. */
+  /* The same sunrise inside a card (CtaBand, the featured offer), without the broad haze across the top. */
   --glow-sunrise-card:
     radial-gradient(70% 85% at 86% 4%, rgb(239 217 160 / 1) 0%, rgb(239 217 160 / 0) 76%),
     radial-gradient(52% 64% at 100% 0%, rgb(226 184 102 / 0.95) 0%, rgb(226 184 102 / 0) 70%),
