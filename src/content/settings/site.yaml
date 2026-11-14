@@ -15,7 +15,7 @@ nav:
       label: Private sessions
       href: /
 availability:
-  open: false
+  open: true
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
   href: /intro-pack
