@@ -1,5 +1,5 @@
 // POST /api/enquire: the site's forms.
-//   question and proposal: an email to Chelsea (Resend), reply-to the sender.
+//   question, proposal and waitlist: an email to Chelsea (Resend), reply-to the sender.
 //   intake: saved in Notion, the client's MailerLite record gets intake_done = today (which sends "you're all
 //   set" and stops the reminders), and Chelsea gets a short notice with the Notion link, no health details.
 //   If Notion fails, her email carries the full answers instead, so nothing is lost.
@@ -7,7 +7,7 @@ import { EMAIL, emailChelsea, json, oneLine, text, today, type Answer, type Env 
 import { upsertClient } from './mailerlite.ts';
 import { saveIntake } from './notion.ts';
 
-const TYPES = { question: 'Question', proposal: 'Proposal request', intake: 'Intro session intake' } as const;
+const TYPES = { question: 'Question', proposal: 'Proposal request', intake: 'Intro session intake', waitlist: 'Waitlist sign-up' } as const;
 type EnquiryType = keyof typeof TYPES;
 
 async function turnstileOk(token: string, secret: string, ip: string | null): Promise<boolean> {

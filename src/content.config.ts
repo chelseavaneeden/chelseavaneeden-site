@@ -115,15 +115,18 @@ const settings = defineCollection({
         open: z.boolean().default(true),
         openLabel: z.string().default('Accepting new clients'),
         closedLabel: z.string().default('Fully booked · Join the waitlist'),
-        href: z.string().default('/private-sessions#investment'),
-        closedHref: z.string().default('/enquire?type=private'),
+        /** When fully booked, every Book your Session button says this and links to closedHref (the waitlist form). */
+        waitlistLabel: z.string().default('Join waitlist'),
+        href: z.string().default('/intro-pack'),
+        closedHref: z.string().default('/waitlist'),
       })
       .default({
         open: true,
         openLabel: 'Accepting new clients',
         closedLabel: 'Fully booked · Join the waitlist',
-        href: '/private-sessions#investment',
-        closedHref: '/enquire?type=private',
+        waitlistLabel: 'Join waitlist',
+        href: '/intro-pack',
+        closedHref: '/waitlist',
       }),
     /** Stripe's publishable key (starts with pk_). It is designed to be public; never paste a secret key here. */
     stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
@@ -198,7 +201,7 @@ const settings = defineCollection({
       error: z.string(),
       /** Cloudflare Turnstile site key (the spam check). Empty: forms send without it. */
       turnstileSiteKey: optionalText,
-      forms: z.object({ question: enquiryForm, proposal: enquiryForm, intake: enquiryForm }),
+      forms: z.object({ question: enquiryForm, proposal: enquiryForm, intake: enquiryForm, waitlist: enquiryForm }),
     }),
     /** Umami Cloud website ID (cookieless analytics). Empty: no analytics. */
     /** Umami's website ID. If the whole tracking code is pasted in, the ID is taken out of it (Chelsea, 10 Nov). */

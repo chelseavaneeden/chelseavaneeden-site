@@ -216,6 +216,14 @@ const paid = { type: 'checkout.session.completed', data: { object: { mode: 'paym
   ok('question form still emails Chelsea as before');
 }
 {
+  reset();
+  const res = await form({ type: 'waitlist', name: 'Sam', email: 'sam@example.com', answers: [{ key: 'whatsapp', label: 'WhatsApp', value: '+351 900 000 000' }, { key: 'location', label: 'Country / state', value: 'Portugal' }], consent: false, page: '/' });
+  assert.equal(res.status, 200); assert.equal(calls.length, 1);
+  assert.equal(calls[0].body.subject, 'Waitlist sign-up: Sam'); assert.equal(calls[0].body.reply_to, 'sam@example.com');
+  assert.ok(calls[0].body.text.includes('WhatsApp: +351 900 000 000') && calls[0].body.text.includes('Country / state: Portugal'));
+  ok('waitlist form emails Chelsea the name, email, WhatsApp and country');
+}
+{
   reset(); assert.equal((await form({ ...intake, website: 'spam' })).status, 200); assert.equal(calls.length, 0); ok('spam trap still works');
 }
 {

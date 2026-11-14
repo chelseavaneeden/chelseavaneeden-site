@@ -551,15 +551,16 @@ content:
               - { name: label, label: Menu text, type: string, required: true }
               - { name: href, label: Link, type: string, required: true }
       - name: availability
-        label: Availability badge
+        label: Availability (accepting new clients)
         type: object
-        description: 'The "Accepting new clients" badge with the pulsing green dot, at the top of the home page.'
+        description: 'The "Accepting new clients" badge at the top of the home page, and what every Book your Session button does.'
         fields:
-          - { name: open, label: Accepting new clients, type: boolean, default: true, description: 'Untick when you are fully booked: the dot stops pulsing and the badge shows the waitlist message instead.' }
+          - { name: open, label: Accepting new clients, type: boolean, default: true, description: 'Untick when you are fully booked: the dot stops pulsing, the badge shows the waitlist message, and every Book your Session button (and See available times on the booking page) becomes the waitlist button, which opens the waitlist form (Enquiry forms → Waitlist form).' }
           - { name: openLabel, label: Text when open, type: string, default: Accepting new clients }
           - { name: closedLabel, label: Text when fully booked, type: string, default: Fully booked · Join the waitlist }
+          - { name: waitlistLabel, label: Book buttons say this when fully booked, type: string, default: Join waitlist }
           - { name: href, label: Link when open, type: string, default: /intro-pack }
-          - { name: closedHref, label: Link when fully booked, type: string, default: /enquire }
+          - { name: closedHref, label: Link when fully booked, type: string, default: /waitlist, description: 'Where the badge and the waitlist buttons go. /waitlist opens the waitlist form as a pop-up.' }
       - name: bookCta
         label: Book button (menu and every "Book your Session")
         type: object
@@ -610,7 +611,7 @@ content:
       - name: enquiry
         label: Enquiry forms
         type: object
-        description: 'question: the Ask me pop-up and /enquire. proposal: the Retreats & events page. Both arrive in your inbox by email. intake: the /welcome page after booking; it is saved in Notion and you get a short email.'
+        description: 'question: the Ask me pop-up and /enquire. proposal: the Retreats & events page. waitlist: the Join waitlist pop-up when you are fully booked. These arrive in your inbox by email. intake: the /welcome page after booking; it is saved in Notion and you get a short email.'
         fields:
           - { name: nameLabel, label: Name field label, type: string, default: Name }
           - { name: emailLabel, label: Email field label, type: string, default: Email }
@@ -629,6 +630,56 @@ content:
             fields:
               - name: question
                 label: Question form (Ask me pop-up and /enquire)
+                type: object
+                fields:
+                  - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }
+                  - { name: intro, label: Intro line, type: string }
+                  - name: questions
+                    label: Tap-to-choose questions
+                    type: object
+                    list: true
+                    description: 'Each option shows as a button.'
+                    fields:
+                      - { name: label, label: Question, type: string, required: true }
+                      - { name: short, label: Word used in the email, type: string, required: true, description: 'e.g. When → "When: 1–3 months"' }
+                      - { name: required, label: Must be answered, type: boolean, default: true, description: 'Untick to mark it (optional).' }
+                      - { name: options, label: Options, type: string, list: true }
+                  - { name: emailHint, label: Line under the email field, type: string, description: 'e.g. Use the email you booked with.' }
+                  - name: fields
+                    label: Fields (after name and email, in this order)
+                    type: object
+                    list: true
+                    fields:
+                      - { name: name, label: Field id, type: string, required: true, description: 'Lower-case letters and dashes, e.g. message. Must be different for each field.' }
+                      - { name: label, label: Label, type: string, required: true }
+                      - name: type
+                        label: Size
+                        type: select
+                        default: textarea
+                        options:
+                          values:
+                            - { value: text, label: One line }
+                            - { value: textarea, label: Several lines }
+                            - { value: date, label: Date }
+                            - { value: tel, label: Phone number }
+                            - { value: choice, label: Tap-to-choose buttons }
+                      - { name: required, label: Required, type: boolean }
+                      - { name: placeholder, label: Hint inside the field, type: string }
+                      - { name: options, label: Buttons (tap-to-choose only), type: string, list: true }
+                      - { name: multiple, label: Can tap more than one (tap-to-choose only), type: boolean }
+                  - name: agreements
+                    label: Required tick boxes
+                    type: object
+                    list: true
+                    description: 'Each must be ticked before sending. Put a link in the text like this: [Terms](/terms).'
+                    fields:
+                      - { name: text, label: Text, type: text, required: true }
+                      - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
+                  - { name: button, label: Send button text, type: string, required: true }
+                  - { name: successTitle, label: Heading after sending (this form only), type: string, description: 'Leave empty to use the one at the top of Enquiry forms. Use *asterisks* for italic. No full stop at the end.' }
+                  - { name: success, label: Message after sending (this form only), type: text, description: 'Leave empty to use the one at the top of Enquiry forms.' }
+              - name: waitlist
+                label: Waitlist form (when fully booked)
                 type: object
                 fields:
                   - { name: title, label: Title, type: string, required: true, description: 'Use *asterisks* for italic. No full stop at the end (commas and … are fine).' }

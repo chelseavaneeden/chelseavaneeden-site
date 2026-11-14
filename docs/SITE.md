@@ -99,6 +99,17 @@ numerals on a fine line with a small amber point.
 
 Hi, I'm Chelsea and the logo banner are shared with the home page, so they are edited in one place (Home page).
 
+### When fully booked (waitlist)
+
+Untick **Site settings → Availability → Accepting new clients** (Chelsea, 14 Nov): the badge shows the waitlist message,
+and every **Book your Session** button (menu, home page, offer card, closing card, phone button, footer link) and **See
+available times** on the booking page become **Join waitlist** (the label is in the same place). They link to
+`/waitlist`, which opens the waitlist form as a pop-up (`EnquiryDialog.astro`, alongside the question form; the
+`/waitlist` page is the fallback, not in search). The form: Name, Email, WhatsApp and Country / state (both optional), in
+**Enquiry forms → Waitlist form**. It emails Chelsea "Waitlist sign-up: name" (reply goes to the person). One rule does the
+buttons: `Button.astro` swaps any button that links to the Book button's address; `BookingButton.astro` and the footer
+do the same.
+
 ### The intro session path
 
 The first step is a single **Intro Session at €55** (since 3 Nov). The page's address is still `/intro-pack`.

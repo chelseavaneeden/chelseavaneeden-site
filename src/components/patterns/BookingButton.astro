@@ -4,6 +4,7 @@
 // the browser blocks the pop-up, or without JavaScript, the link simply opens the booking page in the same tab.
 import Button from '../ui/Button.astro';
 import { bookingPageLink } from '../../lib/booking';
+import { getSite } from '../../lib/content';
 
 interface Props {
   /** The booking page address from Site settings → Intro session page. */
@@ -14,11 +15,21 @@ interface Props {
 }
 
 const { url, label, full = false } = Astro.props;
+// Fully booked: the waitlist button instead (Site settings → Availability), so nobody books a time.
+const { availability } = await getSite();
 ---
 
-<div class:list={[full ? 'w-full' : 'inline-flex']} data-booking-open>
-  <Button href={bookingPageLink(url)} size="l" full={full} external={false} event="booking_calendar">{label}</Button>
-</div>
+{
+  availability.open ? (
+    <div class:list={[full ? 'w-full' : 'inline-flex']} data-booking-open>
+      <Button href={bookingPageLink(url)} size="l" full={full} external={false} event="booking_calendar">{label}</Button>
+    </div>
+  ) : (
+    <div class:list={[full ? 'w-full' : 'inline-flex']}>
+      <Button href={availability.closedHref} size="l" full={full} event="booking_waitlist">{availability.waitlistLabel}</Button>
+    </div>
+  )
+}
 
 <script>
   import { openBookingWindow } from '../../lib/booking';

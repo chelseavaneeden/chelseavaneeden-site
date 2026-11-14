@@ -4,7 +4,7 @@ import Icon from '../ui/Icon.astro';
 import Logo from '../ui/Logo.astro';
 import Text from '../ui/Text.astro';
 import { t, type Lang } from '../../i18n/ui';
-import { newTabRule } from '../../lib/content';
+import { getSite, newTabRule } from '../../lib/content';
 
 interface Link {
   label: string;
@@ -23,7 +23,12 @@ interface Props {
   lang?: Lang;
 }
 
-const { links, tagline, location, socials, legal, copyrightYear, lang = 'en' } = Astro.props;
+const { links: givenLinks, tagline, location, socials, legal, copyrightYear, lang = 'en' } = Astro.props;
+// Fully booked: the "Book your Session" link becomes the waitlist link, like every Book button (see Button.astro).
+const { availability, bookCta } = await getSite();
+const links = givenLinks.map((l) =>
+  !availability.open && l.href === bookCta.href ? { ...l, label: availability.waitlistLabel, href: availability.closedHref } : l,
+);
 const newTab = await newTabRule();
 const year = copyrightYear ?? new Date().getFullYear();
 ---

@@ -1,5 +1,6 @@
 ---
 import Icon, { type IconName } from './Icon.astro';
+import { getSite } from '../../lib/content';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link';
 export type ButtonSize = 's' | 'm' | 'l';
@@ -20,7 +21,7 @@ interface Props {
 const {
   variant = 'primary',
   size = 'm',
-  href,
+  href: givenHref,
   type = 'button',
   icon,
   external = false,
@@ -28,6 +29,13 @@ const {
   event,
   class: className,
 } = Astro.props;
+
+// Fully booked (Site settings → Availability, "Accepting new clients" unticked): every Book your Session button
+// becomes the waitlist button, which opens the waitlist form. One rule here covers the menu, the home page, the
+// offer card, the closing card and the phone's sticky button (Chelsea, 14 Nov).
+const { availability, bookCta } = await getSite();
+const waitlist = Boolean(givenHref) && !availability.open && givenHref === bookCta.href;
+const href = waitlist ? availability.closedHref : givenHref;
 
 const base =
   'group/button inline-flex items-center justify-center gap-2 whitespace-nowrap transition duration-(--duration-base) ease-soft';
@@ -66,7 +74,7 @@ const trailingIcon = icon ?? (external ? 'arrow-up-right' : undefined);
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener' : undefined}
     >
-      <slot />
+      {waitlist ? availability.waitlistLabel : <slot />}
       {trailingIcon && (
         <Icon name={trailingIcon} class="transition-transform duration-(--duration-base) ease-soft group-hover/button:translate-x-0.5" />
       )}

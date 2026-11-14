@@ -1,6 +1,7 @@
 ---
-// The "Ask me a question" pop-up. Every link to /enquire opens it instead of leaving the page
-// (Questions first? Ask me, Ask a question…). Without JavaScript those links open the /enquire page.
+// The "Ask me a question" pop-up, and the "Join waitlist" pop-up when Chelsea is fully booked. Every link to
+// /enquire opens the question form and every link to /waitlist opens the waitlist form, instead of leaving the page
+// (Questions first? Ask me, Ask a question, Join waitlist…). Without JavaScript those links open the pages themselves.
 import Icon from '../ui/Icon.astro';
 import EnquiryForm from './EnquiryForm.astro';
 import type { Site } from '../../lib/content';
@@ -29,20 +30,29 @@ const { enquiry, contact } = Astro.props;
     >
       <Icon name="close" />
     </button>
-    <EnquiryForm type="question" enquiry={enquiry} contact={contact} showTitle idPrefix="dialog-question" />
+    <div data-dialog-form="question">
+      <EnquiryForm type="question" enquiry={enquiry} contact={contact} showTitle idPrefix="dialog-question" />
+    </div>
+    <div data-dialog-form="waitlist" hidden>
+      <EnquiryForm type="waitlist" enquiry={enquiry} contact={contact} showTitle idPrefix="dialog-waitlist" />
+    </div>
   </div>
 </dialog>
 
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('#enquiry-dialog');
 
+  /** Which form a link opens: /enquire → the question form, /waitlist → the waitlist form. */
+  const formFor = (href: string) => (/^\/waitlist\/?(\?.*)?$/.test(href) ? 'waitlist' : /^\/enquire\/?(\?.*)?$/.test(href) ? 'question' : undefined);
+
   if (dialog) {
-    // Any link to /enquire opens the pop-up instead.
     document.addEventListener('click', (event) => {
       const link = (event.target as Element).closest?.('a[href]');
-      const href = link?.getAttribute('href') ?? '';
-      if (!/^\/enquire\/?(\?.*)?$/.test(href)) return;
+      const which = formFor(link?.getAttribute('href') ?? '');
+      if (!which) return;
       event.preventDefault();
+      dialog.querySelectorAll<HTMLElement>('[data-dialog-form]').forEach((el) => (el.hidden = el.dataset.dialogForm !== which));
+      dialog.setAttribute('aria-labelledby', `dialog-${which}-title`);
       dialog.showModal();
     });
 
@@ -54,11 +64,11 @@ const { enquiry, contact } = Astro.props;
 
     // After a message is sent, the next opening shows an empty form again.
     dialog.addEventListener('close', () => {
-      const done = dialog.querySelector<HTMLElement>('[data-enquiry-done]');
-      if (!done?.classList.contains('flex')) return;
-      done.classList.replace('flex', 'hidden');
-      dialog.querySelector('form')?.classList.remove('hidden');
-      dialog.querySelectorAll<HTMLElement>('[data-form-intro]').forEach((el) => (el.hidden = false));
+      dialog.querySelectorAll<HTMLElement>('[data-enquiry-done].flex').forEach((done) => {
+        done.classList.replace('flex', 'hidden');
+        done.closest('[data-enquiry-wrap]')?.querySelector('form')?.classList.remove('hidden');
+        done.closest('[data-enquiry-wrap]')?.querySelectorAll<HTMLElement>('[data-form-intro]').forEach((el) => (el.hidden = false));
+      });
     });
   }
 </script>

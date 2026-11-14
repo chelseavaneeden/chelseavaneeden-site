@@ -18,8 +18,9 @@ availability:
   open: true
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
+  waitlistLabel: Join waitlist
   href: /intro-pack
-  closedHref: /enquire
+  closedHref: /waitlist
 bookCta:
   label: Book your Session
   href: /intro-pack
@@ -73,6 +74,23 @@ enquiry:
           placeholder: e.g. I have lower back pain. Is the intro session right for me?
           multiple: false
       button: Send my question
+    waitlist:
+      title: Join *waitlist*
+      intro: I’m fully booked at the moment. Leave your details and I’ll let you know as soon as a space opens.
+      fields:
+        - name: whatsapp
+          label: WhatsApp
+          type: tel
+          required: false
+          multiple: false
+        - name: location
+          label: Country / state
+          type: text
+          required: false
+          multiple: false
+      button: Join waitlist
+      successTitle: You’re on the *waitlist*
+      success: Thank you! I’ll let you know as soon as a space opens. 🌿
     proposal:
       title: Request a *proposal*
       questions:

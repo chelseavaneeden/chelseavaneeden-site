@@ -94,6 +94,7 @@ const shareImageUrl = new URL(share.src, Astro.site).href;
   const eventFor = (href: string): string | undefined => {
     if (href === bookHref) return 'book_intro';
     if (/^\/enquire\/?(\?.*)?$/.test(href)) return 'enquiry_open';
+    if (/^\/waitlist\/?(\?.*)?$/.test(href)) return 'waitlist_open';
     if (href.startsWith('/retreats-events')) return 'organiser_page';
     if (whatsappHref && href === whatsappHref) return 'whatsapp_click';
     return undefined;
