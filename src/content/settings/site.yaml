@@ -15,7 +15,7 @@ nav:
       label: Private sessions
       href: /
 availability:
-  open: true
+  open: false
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
   waitlistLabel: Join waitlist
@@ -76,7 +76,8 @@ enquiry:
       button: Send my question
     waitlist:
       title: Join *waitlist*
-      intro: I’m fully booked at the moment. Leave your details and I’ll let you know as soon as a space opens.
+      intro: I’m fully booked at the moment. Leave your details and I’ll let you know
+        as soon as a space opens.
       fields:
         - name: whatsapp
           label: WhatsApp
