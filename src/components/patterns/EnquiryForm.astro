@@ -225,8 +225,8 @@ const withLinks = (text: string) =>
   </form>
 
   <div class="hidden flex-col items-start gap-3 py-4" data-enquiry-done role="status">
-    <Heading level={3} variant="h3" text="Sent, *thank you*" />
-    <Text tone="muted" text={enquiry.success} />
+    <Heading level={3} variant="h3" text={form.successTitle || enquiry.successTitle} />
+    <Text tone="muted" text={form.success || enquiry.success} />
   </div>
 </div>
 

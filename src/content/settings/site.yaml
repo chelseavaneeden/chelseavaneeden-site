@@ -56,6 +56,7 @@ enquiry:
   replyPromise: I reply personally within one working day.
   privacyNote: I only use your details to reply to you.
   otherLabel: Tell me more
+  successTitle: Sent, *thank you*
   success: Thank you, your message is on its way. I’ll reply by email soon.
   error: Sorry, that didn’t send. Please try again in a moment, or message me on
     WhatsApp.
@@ -114,6 +115,8 @@ enquiry:
           placeholder: Dates, venue, ideas…
           multiple: false
       button: Request my proposal
+      successTitle: Sent, *thank you!*
+      success: Here’s to feeling amazing! 🌿
     intake:
       title: Tell me about *you*
       emailHint: Use the email you booked with.
@@ -208,6 +211,8 @@ enquiry:
             [Privacy policy](/privacy)
           short: Health consent
       button: Send to Chelsea
+      successTitle: Sent, *thank you!*
+      success: Here’s to feeling amazing! 🌿
 analytics:
   umamiWebsiteId: 5049d82f-3769-4886-b2ee-238c5cf1e826
 tagline: Based in Europe · Teaching worldwide

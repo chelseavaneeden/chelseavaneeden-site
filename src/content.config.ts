@@ -73,6 +73,9 @@ const enquiryForm = z.object({
    */
   agreements: list(z.object({ text: z.string(), short: optionalText })),
   button: z.string(),
+  /** Shown after sending, for this form only. Empty: the shared heading and message under Enquiry forms. */
+  successTitle: optionalText,
+  success: optionalText,
 });
 
 // A block the editor can leave empty: without a title it is treated as not set (and hidden).
@@ -189,6 +192,8 @@ const settings = defineCollection({
       privacyNote: optionalText,
       /** Label of the typing box that opens when someone taps "Other" in a tap-to-choose question. */
       otherLabel: z.string().default('Tell me more'),
+      /** The heading and message shown after sending, unless a form has its own. */
+      successTitle: z.string().default('Sent, *thank you*'),
       success: z.string(),
       error: z.string(),
       /** Cloudflare Turnstile site key (the spam check). Empty: forms send without it. */

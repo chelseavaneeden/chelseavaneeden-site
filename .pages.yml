@@ -619,7 +619,8 @@ content:
           - { name: replyPromise, label: Reply promise under the send button, type: string, description: 'Only promise what you can keep, e.g. I reply personally within one working day.' }
           - { name: privacyNote, label: Privacy line, type: string, description: 'Shown before the Privacy policy link under the send button. Not shown on the intake form.' }
           - { name: otherLabel, label: Label for the box under Other, type: string, default: Tell me more, description: 'When someone taps an option called Other, a box with this label opens so they can type more.' }
-          - { name: success, label: Message after sending, type: text, required: true }
+          - { name: successTitle, label: Heading after sending, type: string, default: 'Sent, *thank you*', description: 'Shown after any form is sent, unless that form has its own below. Use *asterisks* for italic. No full stop at the end.' }
+          - { name: success, label: Message after sending, type: text, required: true, description: 'Shown under that heading, unless a form has its own below.' }
           - { name: error, label: Message if sending fails, type: text, required: true }
           - { name: turnstileSiteKey, label: Turnstile site key (spam check), type: string, description: 'From Cloudflare → Turnstile. Leave empty until it is set up.' }
           - name: forms
@@ -674,6 +675,8 @@ content:
                       - { name: text, label: Text, type: text, required: true }
                       - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
+                  - { name: successTitle, label: Heading after sending (this form only), type: string, description: 'Leave empty to use the one at the top of Enquiry forms. Use *asterisks* for italic. No full stop at the end.' }
+                  - { name: success, label: Message after sending (this form only), type: text, description: 'Leave empty to use the one at the top of Enquiry forms.' }
               - name: proposal
                 label: Proposal form (Retreats & events)
                 type: object
@@ -722,6 +725,8 @@ content:
                       - { name: text, label: Text, type: text, required: true }
                       - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
+                  - { name: successTitle, label: Heading after sending (this form only), type: string, description: 'Leave empty to use the one at the top of Enquiry forms. Use *asterisks* for italic. No full stop at the end.' }
+                  - { name: success, label: Message after sending (this form only), type: text, description: 'Leave empty to use the one at the top of Enquiry forms.' }
               - name: intake
                 label: Intake form (welcome page)
                 type: object
@@ -770,6 +775,8 @@ content:
                       - { name: text, label: Text, type: text, required: true }
                       - { name: short, label: Short name, type: string, description: 'Used in the "Still needed:" message, e.g. Terms.' }
                   - { name: button, label: Send button text, type: string, required: true }
+                  - { name: successTitle, label: Heading after sending (this form only), type: string, description: 'Leave empty to use the one at the top of Enquiry forms. Use *asterisks* for italic. No full stop at the end.' }
+                  - { name: success, label: Message after sending (this form only), type: text, description: 'Leave empty to use the one at the top of Enquiry forms.' }
       - name: analytics
         label: Analytics
         type: object
