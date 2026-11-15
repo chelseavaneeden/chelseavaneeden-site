@@ -5,6 +5,9 @@
 // Tap-to-choose questions, name and email, fields in order (text, date, phone, tap-to-choose), required tick boxes, a hidden
 // spam trap and, once a site key is set, Cloudflare Turnstile. WhatsApp stays as a small link that
 // opens WhatsApp directly. After sending, only the thank-you shows: the form and its heading and intro are hidden.
+// Turnstile loads only when a form is about to be used (on screen after the page has loaded, or tapped), never with
+// the page itself: every page carries the pop-up's two forms, and loading their checks up front kept phones busy and
+// Instagram's browser showing its loading bar (15 Nov 2026).
 import Heading from '../ui/Heading.astro';
 import Text from '../ui/Text.astro';
 import WhatsAppLink from '../ui/WhatsAppLink.astro';
@@ -194,7 +197,7 @@ const withLinks = (text: string) =>
       <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
     </div>
 
-    {enquiry.turnstileSiteKey && <div class="cf-turnstile" data-sitekey={enquiry.turnstileSiteKey} data-size="flexible" data-theme="light" />}
+    {enquiry.turnstileSiteKey && <div data-turnstile data-sitekey={enquiry.turnstileSiteKey} />}
 
     <div class="flex flex-col gap-3 pt-1">
       <button
@@ -230,12 +233,30 @@ const withLinks = (text: string) =>
   </div>
 </div>
 
-{enquiry.turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
-
 <script>
   type Answer = { key: string; label: string; value: string };
   type Umami = { track: (name: string, data?: Record<string, string>) => void };
-  type Turnstile = { reset: (el?: Element) => void };
+  type Turnstile = { render: (box: HTMLElement, options: Record<string, unknown>) => string; reset: (widget: string) => void };
+  type TurnstileWindow = Window & { turnstile?: Turnstile; enquiryTurnstileReady?: () => void };
+
+  // Cloudflare's script, loaded once for every form on the page, the first time one of them needs it.
+  const page = window as TurnstileWindow;
+  let turnstileScript: Promise<Turnstile> | undefined;
+  const loadTurnstile = () =>
+    (turnstileScript ??= new Promise<Turnstile>((resolve, reject) => {
+      page.enquiryTurnstileReady = () => (page.turnstile ? resolve(page.turnstile) : reject(new Error('turnstile')));
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=enquiryTurnstileReady';
+      script.async = true;
+      script.onerror = () => {
+        turnstileScript = undefined; // try again next time
+        script.remove();
+        reject(new Error('turnstile'));
+      };
+      document.head.append(script);
+    }));
+  const afterPageLoad = (run: () => void) =>
+    document.readyState === 'complete' ? run() : window.addEventListener('load', run, { once: true });
 
   document.querySelectorAll<HTMLFormElement>('form[data-enquiry]').forEach((form) => {
     const wrap = form.closest('[data-enquiry-wrap]');
@@ -246,23 +267,57 @@ const withLinks = (text: string) =>
     if (!send || !error || !done || !missing) return;
     const label = send.textContent;
 
-    // Cloudflare's spam check is at least 300px wide. On narrow phones (and in the pop-up) the card is narrower, so the
-    // check is scaled down to fit instead of spilling over the edge. It re-fits when the pop-up opens or the screen turns.
-    const TURNSTILE_WIDTH = 300;
-    const TURNSTILE_HEIGHT = 65;
-    form.querySelectorAll<HTMLElement>('.cf-turnstile').forEach((box) => {
+    // Cloudflare's spam check starts when the form comes on screen once the page has loaded (the pop-up's forms only when
+    // it opens), or as soon as someone taps into the form, whichever is first.
+    const box = form.querySelector<HTMLElement>('[data-turnstile]');
+    let widget: Promise<string | undefined> | undefined;
+    const startCheck = () =>
+      (widget ??= box
+        ? loadTurnstile()
+            .then((turnstile) => turnstile.render(box, { sitekey: box.dataset.sitekey, size: 'flexible', theme: 'light' }))
+            .catch(() => {
+              widget = undefined; // try again on the next tap or send
+              return undefined;
+            })
+        : Promise.resolve(undefined));
+    const resetCheck = () => widget?.then((id) => id && page.turnstile?.reset(id));
+    const token = () => String(new FormData(form).get('cf-turnstile-response') ?? '');
+    // On send, give the check up to 10 seconds to finish if it hasn't yet. If it never does, the message is sent
+    // anyway and the server's answer decides (it shows the "didn't send" message).
+    const waitForCheck = async () => {
+      if (!box) return '';
+      await startCheck();
+      for (let i = 0; i < 40 && !token(); i++) await new Promise((done) => setTimeout(done, 250));
+      return token();
+    };
+    if (box) {
+      const onScreen = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          onScreen.disconnect();
+          afterPageLoad(() => void startCheck());
+        },
+        { rootMargin: '200px' },
+      );
+      onScreen.observe(form);
+      form.addEventListener('focusin', () => void startCheck(), { once: true });
+
+      // The check is at least 300px wide. On narrow phones (and in the pop-up) the card is narrower, so the check is
+      // scaled down to fit instead of spilling over the edge. It re-fits when the pop-up opens or the screen turns.
+      const TURNSTILE_WIDTH = 300;
+      const TURNSTILE_HEIGHT = 65;
       const holder = box.parentElement;
-      if (!holder) return;
       const fit = () => {
-        const room = holder.clientWidth;
+        const room = holder?.clientWidth ?? 0;
         const scale = room > 0 && room < TURNSTILE_WIDTH ? room / TURNSTILE_WIDTH : 1;
         box.style.width = scale < 1 ? `${TURNSTILE_WIDTH}px` : '';
         box.style.height = scale < 1 ? `${Math.ceil(TURNSTILE_HEIGHT * scale)}px` : '';
+        box.style.minHeight = `${Math.ceil(TURNSTILE_HEIGHT * scale)}px`; // keeps its space while it loads
         box.style.transform = scale < 1 ? `scale(${scale})` : '';
         box.style.transformOrigin = 'left top';
       };
-      new ResizeObserver(fit).observe(holder);
-    });
+      if (holder) new ResizeObserver(fit).observe(holder);
+    }
 
     const required = [...form.querySelectorAll<HTMLElement>('[data-required-label]')];
     const controlsOf = (el: HTMLElement) => [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input:not([data-other]), textarea')];
@@ -336,6 +391,7 @@ const withLinks = (text: string) =>
       send.textContent = 'Sending…';
       error.classList.add('hidden');
       try {
+        const checked = await waitForCheck();
         const response = await fetch('/api/enquire', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
@@ -348,10 +404,12 @@ const withLinks = (text: string) =>
             agreed: ticks.filter((tick) => tick.checked).map((tick) => tick.dataset.agreement ?? ''),
             page: location.pathname,
             website: String(data.get('website') ?? ''),
-            token: String(data.get('cf-turnstile-response') ?? ''),
+            token: checked,
           }),
         });
         if (!response.ok) throw new Error(String(response.status));
+        // Each check works once, so a fresh one is ready if they send another message from the same form.
+        void resetCheck();
         (window as unknown as { umami?: Umami }).umami?.track('enquiry_submit', { type: form.dataset.enquiry ?? '' });
         form.reset();
         otherBoxes();
@@ -363,7 +421,7 @@ const withLinks = (text: string) =>
         done.scrollIntoView({ block: 'nearest' });
       } catch {
         error.classList.remove('hidden');
-        (window as unknown as { turnstile?: Turnstile }).turnstile?.reset(form.querySelector('.cf-turnstile') ?? undefined);
+        void resetCheck();
       } finally {
         send.textContent = label;
         send.disabled = false;
