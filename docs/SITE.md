@@ -166,6 +166,8 @@ step**, in Chelsea's Google Calendar booking page (Business Standard includes pa
   form. A page marks the heading block with `data-form-intro` inside a `data-form-scope`; the pop-up's own title has it
   too, and the pop-up brings everything back when it closes.
 - They post to **`/api/enquire`** (`worker/enquire.ts`). It checks the site, a hidden spam trap and Turnstile (when set).
+  Turnstile loads only when a form comes on screen after the page has loaded, or is tapped, never with the page: every
+  page carries the pop-up's two forms, and loading their checks up front made pages slow on phones (15 Nov 2026).
   Question and proposal answers are emailed through **Resend** with reply-to set to the sender; intake goes to Notion.
 - Keys are Cloudflare **secrets**, never in this public repo (Cloudflare → Workers → chelseavaneeden-site → Settings →
   Variables and secrets): `RESEND_API_KEY`, `ENQUIRY_TO` (the inbox), `MAILERLITE_API_KEY`, `STRIPE_WEBHOOK_SECRET`,
@@ -238,7 +240,8 @@ glows, dark bands or tilting on hover.
   reduced motion, since nothing moves then. New looping animations need `data-ambient` so the button stops them too.
 - **Link previews:** `Base.astro` adds them to every page. The picture is Site settings → Picture for shared links, cropped
   to 1200×630.
-- **Videos:** keep hero videos around 2 Mbit/s and 720p, about 1 to 1.5 MB. Visitors with data saver on get the poster only.
+- **Videos:** keep hero videos around 2 Mbit/s and 720p, about 1 to 1.5 MB. The poster shows first and the video only
+  downloads once the rest of the page has loaded. Visitors with data saver on or a slow connection get the poster only.
 - **Design system:** `/styleguide` shows every token and component. The build fails if a raw colour or size appears outside
   the token files (`scripts/check-tokens.mjs`).
 
