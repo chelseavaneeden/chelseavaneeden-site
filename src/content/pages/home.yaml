@@ -10,7 +10,7 @@ hero:
     For busy professionals, new parents and people with chronic pain.
   primary:
     label: Book your Session
-    href: /intro-pack
+    href: /bookings
   secondary:
     label: Questions first? Ask me
     href: /enquire
@@ -96,4 +96,4 @@ ctaBand:
     health.
   primary:
     label: Book your Session
-    href: /intro-pack
+    href: /bookings

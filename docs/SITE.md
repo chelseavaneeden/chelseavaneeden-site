@@ -112,12 +112,16 @@ do the same.
 
 ### The intro session path
 
-The first step is a single **Intro Session at €55** (since 3 Nov). The page's address is still `/intro-pack`.
+The first step is a single **Intro Session at €55** (since 3 Nov). Its page is **`/bookings`** (Chelsea's choice, 18 Nov),
+with no trailing slash, unlike the other pages: `worker/index.ts` serves it from `bookings/index.html` and forwards
+`/bookings/` and the old `/intro-pack` address there for good (301), so old links in her bio, emails and Google still land.
+Every Book your Session link must be exactly `/bookings`: buttons find the booking link by exact match to swap it for
+Join waitlist when she's full.
 
 Chosen on 7 Nov after research (`reports/Pilates booking funnel conversion.md`): **pick a time first, then pay in the same
 step**, in Chelsea's Google Calendar booking page (Business Standard includes paid bookings through her Stripe).
 
-1. Every **Book your Session** goes to **`/intro-pack`**: the heading, then the €55 card with what's included and a big
+1. Every **Book your Session** goes to **`/bookings`**: the heading, then the €55 card with what's included and a big
    **See available times** button inside it (`BookingButton.astro`), which opens her Google booking page in a **pop-up
    window** over the site (Chelsea's choice, 13 Nov; `openBookingWindow()` in `src/lib/booking.ts`). Picking a time and
    paying both happen in that window, and closing it shows the site again; phones open it as a new tab with the site
@@ -301,7 +305,6 @@ glows, dark bands or tilting on hover.
    The BASI logo is their official artwork with the Graduate badge traced from Chelsea's old PNG (BASI may have its own
    Graduate file). Insight Timer is their official SVG. Datchet and Elf are tracings of her old PNGs: an official file for
    Elf needs its website, and the Datchet logo says "Osteopath" while the clinic's site says "Osteopathic".
-6. **Web address**: the payment page is still `/intro-pack`.
 
 ## Launch (10 Nov 2026) and what's left
 

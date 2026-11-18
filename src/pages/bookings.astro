@@ -1,5 +1,6 @@
 ---
-// The intro session page: every "Book your Session" button leads here. It shows what's included and the
+// The intro session page at /bookings (it was /intro-pack until 18 Nov 2026; old links are forwarded, see worker/):
+// every "Book your Session" button leads here. It shows what's included and the
 // price, then Chelsea's Google booking calendar, where clients pick a time and pay in one step (Stripe,
 // inside Google). After paying, MailerLite emails them the intake form (see worker/ and docs/SITE.md).
 // Words and the booking page link: Site settings → Intro session page. While no booking page link is set,
@@ -26,6 +27,7 @@ const offer = offers.find((o) => o.featured) ?? offers[0];
 ---
 
 <Base
+  path="/bookings"
   title="Book your Session · Chelsea van Eeden"
   description="A live 1-to-1 Pilates intro session online with Chelsea van Eeden. Choose a time that suits you and pay securely to confirm it."
 >

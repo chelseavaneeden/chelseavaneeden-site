@@ -20,8 +20,9 @@ globalThis.fetch = async (url, init = {}) => {
   return new Response(JSON.stringify(r.body), { status: r.status });
 };
 const baseFetch = globalThis.fetch;
+let lastAsset = '';
 const env = {
-  ASSETS: { fetch: async () => new Response('asset') },
+  ASSETS: { fetch: async (req) => { lastAsset = new URL(req.url).pathname; return new Response('asset'); } },
   RESEND_API_KEY: 're_test', ENQUIRY_TO: 'inbox@example.com',
   MAILERLITE_API_KEY: 'ml_test', MAILERLITE_GROUP_ID: '203474769523246451',
   STRIPE_WEBHOOK_SECRET: SECRET, NOTION_TOKEN: 'ntn_test', NOTION_DATA_SOURCE_ID: 'ds-123',
@@ -34,8 +35,17 @@ const ok = (name) => console.log('✓', name);
 // 0. One address: pages forward to www, /api answers everywhere
 {
   const go = (u, init) => worker.fetch(new Request(u, init), env);
-  let r = await go('https://chelseavaneeden.com/intro-pack/?a=1');
-  assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/intro-pack/?a=1'); ok('chelseavaneeden.com forwards to www, path and query kept');
+  let r = await go('https://chelseavaneeden.com/terms/?a=1');
+  assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/terms/?a=1'); ok('chelseavaneeden.com forwards to www, path and query kept');
+  r = await go('https://chelseavaneeden.com/intro-pack/?utm_source=ig');
+  assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/bookings?utm_source=ig'); ok('old /intro-pack on the plain address reaches /bookings in one step');
+  for (const old of ['/intro-pack', '/intro-pack/', '/bookings/']) {
+    r = await go(`https://www.chelseavaneeden.com${old}`);
+    assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/bookings');
+  }
+  ok('/intro-pack, /intro-pack/ and /bookings/ forward to /bookings');
+  r = await go('https://www.chelseavaneeden.com/bookings?utm_source=ig');
+  assert.equal(r.status, 200); assert.equal(lastAsset, '/bookings/'); ok('/bookings is served directly, with no redirect');
   r = await go(`${site}/welcome/`);
   assert.equal(r.status, 301); assert.equal(r.headers.get('location'), 'https://www.chelseavaneeden.com/welcome/'); ok('old workers.dev pages forward to www');
   r = await go('https://www.chelseavaneeden.com/');

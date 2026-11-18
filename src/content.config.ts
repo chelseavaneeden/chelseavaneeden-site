@@ -117,7 +117,7 @@ const settings = defineCollection({
         closedLabel: z.string().default('Fully booked · Join the waitlist'),
         /** When fully booked, every Book your Session button says this and links to closedHref (the waitlist form). */
         waitlistLabel: z.string().default('Join waitlist'),
-        href: z.string().default('/intro-pack'),
+        href: z.string().default('/bookings'),
         closedHref: z.string().default('/waitlist'),
       })
       .default({
@@ -125,12 +125,12 @@ const settings = defineCollection({
         openLabel: 'Accepting new clients',
         closedLabel: 'Fully booked · Join the waitlist',
         waitlistLabel: 'Join waitlist',
-        href: '/intro-pack',
+        href: '/bookings',
         closedHref: '/waitlist',
       }),
     /** Stripe's publishable key (starts with pk_). It is designed to be public; never paste a secret key here. */
     stripePublishableKey: z.string().startsWith('pk_', 'Use the publishable key (starts with pk_), never a secret key.'),
-    /** The intro session page (/intro-pack): every "Book your Session" button leads here. */
+    /** The intro session page (/bookings): every "Book your Session" button leads here. */
     introPack: z.object({
       eyebrow: optionalText,
       title: z.string(),

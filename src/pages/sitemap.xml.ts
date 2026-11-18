@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 
 // The pages Google should know about. Pages that stay out of search (/welcome, /monthly-plans, /styleguide, 404)
 // are left out on purpose. Add a new public page here when one is made.
-const PAGES = ['/', '/intro-pack/', '/retreats-events/', '/enquire/', '/privacy/', '/terms/'];
+const PAGES = ['/', '/bookings', '/retreats-events/', '/enquire/', '/privacy/', '/terms/'];
 
 export const GET: APIRoute = ({ site }) => {
   const urls = PAGES.map((path) => `  <url><loc>${new URL(path, site).href}</loc></url>`).join('\n');

@@ -36,7 +36,7 @@ content:
             type: object
             fields:
               - { name: label, label: Button text, type: string, required: true }
-              - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /intro-pack, or a full https:// address.' }
+              - { name: href, label: Link, type: string, required: true, description: 'A page on the site like /bookings, or a full https:// address.' }
           - name: extra
             label: Second button (optional)
             type: object
@@ -559,17 +559,17 @@ content:
           - { name: openLabel, label: Text when open, type: string, default: Accepting new clients }
           - { name: closedLabel, label: Text when fully booked, type: string, default: Fully booked · Join the waitlist }
           - { name: waitlistLabel, label: Book buttons say this when fully booked, type: string, default: Join waitlist }
-          - { name: href, label: Link when open, type: string, default: /intro-pack }
+          - { name: href, label: Link when open, type: string, default: /bookings }
           - { name: closedHref, label: Link when fully booked, type: string, default: /waitlist, description: 'Where the badge and the waitlist buttons go. /waitlist opens the waitlist form as a pop-up.' }
       - name: bookCta
         label: Book button (menu and every "Book your Session")
         type: object
         fields:
           - { name: label, label: Button text, type: string, required: true }
-          - { name: href, label: Link, type: string, required: true, description: '/intro-pack is the intro session page.' }
+          - { name: href, label: Link, type: string, required: true, description: '/bookings is the intro session page. Every Book your Session button must use exactly the same link.' }
       - { name: stripePublishableKey, label: Stripe publishable key, type: string, required: true, description: 'Starts with pk_. Never paste a secret key (sk_).' }
       - name: introPack
-        label: Intro session page (/intro-pack)
+        label: Intro session page (/bookings)
         type: object
         description: 'Where every "Book your Session" button leads: what is included, then your Google booking calendar, where clients pick a time and pay.'
         fields:

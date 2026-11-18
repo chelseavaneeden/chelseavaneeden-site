@@ -19,11 +19,11 @@ availability:
   openLabel: Accepting new clients
   closedLabel: Fully booked · Join the waitlist
   waitlistLabel: Join waitlist
-  href: /intro-pack
+  href: /bookings
   closedHref: /waitlist
 bookCta:
   label: Book your Session
-  href: /intro-pack
+  href: /bookings
 stripePublishableKey: pk_live_51Ps0CqDYbuP8YMkh5gteTGuxbILp4rW47rkv9pu1BugVOpLxgH7v7xE7WSxyKq6iVkJ1zaBKFX8tYLfcMvce1K8W00gUoHj2aQ
 introPack:
   title: Book your Session
@@ -246,7 +246,7 @@ googleReviews:
   linkLabel: See them on Google
 footerLinks:
   - label: Book your Session
-    href: /intro-pack
+    href: /bookings
   - label: Ask a question
     href: /enquire
   - label: WhatsApp
