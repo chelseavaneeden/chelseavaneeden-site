@@ -46,7 +46,7 @@ const { about, logos } = await getPage('home');
 
   <main id="main">
     <Hero {...hero}>
-      <TrustLine slot="trust" trust={{ items: site.trust.items }} />
+      <TrustLine slot="trust" trust={site.trust} />
     </Hero>
 
     {/* Who she is and her credentials, straight after the header: organisers want to know her first (Chelsea, 8 Nov). */}

@@ -841,14 +841,14 @@ content:
         label: Trust line (under the main buttons)
         type: object
         fields:
-          - { name: googleRating, label: Google rating, type: number, description: 'e.g. 5.0. Shown with a star when the number of reviews is filled in too.' }
-          - { name: googleReviewCount, label: Number of Google reviews, type: number }
+          - { name: googleRating, label: Google rating, type: number, description: 'e.g. 5. Shown as ★ 5.0 on Google at the end of the line, on the home and retreats pages. Leave empty to hide it.' }
+          - { name: googleReviewCount, label: Number of Google reviews, type: number, description: 'Optional. When filled in, it shows after the rating: ★ 5.0 on Google · 12 reviews.' }
           - name: items
             label: Facts
             type: object
             list: true
             fields:
-              - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive Instructor' }
+              - { name: label, label: Text, type: string, required: true, description: 'e.g. BASI Comprehensive or 5,000+ teaching hours' }
               - { name: href, label: Link (optional), type: string }
       - name: googleReviews
         label: Google reviews pop-up

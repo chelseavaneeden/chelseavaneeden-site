@@ -237,8 +237,10 @@ analytics:
 tagline: Based in Europe · Teaching worldwide
 shareImage: ../../assets/media/chelsea-portrait.jpg
 trust:
+  googleRating: 5
   items:
     - label: BASI Comprehensive
+    - label: 5,000+ teaching hours
 googleReviews:
   href: https://www.google.com/search?hl=en&q=Chelsea+van+Eeden+%7C+Private+Pilates+Instructor&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-___HdjWKZMi5j0kSi_vzDdVCZp6KATDaWWX3r6R5pV2hSpeezdQLPY_y5kqhPfZnoT52CtI%3D&uds=AJ5uw18nNIe6iM3ZvBqn-kM2E7cZ4ClKzcV_BkZWZhnfHASk_2dcxRdQIcP964OUm71Sfb5DmzR-vSHjxPvmIb48E5TCrzzlzM-tqv-C-zx0IXSZZgaPyy_5BVUOmP7rOJGefh3Y-kO-c5MkoEKQQVW2TOpwjRY6Aw
   title: Client *reviews*

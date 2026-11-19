@@ -221,8 +221,8 @@ const settings = defineCollection({
     /** Year shown in the footer copyright line. Empty shows the current year. */
     copyrightYear: z.preprocess(blankToUndefined, z.number().int().optional()),
     /**
-     * The short proof line under the main buttons: a Google rating (shown only when both numbers
-     * are filled in) and a few facts, each with an optional link.
+     * The short proof line under the main buttons (home and retreats pages): a few facts, each with an optional
+     * link, then the Google rating with a star when it's filled in (the number of reviews follows it if set).
      */
     trust: z
       .object({

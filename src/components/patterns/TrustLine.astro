@@ -1,7 +1,9 @@
 ---
-// The short proof line under the main buttons (Site settings → Trust line): the Google rating,
-// when both numbers are filled in, then a few facts. The rating never links away from the site;
-// a fact's link opens in a new tab.
+// The short proof line under the main buttons (Site settings → Trust line), on the home and retreats pages:
+// a few facts, then the Google rating with a star when it's filled in (and the number of reviews, if that is too),
+// e.g. BASI Comprehensive · 5,000+ teaching hours · ★ 5.0 on Google (Chelsea, 19 Nov 2026).
+// The rating never links away from the site; a fact's link opens in a new tab. The dots between items show from
+// tablet width up, where the line fits on one row; on phones it wraps, so the items are just spaced apart.
 import Icon from '../ui/Icon.astro';
 import { newTabRule, type Site } from '../../lib/content';
 
@@ -12,23 +14,22 @@ interface Props {
 
 const { trust, class: className } = Astro.props;
 const { googleRating, googleReviewCount, items } = trust;
-const rating =
-  googleRating && googleReviewCount
-    ? `${googleRating.toFixed(1)} on Google · ${googleReviewCount} review${googleReviewCount === 1 ? '' : 's'}`
-    : undefined;
+const reviews = googleReviewCount ? ` · ${googleReviewCount} review${googleReviewCount === 1 ? '' : 's'}` : '';
+const rating = googleRating ? `${googleRating.toFixed(1)} on Google${reviews}` : undefined;
 const entries = [
-  ...(rating ? [{ label: rating, href: undefined, icon: 'star' as const }] : []),
   ...items.map((i) => ({ ...i, icon: i.href?.includes('youtube.com') ? ('play' as const) : undefined })),
+  ...(rating ? [{ label: rating, href: undefined, icon: 'star' as const }] : []),
 ];
 const external = await newTabRule();
 ---
 
 {
   entries.length > 0 && (
-    <ul class:list={['flex flex-wrap items-center gap-x-5 gap-y-2', className]}>
-      {entries.map((e) => (
+    <ul class:list={['flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-2.5', className]}>
+      {entries.map((e, i) => (
         <li class="type-body-s inline-flex items-center gap-1.5 text-ink-muted">
-          {e.icon && <Icon name={e.icon} class="text-base text-logo-mark" />}
+          {i > 0 && <span class="hidden sm:me-1 sm:inline" aria-hidden="true">·</span>}
+          {e.icon && <Icon name={e.icon} class:list={['text-base text-logo-mark', e.icon === 'star' && 'fill-current']} />}
           {e.href ? (
             <a
               href={e.href}
